@@ -13,4 +13,23 @@ describe UserFood do
     end
     Factory.build(:user_food, :meal => 'notvalid').valid?.should_not be_true
   end
+  
+  describe "on creation" do
+    before(:each) do
+      @food = Factory.create(:food, :kcal => 120)
+    end
+    context "amount = 1" do
+      it "should set kcal with food.kcal*amount" do
+        @user_food = Factory.create(:user_food, :food => @food, :amount => 1)
+        @user_food.kcal.should == 120
+      end
+    end
+    context "amount > 1" do
+      it "should set kcal with food.kcal*amount" do
+        @user_food = Factory.create(:user_food, :food => @food, :amount => 3)
+        @user_food.kcal.should == 360
+      end
+    end
+  end
+  
 end

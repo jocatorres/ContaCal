@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   
   def consumed_kcal(params = {})
     params[:date] ||= Date.today
-    scope = user_foods.includes(:food).where(:date => params[:date])
+    scope = user_foods.where(:date => params[:date])
     scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
     scope.sum(:kcal).to_f
   end
