@@ -12,7 +12,25 @@
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
 
+  <br/><br/>
+
+  <p><%= f.label :name %><br />
+  <%= f.text_field :name %></p>
+
+  <p><%= f.label :cpf %><br />
+  <%= f.text_field :cpf %></p>
+
+  <p><%= f.label :address_street_and_number %><br />
+  <%= f.text_field :address_street_and_number %></p>
+
+  <p><%= f.label :address_city %><br />
+  <%= f.text_field :address_city %></p>
+
+  <p><%= f.label :address_state %><br />
+  <%= f.text_field :address_state %></p>
+
+  <p><%= f.label :address_zipcode %><br />
+  <%= f.text_field :address_zipcode %></p>
+
   <p><%= f.submit "Sign up" %></p>
 <% end %>
-
-<%= render :partial => "devise/shared/links" %>
