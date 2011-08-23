@@ -1,20 +1,26 @@
-
-<% if current_user.kcal_limit.nil? %>
-	<%= link_to 'definir', '#', :id => 'kcal-limit-link' %>	
-<% else %>
-	<span id="kcal-limit-value"><%= current_user.kcal_limit %></span> <%= link_to 'alterar', '#', :id => 'kcal-limit-link' %>
-<% end -%>
-
-<%= form_tag(kcal_limit_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
-  <%= text_field_tag :kcal_limit %>
-	<%= submit_tag "Atualizar" %>	
-<% end -%>
+<% content_for :header_info do %>
+  <div id="kcal-limit">
+    Limite diário de calorias:<br />
+    <% if current_user.kcal_limit.nil? %>
+      <span id="kcal-limit-value"><%= link_to "indefinido", '#', :id => 'kcal-limit-link' %></span>
+    	<span id="change-kcal-label">definir</span>
+    <% else %>
+    	<span id="kcal-limit-value"><%= link_to "#{current_user.kcal_limit} Kcal", '#', :id => 'kcal-limit-link' %></span>
+    	<span id="change-kcal-label">alterar</span>
+    <% end -%>
+    
+    <%= form_tag(kcal_limit_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
+      <%= text_field_tag :kcal_limit %>
+    	<%= submit_tag "Atualizar" %>	
+    <% end -%>
+  </div>
+<% end %>
 
 
 <%= javascript_tag %{
 	$('#kcal-limit-link').click(function() {
-	  $('#kcal-limit-form').show();
-		$(this).hide();
+	  $(this).slideUp("fast");
+	  $('#kcal-limit-form').slideDown("fast");
 	});
 	
 } %>

@@ -1,3 +1,4 @@
-$('#kcal-limit-value').html(<%= current_user.kcal_limit.to_s %>);
+$('#kcal-limit-value a').html(<%= current_user.kcal_limit.to_s%>);
+$('#kcal-limit-value a').append(" Kcal");
 $('#kcal-limit-form').hide();
 $('#kcal-limit-link').show();
