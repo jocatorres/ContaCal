@@ -24,6 +24,6 @@ lines.each do |line|
     :weight => p[1],
     :measure => p[2],
     :kcal => p[3],
-    :type => p[4],
+    :kind => p[4],
   })
 end

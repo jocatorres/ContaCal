@@ -11,12 +11,12 @@ describe Food do
   it { should allow_mass_assignment_of(:weight) }
   it { should allow_mass_assignment_of(:measure) }
   it { should allow_mass_assignment_of(:kcal) }
-  it { should allow_mass_assignment_of(:type) }
+  it { should allow_mass_assignment_of(:kind) }
   
   it "should validate inclusion of :type" do
-    Factory.build(:food, :type => 'a').valid?.should be_true
-    Factory.build(:food, :type => 'b').valid?.should be_true
-    Factory.build(:food, :type => 'c').valid?.should be_true
-    Factory.build(:food, :type => 'd').valid?.should_not be_true
+    Factory.build(:food, :kind => 'a').valid?.should be_true
+    Factory.build(:food, :kind => 'b').valid?.should be_true
+    Factory.build(:food, :kind => 'c').valid?.should be_true
+    Factory.build(:food, :kind => 'd').valid?.should_not be_true
   end
 end

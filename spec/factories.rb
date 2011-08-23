@@ -5,6 +5,6 @@ FactoryGirl.define do
     weight '90 Gramas - g'
     measure '2 Colher de sopa'
     kcal 164
-    type 'a'
+    kind 'a'
   end
 end
