@@ -9,7 +9,9 @@
 <body>
 <%- if user_signed_in? -%>
   Logado como: <%= current_user.name %>
+  <%= link_to "Logout", destroy_user_session_url, :method => :delete %>
 <%- else -%>
+  <%= link_to "Cadastre-se aqui", new_user_registration_url %>
   <%= link_to "Login", new_user_session_url %>
 <%- end -%>
 <p class="notice"><%= notice %></p>
