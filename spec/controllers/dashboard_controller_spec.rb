@@ -11,10 +11,9 @@ describe DashboardController do
     end
     context "when user is logged in" do
       before(:each) do
-        @user = Factory.create(:user)
-        @user.confirm!
-        sign_in @user
+        login!
       end
+
       it "should be success" do
         get :index
         response.should be_success
