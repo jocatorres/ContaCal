@@ -10,7 +10,7 @@
     <% end -%>
     
     <%= form_tag(kcal_limit_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
-      <%= text_field_tag :kcal_limit %>
+      <%= text_field_tag :kcal_limit, current_user.kcal_limit %>
     	<%= submit_tag "Atualizar" %>	
     <% end -%>
   </div>
@@ -19,8 +19,11 @@
 
 <%= javascript_tag %{
 	$('#kcal-limit-link').click(function() {
-	  $(this).slideUp("fast");
-	  $('#kcal-limit-form').slideDown("fast");
+	  $('#kcal-limit-value').hide();
+		$('#change-kcal-label').hide();
+	  $('#kcal-limit-form').show();
+		$('#kcal_limit').focus();
+		$('#kcal_limit').select();
 	});
 	
 } %>
