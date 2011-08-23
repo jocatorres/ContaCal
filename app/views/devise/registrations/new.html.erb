@@ -16,4 +16,11 @@
   <%= f.password_field :password_confirmation %></p>
 
   <p><%= f.submit "Cadastre-se" %></p>
+  
+  <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://cobregratis.com.br/termos_de_uso', :class => "terms-of-use-fancybox" %>.</p>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '80%', height: '80%'});
+    });
+  </script>
 <% end %>
