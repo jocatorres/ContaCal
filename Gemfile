@@ -5,5 +5,6 @@ gem 'rake', '0.8.7'
 gem 'mysql2', '~> 0.2.11'
 
 group :development, :test do
+  gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
   gem 'rspec-rails', '2.6.1'
 end
