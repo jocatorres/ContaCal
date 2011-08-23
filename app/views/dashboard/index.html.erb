@@ -5,3 +5,19 @@ Casa do cachorro
 <br/><br/><br/><br/><br/>
 
 Casa da vovó
+
+<form>
+  <input id="search-for-food" />
+</form>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#search-for-food").autocomplete({
+      source: "<%= foods_url %>",
+      minLength: 2,
+      select: function(event, ui) {
+        alert("oi");
+      }
+    });
+  });
+</script>

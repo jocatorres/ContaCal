@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 Contacal::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
-  
+  resources :foods, :only => [:index]
   match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm
   root :to => "dashboard#index"
 
