@@ -14,10 +14,14 @@
 
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
-
+  
   <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://cobregratis.com.br/termos_de_uso', :class => "terms-of-use-fancybox" %>.</p>
 
   <p><%= f.submit "Cadastre-se" %></p>
+  
+  <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+    <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
+  <% end -%>
   
   <script type="text/javascript">
     $(document).ready(function(){
