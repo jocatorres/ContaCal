@@ -7,9 +7,13 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+<%- if user_signed_in? -%>
+  Logado como: <%= current_user.name %>
+<%- else -%>
+  <%= link_to "Login", new_user_session_url %>
+<%- end -%>
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
-
 </body>
 </html>
