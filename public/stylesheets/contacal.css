@@ -118,6 +118,7 @@ body#users-engine section[role="main"] a#registration {
   text-shadow: 0px -1px 0 #407f4f;
   font-size: .9em;
   border: none;
+  outline: none;
 }
 
 body#users-engine section[role="main"] a#registration:hover {
@@ -263,6 +264,10 @@ body#users-engine section[role="main"] form input[type="password"] {
 .alert {
   border: 1px solid #edecba;
   background: #fbfad4 url(/images/warning.png) no-repeat 10px 10px;
+}
+
+body#users-engine.confirmation .alert {
+  margin: 30px 0 20px;
 }
 
 .notice {
