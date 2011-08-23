@@ -6,6 +6,8 @@ gem 'pg', '0.11.0'
 gem 'devise', '1.4.2'
 gem 'thin', '1.2.11'
 gem 'silent-postgres', '0.0.8'
+gem 'rails3-jquery-autocomplete', '0.9.1'
+
 
 group :development, :test do
   gem 'heroku', '2.4.2'

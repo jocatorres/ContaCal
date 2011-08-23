@@ -11,5 +11,10 @@ describe DashboardController do
       put("/kcal_limit").should route_to("dashboard#update_kcal_limit")
       kcal_limit_path.should == '/kcal_limit'
     end
+
+    it "recognizes and generates confirm" do
+      get("/autocomplete_food_name").should route_to("dashboard#autocomplete_food_name")
+      autocomplete_food_name_path.should == "/autocomplete_food_name"
+    end
   end
 end

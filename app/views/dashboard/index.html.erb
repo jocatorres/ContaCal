@@ -23,18 +23,15 @@
 
 Casa da vovó
 
-<form>
-  <input id="search-for-food" />
-</form>
+<%= form_for :dashboard do |f| -%>
+  <%= f.autocomplete_field :food_name, autocomplete_food_name_path -%>
+<%- end -%>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#search-for-food").autocomplete({
-      source: "<%= foods_url %>",
-      minLength: 2,
-      select: function(event, ui) {
-        alert("oi");
-      }
+    $('#dashboard_food_name').bind('railsAutocomplete.select', function(event, data){
+      alert(data.item.id);
     });
   });
 </script>
