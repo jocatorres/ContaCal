@@ -17,7 +17,7 @@ namespace :heroku do
     run "git push git@heroku.com:#{APP}.git HEAD:master -f"
 
     puts "-----> Migrating..."
-    run "heroku rake db:migrate --app #{APP}"
+    run "heroku run rake db:migrate --app #{APP}"
 
     puts "-----> Restarting..."
     run "heroku restart --app #{APP}"
