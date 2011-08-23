@@ -107,29 +107,32 @@ body#users-engine section[role="main"] {
   border-radius: 8px;
 }
 
-body#users-engine section[role="main"] a#registration {
+body#users-engine section[role="main"] #registration {
   position: absolute;
   width: 222px;
   height: 72px;
   margin: 0 0 0 -38px;
-  padding: 8px 0 0 30px;
+  padding: 7px 0 0 30px;
   background: transparent url(/images/ribbon.png) no-repeat 0 0;
+}
+
+body#users-engine section[role="main"] #registration a {
+  outline: none;
   color: #fff;
   text-shadow: 0px -1px 0 #407f4f;
   font-size: .9em;
   border: none;
-  outline: none;
 }
 
-body#users-engine section[role="main"] a#registration:hover {
+body#users-engine section[role="main"] #registration a:hover {
   text-shadow: 0 2px 1px #407f4f;
 }
 
-body#users-engine section[role="main"] a#registration:active {
+body#users-engine section[role="main"] #registration a:active {
   color: #e9e9e9;
 }
 
-body#users-engine section[role="main"] a#registration span {
+body#users-engine section[role="main"] #registration a span {
   display: block;
   font-size: .8em;
 }

@@ -1,6 +1,8 @@
 <h1>Acesso ao sistema</h1>
 
-<%= link_to "<span>Ainda não tem conta?</span> Cadastre-se grátis!".html_safe, new_user_registration_url, :id => "registration" %>
+<p id="registration">
+  <%= link_to "<span>Ainda não tem conta?</span> Cadastre-se grátis!".html_safe, new_user_registration_url %>
+</p>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <%- if notice.present? %>
