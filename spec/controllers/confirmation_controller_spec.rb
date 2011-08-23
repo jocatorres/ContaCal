@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ConfirmationController do
   render_views
   
-  describe "GET confirm" do
+  describe "GET index" do
     context "when user is not logged in" do
       it "should be success" do
         get :index

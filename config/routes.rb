@@ -3,7 +3,7 @@ Contacal::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   
   match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm
-  root :to => "application#index"
+  root :to => "dashboard#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
