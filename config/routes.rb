@@ -2,6 +2,7 @@
 Contacal::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :foods, :only => [:index]
+  resources :user_foods, :only => [:create]
   match 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit, :via => :put
   match 'autocomplete_food_name', :to => 'dashboard#autocomplete_food_name', :as => :autocomplete_food_name
   match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm

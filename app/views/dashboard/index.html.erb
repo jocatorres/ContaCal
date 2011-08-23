@@ -29,15 +29,10 @@
 
 Casa da vovó
 
-<%= form_for :dashboard do |f| -%>
-  <%= f.autocomplete_field :food_name, autocomplete_food_name_path -%>
+<%= form_for UserFood.new(:meal => 'breakfast', :date => Date.today) do |f| -%>
+  <%= f.hidden_field :date %>
+  <%= f.hidden_field :food_id %>
+  <%= f.hidden_field :meal %>
+  <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :update_elements => {:id => '#user_food_food_id'} -%>
+  <%= f.submit "Salvar" %>
 <%- end -%>
-
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#dashboard_food_name').bind('railsAutocomplete.select', function(event, data){
-      alert(data.item.id);
-    });
-  });
-</script>
