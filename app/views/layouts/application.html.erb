@@ -21,12 +21,14 @@
   <header>
     <%- if user_signed_in? -%>
       <div id="masthead">
-        <p>Olá, <%= link_to current_user.name, edit_user_registration_url %> | <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+        <p>Olá, <strong><%= current_user.name %></strong> <%= link_to "(editar perfil)", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
       </div>
     <%- end -%>
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
+    
+    <%= yield(:header_info) %>
   </header>
   <hr />
   <section role="main">
