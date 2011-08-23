@@ -14,3 +14,15 @@ user = User.create!({
   :password => "test123"
 })
 user.confirm!
+
+json = File.read(Rails.root.join('db','foods.json'))
+foods = JSON.parse(json)['data']
+foods.each do |f|
+  Food.create!({
+    :name => f['nome'],
+    :weight => f['peso'],
+    :measure => f['medida_caseira'],
+    :kcal => f['kcal'],
+    :type => f['tipo'],
+  })
+end

@@ -5,4 +5,6 @@ class Food < ActiveRecord::Base
   validates_presence_of :measure
   validates_presence_of :kcal
   validates_inclusion_of :type, :in => %w( a b c )
+  
+  attr_accessible :name, :weight, :measure, :kcal, :type
 end

@@ -6,6 +6,12 @@ describe Food do
   it { should validate_presence_of(:weight) }
   it { should validate_presence_of(:measure) }
   it { should validate_presence_of(:kcal) }
+
+  it { should allow_mass_assignment_of(:name) }
+  it { should allow_mass_assignment_of(:weight) }
+  it { should allow_mass_assignment_of(:measure) }
+  it { should allow_mass_assignment_of(:kcal) }
+  it { should allow_mass_assignment_of(:type) }
   
   it "should validate inclusion of :type" do
     Factory.build(:food, :type => 'a').valid?.should be_true
