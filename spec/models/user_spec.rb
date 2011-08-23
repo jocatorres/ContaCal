@@ -108,4 +108,108 @@ describe User do
       end
     end
   end
+  describe "consumed_foods" do
+    before(:each) do
+      @user = Factory.create(:user)
+      @food1 = Factory.create(:food, :kcal => 100)
+      @food2 = Factory.create(:food, :kcal => 200)
+    end
+    context "requesting for a day" do
+      context "there is no food" do
+        it "should return 0" do
+          @user.consumed_foods.should == []
+        end
+      end
+      context "there is one food eaten today and twice" do
+        before(:each) do
+          @user_food1 = Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.today, :meal => 'breakfast', :amount => 2)
+          @user_food2 = Factory.create(:user_food, :user => @user, :food => @food2, :date => Date.today, :meal => 'breakfast', :amount => 2)
+        end
+        context "no meal requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods.should == [@user_food2, @user_food1]
+          end
+        end
+        context "food eaten on meal requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:meal => 'breakfast').should == [@user_food2, @user_food1]
+          end
+        end
+        context "food eaten on another meal not requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:meal => 'lunch').should == []
+          end
+        end
+      end
+      context "there is one food eaten another day" do
+        before(:each) do
+          @user_food1 = Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+          @user_food2 = Factory.create(:user_food, :user => @user, :food => @food2, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+        end
+        context "no meal requested" do
+          it "should return the kcal of food" do
+            Timecop.freeze(2011,8,23) do
+              @user.consumed_foods.should == []
+            end
+          end
+        end
+        context "food eaten on meal requested" do
+          it "should return the kcal of food" do
+            Timecop.freeze(2011,8,23) do
+              @user.consumed_foods(:meal => 'breakfast').should == []
+            end
+          end
+        end
+        context "food eaten on another meal not requested" do
+          it "should return the kcal of food" do
+            Timecop.freeze(2011,8,23) do
+              @user.consumed_foods(:meal => 'lunch').should == []
+            end
+          end
+        end
+      end
+      context "there is one food eaten on requested day" do
+        before(:each) do
+          @user_food1 = Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+          @user_food2 = Factory.create(:user_food, :user => @user, :food => @food2, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+        end
+        context "no meal requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:date => Date.new(2011,8,20)).should == [@user_food2, @user_food1]
+          end
+        end
+        context "food eaten on meal requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:date => Date.new(2011,8,20), :meal => 'breakfast').should == [@user_food2, @user_food1]
+          end
+        end
+        context "food eaten on another meal not requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:date => Date.new(2011,8,20), :meal => 'lunch').should == []
+          end
+        end
+      end
+      context "there is no food eaten on requested day" do
+        before(:each) do
+          @user_food1 = Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+          @user_food2 = Factory.create(:user_food, :user => @user, :food => @food2, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+        end
+        context "no meal requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:date => Date.new(2011,8,22)).should == []
+          end
+        end
+        context "food eaten on meal requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:date => Date.new(2011,8,22), :meal => 'breakfast').should == []
+          end
+        end
+        context "food eaten on another meal not requested" do
+          it "should return the kcal of food" do
+            @user.consumed_foods(:date => Date.new(2011,8,22), :meal => 'lunch').should == []
+          end
+        end
+      end
+    end
+  end
 end
