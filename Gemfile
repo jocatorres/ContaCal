@@ -12,4 +12,5 @@ group :development, :test do
   gem 'foreman', '0.20.0'
   gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
   gem 'rspec-rails', '2.6.1'
+  gem 'shoulda-matchers', '1.0.0.beta2'
 end
