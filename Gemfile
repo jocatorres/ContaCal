@@ -5,6 +5,7 @@ gem 'rake', '0.8.7'
 gem 'pg', '0.11.0'
 gem 'devise', '1.4.2'
 gem 'thin', '1.2.11'
+gem 'silent-postgres', '0.0.8'
 
 group :development, :test do
   gem 'foreman', '0.20.0'
