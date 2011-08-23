@@ -79,6 +79,13 @@ header #logo a {
 
 section[role="main"] {
   display: block;
+  margin: auto;
+  padding: 0 20px;
+  width: 920px;
+  border: 1px solid #ddd;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
   background: #fff url(/images/bg-heading-box.png) repeat-x 0 0;
   color: #333;
   -moz-box-shadow: 0 3px 2px #aaa;
@@ -112,13 +119,7 @@ section[role="main"] #cancel-account a:hover {
 }
 
 body#users-engine section[role="main"] {
-  margin: auto;
-  padding: 0 20px;
   width: 360px;
-  border: 1px solid #ddd;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
 }
 
 body#users-engine section[role="main"] #registration {
