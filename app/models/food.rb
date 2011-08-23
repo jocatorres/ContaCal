@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Food < ActiveRecord::Base
+  has_many :user_foods
   validates_presence_of :name
   validates_presence_of :weight
   validates_presence_of :measure

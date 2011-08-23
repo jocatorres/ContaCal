@@ -2,6 +2,7 @@
 require 'spec_helper'
 
 describe Food do
+  it { should have_many(:user_foods) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:weight) }
   it { should validate_presence_of(:measure) }
