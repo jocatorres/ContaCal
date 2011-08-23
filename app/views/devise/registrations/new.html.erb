@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h1>Cadastre-se</h1>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -15,9 +15,10 @@
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
 
+  <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://cobregratis.com.br/termos_de_uso', :class => "terms-of-use-fancybox" %>.</p>
+
   <p><%= f.submit "Cadastre-se" %></p>
   
-  <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://cobregratis.com.br/termos_de_uso', :class => "terms-of-use-fancybox" %>.</p>
   <script type="text/javascript">
     $(document).ready(function(){
       $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '80%', height: '80%'});
