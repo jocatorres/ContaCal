@@ -4,9 +4,9 @@ pt_BR:
       not_found: "não encontrado"
       already_confirmed: "já foi confirmado"
       not_locked: "não foi bloqueado"
-      not_saved:
-        one: "Não foi possível gravar %{resource}: 1 erro"
-        other: "Não foi possível gravar %{resource}: %{count} erros."
+      not_saved: "Não foi possível gravar"
+#        one: "Não foi possível gravar %{resource}: 1 erro"
+#        other: "Não foi possível gravar %{resource}: %{count} erros."
 
   devise:
     failure:
