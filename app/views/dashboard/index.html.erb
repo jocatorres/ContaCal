@@ -29,6 +29,28 @@
 
 <br/><br/><br/><br/><br/>
 
+<h1>Café da Manhã</h1>
+<ul id="foods_breakfast">
+	<% current_user.consumed_foods(:meal => 'breakfast').each do |user_food| %>
+		<li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
+	<% end -%>
+<ul>
+<h1>Colação</h1>
+<ul id="foods_brunch">
+	<% current_user.consumed_foods(:meal => 'brunch').each do |user_food| %>
+		<li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
+	<% end -%>
+<ul>
+
+<h1>Almoço</h1>
+<h1>Lanche</h1>
+<h1>Jantar</h1>
+<h1>Ceia</h1>
+
+
+<br/><br/><br/><br/><br/>
+
+
 Casa da vovó
 
 <%= form_for UserFood.new(:meal => 'breakfast', :date => Date.today, :food_id => nil) do |f| -%>

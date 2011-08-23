@@ -13,7 +13,7 @@ describe UserFood do
     end
     Factory.build(:user_food, :meal => 'notvalid').valid?.should_not be_true
   end
-  [:food_id, :amount, :meal, :date].each do |attr|
+  [:food, :food_id, :amount, :meal, :date].each do |attr|
     it { should allow_mass_assignment_of(attr) }
   end
 

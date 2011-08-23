@@ -28,4 +28,9 @@ if Rails.env.development?
       :kind => p[4],
     })
   end
+  
+  UserFood.delete_all
+  uf = UserFood.new(:user => user, :food => Food.first, :amount => 2, :meal => 'breakfast', :date => Date.today)
+  uf.user = user
+  uf.save!
 end

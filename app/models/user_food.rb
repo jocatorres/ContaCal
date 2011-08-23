@@ -4,7 +4,7 @@ class UserFood < ActiveRecord::Base
   validates :user, :food, :date, :presence => true
   validates :amount, :numericality => true
   validates :meal, :inclusion => %w( breakfast brunch lunch tea dinner supper )
-  attr_accessible :food_id, :amount, :meal, :date
+  attr_accessible :food, :food_id, :amount, :meal, :date
   before_save :set_kcal
 
   protected
