@@ -21,7 +21,7 @@
   <header>
     <%- if user_signed_in? -%>
       <div id="masthead">
-        <p>Olá, <%= current_user.name %> | <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+        <p>Olá, <%= link_to current_user.name, edit_user_registration_url %> | <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
       </div>
     <%- end -%>
     <div id="logo">

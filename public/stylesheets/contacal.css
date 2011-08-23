@@ -75,6 +75,23 @@ header #logo a {
   text-indent: -9999px;
 }
 
+header #masthead {
+  float: right;
+  font-size: .8em;
+  color: #363636;
+}
+
+header #masthead a,
+header #masthead a:link,
+header #masthead a:active,
+header #masthead a:visited {
+  color: #8e445e;
+}
+
+header #masthead a:hover {
+  text-decoration: underline;
+}
+
 /* SECTION */
 
 section[role="main"] {
