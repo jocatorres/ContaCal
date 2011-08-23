@@ -1,10 +1,10 @@
 <h1>Esqueceu a senha?</h1>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <p><strong>Nós lhe enviaremos instruções para a troca de senha.</strong></p>
+  <p><strong>Nós enviaremos instruções para a troca de senha.</strong></p>
   
   <%- unless resource.errors.empty? -%>
-    <p class="error">E-mail inválido</p>
+    <p class="error">E-mail inválido ou não encontrado</p>
   <%- end -%>
 
   <fieldset>
