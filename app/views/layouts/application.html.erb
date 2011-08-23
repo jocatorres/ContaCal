@@ -17,30 +17,22 @@
     <link href="/assets/iefix.css" media="all" rel="stylesheet" />
   <![endif]-->
 </head>
-<body>
+<body id="<%= controller.controller_name %>">
   <header>
-    <%- if notice.present? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <%- if alert.present? %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-    
-    <div id="masthead">
-      <p>
-        <%- if user_signed_in? -%>
-          Olá, <%= current_user.name %> | <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
-        <%- end -%>
-      </p>
-    </div>
+    <%- if user_signed_in? -%>
+      <div id="masthead">
+        <p>Olá, <%= current_user.name %> | <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+      </div>
+    <%- end -%>
     <div id="logo">
-      <a href="#">ContaCal</a>
+      <a href="<%= root_url %>">ContaCal</a>
     </div>
   </header>
   <hr />
   <section role="main">
     <%= yield %>
   </section>
+  <hr />
   <footer>
     <p>Copyright &copy; 2011 ContaCal.</p>
   </footer>
