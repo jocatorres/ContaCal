@@ -12,7 +12,7 @@ describe ConfirmationController do
 
       it "should render layout" do
         get :index
-        response.should render_template("application")
+        response.should render_template("devise")
       end
 
       it "should render view" do
