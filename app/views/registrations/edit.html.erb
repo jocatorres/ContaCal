@@ -9,13 +9,13 @@
   <p><%= f.label :email %><br />
   <%= f.email_field :email %></p>
 
-  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <p><%= f.label :password %> <em>Deixe em branco para manter a atual</em>
   <%= f.password_field :password %></p>
 
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></p>
 
-  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+  <p><%= f.label :current_password, "Senha atual" %> <em>Precisamos da sua senha atual para validar a sua conta</em>
   <%= f.password_field :current_password %></p>
 
   <h2>Dados adicionais</h2>
@@ -35,11 +35,13 @@
   <p><%= f.label :address_zipcode %><br />
   <%= f.text_field :address_zipcode %></p>
 
-  <p><%= f.submit "Update" %></p>
+  <p><%= f.submit "Atualizar dados" %></p>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3>Cancelar conta</h3>
 
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+<p id="cancel-account">Não está satisfeito? <%= link_to "cancele sua conta", registration_path(resource_name), :confirm => "Tem certeza de que deseja cancelar sua conta?", :method => :delete %>.</p>
 
-<%= link_to "Back", :back %>
+<p>
+  <%= link_to "&laquo; voltar".html_safe, :back %>
+</p>
