@@ -241,3 +241,4 @@ pt_BR:
         address_zipcode: Cep
         password: Senha
         password_confirmation: Confirmação de Senha
+        remember_me: "Lembre-me neste computador"
