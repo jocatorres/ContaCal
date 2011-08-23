@@ -17,4 +17,5 @@ group :development, :test do
   gem 'shoulda-matchers', '1.0.0.beta2'
   gem 'factory_girl_rails', '1.1.0'
   gem 'magic_encoding', '0.0.2'
+  gem 'timecop', '0.3.5'
 end
