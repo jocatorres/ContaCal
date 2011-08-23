@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 FactoryGirl.define do
   factory :food do
     name 'Abacate batido com limao e acucar'

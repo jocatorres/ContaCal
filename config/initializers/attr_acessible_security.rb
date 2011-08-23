@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 # This will create an empty whitelist of attributes available for mass assignment for
 # all models in your app. As such, your models will need to explicitly whitelist 
 # accessible parameters by using an attr_accessible declaration. This technique is best
