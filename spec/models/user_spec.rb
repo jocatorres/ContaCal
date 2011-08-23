@@ -2,9 +2,9 @@
 require 'spec_helper'
 
 describe User do
-  it { should allow_mass_assignment_of(:email) }
-  it { should allow_mass_assignment_of(:password) }
-  it { should allow_mass_assignment_of(:password_confirmation) }
-  it { should allow_mass_assignment_of(:remember_me) }
-  it { should allow_mass_assignment_of(:name) }
+  [:name, :email, :password, :password_confirmation, :remember_me].each do |attr|
+    it { should allow_mass_assignment_of(attr) }
+  end
+
+  it { should validate_presence_of(:name) }
 end
