@@ -8,6 +8,7 @@ gem 'thin', '1.2.11'
 gem 'silent-postgres', '0.0.8'
 
 group :development, :test do
+  gem 'heroku', '2.4.2'
   gem 'foreman', '0.20.0'
   gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
   gem 'rspec-rails', '2.6.1'
