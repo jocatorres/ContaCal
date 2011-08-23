@@ -1,6 +1,23 @@
-Olá
 
-Casa do cachorro
+<% if current_user.kcal_limit.nil? %>
+	<%= link_to 'definir', '#', :id => 'kcal-limit-link' %>	
+<% else %>
+	<span id="kcal-limit-value"><%= current_user.kcal_limit %></span> <%= link_to 'alterar', '#', :id => 'kcal-limit-link' %>
+<% end -%>
+
+<%= form_tag(kcal_limit_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
+  <%= text_field_tag :kcal_limit %>
+	<%= submit_tag "Atualizar" %>	
+<% end -%>
+
+
+<%= javascript_tag %{
+	$('#kcal-limit-link').click(function() {
+	  $('#kcal-limit-form').show();
+		$(this).hide();
+	});
+	
+} %>
 
 <br/><br/><br/><br/><br/>
 
