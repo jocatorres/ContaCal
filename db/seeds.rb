@@ -15,14 +15,15 @@ user = User.create!({
 })
 user.confirm!
 
-json = File.read(Rails.root.join('db','foods.json'))
-foods = JSON.parse(json)['data']
-foods.each do |f|
+Food.delete_all
+lines = File.open(Rails.root.join('db','foods.txt')).readlines
+lines.each do |line|
+  p = line.split("|")
   Food.create!({
-    :name => f['nome'],
-    :weight => f['peso'],
-    :measure => f['medida_caseira'],
-    :kcal => f['kcal'],
-    :type => f['tipo'],
+    :name => p[0],
+    :weight => p[1],
+    :measure => p[2],
+    :kcal => p[3],
+    :type => p[4],
   })
 end
