@@ -1,1 +1,4 @@
-<li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
+<li>
+  <%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %>
+  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true %>
+</li>

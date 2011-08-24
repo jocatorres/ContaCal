@@ -1,3 +1,1 @@
-$('#total-kcal').html('<%= number_with_precision(current_user.consumed_kcal, :precision => 0) %>');
-$('#total-kcal-<%= @user_food.meal %>').html('<%= number_with_precision(current_user.consumed_kcal(:meal => @user_food.meal), :precision => 0) %>');
-$('#foods-<%= @user_food.meal %>').html('<%= escape_javascript(render current_user.consumed_foods(:meal => @user_food.meal), :as => 'user_food') %>');
+<%= render :partial => "update_meal" %>
