@@ -18,6 +18,10 @@ $(function() {
     $(this).children("a.remove").hide();
   });
   
+  $("#toggle-calendar").click(function() {
+    $("#calendar").toggle();
+  });
+  
   if (!supports_input_placeholder()) {
     $("[placeholder]").focus(function() {
       var input = $(this);

@@ -46,12 +46,16 @@
 <nav>
   <div id="prev-date"><%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %></div>
   <% if l(@date) != l(Date.today) %>
-    <div id="current-date" class="not-today"><%= link_to "Voltar para hoje", root_url %> <%= l(@date) %></div>
+    <div id="current-date" class="not-today"><%= link_to "Voltar para hoje", root_url %> <a href="#" id="toggle-calendar"><%= l(@date) %></a></div>
   <% else %>
-    <div id="current-date"><%= l(@date) %></div>
+    <div id="current-date"><a href="#" id="toggle-calendar"><%= l(@date) %></a></div>
   <% end %>
-  <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
+  <% if l(@date) != l(Date.today) %>
+    <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
+  <% end %>
 </nav>
+
+<div id="calendar"></div>
 
 <div id="program-result">
   <%= render 'program_result' %>
@@ -88,5 +92,20 @@
       }
     });
     $(this).val('');
+  });
+  
+  $('#calendar').datepicker({
+    inline: true,
+    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+    maxDate: #{l(Date.today)},
+    prevText: "Anterior",
+    nextText: "Próximo",
+    onSelect: function(dateText, inst) {
+      new_date = dateText.split("/")
+      location.href = "/" + new_date[2] + "/" + new_date[0] + "/" + new_date[1]
+    }
   });
 } %>
