@@ -3,7 +3,7 @@ section[role="main"] {
 }
 
 section[role="main"] nav {
-  width: 260px;
+  width: 180px;
 }
 
 section[role="main"] .meal-box .meals ul li a.remove {
@@ -11,5 +11,5 @@ section[role="main"] .meal-box .meals ul li a.remove {
 }
 
 form .meal-box input[type="text"] {
-  margin-left: -2px; 
+  margin-left: -4px; 
 }

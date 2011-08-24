@@ -28,7 +28,7 @@ $(function() {
     return false;
   });
 });
-} %>
+}, :defer => 'defer' %>
 
 <div id="kcal-measure">
   <div class="title">Total: <strong><span id="total-kcal"><%= number_with_precision(total_kcal, :precision => 0) %></span> Kcal</strong></div>
@@ -112,4 +112,4 @@ $(function() {
     }
   });
 });
-} %>
+}, :defer => 'defer' %>
