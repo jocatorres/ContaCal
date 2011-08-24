@@ -27,6 +27,18 @@ describe DashboardController do
         assigns(:foods).should include(@pao_forma_integral)
       end
 
+      it "should assin foods for pao" do
+        @pao = Factory.create(:food, :name => 'Pão')
+        @pudim_pao = Factory.create(:food, :name => 'Pudim de Pão')
+        @pao_integral = Factory.create(:food, :name => 'Pão Integral')
+        @pao_forma_integral = Factory.create(:food, :name => 'Pão de Forma Integral')
+        get :autocomplete_food_name, :term => 'pao'
+        assigns(:foods).should include(@pao)
+        assigns(:foods).should include(@pudim_pao)
+        assigns(:foods).should include(@pao_integral)
+        assigns(:foods).should include(@pao_forma_integral)
+      end
+
       it "should assin foods for pão integral" do
         @pao = Factory.create(:food, :name => 'Pão')
         @pudim_pao = Factory.create(:food, :name => 'Pudim de Pão')

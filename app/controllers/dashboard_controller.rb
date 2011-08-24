@@ -8,14 +8,14 @@ class DashboardController < ApplicationController
     pieces = []
     terms = []
     params[:term].split(" ").each do |term|
-      pieces << 'lower(name) like ?'
+      pieces << "#{translate_to_remove_accents("name")} like #{translate_to_remove_accents("?")}"
       terms << "%#{term.downcase}%"
     end
     where_clause = pieces.join(" and ")
     @foods = Food.where(where_clause, *terms).limit(100).all
     render :json => json_for_autocomplete(@foods, :name, extra_data)
   end
-  
+
   def index
     begin
       @date = Date.parse("#{params[:year]}-#{params[:month]}-#{params[:day]}")
@@ -67,5 +67,9 @@ class DashboardController < ApplicationController
   private
   def consumed_kcal(date, kind)
     current_user.consumed_kcal(:date => date, :kind => kind)
+  end
+
+  def translate_to_remove_accents(value)
+    %{translate(lower(#{value}),'âãäåāăąèééêëēĕėęěìíîïìĩīĭóôõöōŏőùúûüũūŭůçćčĉċ','aaaaaaaeeeeeeeeeeiiiiiiiiooooooouuuuuuuccccc')}
   end
 end
