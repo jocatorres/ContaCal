@@ -8,7 +8,19 @@ describe User do
   end
 
   it { should validate_presence_of(:name) }
-  
+
+  describe "subscribed scope" do
+    it "should not return user" do
+      @user = Factory.create(:user, :subscribed => false)
+      User.subscribed.should_not include(@user)
+    end
+
+    it "should return user" do
+      @user = Factory.create(:user, :subscribed => true)
+      User.subscribed.should include(@user)
+    end
+  end
+
   describe "consumed_kcal" do
     before(:each) do
       @user = Factory.create(:user)
