@@ -19,26 +19,36 @@ class DashboardController < ApplicationController
   end
 
   def report
-    data = [["",0,0,0, current_user.kcal_limit]]
+    data = []
+    bar = ["",0,0,0]
+    bar << current_user.kcal_limit  unless current_user.kcal_limit.nil?
+    data << bar
     (6.days.ago.to_date..Date.today).each do |date|
-      data << [date.to_s(:db),consumed_kcal(date, "a"), consumed_kcal(date, "b"), consumed_kcal(date, "c"), current_user.kcal_limit]
+      bar = [l(date, :format => :chart),consumed_kcal(date, "a"), consumed_kcal(date, "b"), consumed_kcal(date, "c")]
+      bar << current_user.kcal_limit  unless current_user.kcal_limit.nil?
+      data << bar
     end
-    data << ["",0,0,0, current_user.kcal_limit]
+    bar = ["",0,0,0]
+    bar << current_user.kcal_limit  unless current_user.kcal_limit.nil?
+    data << bar
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Data' )
-    data_table.new_column('number', 'Vermelho')
-    data_table.new_column('number', 'Amarelo')
     data_table.new_column('number', 'Verde')
-    data_table.new_column('number', 'Limite diário')
+    data_table.new_column('number', 'Amarelo')
+    data_table.new_column('number', 'Vermelho')
+    data_table.new_column('number', 'Limite diário de calorias') unless current_user.kcal_limit.nil?
     data_table.add_rows(data)
     chart_options = {
-      :isStacked => 'true',
+      :title => 'Controle de Calorias',
+      :vAxis => {:title => 'Calorias'},
+      :isStacked => true,
       :width => 800, 
-      :height => 400, 
-      :colors => ['#DB281A','#F1BA31','#72F6A0'], 
-      :series => {3 => {:type => 'line', :color => 'black'}}
+      :height => 400,
+      :legend => 'none',
+      :colors => ['#6ba16c','#f7f143','#f75443'],
     }
+    chart_options[:series] = {3 => {:type => 'line', :color => 'black', :lineWidth => 3, :visibleInLegend => false}} unless current_user.kcal_limit.nil?
     @graph = GoogleVisualr::Interactive::ColumnChart.new(data_table, chart_options)
   end
 

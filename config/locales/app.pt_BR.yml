@@ -1,4 +1,7 @@
 pt_BR:
+  date:
+    formats:
+      chart: "%d/%m"
   dashboard:
     index:
       breakfast: Café da Manhã
