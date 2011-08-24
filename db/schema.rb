@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110823222831) do
+ActiveRecord::Schema.define(:version => 20110824190514) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20110823222831) do
   add_index "user_foods", ["user_id", "date"], :name => "index_user_foods_on_user_id_and_date"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                    :default => "", :null => false
-    t.string   "encrypted_password",        :limit => 128, :default => "", :null => false
+    t.string   "email",                                    :default => "",   :null => false
+    t.string   "encrypted_password",        :limit => 128, :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(:version => 20110823222831) do
     t.string   "address_state"
     t.string   "address_zipcode"
     t.integer  "kcal_limit"
+    t.boolean  "subscribed",                               :default => true
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

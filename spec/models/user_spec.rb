@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe User do
   it { should have_many(:user_foods) }
-  [:name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit].each do |attr|
+  [:name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed].each do |attr|
     it { should allow_mass_assignment_of(attr) }
   end
 
