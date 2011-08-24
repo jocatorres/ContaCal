@@ -1,0 +1,15 @@
+section[role="main"] {
+  padding-bottom: 20px;  
+}
+
+section[role="main"] nav {
+  width: 260px;
+}
+
+section[role="main"] .meal-box .meals ul li a.remove {
+  margin-top: -10px;
+}
+
+form .meal-box input[type="text"] {
+  margin-left: -2px; 
+}
