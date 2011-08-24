@@ -18,6 +18,7 @@
 
 
 <%= javascript_tag %{
+$(function() {
   $('#kcal-limit-link').click(function() {
     $('#kcal-limit-value').hide();
     $('#change-kcal-label').hide();
@@ -26,6 +27,7 @@
     $('#kcal_limit').select();
     return false;
   });
+});
 } %>
 
 <div id="kcal-measure">
@@ -78,6 +80,7 @@
 <%- end -%>
 
 <%= javascript_tag %{
+$(function() {
   $('.food_name_autocomplete').bind('railsAutocomplete.select', function(event, data){
     $.ajax({
       type: 'POST',
@@ -108,4 +111,5 @@
       location.href = "/" + new_date[2] + "/" + new_date[0] + "/" + new_date[1]
     }
   });
+});
 } %>
