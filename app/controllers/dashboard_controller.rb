@@ -3,9 +3,9 @@ class DashboardController < ApplicationController
   autocomplete :food, :name, :full => true
   
   def index
-    if !params[:year].blank? and !params[:month].blank? and !params[:day].blank?
+    begin
       @date = Date.parse("#{params[:year]}-#{params[:month]}-#{params[:day]}")
-    else
+    rescue
       @date = Date.today
     end
     @next_day = @date+1.day
