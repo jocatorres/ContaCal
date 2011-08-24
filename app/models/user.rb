@@ -17,6 +17,6 @@ class User < ActiveRecord::Base
     params[:date] ||= Date.today
     scope = user_foods.includes(:food).where(:date => params[:date])
     scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
-    scope.all
+    scope.order('user_foods.created_at ASC').all
   end
 end

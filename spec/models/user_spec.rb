@@ -144,12 +144,12 @@ describe User do
         end
         context "no meal requested" do
           it "should return the kcal of food" do
-            @user.consumed_foods.should == [@user_food2, @user_food1]
+            @user.consumed_foods.should == [@user_food1, @user_food2]
           end
         end
         context "food eaten on meal requested" do
           it "should return the kcal of food" do
-            @user.consumed_foods(:meal => 'breakfast').should == [@user_food2, @user_food1]
+            @user.consumed_foods(:meal => 'breakfast').should == [@user_food1, @user_food2]
           end
         end
         context "food eaten on another meal not requested" do
@@ -192,12 +192,12 @@ describe User do
         end
         context "no meal requested" do
           it "should return the kcal of food" do
-            @user.consumed_foods(:date => Date.new(2011,8,20)).should == [@user_food2, @user_food1]
+            @user.consumed_foods(:date => Date.new(2011,8,20)).should == [@user_food1, @user_food2]
           end
         end
         context "food eaten on meal requested" do
           it "should return the kcal of food" do
-            @user.consumed_foods(:date => Date.new(2011,8,20), :meal => 'breakfast').should == [@user_food2, @user_food1]
+            @user.consumed_foods(:date => Date.new(2011,8,20), :meal => 'breakfast').should == [@user_food1, @user_food2]
           end
         end
         context "food eaten on another meal not requested" do
