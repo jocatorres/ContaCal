@@ -38,7 +38,7 @@ class DashboardController < ApplicationController
       :title => 'Controle de Calorias',
       :vAxis => {:title => 'Calorias'},
       :isStacked => true,
-      :width => 800, 
+      :width => 900, 
       :height => 400,
       :legend => 'none',
       :colors => ['#6ba16c','#f7f143','#f75443'],

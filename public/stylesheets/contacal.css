@@ -30,6 +30,10 @@ body#users-engine h1 {
   text-align: center;
 }
 
+section[role="main"] h1#report-title {
+  margin: 12px 0 30px;
+}
+
 h2 {
   font-size: 1.4em !important;
   line-height: 1.2;
@@ -98,7 +102,7 @@ header a:hover {
 }
 
 header #kcal-limit {
-  margin: 45px 0 0 70px;
+  margin: 45px 0 0 60px;
   color: #363636;
   text-shadow: 0px 1px 0 #fff;
   font-size: .8em;
@@ -206,15 +210,20 @@ section[role="main"] .title {
   color: #5e5e5e;
 }
 
-section[role="main"] #weight-info {
-  float: left;
-}
-
-section[role="main"] #weight {
-  font-size: 1.4em;
+section[role="main"] a#report {
+  margin: 16px 0 0 5px;
+  padding: 4px 4px 4px 24px;
+  font-size: 1.2em;
   font-weight: bold;
   text-shadow: 0px 1px 0 #fff;
   color: #6ba16c;
+  background: transparent url(/images/chart-icon.png) no-repeat 0 5px;
+  float: left;
+}
+
+section[role="main"] a#report:hover {
+  border: none;
+  color: #1e69b4;
 }
 
 section[role="main"] #kcal-measure {
@@ -223,7 +232,7 @@ section[role="main"] #kcal-measure {
 
 section[role="main"] nav {
   display: block;
-  width: 320px;
+  width: 340px;
   height: 50px;
   margin: 0 auto 20px;
 }
@@ -292,7 +301,8 @@ section[role="main"] nav #next-date a:hover {
 }
 
 section[role="main"] #progress {
-  width: 310px;
+  margin-right: 17px;
+  width: 293px;
   height: 20px;
   border: 1px solid #ddd;
   background-color: #fff;
@@ -334,16 +344,68 @@ section[role="main"] .meal-box {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+  background: #fafafa;
+  background: -moz-linear-gradient(top, #e9e9e9 0%, #fafafa 40%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e9e9e9), color-stop(40%,#fafafa)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #e9e9e9 0%,#fafafa 40%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #e9e9e9 0%,#fafafa 40%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #e9e9e9 0%,#fafafa 40%); /* IE10+ */
+  background: linear-gradient(top, #e9e9e9 0%,#fafafa 40%); /* W3C */
   float: left;
 }
 
 section[role="main"] .meal-box h2 {
-  font-size: .8em;
+  margin: 10px 0 10px;
+  padding: 0 0 0 25px;
+  background: transparent url(/images/calendar-icon.png) no-repeat 0 2px;
+  font-size: 1.2em !important;
+  color: #000;
 }
 
 section[role="main"] .meal-box h2 .total-kcal {
   font-size: .8em;
+  color: #1E69B4;
   float: right;
+}
+
+section[role="main"] .meal-box .meals {
+  margin: 10px 0 0 0;
+  height: 200px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+section[role="main"] .meal-box .meals ul li {
+  padding: 10px 6px;
+  font-size: .8em;
+  color: #363636;
+  border-bottom: 1px solid #ddd;
+}
+
+section[role="main"] .meal-box .meals ul li.hover {
+  background-color: #fbfad4;
+}
+
+section[role="main"] .meal-box .meals ul li .ui-slider {
+  margin: 4px 0 0 0;
+}
+
+section[role="main"] .meal-box .meals ul li a.remove {
+  padding: 2px 14px 2px 0;
+  display: none;
+  color: #f00;
+  font-size: .9em;
+  background: transparent url(/images/cross-icon.png) no-repeat top right;
+  float: right;
+}
+
+section[role="main"] .meal-box .meals ul li a.remove:hover {
+  border: none;
+  text-decoration: underline;
 }
 
 /* FORMS AND BUTTONS */
@@ -368,6 +430,10 @@ form textarea {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
+}
+
+form .meal-box input[type="text"] {
+  font-size: .8em;
 }
 
 form textarea {

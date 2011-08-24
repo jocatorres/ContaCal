@@ -1,8 +1,8 @@
 <% slider_id = "slider-meal-#{user_food.id}" %>
 <li>
+  <%= "#{user_food.amount} #{user_food.food.name}<br /><strong>#{user_food.kcal} Kcal</strong>".html_safe %>
+  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true, :class => "remove" %>
   <div id="<%= slider_id %>">&nbsp;</div>
-  <%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %>
-  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true %>
 </li>
 <%= javascript_tag %{
   $( "##{slider_id}" ).slider({

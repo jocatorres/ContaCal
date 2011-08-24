@@ -1,4 +1,9 @@
-<br/><br/><br/><br/>
+<h1 id="report-title">Relatório de controle de calorias</h1>
+
 <div id="graph">&nbsp;</div>
 <script src='https://www.google.com/jsapi'></script>
 <%= raw @graph.to_js("graph") %>
+
+<p>
+  <%= link_to "&laquo; voltar para o programa".html_safe, :back %>
+</p>
