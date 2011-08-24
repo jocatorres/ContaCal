@@ -230,17 +230,3 @@ pt_BR:
 
       full_messages:
         format: "%{attribute} %{message}"
-
-    attributes:
-      user:
-        name: Nome
-        email: E-mail
-        address_street_and_number: Endereço
-        address_city: Cidade
-        address_state: Estado
-        address_zipcode: Cep
-        password: Senha
-        password_confirmation: Confirmação de Senha
-        current_password: Senha atual
-        remember_me: "Lembre-me neste computador"
-        cpf: CPF

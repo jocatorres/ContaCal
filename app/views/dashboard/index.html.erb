@@ -3,70 +3,60 @@
     Limite diário de calorias:<br />
     <% if current_user.kcal_limit.nil? %>
       <span id="kcal-limit-value"><%= link_to "indefinido", '#', :id => 'kcal-limit-link' %></span>
-    	<span id="change-kcal-label">definir</span>
+      <span id="change-kcal-label">definir</span>
     <% else %>
-    	<span id="kcal-limit-value"><%= link_to "#{current_user.kcal_limit} Kcal", '#', :id => 'kcal-limit-link' %></span>
-    	<span id="change-kcal-label">alterar</span>
+      <span id="kcal-limit-value"><%= link_to "#{current_user.kcal_limit} Kcal", '#', :id => 'kcal-limit-link' %></span>
+      <span id="change-kcal-label">alterar</span>
     <% end -%>
     
     <%= form_tag(kcal_limit_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
       <%= text_field_tag :kcal_limit, current_user.kcal_limit %>
-    	<%= submit_tag "Atualizar" %>	
+      <%= submit_tag "Atualizar" %> 
     <% end -%>
   </div>
 <% end %>
 
 
 <%= javascript_tag %{
-	$('#kcal-limit-link').click(function() {
-	  $('#kcal-limit-value').hide();
-		$('#change-kcal-label').hide();
-	  $('#kcal-limit-form').show();
-		$('#kcal_limit').focus();
-		$('#kcal_limit').select();
-	});
+  $('#kcal-limit-link').click(function() {
+    $('#kcal-limit-value').hide();
+    $('#change-kcal-label').hide();
+    $('#kcal-limit-form').show();
+    $('#kcal_limit').focus();
+    $('#kcal_limit').select();
+  });
 } %>
 
 <br/><br/><br/><br/><br/>
 
-<h1>Café da Manhã</h1>
-<ul id="foods_breakfast">
-	<% current_user.consumed_foods(:meal => 'breakfast').each do |user_food| %>
-		<li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
-	<% end -%>
-<ul>
-<h1>Colação</h1>
-<ul id="foods_brunch">
-	<% current_user.consumed_foods(:meal => 'brunch').each do |user_food| %>
-		<li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
-	<% end -%>
-<ul>
+<%= form_tag do -%>
 
-<h1>Almoço</h1>
-<h1>Lanche</h1>
-<h1>Jantar</h1>
-<h1>Ceia</h1>
+<% [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| %>
+  <h1><%=t ".#{meal}" %> - <span id="total-kcal-<%= meal %>"><%= current_user.consumed_kcal(:meal => meal) %></span></h1>
+  <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal -%>
 
+  <ul id="foods_<%= meal %>">
+    <% current_user.consumed_foods(:meal => meal).each do |user_food| %>
+      <li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
+    <% end -%>
+  <ul>
+<% end -%>
 
-<br/><br/><br/><br/><br/>
-
-
-Casa da vovó
-
-<%= form_for UserFood.new(:meal => 'breakfast', :date => Date.today, :food_id => nil) do |f| -%>
-  <%= f.hidden_field :date %>
-  <%= f.hidden_field :food_id %>
-  <%= f.hidden_field :meal %>
-  <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :update_elements => {:id => '#user_food_food_id'}, :id => "food_name_autocomplete" -%>
 <%- end -%>
 
 <%= javascript_tag %{
-  $('#food_name_autocomplete').bind('railsAutocomplete.select', function(event, data){
+  $('.food_name_autocomplete').bind('railsAutocomplete.select', function(event, data){
     $.ajax({
       type: 'POST',
       url: "#{user_foods_url}",
       dataType: "script",
-      data: $("#new_user_food").serialize()
+      data: {
+        user_food: {
+          date: '#{Date.today.to_s(:db)}',
+          food_id: data.item.id,
+          meal: $(this).attr('data-meal')
+        }
+      }
     });
     $('#food_name_autocomplete').val('');
   });
