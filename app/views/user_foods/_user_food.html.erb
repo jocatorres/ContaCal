@@ -10,7 +10,7 @@
     min: 0.5,
     max: 10,
     step: 0.5,
-    slide: function( event, ui ) {
+    change: function( event, ui ) {
       $.ajax({
         type: 'PUT',
         url: "#{user_food_url(user_food)}",
