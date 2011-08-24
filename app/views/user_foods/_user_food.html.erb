@@ -5,7 +5,7 @@
   <div id="<%= slider_id %>">&nbsp;</div>
 </li>
 <%= javascript_tag %{
-$(document).ready(function() {
+$(function() {
   $( "##{slider_id}" ).slider({
     value: #{user_food.amount},
     min: 0.5,
@@ -29,4 +29,4 @@ $(document).ready(function() {
     }
   });
 });
-}, :defer => 'defer' %>
+} %>
