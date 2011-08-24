@@ -1,4 +1,26 @@
+<% slider_id = "slider-meal-#{user_food.id}" %>
 <li>
+  <div id="<%= slider_id %>">&nbsp;</div>
   <%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %>
   <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true %>
 </li>
+<%= javascript_tag %{
+  $( "##{slider_id}" ).slider({
+    value: #{user_food.amount},
+    min: 0.5,
+    max: 10,
+    step: 0.5,
+    slide: function( event, ui ) {
+      $.ajax({
+        type: 'PUT',
+        url: "#{user_food_url(user_food)}",
+        dataType: "script",
+        data: {
+          user_food: {
+            amount: ui.value
+          }
+        }
+      });
+    }
+  });
+} %>
