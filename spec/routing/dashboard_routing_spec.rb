@@ -7,6 +7,11 @@ describe DashboardController do
       root_path.should == '/'
     end
 
+    it "recognizes and generates index with date" do
+      get("/2011/08/24").should route_to("dashboard#index", :year => '2011', :month => '08', :day => '24')
+      dashboard_path(:year => '2011', :month => '08', :day => '24').should == '/2011/08/24'
+    end
+
     it "recognizes and generates kcal_limit" do
       put("/kcal_limit").should route_to("dashboard#update_kcal_limit")
       kcal_limit_path.should == '/kcal_limit'

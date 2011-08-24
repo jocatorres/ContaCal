@@ -2,7 +2,7 @@
   <div id="kcal-limit">
     Limite diário de calorias:<br />
     <% if current_user.kcal_limit.nil? %>
-      <span id="kcal-limit-value"><%= link_to "indefinido", '#', :id => 'kcal-limit-link' %></span>
+      <span id="kcal-limit-value"><%= link_to "0 Kcal", '#', :id => 'kcal-limit-link' %></span>
       <span id="change-kcal-label">definir</span>
     <% else %>
       <span id="kcal-limit-value"><%= link_to "#{current_user.kcal_limit} Kcal", '#', :id => 'kcal-limit-link' %></span>
@@ -29,17 +29,25 @@
 
 <br/><br/><br/><br/><br/>
 
-<h2>Total do dia: <span id="total-kcal"><%= number_with_precision(current_user.consumed_kcal, :precision => 0) %></span> Kcal</h2>
+<%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %>
+
+
+<h2>Hoje <%=l @date %></h2>
+
+<%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %>
+
+<br/><br/>
+<h2>Total do dia: <span id="total-kcal"><%= number_with_precision(current_user.consumed_kcal(:date => @date), :precision => 0) %></span> Kcal</h2>
 <br/><br/><br/>
 
 <%= form_tag do -%>
 
 <% [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| %>
-  <h1><%=t ".#{meal}" %> - <span id="total-kcal-<%= meal %>"><%= number_with_precision(current_user.consumed_kcal(:meal => meal), :precision => 0) %></span> Kcal</h1>
+  <h1><%=t ".#{meal}" %> - <span id="total-kcal-<%= meal %>"><%= number_with_precision(current_user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %></span> Kcal</h1>
   <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal -%>
 
   <ul id="foods-<%= meal %>">
-    <%= render current_user.consumed_foods(:meal => meal), :as => 'user_food' %>
+    <%= render current_user.consumed_foods(:date => @date, :meal => meal), :as => 'user_food' %>
   </ul>
 <% end -%>
 
