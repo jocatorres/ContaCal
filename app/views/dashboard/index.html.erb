@@ -52,6 +52,14 @@
   <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
 </nav>
 
+<div id="program-result">
+  <% if percent_kcal_kind_b <= 35 and percent_kcal_kind_c <= 10 %>
+    <div class="notice"><strong>Parabéns!</strong> Sua dieta está dentro dos padrões recomendados.</div>
+  <% else %>
+    <div class="alert"><strong>Quase lá!</strong> Continue atualizando sua dieta com alimentos verdes e menos alimentos vermelhos.</div>
+  <% end %>
+</div>
+
 <%= form_tag do -%>
   <%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
     <div class="meal-box">

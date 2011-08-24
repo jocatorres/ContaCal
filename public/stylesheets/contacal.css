@@ -408,6 +408,11 @@ section[role="main"] .meal-box .meals ul li a.remove:hover {
   text-decoration: underline;
 }
 
+section[role="main"] #program-result {
+  clear: both;
+  margin: 20px 18px 0 6px;
+}
+
 /* FORMS AND BUTTONS */
 
 body#users-engine form {
