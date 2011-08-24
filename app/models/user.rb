@@ -12,7 +12,11 @@ class User < ActiveRecord::Base
     end
 
     def send_end_of_day_notification!
-      run_on_each_subscribed { |user| NotificationMailer.end_of_day(user).deliver }
+      run_on_each_subscribed do |user|
+        if user.kcal_limit.blank? && (user.consumed_kcal(:date => Date.today) < 1000)
+          NotificationMailer.end_of_day(user).deliver
+        end
+      end
     end
     
     def run_on_each_subscribed
