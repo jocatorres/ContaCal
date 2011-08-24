@@ -2,6 +2,37 @@ require 'spec_helper'
 
 describe DashboardController do
 
+  describe "GET report" do
+    context "when user is not logged in" do
+      it "should redirect to sign in" do
+        get :report
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+    context "when user is logged in" do
+      before(:each) do
+        login!
+      end
+
+      it "should be success" do
+        get :report
+        response.should be_success
+      end
+      it "should render layout" do
+        get :report
+        response.should render_template("application")
+      end
+      it "should render view" do
+        get :report
+        response.should render_template("dashboard/report")
+      end
+      it "should assign graph" do
+        get :report
+        assigns(:graph).should_not be_nil
+      end
+    end
+  end
+
   describe "GET index" do
     context "when user is not logged in" do
       it "should redirect to sign in" do

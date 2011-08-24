@@ -21,5 +21,10 @@ describe DashboardController do
       get("/autocomplete_food_name").should route_to("dashboard#autocomplete_food_name")
       autocomplete_food_name_path.should == "/autocomplete_food_name"
     end
+
+    it "recognizes and generates report" do
+      get("/report").should route_to("dashboard#report")
+      report_path.should == "/report"
+    end
   end
 end

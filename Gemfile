@@ -7,7 +7,7 @@ gem 'devise', '1.4.2'
 gem 'thin', '1.2.11'
 gem 'silent-postgres', '0.0.8'
 gem 'rails3-jquery-autocomplete', '0.9.1'
-
+gem 'google_visualr', '2.1.0'
 
 group :development, :test do
   gem 'heroku', '2.4.2'
