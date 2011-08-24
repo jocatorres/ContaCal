@@ -9,6 +9,32 @@ describe User do
 
   it { should validate_presence_of(:name) }
 
+  describe "send_beginning_of_day_notification!" do
+    it "should not send e-mails to unsubscribed people" do
+      @user = Factory.create(:user, :subscribed => false)
+      lambda do
+        User.send_beginning_of_day_notification!
+      end.should_not change(ActionMailer::Base.deliveries, :count)
+    end
+
+    context "with subscribed people" do
+      before(:each) do
+        @user = Factory.create(:user, :subscribed => true)
+      end
+
+      it "should deliver e-mail to that people" do
+        lambda do
+          User.send_beginning_of_day_notification!
+        end.should change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      it "should deliver to the correct user" do
+        User.send_beginning_of_day_notification!
+        ActionMailer::Base.deliveries.last.to.first.should == @user.email
+      end
+    end
+  end
+
   describe "subscribed scope" do
     it "should not return user" do
       @user = Factory.create(:user, :subscribed => false)

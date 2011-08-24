@@ -5,7 +5,13 @@ class User < ActiveRecord::Base
   has_many :user_foods
   validates :name, :presence => true
   scope :subscribed, where(:subscribed => true)
-  
+
+  def self.send_beginning_of_day_notification!
+    subscribed.each do |user|
+      NotificationMailer.beginning_of_day(user).deliver
+    end
+  end
+
   def consumed_kcal(params = {})
     params[:date] ||= Date.today
     scope = user_foods.includes(:food).where(:date => params[:date])
