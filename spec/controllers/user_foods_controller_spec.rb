@@ -15,12 +15,12 @@ describe UserFoodsController do
       end
 
       def do_post
-        post :create, :user_food => {:food_id => @food.id, :meal => 'breakfast', :date => '2010-10-10'}
+        post :create, :format => :js, :user_food => {:food_id => @food.id, :meal => 'breakfast', :date => '2010-10-10'}
       end
 
       it "should redirect to root_url" do
         do_post
-        response.should redirect_to(root_url)
+        response.should render_template('user_foods/create')
       end
 
       it "should create user_food for current_user" do

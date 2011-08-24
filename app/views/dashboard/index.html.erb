@@ -38,11 +38,9 @@
   <h1><%=t ".#{meal}" %> - <span id="total-kcal-<%= meal %>"><%= number_with_precision(current_user.consumed_kcal(:meal => meal), :precision => 0) %></span> Kcal</h1>
   <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal -%>
 
-  <ul id="foods_<%= meal %>">
-    <% current_user.consumed_foods(:meal => meal).each do |user_food| %>
-      <li><%= "#{user_food.amount} #{user_food.food.name} - #{user_food.kcal} Kcal" %></li>
-    <% end -%>
-  <ul>
+  <ul id="foods-<%= meal %>">
+    <%= render current_user.consumed_foods(:meal => meal), :as => 'user_food' %>
+  </ul>
 <% end -%>
 
 <%- end -%>
@@ -61,6 +59,6 @@
         }
       }
     });
-    $('#food_name_autocomplete').val('');
+    $(this).val('');
   });
 } %>
