@@ -1,4 +1,5 @@
 class NotificationMailer < ::ActionMailer::Base
+  helper :application
   layout 'mailer'
   default :from => "ContaCal <contato@contacal.com.br>"
 

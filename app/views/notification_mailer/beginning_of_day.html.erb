@@ -1,4 +1,11 @@
-<h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas em <%=I18n.l(@date) %></h1>
+<%= content_for :message_title do %>Resumo diário de ontem (<%=I18n.l(@date) %>)<% end -%>
+<p>Bom dia! Veja como está sua evolução no ContaCal e não deixe de registrar suas refeições de hoje.</p>
+<p>Lembre-se, só se melhora aquilo que se mede!</p>
+
+<h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas ontem.</h1>
+<img src='<%= root_url %>images/a.png' alt='' /> <%= number_with_precision(percent_kcal_kind_a, :strip_insignificant_zeros => true) %>%
+<img src='<%= root_url %>images/b.png' alt='' /> <%= number_with_precision(percent_kcal_kind_b, :strip_insignificant_zeros => true) %>%
+<img src='<%= root_url %>images/c.png' alt='' /> <%= number_with_precision(percent_kcal_kind_c, :strip_insignificant_zeros => true) %>%
 
 <%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
   <% next if @user.consumed_kcal(:date => @date, :meal => meal).zero? %>
@@ -6,10 +13,11 @@
     <h2 style="color: #696969; font-size: 16px"><%=t "dashboard.index.#{meal}" %> (<%= number_with_precision(@user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %> Kcal)</h2>
     <ul id="foods-<%= meal %>">
       <% @user.consumed_foods(:date => @date, :meal => meal).each do |user_food| %>
-        <li><%= "#{user_food.food.name} - #{user_food.food.weight} (#{user_food.food.measure})<br /><em>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)} x #{user_food.food.kcal}</em> = <strong>#{number_with_precision(user_food.kcal, :precision => 0)} Kcal</strong>".html_safe %></li>
+        <li><%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)} x #{user_food.food.kcal} Kcal</em> = <strong>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)} Kcal</strong> <img src='#{root_url}images/#{user_food.food.kind}.png' alt='' />".html_safe %></li>
       <% end -%>
     </ul>
   </div>
 <%- end -%>
 
 <p><%= link_to 'Acompanhe Online', root_url, :style => "color: #1E69B4;" %> | <%= link_to 'Veja o relatório dos últimos 7 dias', report_url, :style => "color: #1E69B4;" %></p>
+<p>Sugestões, dúvidas, mande nos um email para <a href="mailto:contato@contacal.com.br" style="color: #1E69B4;">contato@contacal.com.br</a>.</p>

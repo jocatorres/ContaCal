@@ -129,5 +129,62 @@ describe NotificationMailer do
         end
       end
     end
+    describe "without foods on a day" do
+      before(:each) do
+        Timecop.freeze(2011,11,24) do
+          @mailer = NotificationMailer.end_of_day(@user)
+        end
+      end
+      it "should set correct body for text html" do
+        body = @mailer.body.to_s
+        filename = Rails.root.join('spec','fixtures','mailers','end_of_day-without_food.html')
+        File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
+        body.should == File.read(filename)
+      end
+    end
+    describe "without kcal on day less tha 70% of limit" do
+      before(:each) do
+        Timecop.freeze(2011,11,24) do
+          Factory.create(:user_food, :user => @user, :meal => 'breakfast', :date => Date.new(2011,11,24))
+          @mailer = NotificationMailer.end_of_day(@user)
+        end
+      end
+      it "should set correct body for text html" do
+        body = @mailer.body.to_s
+        filename = Rails.root.join('spec','fixtures','mailers','end_of_day-below_70percent.html')
+        File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
+        body.should == File.read(filename)
+      end
+    end
+    describe "without kcal limit" do
+      before(:each) do
+        Timecop.freeze(2011,11,24) do
+          Factory.create(:user_food, :user => @user, :meal => 'breakfast', :date => Date.new(2011,11,24))
+          @user.kcal_limit = nil
+          @mailer = NotificationMailer.end_of_day(@user)
+        end
+      end
+      it "should set correct body for text html" do
+        body = @mailer.body.to_s
+        filename = Rails.root.join('spec','fixtures','mailers','end_of_day-below_70percent.html')
+        File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
+        body.should == File.read(filename)
+      end
+    end
+    describe "with kcal limit = 0" do
+      before(:each) do
+        Timecop.freeze(2011,11,24) do
+          Factory.create(:user_food, :user => @user, :meal => 'breakfast', :date => Date.new(2011,11,24))
+          @user.kcal_limit = 0
+          @mailer = NotificationMailer.end_of_day(@user)
+        end
+      end
+      it "should set correct body for text html" do
+        body = @mailer.body.to_s
+        filename = Rails.root.join('spec','fixtures','mailers','end_of_day-below_70percent.html')
+        File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
+        body.should == File.read(filename)
+      end
+    end
   end
 end

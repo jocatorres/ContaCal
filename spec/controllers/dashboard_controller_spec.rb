@@ -161,9 +161,9 @@ describe DashboardController do
       end
       it "should update kcal_limit of current user" do
         expect {
-          do_request({'kcal_limit' => '100'})
+          do_request({'kcal_limit' => '980'})
           @user.reload
-        }.should change(@user, :kcal_limit).from(nil).to(100)
+        }.should change(@user, :kcal_limit).from(1000).to(980)
       end
       it "should be success" do
         do_request
