@@ -29,9 +29,9 @@ class DashboardController < ApplicationController
 
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Data' )
-    data_table.new_column('number', 'Verde')
-    data_table.new_column('number', 'Amarelo')
-    data_table.new_column('number', 'Vermelho')
+    data_table.new_column('number', 'Caloria Verde')
+    data_table.new_column('number', 'Caloria Amarela')
+    data_table.new_column('number', 'Caloria Vermelha')
     data_table.new_column('number', 'Limite diário de calorias') unless current_user.kcal_limit.nil?
     data_table.add_rows(data)
     chart_options = {
