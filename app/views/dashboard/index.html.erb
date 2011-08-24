@@ -85,7 +85,7 @@
       dataType: "script",
       data: {
         user_food: {
-          date: '#{Date.today.to_s(:db)}',
+          date: '#{@date.to_s(:db)}',
           food_id: data.item.id,
           meal: $(this).attr('data-meal')
         }
