@@ -19,7 +19,12 @@ class DashboardController < ApplicationController
   end
 
   def report
-    data = [["", 0, 0, 0, 80], ["28/10/2011", 70, 20, 10, 80], ["29/10/2011", 20, 70, 10, 80], ["30/10/2011", 20, 40, 40, 80], ["30/10/2011", 20, 40, 40, 80], ["30/10/2011", 20, 40, 40, 80], ["30/10/2011", 20, 40, 40, 80], ["30/10/2011", 20, 40, 40, 80], ["", 0, 0, 0, 80]]
+    data = [["",0,0,0, current_user.kcal_limit]]
+    (6.days.ago.to_date..Date.today).each do |date|
+      data << [date.to_s(:db),consumed_kcal(date, "a"), consumed_kcal(date, "b"), consumed_kcal(date, "c"), current_user.kcal_limit]
+    end
+    data << ["",0,0,0, current_user.kcal_limit]
+
     data_table = GoogleVisualr::DataTable.new
     data_table.new_column('string', 'Data' )
     data_table.new_column('number', 'Vermelho')
@@ -39,5 +44,10 @@ class DashboardController < ApplicationController
 
   def update_kcal_limit
     current_user.update_attributes({:kcal_limit => params[:kcal_limit]})
+  end
+  
+  private
+  def consumed_kcal(date, kind)
+    current_user.consumed_kcal(:date => date, :kind => kind)
   end
 end
