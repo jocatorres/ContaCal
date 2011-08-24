@@ -1,7 +1,12 @@
 # -*- encoding : utf-8 -*-
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
-  autocomplete :food, :name, :full => true
+  
+  def autocomplete_food_name
+    extra_data = [:id, :name]
+    @foods = Food.where('lower(name) like ?',"%#{params[:term].downcase}%").limit(100).all
+    render :json => json_for_autocomplete(@foods, :name, extra_data)
+  end
   
   def index
     begin
