@@ -29,10 +29,13 @@
 
 <br/><br/><br/><br/><br/>
 
+<h2>Total do dia: <span id="total-kcal"><%= number_with_precision(current_user.consumed_kcal, :precision => 0) %></span> Kcal</h2>
+<br/><br/><br/>
+
 <%= form_tag do -%>
 
 <% [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| %>
-  <h1><%=t ".#{meal}" %> - <span id="total-kcal-<%= meal %>"><%= current_user.consumed_kcal(:meal => meal) %></span></h1>
+  <h1><%=t ".#{meal}" %> - <span id="total-kcal-<%= meal %>"><%= number_with_precision(current_user.consumed_kcal(:meal => meal), :precision => 0) %></span> Kcal</h1>
   <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal -%>
 
   <ul id="foods_<%= meal %>">
