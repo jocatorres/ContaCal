@@ -11,11 +11,6 @@ class DashboardController < ApplicationController
     end
     @next_day = @date+1.day
     @previous_day = @date-1.day
-    
-    @total_kcal = current_user.consumed_kcal(:date => @date)
-    @percent_kcal_kind_a = current_user.consumed_kcal(:date => @date, :kind => 'a')/@total_kcal*100
-    @percent_kcal_kind_b = current_user.consumed_kcal(:date => @date, :kind => 'b')/@total_kcal*100
-    @percent_kcal_kind_c = current_user.consumed_kcal(:date => @date, :kind => 'c')/@total_kcal*100
   end
 
   def report
