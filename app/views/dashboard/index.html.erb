@@ -28,9 +28,9 @@
 } %>
 
 <br/><br/><br/><br/><br/>
-Calorias Verdes: <%= number_with_precision(current_user.consumed_kcal(:date => @date, :kind => 'a'), :precision => 0) %><br/>
-Calorias Amarelas: <%= number_with_precision(current_user.consumed_kcal(:date => @date, :kind => 'b'), :precision => 0) %><br/>
-Calorias Vermelhas: <%= number_with_precision(current_user.consumed_kcal(:date => @date, :kind => 'c'), :precision => 0) %><br/>
+Calorias Verdes: <%= number_with_precision(@percent_kcal_kind_a, :precision => 0) %><br/>
+Calorias Amarelas: <%= number_with_precision(@percent_kcal_kind_b, :precision => 0) %><br/>
+Calorias Vermelhas: <%= number_with_precision(@percent_kcal_kind_c, :precision => 0) %><br/>
 
 <br/><br/>
 
@@ -42,7 +42,7 @@ Calorias Vermelhas: <%= number_with_precision(current_user.consumed_kcal(:date =
 <%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %>
 
 <br/><br/>
-<h2>Total do dia: <span id="total-kcal"><%= number_with_precision(current_user.consumed_kcal(:date => @date), :precision => 0) %></span> Kcal</h2>
+<h2>Total do dia: <span id="total-kcal"><%= number_with_precision(@total_kcal, :precision => 0) %></span> Kcal</h2>
 <br/><br/><br/>
 
 <%= form_tag do -%>
