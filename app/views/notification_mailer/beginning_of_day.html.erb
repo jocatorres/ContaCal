@@ -1,1 +1,15 @@
-<p>Tava bem ontem</p>
+<h1><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas em <%=I18n.l(@date) %></h1>
+
+<%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
+  <% next if @user.consumed_kcal(:date => @date, :meal => meal).zero? %>
+  <div class="meal-box">
+    <h2><%=t "dashboard.index.#{meal}" %> (<%= number_with_precision(@user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %> Kcal)</h2>
+    <ul id="foods-<%= meal %>">
+      <% @user.consumed_foods(:date => @date, :meal => meal).each do |user_food| %>
+        <li><%= "#{number_with_precision(user_food.amount, :significant => true)} #{user_food.food.name} - #{number_with_precision(user_food.kcal, :precision => 0)} Kcal" %></li>
+      <% end -%>
+    </ul>
+  </div>
+<%- end -%>
+
+<p><%= link_to 'Acompanhe Online', root_url %> | <%= link_to 'Veja o relatório dos últimos 7 dias', report_url %></p>
