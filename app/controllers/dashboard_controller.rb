@@ -4,7 +4,15 @@ class DashboardController < ApplicationController
   
   def autocomplete_food_name
     extra_data = [:id, :name]
-    @foods = Food.where('lower(name) like ?',"%#{params[:term].downcase}%").limit(100).all
+
+    pieces = []
+    terms = []
+    params[:term].split(" ").each do |term|
+      pieces << 'lower(name) like ?'
+      terms << "%#{term.downcase}%"
+    end
+    where_clause = pieces.join(" and ")
+    @foods = Food.where(where_clause, *terms).limit(100).all
     render :json => json_for_autocomplete(@foods, :name, extra_data)
   end
   

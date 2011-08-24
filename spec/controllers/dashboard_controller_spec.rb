@@ -1,6 +1,50 @@
+# -*- encoding : utf-8 -*-
 require 'spec_helper'
 
 describe DashboardController do
+
+  describe "GET autocomplete_food_name" do
+    context "when user is not logged in" do
+      it "should redirect to sign in" do
+        get :autocomplete_food_name, :term => 'tomate'
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+    context "when user is logged in" do
+      before(:each) do
+        login!
+      end
+      
+      it "should assin foods for pão" do
+        @pao = Factory.create(:food, :name => 'Pão')
+        @pudim_pao = Factory.create(:food, :name => 'Pudim de Pão')
+        @pao_integral = Factory.create(:food, :name => 'Pão Integral')
+        @pao_forma_integral = Factory.create(:food, :name => 'Pão de Forma Integral')
+        get :autocomplete_food_name, :term => 'pão'
+        assigns(:foods).should include(@pao)
+        assigns(:foods).should include(@pudim_pao)
+        assigns(:foods).should include(@pao_integral)
+        assigns(:foods).should include(@pao_forma_integral)
+      end
+
+      it "should assin foods for pão integral" do
+        @pao = Factory.create(:food, :name => 'Pão')
+        @pudim_pao = Factory.create(:food, :name => 'Pudim de Pão')
+        @pao_integral = Factory.create(:food, :name => 'Pão Integral')
+        @pao_forma_integral = Factory.create(:food, :name => 'Pão de Forma Integral')
+        get :autocomplete_food_name, :term => 'pão integral'
+        assigns(:foods).should_not include(@pao)
+        assigns(:foods).should_not include(@pudim_pao)
+        assigns(:foods).should include(@pao_integral)
+        assigns(:foods).should include(@pao_forma_integral)
+      end
+
+      it "should be success" do
+        get :autocomplete_food_name, :term => 'tomate'
+        response.should be_success
+      end
+    end
+  end
 
   describe "GET report" do
     context "when user is not logged in" do
