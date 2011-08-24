@@ -1,6 +1,6 @@
 <% slider_id = "slider-meal-#{user_food.id}" %>
 <li>
-  <%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em><span id='slider-meal-amount-#{user_food.id}'>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)}</span> x #{user_food.food.kcal} Kcal</em> = <strong><span id='slider-meal-total-#{user_food.id}'>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)}</span> Kcal</strong> <img src='/images/#{user_food.food.kind}.png' alt='' />".html_safe %>
+  <%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em><span id='slider-meal-amount-#{user_food.id}'>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)}</span> x #{user_food.food.kcal} Kcal</em> = <strong><span id='slider-meal-total-#{user_food.id}'>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)}</span> Kcal</strong> #{image_tag("#{user_food.food.kind}.png")}".html_safe %>
   <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true, :class => "remove" %>
   <div id="<%= slider_id %>">&nbsp;</div>
 </li>

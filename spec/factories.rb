@@ -8,6 +8,7 @@ FactoryGirl.define do
     email
     password '123456'
     password_confirmation '123456'
+    kcal_limit 1000
   end
   factory :food do
     name 'Abacate batido com limão e açúcar'

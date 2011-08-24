@@ -1,4 +1,5 @@
-<p>Foi solicitado o cadastro de uma com e-mail <strong><%= @resource.email %></strong> no ContaCal.</p>
+<%= content_for :message_title do %>Instruções de confirmação de conta<% end -%>
+<p>Foi solicitado o cadastro de uma conta com e-mail <strong><%= @resource.email %></strong> no ContaCal.</p>
 <p>Se você deseja realmente criar uma conta, confirme sua conta acessando o link abaixo:</p>
 
 <p style="font-size: 1.5em"><%= link_to 'Confirmar minha conta', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

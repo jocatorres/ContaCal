@@ -14,11 +14,16 @@ module ApplicationHelper
 
   private
   def percent_kcal_kind(kind)
-    current_user.consumed_kcal(:date => current_date, :kind => kind)/total_kcal*100
+    user.consumed_kcal(:date => current_date, :kind => kind)/total_kcal*100
+  end
+  
+  def total_kcal
+    @total_kcal ||= user.consumed_kcal(:date => current_date)
   end
 
-  def total_kcal
-    @total_kcal ||= current_user.consumed_kcal(:date => current_date)
+  # this methos was created to make this helper work with emails
+  def user
+    current_user rescue @user
   end
 
   def current_date

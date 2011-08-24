@@ -10,6 +10,7 @@ gem 'rails3-jquery-autocomplete', '0.9.1'
 gem 'google_visualr', '2.1.0'
 
 group :development, :test do
+  gem 'ruby-debug19', '0.11.6'
   gem 'heroku', '2.4.2'
   gem 'foreman', '0.20.0'
   gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
