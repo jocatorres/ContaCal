@@ -12,6 +12,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.send_end_of_day_notification!
+    subscribed.each do |user|
+      NotificationMailer.end_of_day(user).deliver
+    end
+  end
+
   def consumed_kcal(params = {})
     params[:date] ||= Date.today
     scope = user_foods.includes(:food).where(:date => params[:date])

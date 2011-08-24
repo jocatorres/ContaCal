@@ -28,12 +28,59 @@ describe User do
         end.should change(ActionMailer::Base.deliveries, :count).by(1)
       end
 
-      it "should deliver to the correct user" do
-        User.send_beginning_of_day_notification!
-        ActionMailer::Base.deliveries.last.to.first.should == @user.email
+      describe "delivered e-mail" do
+        before(:each) do
+          User.send_beginning_of_day_notification!
+          @email = ActionMailer::Base.deliveries.last
+        end
+        
+        it "should deliver to the correct user" do
+          @email.to.first.should == @user.email
+        end
+
+        it "should deliver the correct email" do
+          @email.subject.should =~ /Resumo de suas calorias em/
+        end
       end
     end
   end
+
+  describe "send_end_of_day_notification!" do
+    it "should not send e-mails to unsubscribed people" do
+      @user = Factory.create(:user, :subscribed => false)
+      lambda do
+        User.send_end_of_day_notification!
+      end.should_not change(ActionMailer::Base.deliveries, :count)
+    end
+
+    context "with subscribed people" do
+      before(:each) do
+        @user = Factory.create(:user, :subscribed => true)
+      end
+
+      it "should deliver e-mail to that people" do
+        lambda do
+          User.send_end_of_day_notification!
+        end.should change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      describe "delivered e-mail" do
+        before(:each) do
+          User.send_end_of_day_notification!
+          @email = ActionMailer::Base.deliveries.last
+        end
+
+        it "should deliver to the correct user" do
+          @email.to.first.should == @user.email
+        end
+
+        it "should deliver the correct email" do
+          @email.subject.should =~ /Resumo de suas calorias de hoje/
+        end
+      end
+    end
+  end
+
 
   describe "subscribed scope" do
     it "should not return user" do
