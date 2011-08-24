@@ -27,21 +27,30 @@
   });
 } %>
 
-<br/><br/><br/><br/><br/>
-Calorias Verdes: <%= number_with_precision(@percent_kcal_kind_a, :precision => 0) %><br/>
-Calorias Amarelas: <%= number_with_precision(@percent_kcal_kind_b, :precision => 0) %><br/>
-Calorias Vermelhas: <%= number_with_precision(@percent_kcal_kind_c, :precision => 0) %><br/>
+<div id="kcal-measure">
+  <div class="title">Total: <strong>203 Kcal</strong></div>
+  <div id="progress">
+    <div id="nice" class="progressbar" style="width: <%= number_with_precision(@percent_kcal_kind_a, :precision => 0) %>%"><%= number_with_precision(@percent_kcal_kind_a, :precision => 0) %>%</div>
+    <div id="fair" class="progressbar" style="width: <%= number_with_precision(@percent_kcal_kind_b, :precision => 0) %>%"><%= number_with_precision(@percent_kcal_kind_b, :precision => 0) %>%</div>
+    <div id="poor" class="progressbar" style="width: <%= number_with_precision(@percent_kcal_kind_c, :precision => 0) %>%"><%= number_with_precision(@percent_kcal_kind_c, :precision => 0) %>%</div>
+  </div>
+</div>
 
-<br/><br/>
+<!--div id="weight-info">
+  <div class="title">Seu peso:</div>
+  <div id="weight">89kg</div>
+</div-->
 
-<%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %>
+<nav>
+  <div id="prev-date"><%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %></div>
+  <div id="current-date"><%=l @date %></div>
+  <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
+</nav>
 
 
-<h2>Hoje <%=l @date %></h2>
+<br/><br/><br/><br/><br/><br/><br/>
 
-<%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %>
 
-<br/><br/>
 <h2>Total do dia: <span id="total-kcal"><%= number_with_precision(@total_kcal, :precision => 0) %></span> Kcal</h2>
 <br/><br/><br/>
 
