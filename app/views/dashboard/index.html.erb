@@ -53,7 +53,11 @@
 
 <nav>
   <div id="prev-date"><%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %></div>
-  <div id="current-date"><%=l @date %></div>
+  <% if l(@date) != l(Date.today) %>
+    <div id="current-date" class="not-today"><%= link_to "Voltar para hoje", root_url %> <%= l(@date) %></div>
+  <% else %>
+    <div id="current-date"><%= l(@date) %></div>
+  <% end %>
   <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
 </nav>
 

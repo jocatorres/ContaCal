@@ -239,6 +239,24 @@ section[role="main"] nav #current-date {
   float: left;
 }
 
+section[role="main"] nav #current-date {
+  text-align: center;
+}
+
+section[role="main"] nav #current-date a {
+  display: block;
+  font-size: .4em;
+}
+
+section[role="main"] nav #current-date a:hover {
+  color: #000;
+  border: none;
+}
+
+section[role="main"] nav #current-date.not-today {
+  margin: 5px 0 0 0;
+}
+
 section[role="main"] nav #prev-date {
   margin: 20px 10px 0 0;
 }
