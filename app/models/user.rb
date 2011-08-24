@@ -13,9 +13,7 @@ class User < ActiveRecord::Base
 
     def send_end_of_day_notification!
       run_on_each_subscribed do |user|
-        if user.kcal_limit.blank? && (user.consumed_kcal(:date => Date.today) < 1000)
-          NotificationMailer.end_of_day(user).deliver
-        end
+        NotificationMailer.end_of_day(user).deliver if user.deliver_end_of_day_email?
       end
     end
     
@@ -37,5 +35,20 @@ class User < ActiveRecord::Base
     scope = user_foods.includes(:food).where(:date => params[:date])
     scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
     scope.order('user_foods.created_at ASC').all
+  end
+
+  def deliver_end_of_day_email?
+    consumed_kcal_less_than_1000_kcal || consumed_kcal_less_than_70_percent
+  end
+
+  private
+  def consumed_kcal_less_than_1000_kcal
+    (kcal_limit.blank? || kcal_limit.zero?) && (consumed_kcal_today < 1000)
+  end
+  def consumed_kcal_less_than_70_percent
+    !kcal_limit.blank? && ((consumed_kcal_today/kcal_limit) < 0.7)
+  end
+  def consumed_kcal_today
+    consumed_kcal(:date => Date.today)
   end
 end
