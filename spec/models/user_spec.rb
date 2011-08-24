@@ -12,7 +12,8 @@ describe User do
   describe "consumed_kcal" do
     before(:each) do
       @user = Factory.create(:user)
-      @food = Factory.create(:food, :kcal => 300)
+      @food1 = Factory.create(:food, :kcal => 300)
+      @food2 = Factory.create(:food, :kcal => 100, :kind => 'b')
     end
     context "requesting for a day" do
       context "there is no food" do
@@ -22,16 +23,32 @@ describe User do
       end
       context "there is one food eaten today and twice" do
         before(:each) do
-          Factory.create(:user_food, :user => @user, :food => @food, :date => Date.today, :meal => 'breakfast', :amount => 2)
+          Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.today, :meal => 'breakfast', :amount => 2)
+          Factory.create(:user_food, :user => @user, :food => @food2, :date => Date.today, :meal => 'breakfast', :amount => 1)
         end
         context "no meal requested" do
-          it "should return the kcal of food" do
-            @user.consumed_kcal.should == 600
+          context "no kind requested" do
+            it "should return the kcal of food" do
+              @user.consumed_kcal.should == 700
+            end
+          end
+          context "food eaten on kind requested" do
+            it "should return the kcal of food" do
+              @user.consumed_kcal(:kind => 'a').should == 600
+            end            
+          end
+          context "food eaten on another kind not requested" do
+            it "should return the kcal of food" do
+              @user.consumed_kcal(:kind => 'b').should == 100
+            end
+            it "should return the kcal of food" do
+              @user.consumed_kcal(:kind => 'c').should == 0
+            end
           end
         end
         context "food eaten on meal requested" do
           it "should return the kcal of food" do
-            @user.consumed_kcal(:meal => 'breakfast').should == 600
+            @user.consumed_kcal(:meal => 'breakfast').should == 700
           end
         end
         context "food eaten on another meal not requested" do
@@ -42,7 +59,7 @@ describe User do
       end
       context "there is one food eaten another day" do
         before(:each) do
-          Factory.create(:user_food, :user => @user, :food => @food, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+          Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
         end
         context "no meal requested" do
           it "should return the kcal of food" do
@@ -68,7 +85,7 @@ describe User do
       end
       context "there is one food eaten on requested day" do
         before(:each) do
-          Factory.create(:user_food, :user => @user, :food => @food, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+          Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
         end
         context "no meal requested" do
           it "should return the kcal of food" do
@@ -88,7 +105,7 @@ describe User do
       end
       context "there is no food eaten on requested day" do
         before(:each) do
-          Factory.create(:user_food, :user => @user, :food => @food, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
+          Factory.create(:user_food, :user => @user, :food => @food1, :date => Date.new(2011,8,20), :meal => 'breakfast', :amount => 2)
         end
         context "no meal requested" do
           it "should return the kcal of food" do

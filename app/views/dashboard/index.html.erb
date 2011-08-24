@@ -28,6 +28,11 @@
 } %>
 
 <br/><br/><br/><br/><br/>
+Calorias Verdes: <%= number_with_precision(current_user.consumed_kcal(:date => @date, :kind => 'a'), :precision => 0) %><br/>
+Calorias Amarelas: <%= number_with_precision(current_user.consumed_kcal(:date => @date, :kind => 'b'), :precision => 0) %><br/>
+Calorias Vermelhas: <%= number_with_precision(current_user.consumed_kcal(:date => @date, :kind => 'c'), :precision => 0) %><br/>
+
+<br/><br/>
 
 <%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %>
 
