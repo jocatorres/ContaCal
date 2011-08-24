@@ -2,9 +2,9 @@ pt_BR:
   dashboard:
     index:
       breakfast: Café da Manhã
-      brunch: Colação
+      brunch: Lanche da Manhã
       lunch: Almoço
-      tea: Lanche
+      tea: Lanche da Tarde
       dinner: Jantar
       supper: Ceia
   activerecord:
