@@ -1,4 +1,16 @@
-<h1 id="report-title">Relatório de controle de calorias</h1>
+<h1 id="report-title">
+    <% if @days == 30 %>
+      <span style="float: right">
+        <%= link_to 'Ver últimos 7 dias &raquo;'.html_safe, report_path %>
+      </span>
+      Relatório de controle de calorias dos últimos 30 dias
+    <% else %>
+      <span style="float: right">
+        <%= link_to 'Ver últimos 30 dias &raquo;'.html_safe, report_path(:range => 'month') %>
+      </span>
+      Relatório de controle de calorias dos últimos 7 dias
+    <% end -%>
+</h1>
 
 <div id="graph">&nbsp;</div>
 <script src='https://www.google.com/jsapi'></script>

@@ -31,7 +31,13 @@ class DashboardController < ApplicationController
     bar = ["",0,0,0]
     bar << current_user.kcal_limit  unless current_user.kcal_limit.nil?
     data << bar
-    (6.days.ago.to_date..Date.today).each do |date|
+    case params[:range]
+    when 'month'
+      @days = 30
+    else
+      @days = 7
+    end
+    (@days.days.ago.to_date..Date.today).each do |date|
       bar = [l(date, :format => :chart),consumed_kcal(date, "a"), consumed_kcal(date, "b"), consumed_kcal(date, "c")]
       bar << current_user.kcal_limit  unless current_user.kcal_limit.nil?
       data << bar
