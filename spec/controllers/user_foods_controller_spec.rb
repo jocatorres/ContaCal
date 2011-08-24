@@ -1,6 +1,40 @@
 require 'spec_helper'
 
 describe UserFoodsController do
+  describe "PUT update" do
+    context "when user is not logged in" do
+      it "should redirect to sign in" do
+        put :update, :id => "1"
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+    context "when user is logged in" do
+      before(:each) do
+        login!
+        @user_food = Factory.create(:user_food, :user => @user)
+      end
+
+      it "should render template" do
+        put :update, :format => :js, :id => @user_food.id, :user_food => { :amount => 2 }
+        response.should render_template('user_foods/update')
+      end
+
+      it "should update user_food for current_user" do
+        lambda do
+          put :update, :format => :js, :id => @user_food.id, :user_food => { :amount => 2 }
+          @user_food.reload
+        end.should change(@user_food, :amount).to(2)
+      end
+
+      it "should not update user_food from other users" do
+        @another_user_food = Factory.create(:user_food)
+        lambda do
+          put :update, :format => :js, :id => @another_user_food.id, :user_food => { :amount => 2 }
+        end.should raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
+
   describe "DELETE destroy" do
     context "when user is not logged in" do
       it "should redirect to sign in" do
