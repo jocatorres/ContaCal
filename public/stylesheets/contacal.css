@@ -287,8 +287,12 @@ section[role="main"] #progress {
 }
 
 section[role="main"] #progress .progressbar {
-  padding: 4px;
   float: left;
+}
+
+section[role="main"] #progress .progressbar span {
+  display: block;
+  padding: 4px;
 }
 
 section[role="main"] #progress #nice {
