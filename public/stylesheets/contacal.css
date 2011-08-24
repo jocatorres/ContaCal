@@ -391,7 +391,7 @@ section[role="main"] .meal-box .meals ul li.hover {
 }
 
 section[role="main"] .meal-box .meals ul li .ui-slider {
-  margin: 4px 0 0 0;
+  margin: 4px 4px 0;
 }
 
 section[role="main"] .meal-box .meals ul li a.remove {
