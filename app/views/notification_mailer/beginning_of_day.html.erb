@@ -6,7 +6,7 @@
     <h2 style="color: #696969; font-size: 16px"><%=t "dashboard.index.#{meal}" %> (<%= number_with_precision(@user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %> Kcal)</h2>
     <ul id="foods-<%= meal %>">
       <% @user.consumed_foods(:date => @date, :meal => meal).each do |user_food| %>
-        <li><%= "#{user_food.food.name} - #{user_food.food.weight} (#{user_food.food.measure})<br /><em>#{user_food.amount} x #{user_food.food.kcal}</em> = <strong>#{number_with_precision(user_food.kcal, :precision => 0)} Kcal</strong>".html_safe %></li>
+        <li><%= "#{user_food.food.name} - #{user_food.food.weight} (#{user_food.food.measure})<br /><em>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)} x #{user_food.food.kcal}</em> = <strong>#{number_with_precision(user_food.kcal, :precision => 0)} Kcal</strong>".html_safe %></li>
       <% end -%>
     </ul>
   </div>

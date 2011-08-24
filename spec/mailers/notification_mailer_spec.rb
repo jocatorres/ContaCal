@@ -14,7 +14,8 @@ describe NotificationMailer do
     describe "rendered without error" do
       before(:each) do
         Timecop.freeze(2011,11,24) do
-          2.times { Factory.create(:user_food, :user => @user, :meal => 'breakfast', :date => Date.new(2011,11,23)) }
+          Factory.create(:user_food, :user => @user, :meal => 'breakfast', :date => Date.new(2011,11,23))
+          Factory.create(:user_food, :user => @user, :meal => 'breakfast', :date => Date.new(2011,11,23), :amount => 1.5)
           3.times { Factory.create(:user_food, :user => @user, :meal => 'lunch', :date => Date.new(2011,11,23)) }
           @mailer = NotificationMailer.beginning_of_day(@user)
         end
