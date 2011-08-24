@@ -9,11 +9,11 @@ namespace :notification do
 end
 
 task :cron => :environment do
-  return false
-  if false
+  if Time.zone.now.hour == 8
     Rake::Task['notification:beginning_of_day'].invoke
   end
-  if false
+
+  if Time.zone.now.hour == 20
     Rake::Task['notification:end_of_day'].invoke
   end
 end
