@@ -1,6 +1,6 @@
 <% content_for :header_info do %>
   <div id="kcal-limit">
-    <%= link_to "Limite diário de calorias", "http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/" %>:
+    <%= link_to "Limite diário de calorias", "http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/", :target => '_blank' %>:
     <br />
     <% if current_user.kcal_limit.nil? %>
       <span id="kcal-limit-value"><%= link_to "0 Kcal", '#', :id => 'kcal-limit-link' %></span>

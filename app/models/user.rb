@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
     params[:date] ||= Date.today
     scope = user_foods.includes(:food).where(:date => params[:date])
     scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
-    scope.order('user_foods.created_at ASC').all
+    scope.order('user_foods.created_at DESC').all
   end
 
   def deliver_end_of_day_email?
