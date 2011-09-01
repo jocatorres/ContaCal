@@ -67,6 +67,19 @@ describe NotificationMailer do
         end
       end
     end
+    describe "without foods on a day" do
+      before(:each) do
+        Timecop.freeze(2011,11,25) do
+          @mailer = NotificationMailer.beginning_of_day(@user)
+        end
+      end
+      it "should set correct body for text html" do
+        body = @mailer.body.to_s
+        filename = Rails.root.join('spec','fixtures','mailers','beginning_of_day-without_food.html')
+        File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
+        body.should == File.read(filename)
+      end
+    end
   end
   
   describe "end_of_day" do

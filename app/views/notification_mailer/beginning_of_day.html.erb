@@ -3,9 +3,11 @@
 <p>Lembre-se, só se melhora aquilo que se mede!</p>
 
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas ontem.</h1>
-<img src='<%= root_url %>images/a.png' alt='' /> <%= number_with_precision(percent_kcal_kind_a, :precision => 0) %>%
-<img src='<%= root_url %>images/b.png' alt='' /> <%= number_with_precision(percent_kcal_kind_b, :precision => 0) %>%
-<img src='<%= root_url %>images/c.png' alt='' /> <%= number_with_precision(percent_kcal_kind_c, :precision => 0) %>%
+<% if !@user.consumed_kcal(:date => @date).zero? %>
+  <img src='<%= root_url %>images/a.png' alt='' /> <%= number_with_precision(percent_kcal_kind_a, :precision => 0) %>%
+  <img src='<%= root_url %>images/b.png' alt='' /> <%= number_with_precision(percent_kcal_kind_b, :precision => 0) %>%
+  <img src='<%= root_url %>images/c.png' alt='' /> <%= number_with_precision(percent_kcal_kind_c, :precision => 0) %>%
+<% end -%>
 
 <%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
   <% next if @user.consumed_kcal(:date => @date, :meal => meal).zero? %>
