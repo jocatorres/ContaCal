@@ -13,6 +13,7 @@ class DashboardController < ApplicationController
     end
     where_clause = pieces.join(" and ")
     @foods = Food.where(where_clause, *terms).limit(100).all
+    @foods << Food.new(:name => "#{params[:term]} não encontrado.") if @foods.empty?
     render :json => json_for_autocomplete(@foods, :name, extra_data)
   end
 
