@@ -77,6 +77,6 @@ class DashboardController < ApplicationController
   end
 
   def translate_to_remove_accents(value)
-    %{translate(lower(#{value}),'âãäåāăąèééêëēĕėęěìíîïìĩīĭóôõöōŏőùúûüũūŭůçćčĉċ','aaaaaaaeeeeeeeeeeiiiiiiiiooooooouuuuuuuccccc')}
+    %{translate(lower(#{value}),'áâãäåāăąèééêëēĕėęěìíîïìĩīĭóôõöōŏőùúûüũūŭůçćčĉċ','aaaaaaaaeeeeeeeeeeiiiiiiiiooooooouuuuuuuccccc')}
   end
 end
