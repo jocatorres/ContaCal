@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
-  
+
   def autocomplete_food_name
     extra_data = [:id, :name]
 
