@@ -386,4 +386,21 @@ describe User do
       end
     end
   end
+
+  describe "destroy" do
+    before(:each) do
+      @user = Factory.create(:user)
+    end
+    it "should not delete from database" do
+      expect do
+        @user.destroy
+      end.should_not change(User, :count)
+    end
+    it "should fill deleted_at field" do
+      expect do
+        Timecop.freeze(2011,8,23) { @user.destroy }
+        @user.reload
+      end.should change(@user, :deleted_at).from(nil).to(Time.new(2011,8,23))
+    end
+  end
 end

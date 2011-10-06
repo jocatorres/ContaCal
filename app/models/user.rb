@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     consumed_kcal_less_than_1000_kcal || consumed_kcal_less_than_70_percent
   end
 
+  def destroy
+    update_attribute(:deleted_at, Time.now)
+  end
+
   private
   def consumed_kcal_less_than_1000_kcal
     (kcal_limit.blank? || kcal_limit.zero?) && (consumed_kcal_today < 1000)
