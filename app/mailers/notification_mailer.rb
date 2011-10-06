@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class NotificationMailer < ::ActionMailer::Base
   helper :application
   layout 'mailer'
@@ -15,6 +16,15 @@ class NotificationMailer < ::ActionMailer::Base
     @date = Date.today
     mail(:to => "#{user.name} <#{user.email}>",
       :subject => "Resumo de suas calorias de hoje (#{I18n.l(@date)})")
+  end
+  
+  def new_food(user, food)
+    @user = user
+    @food = food
+    mail(
+      :from => "#{user.name} <#{user.email}>",
+      :to => "ContaCal <contato@contacal.com.br>",
+      :subject => "Sugestão de novo alimento")
   end
 
 end

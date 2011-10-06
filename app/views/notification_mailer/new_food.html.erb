@@ -1,0 +1,10 @@
+<%= content_for :message_title do %>Sugestão de novo alimento.<% end -%>
+<p>O usuário <strong><%= @user.name %> (<%= @user.email%>)</strong> sugeriu um novo alimento.</strong></p>
+
+<div class="meal-box">
+  <h2 style="color: #696969; font-size: 16px"><%= @food.name %></h2>
+  <p>Peso: <strong><%= @food.weight%></strong></p>
+  <p>Medida: <strong><%= @food.measure %></strong></p>
+  <p>Quantidade de Calorias: <strong><%= @food.kcal %></strong></p>
+  <p>Tipo de Caloria: <strong><%= {'a' => 'Tipo Verde', 'b' => 'Tipo Amarela', 'c' => 'Tipo Vermelha'}[@food.kind] %></strong></p>
+</div>
