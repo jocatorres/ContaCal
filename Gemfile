@@ -19,4 +19,5 @@ group :development, :test do
   gem 'factory_girl_rails', '1.1.0'
   gem 'magic_encoding', '0.0.2'
   gem 'timecop', '0.3.5'
+  gem 'simplecov', '0.5.3', :require => false
 end

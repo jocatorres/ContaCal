@@ -5,3 +5,4 @@ tmp/
 heroku/
 .DS_Store
 .rspec
+coverage
