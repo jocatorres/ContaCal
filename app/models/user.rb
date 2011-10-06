@@ -52,6 +52,34 @@ class User < ActiveRecord::Base
   def destroy
     update_attribute(:deleted_at, Time.now)
   end
+  
+  def last_week_history
+    from = 7.days.ago.to_date
+    to = 1.day.ago.to_date
+    days = []
+    (from..to).each do |date|
+      kcal = consumed_kcal({:date => date})
+      if kcal.zero?
+        percent_kind_a = percent_kind_b = percent_kind_c = 0.0
+      else
+        percent_kind_a = (consumed_kcal({:date => date, :kind => 'a'})/kcal*100).round(2)
+        percent_kind_b = (consumed_kcal({:date => date, :kind => 'b'})/kcal*100).round(2)
+        percent_kind_c = (consumed_kcal({:date => date, :kind => 'c'})/kcal*100).round(2)
+      end
+      days << {
+        :day => date,
+        :kcal => kcal,
+        :percent_kind_a => percent_kind_a,
+        :percent_kind_b => percent_kind_b,
+        :percent_kind_c => percent_kind_c,
+      }
+    end
+    {
+      :from => from,
+      :to => to,
+      :days => days
+    }
+  end
 
   private
   def consumed_kcal_less_than_1000_kcal

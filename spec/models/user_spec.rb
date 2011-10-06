@@ -456,7 +456,6 @@ describe User do
       end
     end
   end
-
   describe "destroy" do
     before(:each) do
       @user = Factory.create(:user)
@@ -472,5 +471,59 @@ describe User do
         @user.reload
       end.should change(@user, :deleted_at).from(nil).to(Time.new(2011,8,23))
     end
+  end
+  describe "last_week_history" do
+    before(:each) do
+      @user = Factory.create(:user)
+      @food100a = Factory.create(:food, :kcal => 100, :kind => 'a')
+      @food200a = Factory.create(:food, :kcal => 200, :kind => 'a')
+      @food100b = Factory.create(:food, :kcal => 100, :kind => 'b')
+      @food200b = Factory.create(:food, :kcal => 200, :kind => 'b')
+      @food100c = Factory.create(:food, :kcal => 100, :kind => 'c')
+      @food200c = Factory.create(:food, :kcal => 200, :kind => 'c')
+
+      # 03/10/2011 - 300 Kcal (33% 33% 33%)
+      Factory.create(:user_food, :user => @user, :food => @food100a, :date => '2011-10-03', :meal => 'breakfast', :amount => 1)
+      Factory.create(:user_food, :user => @user, :food => @food100b, :date => '2011-10-03', :meal => 'breakfast', :amount => 1)
+      Factory.create(:user_food, :user => @user, :food => @food100c, :date => '2011-10-03', :meal => 'breakfast', :amount => 1)
+
+      # 04/10/2011 - 0 Kcal
+      
+      # 05/10/2011 - 200 Kcal (0% 0% 100%)
+      Factory.create(:user_food, :user => @user, :food => @food100c, :date => '2011-10-05', :meal => 'breakfast', :amount => 2)
+
+      # 06/10/2011 - 1.400 Kcal (57,14% 28,57% 14,29%)
+      Factory.create(:user_food, :user => @user, :food => @food200a, :date => '2011-10-06', :meal => 'breakfast', :amount => 4)
+      Factory.create(:user_food, :user => @user, :food => @food200b, :date => '2011-10-06', :meal => 'breakfast', :amount => 2)
+      Factory.create(:user_food, :user => @user, :food => @food200c, :date => '2011-10-06', :meal => 'breakfast', :amount => 1)
+
+      # 07/10/2011 - 200 Kcal (50% 50% 0%)
+      Factory.create(:user_food, :user => @user, :food => @food100a, :date => '2011-10-07', :meal => 'breakfast', :amount => 1)
+      Factory.create(:user_food, :user => @user, :food => @food100b, :date => '2011-10-07', :meal => 'breakfast', :amount => 1)
+
+      # 08/10/2011 - 0 Kcal
+
+      # 09/10/2011 - 2.000 Kcal (100% 0% 0%)
+      Factory.create(:user_food, :user => @user, :food => @food100a, :date => '2011-10-09', :meal => 'breakfast', :amount => 20)
+    end
+    
+    it "should return correct array of data" do
+      Timecop.freeze(2011,10,10) do
+        @user.last_week_history.should == {
+          :from => '2011-10-03'.to_date,
+          :to => '2011-10-09'.to_date,
+          :days => [
+            {:day => '2011-10-03'.to_date, :kcal => 300.0, :percent_kind_a => 33.33, :percent_kind_b => 33.33, :percent_kind_c => 33.33},
+            {:day => '2011-10-04'.to_date, :kcal => 0.0, :percent_kind_a => 0.0, :percent_kind_b => 0.0, :percent_kind_c => 0.0},
+            {:day => '2011-10-05'.to_date, :kcal => 200.0, :percent_kind_a => 0.0, :percent_kind_b => 0.0, :percent_kind_c => 100.0},
+            {:day => '2011-10-06'.to_date, :kcal => 1400.0, :percent_kind_a => 57.14, :percent_kind_b => 28.57, :percent_kind_c => 14.29},
+            {:day => '2011-10-07'.to_date, :kcal => 200.0, :percent_kind_a => 50.0, :percent_kind_b => 50.0, :percent_kind_c => 0.0},
+            {:day => '2011-10-08'.to_date, :kcal => 0.0, :percent_kind_a => 0.0, :percent_kind_b => 0.0, :percent_kind_c => 0.0},
+            {:day => '2011-10-09'.to_date, :kcal => 2000.0, :percent_kind_a => 100.0, :percent_kind_b => 0.0, :percent_kind_c => 0.0},
+          ]
+        }
+      end
+    end
+    
   end
 end
