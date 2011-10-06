@@ -12,8 +12,27 @@ class DashboardController < ApplicationController
       terms << "%#{term.downcase}%"
     end
     where_clause = pieces.join(" and ")
+    
     @foods = Food.where(where_clause, *terms).limit(100).all
-    @foods << Food.new(:name => "#{params[:term]} não encontrado.") if @foods.empty?
+    if @foods.empty?
+      @foods << Food.new(:name => "#{params[:term]} não encontrado.")
+    else
+      @foods.sort! do |a,b|
+        if a.name.noaccents == params[:term].noaccents
+          -1
+        elsif b.name.noaccents == params[:term].noaccents
+          +1
+        elsif a.name[0,params[:term].length].noaccents == params[:term].noaccents and b.name[0,params[:term].length].noaccents != params[:term].noaccents
+          -1
+        elsif b.name[0,params[:term].length].noaccents == params[:term].noaccents and a.name[0,params[:term].length].noaccents != params[:term].noaccents
+          +1
+        elsif a.name[0,params[:term].length].noaccents == params[:term].noaccents and b.name[0,params[:term].length].noaccents != params[:term].noaccents   
+          0
+        else
+          a.name.noaccents <=> b.name.noaccents
+        end
+      end
+    end
     render :json => json_for_autocomplete(@foods, :name, extra_data)
   end
 
@@ -79,4 +98,5 @@ class DashboardController < ApplicationController
   def translate_to_remove_accents(value)
     %{translate(lower(#{value}),'áâãäåāăąèééêëēĕėęěìíîïìĩīĭóôõöōŏőùúûüũūŭůçćčĉċ','aaaaaaaaeeeeeeeeeeiiiiiiiiooooooouuuuuuuccccc')}
   end
+
 end

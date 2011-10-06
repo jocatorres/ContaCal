@@ -51,6 +51,18 @@ describe DashboardController do
         assigns(:foods).should include(@pao_forma_integral)
       end
 
+
+      it "should order correctly" do
+        @pudim_pao = Factory.create(:food, :name => 'Pudim de Pão')
+        @doce_pao = Factory.create(:food, :name => 'Doce de Pão')
+        @pao_integral = Factory.create(:food, :name => 'Pão Integral')
+        @pao_forma_integral = Factory.create(:food, :name => 'Pão de Forma Integral')
+        @pao = Factory.create(:food, :name => 'Pão')
+        
+        get :autocomplete_food_name, :term => 'pao'
+        assigns(:foods).should == [@pao, @pao_forma_integral, @pao_integral, @doce_pao, @pudim_pao]
+      end
+
       it "should be success" do
         get :autocomplete_food_name, :term => 'tomate'
         response.should be_success
