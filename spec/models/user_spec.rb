@@ -155,14 +155,25 @@ describe User do
   end
 
   describe "subscribed scope" do
-    it "should not return user" do
-      @user = Factory.create(:user, :subscribed => false)
-      User.subscribed.should_not include(@user)
+    context "when deleted_at is nil" do
+      it "should not return user" do
+        @user = Factory.create(:user, :subscribed => false, :deleted_at => nil)
+        User.subscribed.should_not include(@user)
+      end
+      it "should return user" do
+        @user = Factory.create(:user, :subscribed => true, :deleted_at => nil)
+        User.subscribed.should include(@user)
+      end
     end
-
-    it "should return user" do
-      @user = Factory.create(:user, :subscribed => true)
-      User.subscribed.should include(@user)
+    context "when deleted_at is not nil" do
+      it "should not return user" do
+        @user = Factory.create(:user, :subscribed => false, :deleted_at => Time.now)
+        User.subscribed.should_not include(@user)
+      end
+      it "should not return user too" do
+        @user = Factory.create(:user, :subscribed => true, :deleted_at => Time.now)
+        User.subscribed.should_not include(@user)
+      end
     end
   end
 
