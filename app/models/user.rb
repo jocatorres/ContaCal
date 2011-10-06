@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed, :subscribed_weekly
   has_many :user_foods
   validates :name, :presence => true
-  scope :subscribed, where(:subscribed => true, :deleted_at => nil)
+  scope :active, where(:deleted_at => nil)
+  scope :subscribed, active.where(:subscribed => true)
+  scope :subscribed_weekly, active.where(:subscribed_weekly => true)
 
   class << self
     def send_beginning_of_day_notification!

@@ -154,6 +154,29 @@ describe User do
     end
   end
 
+  describe "subscribed weekly" do
+    context "when deleted_at is nil" do
+      it "should not return user" do
+        @user = Factory.create(:user, :subscribed_weekly => false, :deleted_at => nil)
+        User.subscribed_weekly.should_not include(@user)
+      end
+      it "should return user" do
+        @user = Factory.create(:user, :subscribed_weekly => true, :deleted_at => nil)
+        User.subscribed_weekly.should include(@user)
+      end
+    end
+    context "when deleted_at is not nil" do
+      it "should not return user" do
+        @user = Factory.create(:user, :subscribed_weekly => false, :deleted_at => Time.now)
+        User.subscribed_weekly.should_not include(@user)
+      end
+      it "should not return user too" do
+        @user = Factory.create(:user, :subscribed_weekly => true, :deleted_at => Time.now)
+        User.subscribed_weekly.should_not include(@user)
+      end
+    end
+  end
+
   describe "subscribed scope" do
     context "when deleted_at is nil" do
       it "should not return user" do
