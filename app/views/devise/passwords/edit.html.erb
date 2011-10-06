@@ -7,10 +7,10 @@
     <%= f.hidden_field :reset_password_token %>
 
     <p><%= f.label :password, "Nova senha" %><br />
-    <%= f.password_field :password %></p>
+    <%= f.password_field :password, :autocomplete => "off" %></p>
 
     <p><%= f.label :password_confirmation, "Repita a nova senha" %><br />
-    <%= f.password_field :password_confirmation %></p>
+    <%= f.password_field :password_confirmation, :autocomplete => "off" %></p>
 
     <p><%= f.submit "Trocar senha" %></p>
   </fieldset>

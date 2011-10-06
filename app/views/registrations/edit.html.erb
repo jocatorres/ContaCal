@@ -10,10 +10,10 @@
   <%= f.email_field :email %></p>
 
   <p><%= f.label :password %> <em>Deixe em branco para manter a atual</em>
-  <%= f.password_field :password %></p>
+  <%= f.password_field :password, :autocomplete => "off" %></p>
 
   <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+  <%= f.password_field :password_confirmation, :autocomplete => "off" %></p>
 
   <p><%= f.label :current_password, "Senha atual" %> <em>Precisamos da sua senha atual para validar a sua conta</em>
   <%= f.password_field :current_password %></p>
