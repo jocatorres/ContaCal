@@ -4,6 +4,12 @@ class NotificationMailer < ::ActionMailer::Base
   layout 'mailer'
   default :from => "ContaCal <contato@contacal.com.br>"
 
+  def weekly(user)
+    @user = user
+    mail(:to => "#{user.name} <#{user.email}>",
+      :subject => "Resumo semanal de calorias consumidas")
+  end
+
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date
