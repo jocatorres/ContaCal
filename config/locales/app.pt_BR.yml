@@ -10,6 +10,11 @@ pt_BR:
       tea: Lanche da Tarde
       dinner: Jantar
       supper: Ceia
+  helpers:
+    label:
+      food:
+        weight: "Peso (Ex: 90 Gramas - g)"
+        measure: "Medida (Ex: 1 Prato de sobremesa)"
   activerecord:
     attributes:
       user:
@@ -27,7 +32,7 @@ pt_BR:
         subscribed: Receber notificações por e-mail?
       food:
         name: Descrição
-        weight: "Peso (Ex: 90 Gramas - g)"
-        measure: "Medida (Ex: 1 Prato de sobremesa)"
+        weight: Peso
+        measure: Medida
         kcal: Quantidade de Calorias
         kind: Tipo de Caloria

@@ -1,6 +1,18 @@
 <h1>Sugerir Novo Alimento</h1>
 
+<%= render_flash_messages %>
+
 <%= form_for(@food, :html => { :method => :post }) do |f| %>
+  <%- if @food.errors.any? -%>
+    <div id="error_explanation">
+      <h2>Verifique os erros abaixo:</h2>
+      <ul>
+      <% @food.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <%- end -%>
 
   <p><%= f.label :name %><br />
   <%= f.text_field :name %></p>
@@ -19,3 +31,7 @@
 
   <p><%= f.submit "Enviar Sugestão" %></p>
 <% end %>
+
+<p>
+  <%= link_to "&laquo; voltar".html_safe, root_path %>
+</p>

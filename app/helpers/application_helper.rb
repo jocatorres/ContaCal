@@ -29,4 +29,21 @@ module ApplicationHelper
   def current_date
     @date || @user_food.date
   end
+  
+  def has_flash_messages?
+    flashes = [:alert, :notice, :warning, :message, :failure]
+    flash and flashes.find { |key| flash.has_key?(key) }
+  end
+
+  def render_flash_messages
+    return unless has_flash_messages?
+    buffer = "<div id=\"flash\">"
+    #[:alert, :notice, :warning, :message, :failure].each do |name|
+    flash.each do |name, text|
+      html_class = (:notice == name or :message == name) ? "flash_notice" : "flash_alert"
+      buffer << "<div id=\"messages\"><dl class=\"#{html_class}\"><dt>#{flash[name]}</dt></dl></div>"
+    end
+    buffer << "</div>"
+    buffer.html_safe
+  end
 end
