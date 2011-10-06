@@ -1,5 +1,8 @@
-<%= content_for :message_title do %>Resumo semanal de calorias consumidas<% end -%>
-<p>Bom dia! Veja como está sua evolução no ContaCal.</p>
-
+<%= content_for :message_title do %>Resumo semanal (<%=l @user.last_week_history[:from], :format => :weekly_email_from %> a <%=l @user.last_week_history[:to], :format => :weekly_email_to %>)<% end -%>
+<p>Bom dia!</p>
+<p>Veja como está sua evolução no ContaCal.</p>
+<% @user.last_week_history[:days].each do |day| -%>
+  <p><%=l day[:day], :format => :weekly_email_days %>: <%= number_with_precision(day[:kcal], :precision => 0) %> Kcal <%= "(#{number_with_precision(day[:percent_kind_a], :strip_insignificant_zeros => true)}%  #{number_with_precision(day[:percent_kind_b], :strip_insignificant_zeros => true)}%  #{number_with_precision(day[:percent_kind_c], :strip_insignificant_zeros => true)}%)" unless day[:kcal].zero? %></p>
+<% end -%>
 <p>Acesse o <%= link_to 'ContaCal', root_url, :style => "color: #1E69B4;" %> e acompanhe sua evolução. Não deixe de registrar suas refeições na semana que está começando afinal, só se melhora aquilo que se mede.</p>
 <p>Sugestões, dúvidas, mande nos um email para <a href="mailto:contato@contacal.com.br" style="color: #1E69B4;">contato@contacal.com.br</a>.</p>

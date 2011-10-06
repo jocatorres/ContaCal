@@ -54,6 +54,8 @@ class User < ActiveRecord::Base
   end
   
   def last_week_history
+    return @last_weeek_history unless @last_weeek_history.nil?
+    
     from = 7.days.ago.to_date
     to = 1.day.ago.to_date
     days = []
@@ -74,7 +76,7 @@ class User < ActiveRecord::Base
         :percent_kind_c => percent_kind_c,
       }
     end
-    {
+    @last_weeek_history = {
       :from => from,
       :to => to,
       :days => days

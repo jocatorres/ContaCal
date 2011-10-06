@@ -7,6 +7,21 @@ describe NotificationMailer do
   end
 
   describe "weekly" do
+    before(:each) do
+      @user.stub(:last_week_history).and_return({
+        :from => '2011-10-03'.to_date,
+        :to => '2011-10-09'.to_date,
+        :days => [
+          {:day => '2011-10-03'.to_date, :kcal => 300.0, :percent_kind_a => 33.33, :percent_kind_b => 33.33, :percent_kind_c => 33.33},
+          {:day => '2011-10-04'.to_date, :kcal => 0.0, :percent_kind_a => 0.0, :percent_kind_b => 0.0, :percent_kind_c => 0.0},
+          {:day => '2011-10-05'.to_date, :kcal => 200.0, :percent_kind_a => 0.0, :percent_kind_b => 0.0, :percent_kind_c => 100.0},
+          {:day => '2011-10-06'.to_date, :kcal => 1400.0, :percent_kind_a => 57.14, :percent_kind_b => 28.57, :percent_kind_c => 14.29},
+          {:day => '2011-10-07'.to_date, :kcal => 200.0, :percent_kind_a => 50.0, :percent_kind_b => 50.0, :percent_kind_c => 0.0},
+          {:day => '2011-10-08'.to_date, :kcal => 0.0, :percent_kind_a => 0.0, :percent_kind_b => 0.0, :percent_kind_c => 0.0},
+          {:day => '2011-10-09'.to_date, :kcal => 2000.0, :percent_kind_a => 100.0, :percent_kind_b => 0.0, :percent_kind_c => 0.0},
+        ]
+      })
+    end
     it "should render successfully" do
       lambda { NotificationMailer.weekly(@user) }.should_not raise_error
     end

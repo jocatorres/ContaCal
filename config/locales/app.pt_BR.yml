@@ -2,6 +2,9 @@ pt_BR:
   date:
     formats:
       chart: "%d/%m"
+      weekly_email_from: "%d/%m"
+      weekly_email_to: "%d/%m/%Y"
+      weekly_email_days: "%d/%m/%Y"
   dashboard:
     index:
       breakfast: Café da Manhã
