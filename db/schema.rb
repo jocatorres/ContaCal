@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111006205924) do
+ActiveRecord::Schema.define(:version => 20111006215959) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20111006205924) do
     t.integer  "kcal_limit"
     t.boolean  "subscribed",                               :default => true
     t.datetime "deleted_at"
+    t.boolean  "subscribed_weekly",                        :default => true
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
