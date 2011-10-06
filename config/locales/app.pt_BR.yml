@@ -25,3 +25,9 @@ pt_BR:
         remember_me: "Lembre-me neste computador"
         cpf: CPF
         subscribed: Receber notificações por e-mail?
+      food:
+        name: Descrição
+        weight: "Peso (Ex: 90 Gramas - g)"
+        measure: "Medida (Ex: 1 Prato de sobremesa)"
+        kcal: Quantidade de Calorias
+        kind: Tipo de Caloria

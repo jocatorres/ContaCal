@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 Contacal::Application.routes.draw do
+
   devise_for :users, :controllers => { :registrations => "registrations" }
-  resources :foods, :only => [:index]
+  resources :foods, :only => [:new, :create]
   resources :user_foods, :only => [:create, :destroy, :update]
   match 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit, :via => :put
   match 'report' => 'dashboard#report', :as => :report

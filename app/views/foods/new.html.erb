@@ -1,0 +1,21 @@
+<h1>Sugerir Novo Alimento</h1>
+
+<%= form_for(@food, :html => { :method => :post }) do |f| %>
+
+  <p><%= f.label :name %><br />
+  <%= f.text_field :name %></p>
+
+  <p><%= f.label :weight %><br />
+  <%= f.text_field :weight %></p>
+
+  <p><%= f.label :measure %><br />
+  <%= f.text_field :measure %></p>
+
+  <p><%= f.label :kcal %><br />
+  <%= f.text_field :kcal, :style => 'width: 50px' %></p>
+
+  <p><%= f.label :kind %><br />
+  <%= f.select :kind, {'Tipo Verde' => 'a', 'Tipo Amarela' => 'b', 'Tipo Vermelha' => 'c'} %></p>
+
+  <p><%= f.submit "Enviar Sugestão" %></p>
+<% end %>
