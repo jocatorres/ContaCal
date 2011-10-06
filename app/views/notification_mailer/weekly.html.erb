@@ -2,7 +2,7 @@
 <p>Bom dia!</p>
 <p>Veja como está sua evolução no ContaCal.</p>
 <% @user.last_week_history[:days].each do |day| -%>
-  <p><%=l day[:day], :format => :weekly_email_days %>: <%= number_with_precision(day[:kcal], :precision => 0) %> Kcal <%= "(#{number_with_precision(day[:percent_kind_a], :strip_insignificant_zeros => true)}%  #{number_with_precision(day[:percent_kind_b], :strip_insignificant_zeros => true)}%  #{number_with_precision(day[:percent_kind_c], :strip_insignificant_zeros => true)}%)" unless day[:kcal].zero? %></p>
+  <p><strong><%=l day[:day], :format => :weekly_email_days %>:</strong> <%= number_with_precision(day[:kcal], :precision => 0) %> Kcal <%= "(<img src='#{root_url}images/a.png' alt='' /> #{number_with_precision(day[:percent_kind_a], :strip_insignificant_zeros => true)}%&nbsp;&nbsp;&nbsp;<img src='#{root_url}images/b.png' alt='' /> #{number_with_precision(day[:percent_kind_b], :strip_insignificant_zeros => true)}&nbsp;&nbsp;&nbsp;<img src='#{root_url}images/c.png' alt='' /> #{number_with_precision(day[:percent_kind_c], :strip_insignificant_zeros => true)}%)".html_safe unless day[:kcal].zero? %></p>
 <% end -%>
 <p>Acesse o <%= link_to 'ContaCal', root_url, :style => "color: #1E69B4;" %> e acompanhe sua evolução. Não deixe de registrar suas refeições na semana que está começando afinal, só se melhora aquilo que se mede.</p>
 <p>Sugestões, dúvidas, mande nos um email para <a href="mailto:contato@contacal.com.br" style="color: #1E69B4;">contato@contacal.com.br</a>.</p>
