@@ -39,4 +39,15 @@ describe Devise::SessionsController do
       end
     end
   end
+
+  describe "GET destroy" do
+    before(:each) do
+      login!
+    end
+
+    it "should redirect to /" do
+      get :destroy
+      response.should redirect_to("/")
+    end
+  end
 end
