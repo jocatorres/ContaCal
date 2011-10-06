@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111006215959) do
+ActiveRecord::Schema.define(:version => 20111006223618) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(:version => 20111006215959) do
     t.string   "address_state"
     t.string   "address_zipcode"
     t.integer  "kcal_limit"
-    t.boolean  "subscribed",                               :default => true
+    t.boolean  "subscribed_daily",                         :default => true
     t.datetime "deleted_at"
     t.boolean  "subscribed_weekly",                        :default => true
   end

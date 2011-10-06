@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe User do
   it { should have_many(:user_foods) }
-  [:name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed, :subscribed_weekly].each do |attr|
+  [:name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly].each do |attr|
     it { should allow_mass_assignment_of(attr) }
   end
 
@@ -11,7 +11,7 @@ describe User do
 
   describe "send_beginning_of_day_notification!" do
     it "should not send e-mails to unsubscribed people" do
-      @user = Factory.create(:user, :subscribed => false)
+      @user = Factory.create(:user, :subscribed_daily => false)
       lambda do
         User.send_beginning_of_day_notification!
       end.should_not change(ActionMailer::Base.deliveries, :count)
@@ -19,7 +19,7 @@ describe User do
 
     context "with subscribed people" do
       before(:each) do
-        @user = Factory.create(:user, :subscribed => true)
+        @user = Factory.create(:user, :subscribed_daily => true)
       end
 
       it "should deliver e-mail to that people" do
@@ -47,7 +47,7 @@ describe User do
 
   describe "send_end_of_day_notification!" do
     it "should not send e-mails to unsubscribed people" do
-      @user = Factory.create(:user, :subscribed => false)
+      @user = Factory.create(:user, :subscribed_daily => false)
       lambda do
         User.send_end_of_day_notification!
       end.should_not change(ActionMailer::Base.deliveries, :count)
@@ -55,7 +55,7 @@ describe User do
 
     context "with subscribed people" do
       before(:each) do
-        @user = Factory.create(:user, :subscribed => true)
+        @user = Factory.create(:user, :subscribed_daily => true)
       end
 
       it "should deliver e-mail to that people" do
@@ -84,7 +84,7 @@ describe User do
   describe "deliver_end_of_day_email?" do
     context "when kcal limit is nil" do
       before(:each) do
-        @user = Factory.create(:user, :subscribed => true, :kcal_limit => nil)
+        @user = Factory.create(:user, :subscribed_daily => true, :kcal_limit => nil)
       end
 
       context "when consumed kcal is more or equal than 1000kcal" do
@@ -102,7 +102,7 @@ describe User do
     end
     context "when kcal limit is zero" do
       before(:each) do
-        @user = Factory.create(:user, :subscribed => true, :kcal_limit => 0)
+        @user = Factory.create(:user, :subscribed_daily => true, :kcal_limit => 0)
       end
 
       context "when consumed kcal is more or equal than 1000kcal" do
@@ -120,7 +120,7 @@ describe User do
     end
     context "when person registered 70% or more of kcal diary limit" do
       before(:each) do
-        @user = Factory.create(:user, :subscribed => true, :kcal_limit => 1000)
+        @user = Factory.create(:user, :subscribed_daily => true, :kcal_limit => 1000)
         food = Factory.create(:food, :kcal => 700)
         Factory.create(:user_food, :food => food, :user => @user)
       end
@@ -130,7 +130,7 @@ describe User do
     end
     context "when person registered less than 70% of kcal diary limit" do
       before(:each) do
-        @user = Factory.create(:user, :subscribed => true, :kcal_limit => 1000)
+        @user = Factory.create(:user, :subscribed_daily => true, :kcal_limit => 1000)
       end
       it "should be true" do
         @user.deliver_end_of_day_email?.should be_true
@@ -138,7 +138,7 @@ describe User do
     end
     context "when kcal_limit is 0 and consumed kcal > 1000" do
       it "should be false" do
-        @user = Factory.create(:user, :subscribed => true, :kcal_limit => 0)
+        @user = Factory.create(:user, :subscribed_daily => true, :kcal_limit => 0)
         food = Factory.create(:food, :kcal => 1300)
         Factory.create(:user_food, :food => food, :user => @user)
         @user.deliver_end_of_day_email?.should be_false
@@ -146,7 +146,7 @@ describe User do
     end
     context "when kcal_limit is 0 and consumed kcal < 1000" do
       it "should be true" do
-        @user = Factory.create(:user, :subscribed => true, :kcal_limit => 0)
+        @user = Factory.create(:user, :subscribed_daily => true, :kcal_limit => 0)
         food = Factory.create(:food, :kcal => 900)
         Factory.create(:user_food, :food => food, :user => @user)
         @user.deliver_end_of_day_email?.should be_true
@@ -177,25 +177,25 @@ describe User do
     end
   end
 
-  describe "subscribed scope" do
+  describe "subscribed_daily scope" do
     context "when deleted_at is nil" do
       it "should not return user" do
-        @user = Factory.create(:user, :subscribed => false, :deleted_at => nil)
-        User.subscribed.should_not include(@user)
+        @user = Factory.create(:user, :subscribed_daily => false, :deleted_at => nil)
+        User.subscribed_daily.should_not include(@user)
       end
       it "should return user" do
-        @user = Factory.create(:user, :subscribed => true, :deleted_at => nil)
-        User.subscribed.should include(@user)
+        @user = Factory.create(:user, :subscribed_daily => true, :deleted_at => nil)
+        User.subscribed_daily.should include(@user)
       end
     end
     context "when deleted_at is not nil" do
       it "should not return user" do
-        @user = Factory.create(:user, :subscribed => false, :deleted_at => Time.now)
-        User.subscribed.should_not include(@user)
+        @user = Factory.create(:user, :subscribed_daily => false, :deleted_at => Time.now)
+        User.subscribed_daily.should_not include(@user)
       end
       it "should not return user too" do
-        @user = Factory.create(:user, :subscribed => true, :deleted_at => Time.now)
-        User.subscribed.should_not include(@user)
+        @user = Factory.create(:user, :subscribed_daily => true, :deleted_at => Time.now)
+        User.subscribed_daily.should_not include(@user)
       end
     end
   end

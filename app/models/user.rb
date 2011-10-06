@@ -1,11 +1,11 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed, :subscribed_weekly
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly
   has_many :user_foods
   validates :name, :presence => true
   scope :active, where(:deleted_at => nil)
-  scope :subscribed, active.where(:subscribed => true)
+  scope :subscribed_daily, active.where(:subscribed_daily => true)
   scope :subscribed_weekly, active.where(:subscribed_weekly => true)
 
   class << self
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     end
     
     def run_on_each_subscribed
-      subscribed.each { |user| yield(user) }
+      subscribed_daily.each { |user| yield(user) }
     end
   end
 
