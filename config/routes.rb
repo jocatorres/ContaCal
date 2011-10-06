@@ -9,6 +9,7 @@ Contacal::Application.routes.draw do
   match 'autocomplete_food_name', :to => 'dashboard#autocomplete_food_name', :as => :autocomplete_food_name
   match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm
   match ':year/:month/:day' => "dashboard#index", :as => :dashboard, :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ }
+  match 'authenticate', :to => 'dashboard#authenticate'
   root :to => "dashboard#index"
 
   # The priority is based upon order of creation:

@@ -6,6 +6,24 @@ describe DashboardController do
   describe "GET autocomplete_food_name" do
     context "when user is not logged in" do
       it "should redirect to sign in" do
+        get :authenticate
+        response.should redirect_to(new_user_session_path)
+      end
+    end
+    context "when user is logged in" do
+      before(:each) do
+        login!
+      end
+      it "should return ok" do
+        get :authenticate
+        response.should be_ok
+      end
+    end
+  end
+
+  describe "GET autocomplete_food_name" do
+    context "when user is not logged in" do
+      it "should redirect to sign in" do
         get :autocomplete_food_name, :term => 'tomate'
         response.should redirect_to(new_user_session_path)
       end

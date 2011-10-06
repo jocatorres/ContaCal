@@ -7,6 +7,11 @@ describe DashboardController do
       root_path.should == '/'
     end
 
+    it "recognizes and generates authenticate" do
+      get("/authenticate").should route_to("dashboard#authenticate")
+      authenticate_path.should == '/authenticate'
+    end
+
     it "recognizes and generates index with date" do
       get("/2011/08/24").should route_to("dashboard#index", :year => '2011', :month => '08', :day => '24')
       dashboard_path(:year => '2011', :month => '08', :day => '24').should == '/2011/08/24'

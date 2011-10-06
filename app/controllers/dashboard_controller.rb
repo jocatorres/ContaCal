@@ -45,6 +45,10 @@ class DashboardController < ApplicationController
     @next_day = @date+1.day
     @previous_day = @date-1.day
   end
+  
+  def authenticate
+    head :ok
+  end
 
   def report
     data = []
