@@ -10,10 +10,11 @@ class FoodsController < ApplicationController
   def create
     @food = Food.new(params[:food])
     
-    if @food.valid?
+    if !@food.name.blank?
       NotificationMailer.new_food(current_user, @food).deliver
       redirect_to new_food_path, notice: 'Sua sugestão foi enviada com sucesso.'
     else
+      @food.errors.add(:name, :empty)
       render action: "new"
     end
   end

@@ -35,7 +35,7 @@ pt_BR:
         subscribed_daily: Receber notificações por e-mail diariamente?
         subscribed_weekly: Receber notificações por e-mail semanalmente?
       food:
-        name: Descrição
+        name: Nome
         weight: Peso
         measure: Medida
         kcal: Quantidade de Calorias
