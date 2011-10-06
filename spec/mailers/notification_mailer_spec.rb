@@ -273,7 +273,7 @@ describe NotificationMailer do
       end
       it "should set correct header To" do
         # Ele não coloca as aspas por que não receonhece nenhum caracter UTF-8 (acento)
-        @mailer.header['To'].to_s.should == "ContaCal <contato@contacal.com.br>"
+        @mailer.header['To'].to_s.should == "ContaCal <info@contacal.com.br>"
       end
       it "should not have more than one to address" do
         @mailer.to.size.should == 1
