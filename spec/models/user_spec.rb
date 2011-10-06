@@ -9,6 +9,42 @@ describe User do
 
   it { should validate_presence_of(:name) }
 
+  describe "send_weekly_notification!" do
+    it "should not send e-mails to unsubscribed people" do
+      @user = Factory.create(:user, :subscribed_weekly => false)
+      lambda do
+        User.send_weekly_notification!
+      end.should_not change(ActionMailer::Base.deliveries, :count)
+    end
+
+    context "with subscribed people" do
+      before(:each) do
+        @user = Factory.create(:user, :subscribed_weekly => true)
+      end
+
+      it "should deliver e-mail to that people" do
+        lambda do
+          User.send_weekly_notification!
+        end.should change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      describe "delivered e-mail" do
+        before(:each) do
+          User.send_weekly_notification!
+          @email = ActionMailer::Base.deliveries.last
+        end
+
+        it "should deliver to the correct user" do
+          @email.to.first.should == @user.email
+        end
+
+        it "should deliver the correct email" do
+          @email.subject.should =~ /Resumo semanal de calorias consumidas/
+        end
+      end
+    end
+  end
+
   describe "send_beginning_of_day_notification!" do
     it "should not send e-mails to unsubscribed people" do
       @user = Factory.create(:user, :subscribed_daily => false)
@@ -154,7 +190,7 @@ describe User do
     end
   end
 
-  describe "subscribed weekly" do
+  describe "subscribed_weekly scope" do
     context "when deleted_at is nil" do
       it "should not return user" do
         @user = Factory.create(:user, :subscribed_weekly => false, :deleted_at => nil)

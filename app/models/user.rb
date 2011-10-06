@@ -9,17 +9,23 @@ class User < ActiveRecord::Base
   scope :subscribed_weekly, active.where(:subscribed_weekly => true)
 
   class << self
+    def send_weekly_notification!
+      run_on_each_subscribed_weekly { |user| NotificationMailer.weekly(user).deliver }
+    end
+
     def send_beginning_of_day_notification!
-      run_on_each_subscribed { |user| NotificationMailer.beginning_of_day(user).deliver }
+      run_on_each_subscribed_daily { |user| NotificationMailer.beginning_of_day(user).deliver }
     end
 
     def send_end_of_day_notification!
-      run_on_each_subscribed do |user|
-        NotificationMailer.end_of_day(user).deliver if user.deliver_end_of_day_email?
-      end
+      run_on_each_subscribed_daily { |user| NotificationMailer.end_of_day(user).deliver if user.deliver_end_of_day_email? }
     end
-    
-    def run_on_each_subscribed
+
+    def run_on_each_subscribed_weekly
+      subscribed_weekly.each { |user| yield(user) }
+    end
+
+    def run_on_each_subscribed_daily
       subscribed_daily.each { |user| yield(user) }
     end
   end
