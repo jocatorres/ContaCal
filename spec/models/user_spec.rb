@@ -9,6 +9,29 @@ describe User do
 
   it { should validate_presence_of(:name) }
 
+  describe "send_welcome_email after create" do
+    it "should send e-mail to new user" do
+      lambda do
+        Factory.create(:user)
+      end.should change(ActionMailer::Base.deliveries, :count).by(1)
+    end
+
+    describe "delivered e-mail" do
+      before(:each) do
+        @user = Factory.create(:user)
+        @email = ActionMailer::Base.deliveries.last
+      end
+
+      it "should deliver to the correct user" do
+        @email.to.first.should == @user.email
+      end
+
+      it "should deliver the correct email" do
+        @email.subject.should =~ /Seja bem vindo ao ContaCal!/
+      end
+    end
+  end
+
   describe "send_weekly_notification!" do
     it "should not send e-mails to unsubscribed people" do
       @user = Factory.create(:user, :subscribed_weekly => false)
