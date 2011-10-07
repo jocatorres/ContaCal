@@ -32,7 +32,11 @@ class User < ActiveRecord::Base
   
   def update_with_password(params={})
     params.delete(:current_password)
-    self.update_without_password(params)
+    if params[:password].blank? 
+      params.delete(:password) 
+      params.delete(:password_confirmation) if params[:password_confirmation].blank? 
+    end
+    self.update_attributes(params)
   end
 
   def consumed_kcal(params = {})
