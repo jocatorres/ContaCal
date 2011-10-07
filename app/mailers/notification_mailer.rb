@@ -4,6 +4,12 @@ class NotificationMailer < ::ActionMailer::Base
   layout 'mailer'
   default :from => "ContaCal <contato@contacal.com.br>"
 
+  def welcome(user)
+    @user = user
+    mail(:to => "#{user.name} <#{user.email}>",
+      :subject => "Seja bem vindo ao ContaCal!")    
+  end
+
   def weekly(user)
     @user = user
     mail(:to => "#{user.name} <#{user.email}>",

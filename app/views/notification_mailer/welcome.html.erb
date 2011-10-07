@@ -1,0 +1,12 @@
+<%= content_for :message_title do %>Seja bem vindo ao ContaCal!<% end -%>
+<p>Olá <%= @user.name %>,</p>
+
+<p>Esperamos que ele lhe ajude a ter uma alimentação mais saudável.</p>
+
+<p>Alguns links úteis:</p>
+<ul>
+  <li><a href="http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal/">Como registrar sua alimentação no ContaCal</a></li>
+  <li><a href="http://www.contacal.com.br/o-que-sao-as-calorias-vermelhas-amarelas-e-verdes/">O que são as calorias vermelhas, amarelas e verdes?</a></li>
+  <li><a href="http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/">Qual o limite de calorias indicado?</a></li>
+</ul>
+<p>Acesse o <%= link_to 'ContaCal', root_url, :style => "color: #1E69B4;" %> e registre suas refeições para acompanhar suas calorias diárias. Lembre-se, só se melhora aquilo que se mede. Caso tenha qualquer dúvida, não hesite em nos contactar.</p>
