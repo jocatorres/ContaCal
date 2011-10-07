@@ -1,7 +1,6 @@
 module DeviseLoginTestHelper
   def login!
     @user = Factory.create(:user)
-    @user.confirm!
     sign_in @user
   end
 end

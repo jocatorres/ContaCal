@@ -9,7 +9,6 @@ describe Devise::SessionsController do
   describe "POST create" do
     before(:each) do
       @user = Factory.create(:user)
-      @user.confirm!
     end
 
     def do_post!

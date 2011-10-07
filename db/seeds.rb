@@ -14,7 +14,6 @@ if Rails.env.development?
     :email => "quentin@example.com",
     :password => "test123"
   })
-  user.confirm!
 
   Food.delete_all
   lines = File.open(Rails.root.join('db','foods.txt')).readlines

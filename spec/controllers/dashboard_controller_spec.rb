@@ -186,7 +186,6 @@ describe DashboardController do
     context "when user is logged in" do
       before(:each) do
         @user = Factory.create(:user)
-        @user.confirm!
         sign_in @user
       end
       it "should update kcal_limit of current user" do
