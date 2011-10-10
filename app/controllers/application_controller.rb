@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   protected
-  def after_sign_in_path_for(resource)
+  def redirect_location(scope, resource)
     resource.update_attribute(:deleted_at, nil) unless resource.deleted_at.nil?
-    root_path
+    stored_location_for(scope) || after_sign_in_path_for(resource)
   end
 
   def layout_by_resource

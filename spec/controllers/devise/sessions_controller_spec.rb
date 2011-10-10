@@ -24,11 +24,22 @@ describe Devise::SessionsController do
         do_post!
         response.should redirect_to("/")
       end
-      it "should undelete user" do
-        do_post!
-        expect do
-          @user.reload
-        end.should change(@user, :deleted_at).from(@time).to(nil)
+      context "when there is stored return to" do
+        it "should undelete user" do
+          session["user_return_to"] = "/bla"
+          do_post!
+          expect do
+            @user.reload
+          end.should change(@user, :deleted_at).from(@time).to(nil)
+        end
+      end
+      context "when there is NO stored return to" do
+        it "should undelete user" do
+          do_post!
+          expect do
+            @user.reload
+          end.should change(@user, :deleted_at).from(@time).to(nil)
+        end
       end
     end
     context "when user is not deleted" do
