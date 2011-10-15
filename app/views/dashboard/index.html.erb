@@ -32,7 +32,7 @@ $(function() {
 } %>
 
 <div id="kcal-measure">
-  <div class="title">Total: <strong><span id="total-kcal"><%= number_with_precision(total_kcal, :precision => 0) %></span> Kcal</strong></div>
+  <div class="title">Total: <strong><span id="total-kcal"><%= display_daily_total(current_date) %></span> Kcal</strong></div>
   <div id="progress">
     <%= render :partial => "progress" %>
   </div>
@@ -71,7 +71,7 @@ $(function() {
       <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal, :placeholder => "Adicione um alimento" -%>
       <div class="meals">
         <ul id="foods-<%= meal %>">
-          <%= render current_user.consumed_foods(:date => @date, :meal => meal), :as => 'user_food' %>
+          <%= render current_user.foods_and_exercises(:date => @date, :meal => meal), :as => 'user_food' %>
         </ul>
       </div>
     </div>

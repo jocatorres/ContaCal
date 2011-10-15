@@ -39,22 +39,38 @@ class User < ActiveRecord::Base
     end
     self.update_attributes(params)
   end
+  
+  def consumed_foods(params = {})
+    scope = prepare_user_foods_scope(params, Food::Consumables)
+    scope.order('user_foods.created_at DESC').all
+  end
+
+  def exercises(params = {})
+    scope = prepare_user_foods_scope(params, Food::Expendables)
+    scope.order('user_foods.created_at DESC').all
+  end
+
+  def foods_and_exercises(params = {})
+    scope = prepare_user_foods_scope(params, Food::Consumables + Food::Expendables)
+    scope.order('user_foods.created_at DESC').all
+  end
 
   def consumed_kcal(params = {})
-    params[:date] ||= Date.today
-    scope = user_foods.includes(:food).where(:date => params[:date])
-    scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
+    scope = prepare_user_foods_scope(params, Food::Consumables)
+    scope = scope.where('foods.kind = ?', params[:kind]) unless params[:kind].nil?
+    scope.sum(:kcal).to_f
+  end
+
+  def spent_kcal(params = {})
+    scope = prepare_user_foods_scope(params, Food::Expendables)
     scope = scope.where('foods.kind = ?', params[:kind]) unless params[:kind].nil?
     scope.sum(:kcal).to_f
   end
   
-  def consumed_foods(params = {})
-    params[:date] ||= Date.today
-    scope = user_foods.includes(:food).where(:date => params[:date])
-    scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
-    scope.order('user_foods.created_at DESC').all
+  def net_kcal(params = {})
+    consumed_kcal(params) - spent_kcal(params)
   end
-
+  
   def deliver_end_of_day_email?
     consumed_kcal_less_than_1000_kcal || consumed_kcal_less_than_70_percent
   end
@@ -106,5 +122,13 @@ class User < ActiveRecord::Base
   end
   def consumed_kcal_today
     consumed_kcal(:date => Date.today)
+  end
+
+  def prepare_user_foods_scope(params, included_kinds)
+    params[:date] ||= Date.today
+    scope = user_foods.includes(:food).where(:date => params[:date])
+    scope = scope.where(:meal => params[:meal]) unless params[:meal].nil?
+    scope = scope.where(:foods => {:kind => included_kinds })
+    scope
   end
 end

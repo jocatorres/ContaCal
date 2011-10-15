@@ -18,6 +18,7 @@ describe Food do
     Factory.build(:food, :kind => 'a').valid?.should be_true
     Factory.build(:food, :kind => 'b').valid?.should be_true
     Factory.build(:food, :kind => 'c').valid?.should be_true
-    Factory.build(:food, :kind => 'd').valid?.should_not be_true
+    Factory.build(:food, :kind => 'd').valid?.should be_true
+    Factory.build(:food, :kind => 'e').valid?.should_not be_true
   end
 end
