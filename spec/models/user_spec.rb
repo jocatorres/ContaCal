@@ -547,6 +547,46 @@ describe User do
         }
       end
     end
-    
+  end
+  describe "and exercises." do
+    subject     { Factory.create(:user) }
+    let(:food1) { Factory.create(:food, :kcal => 300) }
+    let(:food2) { Factory.create(:food, :kcal => 100, :kind => 'b') }
+    let(:registered_date) { Date.new(2011,8,20) }
+    let!(:registered_food1) { Factory.create(:user_food, :user => subject, :date => registered_date, :food => food1) }
+    let!(:registered_food2) { Factory.create(:user_food, :user => subject, :date => registered_date, :food => food2) }
+
+    context 'When there are no exercises registered' do
+      it "#spent_kcal should be zero" do
+        subject.exercises(:date => registered_date).should be_empty
+        subject.spent_kcal(:date => registered_date).should be_zero
+      end
+    end
+    context 'When the user has some exercise registered,' do
+      let!(:registered_exercise) { Factory.create(:user_exercise, :user => subject, :date => registered_date) }
+      
+      let(:spent_kcal)    { subject.spent_kcal(:date => registered_date) }
+      let(:consumed_kcal) { subject.consumed_kcal(:date => registered_date) }
+      let(:net_kcal)      { subject.net_kcal(:date => registered_date) }
+
+      it '#exercises should not be empty' do
+        subject.exercises(:date => registered_date).should_not be_empty
+      end
+      it '#consumed_foods should not include exercises' do
+        subject.consumed_foods(:date => registered_date).should_not include(registered_exercise)
+      end
+      it '#foods_and_exercises should include foods and exercises' do
+        subject.foods_and_exercises(:date => registered_date).should =~ [registered_exercise, registered_food1, registered_food2]
+      end
+      it '#spent_kcal should be greater than zero' do
+        spent_kcal.should == registered_exercise.kcal
+      end
+      it '#consumed_kcal should not affected' do
+        consumed_kcal.should == (registered_food1.kcal + registered_food2.kcal)
+      end
+      it '#net_kcal should be #consumed_kcal - #spent_kcal' do
+        net_kcal.should == (consumed_kcal - spent_kcal)
+      end
+    end
   end
 end

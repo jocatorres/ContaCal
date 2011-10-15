@@ -24,4 +24,19 @@ FactoryGirl.define do
     meal 'breakfast'
     date { Date.today }
   end
+
+  factory :exercise, :class => Food do
+    name 'Corrida leve'
+    weight '6 km/h'
+    measure '20 minutos'
+    kcal 25
+    kind 'd'
+  end
+  factory :user_exercise, :class => UserFood do
+    user
+    association :food, :factory => :exercise
+    amount 2
+    meal 'breakfast'
+    date { Date.today }
+  end
 end
