@@ -1,11 +1,12 @@
 common: &common
   adapter: postgresql
   username: postgres
-  password: postgres
+  password:
 
 development:
   <<: *common
   database: contacal_development
+  password: postgres
 
 test:
   <<: *common
