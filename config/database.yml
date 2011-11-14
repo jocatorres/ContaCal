@@ -7,10 +7,6 @@ development:
   <<: *common
   database: contacal_development
   password: postgres
-#  database: dc24djmdu7vke9q
-#  username: up1adq4bo45prl5
-#  password: p7lzd881bjo62y7ohlfbezqded
-#  host: ec2-107-20-240-34.compute-1.amazonaws.com
 
 test:
   <<: *common
