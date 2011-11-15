@@ -34,6 +34,7 @@ pt_BR:
         cpf: CPF
         subscribed_daily: Receber notificações por e-mail diariamente?
         subscribed_weekly: Receber notificações por e-mail semanalmente?
+        kcal_limit: Limite diário de calorias
       food:
         name: Nome
         weight: Peso
