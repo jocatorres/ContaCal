@@ -8,9 +8,9 @@
 $(function() {
   $( "##{slider_id}" ).slider({
     value: #{user_food.amount},
-    min: 0.1,
+    min: 0.5,
     max: 10,
-    step: 0.1,
+    step: 0.5,
     slide: function( event, ui ) {
       $('#slider-meal-amount-#{user_food.id}').html(ui.value.toFixed(1).toString().replace('.',','));
       $('#slider-meal-total-#{user_food.id}').html((ui.value.toFixed(1)*#{user_food.food.kcal}).toString().replace('.',','));
