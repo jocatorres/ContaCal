@@ -14,7 +14,10 @@
  
   <h2>Recebimento de Emails</h2>
 
-<!--  <p><%= f.check_box :subscribed_daily %>&nbsp;<%= f.label :subscribed_daily %></p>-->
+  <% if user.subscribed_daily %>
+    <p><%= f.check_box :subscribed_daily %>&nbsp;<%= f.label :subscribed_daily %></p>
+  <% end %>
+
   <p><%= f.check_box :subscribed_weekly %>&nbsp;<%= f.label :subscribed_weekly %></p>
 
   <h2>Trocar Senha</h2>

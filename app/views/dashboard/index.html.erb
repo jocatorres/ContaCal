@@ -53,6 +53,7 @@ $(function() {
   <% else %>
     <div id="current-date"><a href="#" id="toggle-calendar"><%= l(@date) %></a></div>
   <% end %>
+<!--  <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>-->
   <% if l(@date) != l(Date.today) %>
     <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
   <% end %>
