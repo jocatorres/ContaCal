@@ -23,13 +23,14 @@
   <header>
     <%- if user_signed_in? -%>
       <div id="masthead">
-        <p>Olá, <strong><%= current_user.name %></strong> <%= link_to "(editar perfil)", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+        <p>Olá, <strong><%= current_user.name %></strong> (limite diário: <%= current_user.kcal_limit %> Kcal)  &bull; <%= link_to "Editar Perfil", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
       </div>
     <%- end -%>
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
-	<div id="ad" style="position: relative; top: 37px; left: 227px">
+	<div id="ad" style="position: relative; left: 482px">
+	<div id="ad1" style="position: absolute; top: 38px">
 	<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-8852943436713720";
 		/* ContaCal */
@@ -42,6 +43,7 @@
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</script>
     </div>	
+	</div>
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
