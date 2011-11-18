@@ -23,12 +23,21 @@
   <header>
     <%- if user_signed_in? -%>
       <div id="masthead">
-        <p>Olá, <strong><%= current_user.name %></strong> (limite diário: <%= current_user.kcal_limit %> Kcal)  &bull; <%= link_to "Editar Perfil", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+        <p>Olá, <strong><%= current_user.name %></strong>, 
+		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
+           seu limite diário é <%= current_user.kcal_limit %> Kcal
+	    <%- else -%>
+           você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>
+	    <%- end -%>
+         &bull; <%= link_to "alterar seus dados", edit_user_registration_url %> &bull; <%= link_to "sair", destroy_user_session_url, :method => :delete %></p>
       </div>
     <%- end -%>
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
+    <%- if current_user.sign_in_count == 1 -%>
+<!--       É sua primeira vez!!! :-) -->
+    <%- else -%>
 	<div id="ad" style="position: relative; left: 482px">
 	<div id="ad1" style="position: absolute; top: 38px">
 	<script type="text/javascript"><!--
@@ -44,6 +53,7 @@
 	</script>
     </div>	
 	</div>
+    <%- end -%>
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
