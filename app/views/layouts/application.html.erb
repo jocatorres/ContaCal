@@ -4,7 +4,7 @@
   <meta charset='utf-8'>
   <title>ContaCal - Só se melhora o que se mede!</title>
   <meta name="description" content="Sistema simples e eficiente para controlar suas calorias diárias. Basta vc registrar suas refeições e o sistema calcula automaticamente a quantidade de calorias ingerida e ainda informa se as calorias ingeridas são do tipo verde, amarela ou vermelha. As cores servem para indicar quão recomendável é ingerir o alimento. Se é um alimento de calorias vermelhas, é melhor evitá-lo ao máximo. Calorias amarelas podem ser ingeridas com moderação. Já as calorias verdes podem ser ingeridas sem restrição. Como sugestão, procure seguir a seguinte regra, não mais que 10% de calorias vermelhas, não mais que 35% de calorias amarelas e pelo menos 55% de calorias verdes.">
-  <meta name="keywords" content="contador de calorias, conta calorias, calorias, emagrecer, emagrecimento, controle de calorias, controle de peso, perder peso, diário de calorias, perda de peso, alimenta saudável">
+  <meta name="keywords" content="contador de calorias, conta calorias, calorias, emagrecer, emagrecimento, controle de calorias, controle de peso, perder peso, diário de calorias, perda de peso, alimentação saudável, nutrição, informação nutricional">
   <link href='/favicon.png' rel='shortcut icon'>
   <%= stylesheet_link_tag "contacal", "jquery-ui", "jquery.fancybox-1.3.4", "reset" %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
@@ -23,13 +23,13 @@
   <header>
     <%- if user_signed_in? -%>
       <div id="masthead">
-        <p>Olá, <strong><%= current_user.name %></strong>, 
+        <p align=right>Olá, <strong><%= current_user.name %></strong>! 
 		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
-           seu limite diário é <%= current_user.kcal_limit %> Kcal
+           Seu limite diário é de <%= current_user.kcal_limit %> Kcal.<br>
 	    <%- else -%>
-           você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>
+           Você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>.<br>
 	    <%- end -%>
-         &bull; <%= link_to "alterar seus dados", edit_user_registration_url %> &bull; <%= link_to "sair", destroy_user_session_url, :method => :delete %></p>
+          <%= link_to "Seus Dados", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
       </div>
     <%- end -%>
     <div id="logo">
@@ -38,17 +38,28 @@
     <%- if current_user.sign_in_count == 1 -%>
 <!--       É sua primeira vez!!! :-) -->
     <%- else -%>
-	<div id="ad" style="position: relative; left: 482px">
-	<div id="ad1" style="position: absolute; top: 38px">
+	<div id="ad" style="position: relative; left: 472px">
+	<div id="ad1" style="position: absolute; top: 84px">
 	<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-8852943436713720";
-		/* ContaCal */
-		google_ad_slot = "0364422435";
+		/* ContaCal-Links */
+		google_ad_slot = "8816290780";
 		google_ad_width = 468;
-		google_ad_height = 60;
+		google_ad_height = 15;
 		//-->
-		</script>
-		<script type="text/javascript"
+	</script>
+	<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+	<script type="text/javascript"><!--
+//		google_ad_client = "ca-pub-8852943436713720";
+		/* ContaCal */
+//		google_ad_slot = "0364422435";
+//		google_ad_width = 468;
+//		google_ad_height = 60;
+		//-->
+	</script>
+	<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 	</script>
     </div>	
