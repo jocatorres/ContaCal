@@ -25,11 +25,11 @@
       <div id="masthead">
         <p align=right>Olá, <strong><%= current_user.name %></strong>! 
 		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
-           Seu limite diário é de <%= current_user.kcal_limit %> Kcal.<br>
+           Seu limite diário é de <%= current_user.kcal_limit %> Kcal
 	    <%- else -%>
-           Você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>.<br>
+           Você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>
 	    <%- end -%>
-          <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+          &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
       </div>
     <%- end -%>
     <div id="logo">
@@ -37,60 +37,22 @@
     </div>
     <%- if current_user.sign_in_count == 1 -%>
 <!--       É sua primeira vez!!! :-) -->
-	<div id="ad" style="position: relative; left: 472px">
-	<div id="ad1" style="position: absolute; top: 84px">
-	<script type="text/javascript"><!--
+	<%- end -%>
+	<div id="ad" style="position: relative; left: 460px; top: 38px">
+<!--	<div id="ad1" style="position: absolute; top: 50px">-->
+		<script type="text/javascript"><!--
 		google_ad_client = "ca-pub-8852943436713720";
-		/* ContaCal-Links */
-		google_ad_slot = "8816290780";
-		google_ad_width = 468;
-		google_ad_height = 15;
+		/* ContaCal-Meio-banner */
+		google_ad_slot = "7623009538";
+		google_ad_width = 234;
+		google_ad_height = 60;
 		//-->
-	</script>
-	<script type="text/javascript"
+		</script>
+		<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-	<script type="text/javascript"><!--
-//		google_ad_client = "ca-pub-8852943436713720";
-		/* ContaCal */
-//		google_ad_slot = "0364422435";
-//		google_ad_width = 468;
-//		google_ad_height = 60;
-		//-->
-	</script>
-	<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
+		</script>
     </div>	
 	</div>
-    <%- else -%>
-	<div id="ad" style="position: relative; left: 472px">
-	<div id="ad1" style="position: absolute; top: 84px">
-	<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-8852943436713720";
-		/* ContaCal-Links */
-		google_ad_slot = "8816290780";
-		google_ad_width = 468;
-		google_ad_height = 15;
-		//-->
-	</script>
-	<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-	<script type="text/javascript"><!--
-//		google_ad_client = "ca-pub-8852943436713720";
-		/* ContaCal */
-//		google_ad_slot = "0364422435";
-//		google_ad_width = 468;
-//		google_ad_height = 60;
-		//-->
-	</script>
-	<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
-    </div>	
-	</div>
-    <%- end -%>
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
