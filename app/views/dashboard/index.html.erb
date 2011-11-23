@@ -100,7 +100,7 @@ $(function() {
   });
 
   $('.food_name_autocomplete').bind('autocompleteopen', function(event, data){
-    $('.ui-autocomplete').append('<li class="ui-menu-item-link">#{link_to 'Sugerir cadastro de novo alimento', new_food_path, :class => 'ui-corner-all'}</li>');
+    $('.ui-autocomplete').append('<li class="ui-menu-item-link">#{link_to 'Sugerir cadastro de alimento ou exercício', new_food_path, :class => 'ui-corner-all'}</li>');
   });
   
   $('#calendar').datepicker({
