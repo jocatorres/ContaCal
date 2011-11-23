@@ -12,7 +12,7 @@ class FoodsController < ApplicationController
     
     if !@food.name.blank?
       NotificationMailer.new_food(current_user, @food).deliver
-#      @food.name << " (kind = '@food.kind')"
+# precisa rever essa parte
       nome = @food.name
       nome << " (kind = "
       nome << @food.kind
