@@ -6,5 +6,7 @@
   <p>Peso: <strong><%= @food.weight%></strong></p>
   <p>Medida: <strong><%= @food.measure %></strong></p>
   <p>Quantidade de Calorias: <strong><%= @food.kcal %></strong></p>
-  <p>Tipo de Caloria: <strong><%= {'a' => 'Tipo Verde', 'b' => 'Tipo Amarela', 'c' => 'Tipo Vermelha'}[@food.kind] %></strong></p>
+  <p>Tipo de Caloria: <strong><%= {'a' => 'Tipo Verde', 'b' => 'Tipo Amarela', 'c' => 'Tipo Vermelha', 'd' => 'Exercício'}[@food.kind] %></strong></p>
+  <p>Insert: <strong>insert into foods (name, weight, measure, kcal, kind, created_at, updated_at) values ('<%= @food.name %>', '<%= @food.weight%>', '<%= @food.measure %>', <%= @food.kcal %>, '<%= @food.kind %>', now(), now());</strong></p>
+  <p>Google: <strong><a href="http://www.google.com.br/search?rls=pt&q=caloria+<%= @food.name %>">http://www.google.com.br/search?rls=pt&q=caloria+<%= @food.name %></a></strong></p>
 </div>
