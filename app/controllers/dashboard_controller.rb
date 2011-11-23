@@ -11,7 +11,9 @@ class DashboardController < ApplicationController
       pieces << "#{translate_to_remove_accents("name")} like #{translate_to_remove_accents("?")}"
       terms << "%#{term.downcase}%"
     end
-    where_clause = pieces.join(" and ")
+
+    where_clause = "kind <> 'h' and "
+    where_clause << pieces.join(" and ")
     
     @foods = Food.where(where_clause, *terms).limit(100).all
     if @foods.empty?
