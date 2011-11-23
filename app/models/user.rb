@@ -112,6 +112,8 @@ class User < ActiveRecord::Base
   private
   def send_welcome_email
     NotificationMailer.welcome(self).deliver
+  	update_attribute(:confirmed_at, Time.now)
+		update_attribute(:confirmation_sent_at, Time.now)
   end
 
   def consumed_kcal_less_than_1000_kcal

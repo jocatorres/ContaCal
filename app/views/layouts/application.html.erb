@@ -22,12 +22,6 @@
 <body id="<%= controller.controller_name %>">
   <header>
     <%- if user_signed_in? -%>
-	<%-
-	if current_user.confirmed_at == nil
-  		current_user.update_attribute(:confirmed_at, Time.now)
-		current_user.update_attribute(:confirmation_sent_at, Time.now)
-	end
-	-%>
       <div id="masthead">
         <p align=right>Olá, <strong><%= current_user.name %></strong>! 
 		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
