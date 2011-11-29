@@ -1,5 +1,5 @@
 <% if percent_kcal_kind_b <= 35 and percent_kcal_kind_c <= 10 %>
-  <div class="notice"><strong>Parabéns!</strong> Sua dieta está dentro dos padrões recomendados.</div>
+  <div class="notice"><strong>Parabéns!</strong> Sua dieta está dentro dos <%= link_to 'padrões recomendados', 'http://www.contacal.com.br/o-que-sao-as-calorias-vermelhas-amarelas-e-verdes/', :target => '_blank' %>.</div>
 <% else %>
-  <div class="alert"><strong>Quase lá!</strong> Continue atualizando sua dieta com alimentos verdes e menos alimentos vermelhos.</div>
+  <div class="alert"><strong>Quase lá!</strong> Continue atualizando sua dieta com <%= link_to 'mais alimentos verdes e menos alimentos vermelhos', 'http://www.contacal.com.br/o-que-sao-as-calorias-vermelhas-amarelas-e-verdes/', :target => '_blank' %>.</div>
 <% end %>
