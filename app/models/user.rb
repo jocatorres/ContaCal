@@ -114,8 +114,8 @@ class User < ActiveRecord::Base
     NotificationMailer.welcome(self).deliver
   	update_attribute(:confirmed_at, Time.now)
 		update_attribute(:confirmation_sent_at, Time.now)
-		bb = Cobregratis::BankBillet.new(:amount => 30, :expire_at_date_string => "23/12/2011", :name => self.name, :acceptance => "S", :document_number => "0000232", :description => "Teste")
-    bb.save
+#		bb = Cobregratis::BankBillet.new(:amount => 30, :expire_at_date_string => "23/12/2011", :name => self.name, :acceptance => "S", :document_number => "0000232", :description => "Teste")
+#    bb.save
   end
 
   def consumed_kcal_less_than_1000_kcal
