@@ -41,6 +41,11 @@ GEM
     arel (2.0.10)
     bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    cobregratis (0.3.0)
+      activeresource (>= 2.1)
+      activeresource (>= 2.1)
+      activesupport (>= 2.1)
+      activesupport (>= 2.1)
     columnize (0.3.4)
     daemons (1.1.4)
     devise (1.4.2)
@@ -153,6 +158,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cobregratis (= 0.3.0)
   devise (= 1.4.2)
   factory_girl_rails (= 1.1.0)
   foreman (= 0.20.0)

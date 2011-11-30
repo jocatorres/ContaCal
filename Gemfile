@@ -8,6 +8,7 @@ gem 'thin', '1.2.11'
 gem 'silent-postgres', '0.0.8'
 gem 'rails3-jquery-autocomplete', '0.9.1'
 gem 'google_visualr', '2.1.0'
+gem 'cobregratis', '0.3.0'
 
 group :development, :test do
   gem 'ruby-debug19', '0.11.6'
