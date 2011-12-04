@@ -35,8 +35,7 @@ class NotificationMailer < ::ActionMailer::Base
     @food = food
     mail(
       :from => "#{user.name} <#{user.email}>",
-      :to => "ContaCal <info@contacal.com.br>",
-      :cc => "Joca Torres <jtorres@jig.com.br>",
+      :to => "ContaCal <alimento@contacal.com.br>",
       :subject => "Sugestão de novo alimento")
   end
 
