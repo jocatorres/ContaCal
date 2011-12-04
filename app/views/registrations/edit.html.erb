@@ -29,25 +29,25 @@
   <%= f.password_field :password_confirmation, :autocomplete => "off" %></p>
 
 
-<!--  <h2>Dados de cobrança</h2>
+  <h2>Dados de cobrança</h2>
 
-  <p><%= f.label :status %>: -->
-  <!--%- if user.status == 0 -%-->
-    <!--Cortesia-->
-  <!--%- elsif user.status == 1 -%-->
-<!--    Período de teste gratuito -->
-  <!--%- elsif user.status == 2 -%-->
-<!--    Assinante -->
-  <!--%- end -%-->
-<!--</p>-->
+  <p><%= f.label :status %>: 
+  <%- if user.status.blank? or user.status == 0 -%>
+    Cortesia
+  <%- elsif user.status == 1 -%>
+    Período de teste gratuito
+  <%- elsif user.status == 2 -%>
+    Assinante
+  <%- end -%>
+</p>
 
-  <!--%- if user.status > 0 -%-->
-  <!--<p><%= f.label :expire_at %>: <!--%= user.expire_at.strftime("%d/%m/%Y") %></p>-->
+  <%- if !user.status.blank? and user.status > 0 -%>
+  <p><%= f.label :expire_at %>: <%= user.expire_at.strftime("%d/%m/%Y") %>
 
-    <!--%- if !user.bank_billet_link.nil? then -%-->
-<!--    <p><%= f.label :bank_billet_link %>: <a target=_blank href=<%= user.bank_billet_link %>><%= user.bank_billet_link %></a></p>-->
-    <!--%- end -%-->
-  <!--%- end -%-->
+    <%- if !user.bank_billet_link.nil? then -%>
+    (<a target=_blank href=<%= user.bank_billet_link %>>ver boleto</a>)</p>
+    <%- end -%>
+  <%- end -%>
 
 
 

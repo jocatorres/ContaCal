@@ -35,43 +35,46 @@
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
-<!--%-     if current_user.status > 0 -%-->
-<!--	<div id="pagante" 
-	style="border: 1px solid #ddd;  
-	-moz-border-radius: 8px;  
-	-webkit-border-radius: 8px; 
-	 border-radius: 8px; 
-	font-size: .8em; 
-    padding: 5px 20px;
-	width: 200px; 
-	height: 50px;
-	background-color: #cccc00; 
-	position: absolute; left: 920px; top: 54px">
-		Vc é um usuário pagante...<br />-->
-		<!--%= user.expire_at.strftime("%d/%m/%Y") %--><!--<br />
-		<a target=_blank href=<%=user.bank_billet_link%>><%=user.bank_billet_link%></a>
-		
-    </div> -->
-	<!--%- else -%-->
-	<div id="ad" style="position: relative; left: 715px">
+	<%- if !current_user.status.blank? and current_user.status > 0 and !user.bank_billet_link.nil? -%>
+	<div id="subscriber">
+		<%- if current_user.status == 1 -%>
+		  Período de teste gratuito
+		<%- else -%>
+		  Assinatura
+		<%- end -%>
+		<%- if Date.today <= user.expire_at -%>
+		vence 
+		<%- else -%>
+		venceu 
+		<%- end -%>
+		em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong> (<a target=_blank href=<%=user.bank_billet_link%>>ver boleto</a>)
+    </div>
+	<%- else -%>
+<!--	<div id="ad" style="position: relative; left: 715px">
 	<div id="ad1" style="position: absolute; top: 38px">
-		<script type="text/javascript"><!--
+		<script type="text/javascript">--><!--
 		google_ad_client = "ca-pub-8852943436713720";
 		/* ContaCal-Meio-banner */
 		google_ad_slot = "7623009538";
 		google_ad_width = 234;
 		google_ad_height = 60;
 		//-->
-		</script>
+<!--		</script>
 		<script type="text/javascript"
 		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 		</script>
     </div>	
-	</div>
-	<!--%- end -%-->
+	</div>-->
+	<%- end -%>
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
+  <%- if current_user.status == 3 -%>
+<br /><br /><br />
+<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 300px">
+<b>Acesso suspenso... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta quitar o <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
+</div>
+  <%- else -%>
   <section role="main">
     <%= yield %>
   </section>
@@ -79,6 +82,7 @@
   <footer>
     <p>Copyright &copy; 2011 ContaCal. Dúvidas? Sugestões? <%= link_to 'Fale conosco', 'http://www.contacal.com.br/contato/', :target => '_blank' %>!</p>
   </footer>
+  <%- end -%>
 <script type="text/javascript"> 
 
   var _gaq = _gaq || [];

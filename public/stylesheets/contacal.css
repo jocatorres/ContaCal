@@ -126,6 +126,16 @@ header #kcal-limit #change-kcal-label {
   color: #255686;
 }
 
+/* SUBSCRIBER */
+
+header #subscriber {
+	font-size: .8em; 
+    float: right;
+	text-align: right;
+	position: relative; left: 0px; top: -10px
+}
+
+
 /* SECTION */
 
 section[role="main"] {
