@@ -35,11 +35,24 @@
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
-    <%- if current_user.sign_in_count == 1 -%>
-<!--	<div id="primeira_vez" style="position: relative; left: 150px; top: 54px">
-       É sua primeira vez!!! :-) 
-    </div>-->
-	<%- end -%>
+<!--%-     if current_user.status > 0 -%-->
+<!--	<div id="pagante" 
+	style="border: 1px solid #ddd;  
+	-moz-border-radius: 8px;  
+	-webkit-border-radius: 8px; 
+	 border-radius: 8px; 
+	font-size: .8em; 
+    padding: 5px 20px;
+	width: 200px; 
+	height: 50px;
+	background-color: #cccc00; 
+	position: absolute; left: 920px; top: 54px">
+		Vc é um usuário pagante...<br />-->
+		<!--%= user.expire_at.strftime("%d/%m/%Y") %--><!--<br />
+		<a target=_blank href=<%=user.bank_billet_link%>><%=user.bank_billet_link%></a>
+		
+    </div> -->
+	<!--%- else -%-->
 	<div id="ad" style="position: relative; left: 715px">
 	<div id="ad1" style="position: absolute; top: 38px">
 		<script type="text/javascript"><!--
@@ -55,6 +68,7 @@
 		</script>
     </div>	
 	</div>
+	<!--%- end -%-->
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />

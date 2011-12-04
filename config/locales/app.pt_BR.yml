@@ -38,6 +38,9 @@ pt_BR:
         subscribed_daily: Receber notificações por e-mail diariamente?
         subscribed_weekly: Receber notificações por e-mail semanalmente?
         kcal_limit: Limite diário de calorias
+        status: Tipo de assinatura
+        expire_at: Data de vencimento
+        bank_billet_link: Boleto
       food:
         name: Nome
         weight: Peso

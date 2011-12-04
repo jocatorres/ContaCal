@@ -12,8 +12,8 @@ class FoodsController < ApplicationController
     
     if !@food.name.blank?
       NotificationMailer.new_food(current_user, @food).deliver
-      @food.update_attribute(:kind, "h")
-      @food.save
+#      @food.update_attribute(:kind, "h")
+#      @food.save
       redirect_to new_food_path, notice: 'Sua sugestão foi enviada com sucesso!'
     else
       @food.errors.add(:name, :empty)
