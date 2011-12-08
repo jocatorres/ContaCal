@@ -29,7 +29,7 @@
 	    <%- else -%>
            Você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>
 	    <%- end -%>
-          &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %></p>
+          &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Ajuda", '/ajuda.html', :class => "terms-of-use-fancybox" %> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
       </div>
     <%- end -%>
     <div id="logo">
@@ -95,6 +95,11 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '90%', height: '90%'});
+  });
 </script>
 </body>
 </html>
