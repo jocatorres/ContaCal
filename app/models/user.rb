@@ -123,7 +123,7 @@ class User < ActiveRecord::Base
   	update_attribute(:expire_at, date_expire.strftime("%Y-%m-%d"))
   	update_attribute(:status, 1)
   	update_attribute(:bank_billet_link, bb.attributes["external_link"])
-#  	update_attribute(:bank_billet_our_number, bb.attributes["our-number"])
+  	update_attribute(:bank_billet_our_number, bb.attributes["our_number"])
   end
 
   def consumed_kcal_less_than_1000_kcal
