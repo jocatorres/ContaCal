@@ -29,15 +29,6 @@ class NotificationMailer < ::ActionMailer::Base
     mail(:to => "#{user.name} <#{user.email}>",
       :subject => "Resumo de suas calorias de hoje (#{I18n.l(@date)})")
   end
-  
-#  def new_food(user, food)
-#    @user = user
-#    @food = food
-#    mail(
-#      :from => "#{user.name} <#{user.email}>",
-#      :to => "Info ContaCal <alimento@contacal.com.br>",
-#      :subject => "Sugestão de novo alimento")
-#  end
 
   def new_food(user, food)
     @user = user

@@ -53,10 +53,10 @@ $(function() {
   <% else %>
     <div id="current-date"><a href="#" id="toggle-calendar"><%= l(@date) %></a></div>
   <% end %>
-<!--  <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>-->
-  <% if l(@date) != l(Date.today) %>
+  <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
+<!--  <% if l(@date) != l(Date.today) %>
     <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
-  <% end %>
+  <% end %>-->
 </nav>
 
 <div id="calendar"></div>
@@ -109,7 +109,7 @@ $(function() {
     dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
     monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-    maxDate: #{l(Date.today)},
+//    maxDate: #{l(Date.today)},
     prevText: "Anterior",
     nextText: "Próximo",
     onSelect: function(dateText, inst) {
