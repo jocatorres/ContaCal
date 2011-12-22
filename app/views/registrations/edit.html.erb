@@ -37,11 +37,13 @@
   <%- elsif user.status == 1 -%>
     Período de teste gratuito
   <%- elsif user.status == 2 -%>
-    Assinante
+    Assinante boleto bancário
+  <%- elsif user.status == 4 -%>
+    Assinante cartão de crédito
   <%- end -%>
 </p>
 
-  <%- if !user.status.blank? and user.status > 0 -%>
+  <%- if !user.status.blank? and user.status > 0 and user.status < 4 and !user.expire_at.blank? -%>
   <p><%= f.label :expire_at %>: <%= user.expire_at.strftime("%d/%m/%Y") %>
 
     <%- if !user.bank_billet_link.nil? then -%>

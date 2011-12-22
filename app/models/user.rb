@@ -111,19 +111,19 @@ class User < ActiveRecord::Base
 
   private
   def send_welcome_email
-    date_expire = Date.today+5
-    date_expire.strftime("%d/%m/%Y")
-    document_number = Date.today.strftime("%Y%m%d") + "%08d" % self.id
-    descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 4,19 => taxa de emissão de boleto\nTotal: R$ 34,19\nlogin: " + self.email
-    bb = Cobregratis::BankBillet.new(:amount => 34.19, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => self.name, :acceptance => "S", :document_number => document_number, :description => descrition)
-    bb.save
+#    date_expire = Date.today+5
+#    date_expire.strftime("%d/%m/%Y")
+#    document_number = Date.today.strftime("%Y%m%d") + "%08d" % self.id
+#    descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 4,19 => taxa de emissão de boleto\nTotal: R$ 34,19\nlogin: " + self.email
+#    bb = Cobregratis::BankBillet.new(:amount => 34.19, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => self.name, :acceptance => "S", :document_number => document_number, :description => descrition)
+#    bb.save
     NotificationMailer.welcome(self).deliver
   	update_attribute(:confirmed_at, Time.now)
 		update_attribute(:confirmation_sent_at, Time.now)
-  	update_attribute(:expire_at, date_expire.strftime("%Y-%m-%d"))
-  	update_attribute(:status, 1)
-  	update_attribute(:bank_billet_link, bb.attributes["external_link"])
-  	update_attribute(:bank_billet_our_number, bb.attributes["our_number"])
+#  	update_attribute(:expire_at, date_expire.strftime("%Y-%m-%d"))
+ 	update_attribute(:status, 5)
+#  	update_attribute(:bank_billet_link, bb.attributes["external_link"])
+#  	update_attribute(:bank_billet_our_number, bb.attributes["our_number"])
   end
 
   def consumed_kcal_less_than_1000_kcal

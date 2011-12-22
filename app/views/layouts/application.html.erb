@@ -50,7 +50,7 @@
 		em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong> (<a target=_blank href=<%=user.bank_billet_link%>>ver boleto</a>)
     </div>
 	<%- else -%>
-	<div id="ad" style="position: relative; top: 38px; left: 455px">
+	<div id="ad2" style="position: absolute; top: 48px; relative; right: 185px">
 	<script type="text/javascript"><!--
 	google_ad_client = "ca-pub-8455618706390575";
 	/* ContaCal In-app */
@@ -71,6 +71,11 @@
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 300px">
 <b>Acesso desativado... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta quitar o <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
+</div>
+  <%- elsif current_user.status == 5 -%>
+<br /><br /><br />
+<div class="notice" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 300px">
+<b>Acesso aguardando liberação... :-)</b><br /><br />Estamos aguardando do PayPal a confirmação do pagamento o que deve ocorrer em, no máximo, 1 dia útil!
 </div>
   <%- else -%>
   <section role="main">
