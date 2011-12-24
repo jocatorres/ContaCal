@@ -74,9 +74,21 @@
 </div>
   <%- elsif current_user.status == 5 -%>
 <br /><br /><br />
-<div class="notice" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 300px">
+<div class="notice" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 420px">
 <b>Acesso aguardando liberação... :-)</b><br /><br />Estamos aguardando do PayPal a confirmação do pagamento o que deve ocorrer em, no máximo, 1 dia útil!
-<br /><br /><small>Caso você não tenha feito sua inscrição no PayPal, não perca tempo e <a target=_blank href=http://www.contacal.com.br/precos>faça agora mesmo</a>, para que possamos ativar sua conta o quanto antes!</small>
+</div>
+<br /><br />
+<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 420px">
+<b>Atenção</b><br /><br />Caso você ainda não tenha feito sua inscrição via PayPal, basta fazê-lo clicando no botão abaixo, para se tornar um assinante do Plano ContaCal por R$ 5,00 por mês.
+<br /><br />
+<center>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="AJF5XZCYGJY5A">
+	<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
+	<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+	</form>
+</center>
 </div>
   <%- else -%>
   <section role="main">
