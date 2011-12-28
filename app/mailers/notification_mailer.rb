@@ -21,13 +21,16 @@ class NotificationMailer < ::ActionMailer::Base
     @date = 1.day.ago.to_date
     mail(:to => "#{user.name} <#{user.email}>",
       :subject => "Resumo de suas calorias em #{I18n.l(@date)}")
+    if (user.status == 1 and user.bank_billet_link.nil? and user.expire_at < Date.today-1)
+      user.update_attribute(:subscribed_daily, "f")
+    end
   end
 
   def end_of_day(user)
-    @user = user
-    @date = Date.today
-    mail(:to => "#{user.name} <#{user.email}>",
-      :subject => "Resumo de suas calorias de hoje (#{I18n.l(@date)})")
+#    @user = user
+#    @date = Date.today
+#    mail(:to => "#{user.name} <#{user.email}>",
+#      :subject => "Resumo de suas calorias de hoje (#{I18n.l(@date)})")
   end
 
   def new_food(user, food)

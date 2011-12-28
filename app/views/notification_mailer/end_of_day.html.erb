@@ -1,5 +1,5 @@
 <%= content_for :message_title do %>Resumo diário de hoje (<%=I18n.l(@date) %>)<% end -%>
-<p>Bom dia!</p>
+<p>Olá!</p>
 <% if @user.status == 1 %>
 <%- dias_falta = user.expire_at - Date.today -%>
 <%- if dias_falta >= 5 -%>

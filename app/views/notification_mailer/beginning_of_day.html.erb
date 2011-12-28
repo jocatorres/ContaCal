@@ -3,8 +3,7 @@
 <% if @user.status == 1 %>
 <%- dias_falta = user.expire_at - Date.today -%>
 <%- if dias_falta >= 5 -%>
-<p>Você tem 5 dias para experimentar o ContaCal!</p>
-<p>Alguns links úteis:</p>
+<p>Você tem 5 dias para experimentar o ContaCal, sistema para registra de refeições que conta calorias. Veja abaixo alguns links úteis para você aproveitar ao máximo o sistema:</p>
 <ul>
   <li><a href="http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal/">Como registrar sua alimentação no ContaCal</a></li>
   <li><a href="http://www.contacal.com.br/o-que-sao-as-calorias-vermelhas-amarelas-e-verdes/">O que são as calorias vermelhas, amarelas e verdes?</a></li>
