@@ -49,7 +49,7 @@
 		<%- end -%>
 		em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong> (<a target=_blank href=<%=user.bank_billet_link%>>ver boleto</a>)
     </div>
-    <%- elsif current_user.status == 1 and user.bank_billet_link.nil?-%>
+    <%- elsif current_user.status == 1 and user.bank_billet_link.nil? -%>
 	<div id="subscriber">
 		  Período de teste gratuito
 		<%- if Date.today < user.expire_at -%>
@@ -79,7 +79,7 @@
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
-  <%- if current_user.status == 1 and Date.today > user.expire_at-%>
+  <%- if current_user.status == 1 and Date.today > user.expire_at -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
 <b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas R$ 5,00 por mês fazendo sua inscrição via PayPal:
