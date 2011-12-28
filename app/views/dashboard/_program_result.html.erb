@@ -1,5 +1,5 @@
 <% if total_kcal == 0 %>
-  <% if current_user.sign_in_count == 0 %>
+  <% if current_user.sign_in_count <=1 %>
     <div class="notice"><strong>Seja bem vindo!</strong> Confira nosso <%= link_to "vídeo de primeiros passos", '/ajuda.html', :class => "terms-of-use-fancybox" %>.</div>
   <% else %>
     <div class="notice"><strong>Bem vindo de volta!</strong> Confira nossas últimas novidades em <%= link_to "nosso blog", 'http://www.contacal.com.br/blog', :class => "terms-of-use-fancybox" %>.</div>
