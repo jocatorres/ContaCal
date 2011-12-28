@@ -49,6 +49,18 @@
 		<%- end -%>
 		em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong> (<a target=_blank href=<%=user.bank_billet_link%>>ver boleto</a>)
     </div>
+    <%- elsif current_user.status == 1 and user.bank_billet_link.nil?-%>
+	<div id="subscriber">
+		  Período de teste gratuito
+		<%- if Date.today < user.expire_at -%>
+          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se um <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>assinante</a> por apenas R$ 5,00 por mês
+		<%- elsif Date.today == user.expire_at -%>
+		  está vencendo <strong>hoje</strong>!<br>Torne-se um <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>assinante</a> por apenas R$ 5,00 por mês
+		<%- else -%>
+	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se um <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>assinante</a> por apenas R$ 5,00 por mês
+		<%- end -%>
+
+    </div>
 	<%- else -%>
 	<div id="ad2" style="position: absolute; top: 48px; relative; right: 185px">
 	<script type="text/javascript"><!--
@@ -67,10 +79,19 @@
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
-  <%- if current_user.status == 3 -%>
+  <%- if current_user.status == 1 and Date.today > user.expire_at-%>
 <br /><br /><br />
-<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 300px">
-<b>Acesso desativado... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta quitar o <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
+<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
+<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas R$ 5,00 por mês fazendo sua inscrição via PayPal:
+<br /><br />
+<center>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="AJF5XZCYGJY5A">
+	<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
+	<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+	</form>
+</center>
 </div>
   <%- elsif current_user.status == 5 -%>
 <br /><br /><br />
