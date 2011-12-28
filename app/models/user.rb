@@ -122,6 +122,7 @@ class User < ActiveRecord::Base
 		update_attribute(:confirmation_sent_at, Time.now)
   	update_attribute(:expire_at, date_expire.strftime("%Y-%m-%d"))
  	  update_attribute(:status, 1)
+ 	  update_attribute(:subscribed_daily, "t")
 #  	update_attribute(:bank_billet_link, bb.attributes["external_link"])
 #  	update_attribute(:bank_billet_our_number, bb.attributes["our_number"])
   end
