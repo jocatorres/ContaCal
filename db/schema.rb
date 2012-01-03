@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209003423) do
+ActiveRecord::Schema.define(:version => 20120103114317) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
-    t.string   "weight",     :limit => 40
-    t.string   "measure",    :limit => 40
+    t.string   "weight",       :limit => 40
+    t.string   "measure",      :limit => 40
     t.integer  "kcal"
-    t.string   "kind",       :limit => 1
+    t.string   "kind",         :limit => 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "suggester_id"
   end
 
   create_table "user_foods", :force => true do |t|
