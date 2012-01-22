@@ -35,29 +35,24 @@
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
-	<%- if !current_user.status.blank? and current_user.status > 0 and !user.bank_billet_link.nil? -%>
-	<div id="subscriber">
-		<%- if current_user.status == 1 -%>
-		  Período de teste gratuito
-		<%- else -%>
-		  Assinatura
-		<%- end -%>
-		<%- if Date.today <= user.expire_at -%>
-		vence 
-		<%- else -%>
-		venceu 
-		<%- end -%>
-		em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong> (<a target=_blank href=<%=user.bank_billet_link%>>ver boleto</a>)
-    </div>
-    <%- elsif current_user.status == 1 and user.bank_billet_link.nil? -%>
+    <%- if current_user.status == 1 -%>
+      <%- if  user.bank_billet_link.nil? -%>
+        <%- date_expire = Date.today+5 -%>
+        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
+        <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+        <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+        <%- bb.save -%>
+ 		<%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
+	  	<%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
+     <%- end -%>
 	<div id="subscriber">
 		  Período de teste gratuito
 		<%- if Date.today < user.expire_at -%>
-          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se um <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>assinante</a> por apenas R$ 5,00 por mês
+          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- elsif Date.today == user.expire_at -%>
-		  está vencendo <strong>hoje</strong>!<br>Torne-se um <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>assinante</a> por apenas R$ 5,00 por mês
+		  está vencendo <strong>hoje</strong>!<br>Torne-se um assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- else -%>
-	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se um <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>assinante</a> por apenas R$ 5,00 por mês
+	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- end -%>
 
     </div>
