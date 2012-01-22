@@ -75,36 +75,19 @@
   </header>
   <hr />
   <%- if current_user.status == 1 and Date.today > user.expire_at -%>
+   <%- if  user.bank_billet_link.nil? -%>
+     <%- date_expire = Date.today+5 -%>
+     <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
+     <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+     <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+     <%- bb.save -%>
+     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
+     <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
+  <%- end -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas R$ 5,00 por mês fazendo sua inscrição via PayPal:
+<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
 <br /><br />
-<center>
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="AJF5XZCYGJY5A">
-	<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
-	<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-	</form>
-</center>
-</div>
-  <%- elsif current_user.status == 5 -%>
-<br /><br /><br />
-<div class="notice" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 420px">
-<b>Acesso aguardando liberação... :-)</b><br /><br />Estamos aguardando do PayPal a confirmação do pagamento o que deve ocorrer em, no máximo, 1 dia útil!
-</div>
-<br /><br />
-<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 420px">
-<b>Atenção</b><br /><br />Caso você ainda não tenha feito sua inscrição via PayPal, basta fazê-lo clicando no botão abaixo, para se tornar um assinante do Plano ContaCal por R$ 5,00 por mês.
-<br /><br />
-<center>
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-	<input type="hidden" name="cmd" value="_s-xclick">
-	<input type="hidden" name="hosted_button_id" value="AJF5XZCYGJY5A">
-	<input type="image" src="https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
-	<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-	</form>
-</center>
 </div>
   <%- else -%>
   <section role="main">
