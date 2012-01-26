@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120103114317) do
+ActiveRecord::Schema.define(:version => 20120126193605) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120103114317) do
     t.date     "expire_at"
     t.integer  "bank_billet_id"
     t.string   "bank_billet_our_number"
+    t.string   "paypal_email"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
