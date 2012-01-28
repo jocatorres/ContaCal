@@ -56,16 +56,16 @@
 		<%- end -%>
 
     </div>
-	<%- elsif (current_user.status == 2 or current_user.status == 4) and Date.today+10 > user.expire_at -%>
-      <%- if  user.bank_billet_link.nil? -%>
-        <%- date_expire = Date.today+10 -%>
-        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-        <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
-        <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
-        <%- bb.save -%>
- 		<%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
-	  	<%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
-     <%- end -%>
+	<%- elsif (current_user.status == 2 or current_user.status == 4) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
+        <%- if  user.bank_billet_link.nil? -%>
+          <%- date_expire = Date.today+10 -%>
+          <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
+          <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+          <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+          <%- bb.save -%>
+   	      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
+  	  	  <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
+        <%- end -%>
 	<div id="subscriber">
 		  Sua assinatura
 		<%- if Date.today < user.expire_at -%>
@@ -109,22 +109,21 @@
 <b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
 <br /><br />
 </div>
-  <%- elsif (current_user.status == 2 or current_user.status == 4) and Date.today > user.expire_at -%>
-   <%- if  user.bank_billet_link.nil? -%>
-     <%- date_expire = Date.today+5 -%>
-     <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-     <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
-     <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
-     <%- bb.save -%>
-     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
-     <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
-  <%- end -%>
+  <%- elsif (current_user.status == 2 or current_user.status == 4) and !user.expire_at.nil? and Date.today > user.expire_at -%>
+      <%- if  user.bank_billet_link.nil? -%>
+       <%- date_expire = Date.today+5 -%>
+       <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
+       <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+       <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+       <%- bb.save -%>
+       <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
+       <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
+      <%- end -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
 <b>Assinatura vencida... :-(</b><br /><br />Para voltar a usar o ContaCal basta renovar sua assinatura por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
 <br /><br />
 </div>
-
   <%- else -%>
   <section role="main">
     <%= yield %>
