@@ -5,6 +5,7 @@ common: &common
 
 development:
   <<: *common
+  host: localhost
   database: contacal_development
   password: postgres
 
