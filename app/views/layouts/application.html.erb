@@ -37,9 +37,9 @@
     </div>
     <%- if current_user.status == 1 -%>
       <%- if  user.bank_billet_link.nil? -%>
-        <%- date_expire = Date.today+10 -%>
+        <%- date_expire = Date.today+365 -%>
         <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-        <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+        <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
         <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
         <%- bb.save -%>
  		<%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -58,9 +58,9 @@
     </div>
 	<%- elsif (current_user.status == 2 or current_user.status == 4) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
         <%- if  user.bank_billet_link.nil? or Date.today > user.expire_at -%>
-          <%- date_expire = Date.today+10 -%>
+          <%- date_expire = Date.today+60 -%>
           <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-          <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+          <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
           <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
           <%- bb.save -%>
    	      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -96,9 +96,9 @@
   <hr />
   <%- if current_user.status == 1 and Date.today > user.expire_at -%>
    <%- if  user.bank_billet_link.nil? -%>
-     <%- date_expire = Date.today+10 -%>
+     <%- date_expire = Date.today+365 -%>
      <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-     <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+     <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
      <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
      <%- bb.save -%>
      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -111,9 +111,9 @@
 </div>
   <%- elsif (current_user.status == 2 or current_user.status == 4) and !user.expire_at.nil? and Date.today > user.expire_at -%>
       <%- if  user.bank_billet_link.nil? -%>
-       <%- date_expire = Date.today+10 -%>
+       <%- date_expire = Date.today+60 -%>
        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-       <%- descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + user.email -%>
+       <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
        <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
        <%- bb.save -%>
        <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
