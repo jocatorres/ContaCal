@@ -37,7 +37,7 @@
     </div>
     <%- if current_user.status == 1 -%>
       <%- if  user.bank_billet_link.nil? -%>
-        <%- date_expire = Date.today+365 -%>
+        <%- date_expire = Date.today+90 -%>
         <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
         <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
         <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
@@ -96,7 +96,7 @@
   <hr />
   <%- if current_user.status == 1 and Date.today > user.expire_at -%>
    <%- if  user.bank_billet_link.nil? -%>
-     <%- date_expire = Date.today+365 -%>
+     <%- date_expire = Date.today+90 -%>
      <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
      <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
      <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
@@ -132,7 +132,7 @@
   <footer>
     <p>Copyright &copy; 2011 ContaCal. Dúvidas? Sugestões? <%= link_to 'Fale conosco', 'http://www.contacal.com.br/contato/', :target => '_blank' %>!</p>
   </footer>
-  <%- end -%>
+  <%- end -%>                  
 <script type="text/javascript"> 
 
   var _gaq = _gaq || [];
