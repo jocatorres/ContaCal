@@ -22,6 +22,8 @@
 <body id="<%= controller.controller_name %>">
   <header>
     <%- if user_signed_in? -%>
+      <%- cartao_url_600 = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A" -%>
+      <%- cartao_url_980 = "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC" -%>
       <div id="masthead">
         <p align=right>Olá, <strong><%= current_user.name %></strong>! 
 		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
@@ -35,49 +37,73 @@
     <div id="logo">
       <a href="<%= root_url %>">ContaCal</a>
     </div>
-    <%- if current_user.status == 1 -%>
+    <%- if current_user.status == 1 or current_user.status == 10 -%>
       <%- if  user.bank_billet_link.nil? -%>
         <%- date_expire = Date.today+90 -%>
-        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-        <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-        <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
+        <%- if current_user.status == 1 -%>
+          <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+          <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+        <%- elsif current_user.status == 10 -%>    
+          <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+          <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+        <%- end -%>
         <%- bb.save -%>
  		<%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
 	  	<%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
-     <%- end -%>
+      <%- end -%>
+      <%- if current_user.status == 1 -%>
+        <%- cartao_url = cartao_url_600 -%> 
+        <%- preco = "R$ 5,00" -%>
+      <%- elsif current_user.status == 10 -%>    
+        <%- cartao_url = cartao_url_980 -%>
+        <%- preco = "R$ 9,80" -%>
+      <%- end -%>
 	<div id="subscriber">
 		  Período de teste gratuito
 		<%- if Date.today < user.expire_at -%>
-          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- elsif Date.today == user.expire_at -%>
-		  está vencendo <strong>hoje</strong>!<br>Torne-se um assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+		  está vencendo <strong>hoje</strong>!<br>Torne-se um assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- else -%>
-	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- end -%>
 
     </div>
-	<%- elsif (current_user.status == 2 or current_user.status == 4) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
+	<%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
         <%- if  user.bank_billet_link.nil? or Date.today > user.expire_at -%>
           <%- date_expire = Date.today+60 -%>
-          <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-          <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-          <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+          <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>    
+          <%- if current_user.status == 2 or current_user.status == 4 -%>        
+            <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+            <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+          <%- elsif current_user.status == 20 or current_user.status == 40 -%>
+            <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+            <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+          <%- end -%>
           <%- bb.save -%>
    	      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
   	  	  <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
         <%- end -%>
+        <%- if current_user.status == 2 or current_user.status == 4 -%>        
+          <%- cartao_url = cartao_url_600 -%> 
+          <%- preco = "R$ 5,00" -%>
+        <%- elsif current_user.status == 20 or current_user.status == 40 -%>
+          <%- cartao_url = cartao_url_980 -%>
+          <%- preco = "R$ 9,80" -%>
+        <%- end -%>
 	<div id="subscriber">
 		  Sua assinatura
 		<%- if Date.today < user.expire_at -%>
-          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Renove sua assinatura por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Renove sua assinatura por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- elsif Date.today == user.expire_at -%>
-		  está vencendo <strong>hoje</strong>!<br>Renove sua assinatura por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+		  está vencendo <strong>hoje</strong>!<br>Renove sua assinatura por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- else -%>
-	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Renove sua assinatura por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Renove sua assinatura por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
 		<%- end -%>
 
     </div>
-	<!--<div id="ad2" style="position: absolute; top: 48px; relative; right: 185px">
+    <!--<div id="ad2" style="position: absolute; top: 48px; relative; right: 185px">
 	<script type="text/javascript">--><!--
 	google_ad_client = "ca-pub-8455618706390575";
 	/* ContaCal In-app */
@@ -94,34 +120,58 @@
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
-  <%- if current_user.status == 1 and Date.today > user.expire_at -%>
+  <%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>
    <%- if  user.bank_billet_link.nil? -%>
      <%- date_expire = Date.today+90 -%>
      <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-     <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-     <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+     <%- if current_user.status == 1 -%>
+       <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+       <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+     <%- elsif current_user.status == 10 -%>    
+       <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+       <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+     <%- end -%>
      <%- bb.save -%>
      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
      <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
   <%- end -%>
+  <%- if current_user.status == 1 -%>
+    <%- cartao_url = cartao_url_600 -%> 
+    <%- preco = "R$ 5,00" -%>
+  <%- elsif current_user.status == 10 -%>    
+    <%- cartao_url = cartao_url_980 -%>
+    <%- preco = "R$ 9,80" -%>
+  <%- end -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
+<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
 <br /><br />
 </div>
-  <%- elsif (current_user.status == 2 or current_user.status == 4) and !user.expire_at.nil? and Date.today > user.expire_at -%>
+  <%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today > user.expire_at -%>
       <%- if  user.bank_billet_link.nil? -%>
        <%- date_expire = Date.today+60 -%>
        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
-       <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-       <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+       <%- if current_user.status == 2 or current_user.status == 4 -%>        
+         <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+         <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+       <%- elsif current_user.status == 20 or current_user.status == 40 -%>
+         <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+         <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+       <%- end -%>
        <%- bb.save -%>
        <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
        <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
       <%- end -%>
+      <%- if current_user.status == 2 or current_user.status == 4 -%>        
+        <%- cartao_url = cartao_url_600 -%> 
+        <%- preco = "R$ 5,00" -%>
+      <%- elsif current_user.status == 20 or current_user.status == 40 -%>
+        <%- cartao_url = cartao_url_980 -%>
+        <%- preco = "R$ 9,80" -%>
+      <%- end -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Assinatura vencida... :-(</b><br /><br />Para voltar a usar o ContaCal basta renovar sua assinatura por apenas R$ 5,00 por mês que podem ser pagos com <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
+<b>Assinatura vencida... :-(</b><br /><br />Para voltar a usar o ContaCal basta renovar sua assinatura por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
 <br /><br />
 </div>
   <%- else -%>
