@@ -45,8 +45,8 @@
           <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
           <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
         <%- elsif current_user.status == 10 -%>    
-          <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-          <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+          <%- descrition = "R$ 29.40 = pagamento trimestral - se você preferir pagamento mensal utilize a opção de cartão de crédito.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+          <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
         <%- end -%>
         <%- bb.save -%>
  		<%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -78,8 +78,8 @@
             <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
             <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
           <%- elsif current_user.status == 20 or current_user.status == 40 -%>
-            <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-            <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+            <%- descrition = "R$ 29.40 = pagamento trimestral - se você preferir pagamento mensal utilize a opção de cartão de crédito.\n\nATENÇÃO: A renovação de seu acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+            <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
           <%- end -%>
           <%- bb.save -%>
    	      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -128,8 +128,8 @@
        <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
        <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
      <%- elsif current_user.status == 10 -%>    
-       <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-       <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+       <%- descrition = "R$ 29.40 = pagamento trimestral - se você preferir pagamento mensal utilize a opção de cartão de crédito.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+       <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
      <%- end -%>
      <%- bb.save -%>
      <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -155,8 +155,8 @@
          <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
          <%- bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
        <%- elsif current_user.status == 20 or current_user.status == 40 -%>
-         <%- descrition = "R$ 49,00 = pagamento semestral com desconto de 20% (equivale a 1 mês grátis)!\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-         <%- bb = Cobregratis::BankBillet.new(:amount => 49.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+         <%- descrition = "R$ 29.40 = pagamento trimestral - se você preferir pagamento mensal utilize a opção de cartão de crédito.\n\nATENÇÃO: A renovação de seu acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+         <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
        <%- end -%>
        <%- bb.save -%>
        <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
