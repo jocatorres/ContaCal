@@ -17,9 +17,9 @@ pt_BR:
     label:
       food:
         name: "Nome do alimento ou exercício"
-        weight: "Peso (Ex: 90 Gramas - g)"
+        weight: "Peso (Ex: 25 g ou 100 ml)"
         weight_explain: "Se for exercício coloque tempo (Ex: 30 minutos)"
-        measure: "Medida (Ex: 1 Prato de sobremesa)"
+        measure: "Medida caseira (Ex: 1 colher ou 1 copo)"
         measure_explain: "Se for exercício coloque algo como 1 aula"
   activerecord:
     attributes:
