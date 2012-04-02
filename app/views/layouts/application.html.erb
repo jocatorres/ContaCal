@@ -7,7 +7,7 @@
   <meta name="keywords" content="contador de calorias, conta calorias, calorias, emagrecer, emagrecimento, controle de calorias, controle de peso, perder peso, diário de calorias, perda de peso, alimentação saudável, nutrição, informação nutricional">
   <link href='/favicon.png' rel='shortcut icon'>
   <%= stylesheet_link_tag "contacal", "jquery-ui", "jquery.fancybox-1.3.4", "reset" %>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js">  </script>
   <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
 
@@ -198,8 +198,13 @@
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '90%', height: '90%'});
+    $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '90%', height: '92%'});
   });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#primeira_vez").fancybox({type: 'iframe', width: '90%', height: '92%'}).trigger('click');
+    });
 </script>
 </body>
 </html>
