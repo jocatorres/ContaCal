@@ -198,13 +198,22 @@
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '90%', height: '92%'});
+    $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '90%', height: '90%'});
   });
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#primeira_vez").fancybox({type: 'iframe', width: '90%', height: '92%'}).trigger('click');
+        $("#primeira_vez").fancybox({type: 'iframe', width: '90%', height: '93%'}).trigger('click');
     });
-</script>
+</script> 
+
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('#close-button').click(function(){
+          $.fancybox.close();
+       }
+    });
+</script> 
+
 </body>
 </html>
