@@ -1,6 +1,6 @@
 <% if total_kcal == 0 %>
   <% if current_user.sign_in_count <=1 %>
-    <div class="alert"><strong>Seja bem vindo!</strong> Como vc é novo por aqui, recomendamos que vc confira nossas <%= link_to "dicas para novos usuários", '/bemvindo.html', :class => "terms-of-use-fancybox", :id => "primeira_vez" %>.</div>
+    <div class="alert"><strong>Seja bem vindo!</strong> Como vc é novo por aqui, recomendamos que vc confira nossas <%= link_to "dicas para novos usuários", '/ajuda.html', :class => "terms-of-use-fancybox", :id => "primeira_vez" %>.</div>
   <% else %>
     <div class="notice"><strong>Bem vindo de volta!</strong> Confira nossas últimas novidades em <%= link_to "nosso blog", 'http://www.contacal.com.br/blog', :class => "terms-of-use-fancybox" %>.</div>
   <% end %>
