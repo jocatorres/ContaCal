@@ -38,14 +38,8 @@
 <p>Ops! Parece que você não registrou nenhuma refeição ontem no ContaCal, né? Se você está encontrando dificuldade em usar o sistema, veja nosso <a href=http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal>passo a passo</a>. Agora, se você já sabe como usar, mas na hora de anotar, esquece o que comeu, veja essa <a href=http://www.contacal.com.br/tire-fotos>super dica</a>!</p>
 <% end -%>
 <%- elsif dias_falta < 1 -%>  
-<%- if current_user.status == 1 -%>
-  <%- preco = "R$ 5,00" -%>
-<%- elsif current_user.status == 10 -%>    
-  <%- preco = "R$ 9,80" -%>
-<%- end -%>
-
 <p>Seu período de experiência do ContaCal acabou... :-(</p>
-<p>Mas se você gostou, junte-se a mais de 10.000 contadores de calorias e torne-se um assinante por apenas <%=preco%> por mês!</p>
+<p>Mas se você gostou, junte-se a mais de 10.000 contadores de calorias e torne-se um assinante hoje mesmo!</p>
 <p>Para se tornar assinante, basta acessar o <a href=http://app.contacal.com.br>ContaCal</a> e escolher a opção de pagamento que desejar, cartão ou boleto.</p>
 <p>Lembre-se, só se melhora aquilo que se mede!</p>
 <% end -%>
