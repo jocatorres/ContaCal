@@ -19,7 +19,7 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date
-    if (user.status == 1 and user.bank_billet_link.nil?)
+    if ((user.status == 1 or user.status == 10) and user.bank_billet_link.nil?)
       mail(:to => "#{user.name} <#{user.email}>",
         :subject => "Está gostando do ContaCal?")
       if (user.expire_at < Date.today-1)
