@@ -25,9 +25,14 @@ class NotificationMailer < ::ActionMailer::Base
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
       end
-    else
-      mail(:to => "#{user.name} <#{user.email}>",
-        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+    else  
+      if (user.email == "jtorres@jig.com.br")
+        mail(:to => "#{user.name} <#{user.email}>, joaquim.torres@locaweb.com.br",
+          :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+      else
+        mail(:to => "#{user.name} <#{user.email}>",
+          :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+      end  
     end
   end
 
