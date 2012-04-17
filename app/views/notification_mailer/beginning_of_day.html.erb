@@ -46,12 +46,7 @@
 <% else -%>
 <%= content_for :message_title do %>Resumo diário de ontem (<%=I18n.l(@date) %>)<% end -%>
 <p>Bom dia!</p>
-<% if @user.consumed_kcal(:date => @date).zero? %>
-<p>Ops! Parece que você não registrou nenhuma refeição ontem no ContaCal, né? Você sabia que pessoas que mantêm diários de sua alimentação perdem até o dobro do peso que as que não têm o registro?</p>
-<p>Se você está encontrando dificuldade em usar o sistema, veja nosso <a href=http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal>passo a passo</a>. Agora, se você já sabe como usar, mas na hora de anotar, esquece o que comeu, veja essa <a href=http://www.contacal.com.br/tire-fotos>super dica</a>!</p>
-<% else -%>
 <p>Veja como está sua evolução no ContaCal e não deixe de registrar suas refeições de hoje.</p>
-<% end -%>
 <p>Lembre-se, só se melhora aquilo que se mede!</p>
 
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas ontem.</h1>
@@ -74,6 +69,8 @@
 <%- end -%>
 
 <p><%= link_to 'Acompanhe Online', root_url, :style => "color: #1E69B4;" %> | <%= link_to 'Veja o relatório dos últimos 7 dias', report_url, :style => "color: #1E69B4;" %></p>
+<p>Você sabia que pessoas que mantêm diários de sua alimentação perdem até o dobro do peso que as que não têm o registro?</p>
+<p>Se você está encontrando dificuldade em usar o sistema, veja nosso <a href=http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal>passo a passo</a>. Agora, se você já sabe como usar, mas na hora de anotar, esquece o que comeu, veja essa <a href=http://www.contacal.com.br/tire-fotos>super dica</a>!</p>
 <%- end -%>
 <p>Sugestões, dúvidas, mande-nos um email para <a href="mailto:contato@contacal.com.br" style="color: #1E69B4;">contato@contacal.com.br</a>.</p>
 <p>Saudações,<br />Guilherme e Joca.</p>
