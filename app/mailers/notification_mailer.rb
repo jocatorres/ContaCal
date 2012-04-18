@@ -19,7 +19,7 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date
-    if ((user.status == 1 or user.status == 10) and user.bank_billet_link.nil?)
+    if (user.status == 1 or user.status == 10)
       mail(:to => "#{user.name} <#{user.email}>",
         :subject => "Está gostando do ContaCal?")
       if (user.expire_at < Date.today-1)
@@ -27,8 +27,10 @@ class NotificationMailer < ::ActionMailer::Base
       end
     else  
       if (user.email == "jtorres@jig.com.br")
-        mail(:to => "#{user.name} <#{user.email}>, joaquim.torres@locaweb.com.br",
+        mail(:to => "#{user.name} <#{user.email}>",
           :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+          mail(:to => "joaquim.torres@locaweb.com.br",
+            :subject => "[ContaCal] Resumo das calorias de #{user.name} ()#{user.email}) em #{I18n.l(@date)}")
       else
         mail(:to => "#{user.name} <#{user.email}>",
           :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
