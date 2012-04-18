@@ -14,6 +14,10 @@ class NotificationMailer < ::ActionMailer::Base
     @user = user
     mail(:to => "#{user.name} <#{user.email}>",
       :subject => "Resumo semanal de calorias consumidas")
+      if (!user.email_nutri.blank?) 
+        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",  
+          :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
+      end
   end
 
   def beginning_of_day(user)
@@ -26,15 +30,12 @@ class NotificationMailer < ::ActionMailer::Base
         user.update_attribute(:subscribed_daily, "f")
       end
     else  
-      if (user.email == "jtorres@jig.com.br")
-        mail(:to => "#{user.name} <#{user.email}>",
-          :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
-          mail(:to => "joaquim.torres@locaweb.com.br",
-            :subject => "[ContaCal] Resumo das calorias de #{user.name} ()#{user.email}) em #{I18n.l(@date)}")
-      else
-        mail(:to => "#{user.name} <#{user.email}>",
-          :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
-      end  
+      mail(:to => "#{user.name} <#{user.email}>",
+        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+      if (!user.email_nutri.blank?) 
+        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
+          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+      end
     end
   end
 

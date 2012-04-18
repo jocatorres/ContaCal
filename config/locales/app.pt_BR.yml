@@ -26,6 +26,8 @@ pt_BR:
       user:
         name: Nome
         email: E-mail
+        nutri_name: Nome
+        nutri_email: E-mail
         address_street_and_number: Endereço
         address_city: Cidade
         address_state: Estado

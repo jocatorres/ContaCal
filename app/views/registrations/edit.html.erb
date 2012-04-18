@@ -18,6 +18,14 @@
 
   <p><%= f.check_box :subscribed_weekly %>&nbsp;<%= f.label :subscribed_weekly %></p>
 
+  <p>Caso queira mandar cópia desses emails para alguém, preencha os dados abaixo:</p>
+
+  <p><%= f.label :nutri_name %><br />
+  <%= f.text_field :nutri_name %></p>
+
+  <p><%= f.label :nutri_email %><br />
+  <%= f.email_field :nutri_email %></p>
+
   <h2>Trocar Senha</h2>
 
   <p><%= f.label :password %> <em>Deixe em branco para manter a atual</em>
@@ -32,14 +40,12 @@
   <p><%= f.label :status %>: 
   <%- if user.status.blank? or user.status == 0 -%>
     Cortesia
-  <%- elsif user.status == 1 -%>
+  <%- elsif (user.status == 1 or user.status == 10) -%>
     Período de teste gratuito
-  <%- elsif user.status == 2 -%>
+  <%- elsif (user.status == 2 or user.status == 20) -%>
     Assinante boleto bancário
-  <%- elsif user.status == 4 -%>
+  <%- elsif (user.status == 4 or user.status == 40) -%>
     Assinante cartão de crédito
-  <%- elsif user.status == 5 -%>
-    Aguardando confirmação de pagamento
   <%- end -%>
 </p>
 
