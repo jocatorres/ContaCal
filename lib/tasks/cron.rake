@@ -13,7 +13,7 @@ task :cron => :environment do
     Rake::Task['notification:weekly'].invoke
   end
 
-  if Time.zone.now.hour == 11
+  if Time.zone.now.hour == 12
     Rake::Task['notification:beginning_of_day'].invoke
   end
 end
