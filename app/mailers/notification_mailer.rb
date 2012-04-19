@@ -15,13 +15,13 @@ class NotificationMailer < ::ActionMailer::Base
     @user = user
     puts "Mandando email semanal"
     puts "weekly: mail(:to => #{user.name} <#{user.email}>,..."
-#    mail(:to => "#{user.name} <#{user.email}>",
-#      :subject => "Resumo semanal de calorias consumidas")
+    mail(:to => "#{user.name} <#{user.email}>",
+      :subject => "Resumo semanal de calorias consumidas")
     if (!user.nutri_email.blank?) 
       puts "Tem nutri!"
       puts "weekly - nutri: mail(:to => #{user.nutri_name} <#{user.nutri_email}>,..."
-#      mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",  
-#        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
+      mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",  
+        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
     end
   end
 
@@ -33,7 +33,8 @@ class NotificationMailer < ::ActionMailer::Base
       puts "Eh trial."
       puts "daily - trial: mail(:to => #{user.name} <#{user.email}>,..."
 #      mail(:to => "#{user.name} <#{user.email}>",
-#        :subject => "Está gostando do ContaCal?")
+      mail(:to => "Joca <jtorres@jig.com.br>",
+        :subject => "Está gostando do ContaCal?")
       puts "enviou..."
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
@@ -42,13 +43,15 @@ class NotificationMailer < ::ActionMailer::Base
     else  
       puts "daily - nao trial: mail(:to => #{user.name} <#{user.email}>,..."
 #      mail(:to => "#{user.name} <#{user.email}>",
-#        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+      mail(:to => "Joca <jtorres@jig.com.br>",
+        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
       puts "Nao eh trial. Vamos ver se tem nutri. [#{user.nutri_name}] [<#{user.nutri_email}]"
       if (!user.nutri_email.blank?) 
          puts "Tem nutri!"
          puts "daily - nao trial - nutri: mail(:to => #{user.nutri_name} <#{user.nutri_email}>,..."
 #        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
-#          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+         mail(:to => "Joaquim <joaquim.torres@locaweb.com.br>",
+          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
       end
     end
     puts "chegou ao fim."
