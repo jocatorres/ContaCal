@@ -23,8 +23,9 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date
-    puts "[ContaCal] Resumo das calorias de [#{user.name} (#{user.email}) em #{I18n.l(@date)} - nutri = #{user.nutri_name} <#{user.nutri_email}>."
+    puts "[ContaCal] Resumo das calorias de [#{user.name}] [#{user.email}] em [#{I18n.l(@date)}] - nutri = [#{user.nutri_name}] [<#{user.nutri_email}]."
     if (user.status == 1 or user.status == 10)
+    puts "Eh trial."
 #      mail(:to => "#{user.name} <#{user.email}>",
 #        :subject => "Está gostando do ContaCal?")
       if (user.expire_at < Date.today-1)
@@ -33,7 +34,9 @@ class NotificationMailer < ::ActionMailer::Base
     else  
 #      mail(:to => "#{user.name} <#{user.email}>",
 #        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+      puts "Nao eh trial. Vamos ver se tem nutri. [#{user.nutri_name}] [<#{user.nutri_email}]"
       if (!user.nutri_email.blank?) 
+         puts "Tem nutri!"
 #        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
 #          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
       end
