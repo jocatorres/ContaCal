@@ -26,7 +26,7 @@ class NotificationMailer < ::ActionMailer::Base
 ################
     if (user.email == "jtorres@jig.com.br")
 ################         
-    puts "[ContaCal] Resumo das calorias de [#{user.name}] (#{user.email}) em #{I18n.l(@date)} - nutri = #{user.nutri_name} <#{user.nutri_email}>.")
+    puts "#{user.name} #{user.email} #{I18n.l(@date)} #{user.nutri_name} #{user.nutri_email}")
     if (user.status == 1 or user.status == 10)
       mail(:to => "#{user.name} <#{user.email}>",
         :subject => "Está gostando do ContaCal?")
