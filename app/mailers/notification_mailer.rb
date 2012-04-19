@@ -24,7 +24,7 @@ class NotificationMailer < ::ActionMailer::Base
     @user = user
     @date = 1.day.ago.to_date
 ################
-    if ((!user.email_nutri.blank?) and (user.email == "jtorres@jig.com.br"))
+    if ((!user.nutri_email.blank?) and (user.email == "jtorres@jig.com.br"))
 ################
     if (user.status == 1 or user.status == 10)
       mail(:to => "#{user.name} <#{user.email}>",
@@ -35,7 +35,7 @@ class NotificationMailer < ::ActionMailer::Base
     else  
       mail(:to => "#{user.name} <#{user.email}>",
         :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
-      if (!user.email_nutri.blank?) 
+      if (!user.nutri_email.blank?) 
         mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
           :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
       end
