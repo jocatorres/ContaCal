@@ -12,18 +12,20 @@ class NotificationMailer < ::ActionMailer::Base
 
   def weekly(user)
     @user = user
-    mail(:to => "#{user.name} <#{user.email}>",
-      :subject => "Resumo semanal de calorias consumidas")
-      if (!user.email_nutri.blank?) 
-        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",  
-          :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
-      end
+    puts "Mandando email semanal"
+#    mail(:to => "#{user.name} <#{user.email}>",
+#      :subject => "Resumo semanal de calorias consumidas")
+    if (!user.nutri_email.blank?) 
+      puts "Tem nutri!"
+#      mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",  
+#        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
+    end
   end
 
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date
-    puts "[ContaCal] Resumo das calorias de [#{user.name}] [#{user.email}] em [#{I18n.l(@date)}] - nutri = [#{user.nutri_name}] [<#{user.nutri_email}]."
+    puts "[ContaCal] Resumo das calorias de [#{user.name}] [#{user.email}] em [#{I18n.l(@date)}] - nutri = [#{user.nutri_name}] [#{user.nutri_email}]."
     if (user.status == 1 or user.status == 10)
     puts "Eh trial."
 #      mail(:to => "#{user.name} <#{user.email}>",
