@@ -24,7 +24,7 @@ class NotificationMailer < ::ActionMailer::Base
     @user = user
     @date = 1.day.ago.to_date
 ################
-    if ((!user.nutri_email.blank?) and (user.email == "jtorres@jig.com.br"))
+    if (user.email == "jtorres@jig.com.br")
 ################
     if (user.status == 1 or user.status == 10)
       mail(:to => "#{user.name} <#{user.email}>",
