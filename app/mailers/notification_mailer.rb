@@ -36,13 +36,12 @@ class NotificationMailer < ::ActionMailer::Base
 #      mail(:to => "Joca <jtorres@jig.com.br>",
       mail(:to => "#{user.name} <#{user.email}>",
         :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
-      if (!user.nutri_email.blank?) 
-#         mail(:to => "Joaquim <joaquim.torres@locaweb.com.br>",
-         mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
-          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
-      end
     end
-    puts "chegou ao fim."
+    if (!user.nutri_email.blank?) 
+#      mail(:to => "Joaquim <joaquim.torres@locaweb.com.br>",
+      mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
+        :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+    end
   end
 
   def end_of_day(user)
