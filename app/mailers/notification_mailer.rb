@@ -34,6 +34,7 @@ class NotificationMailer < ::ActionMailer::Base
       puts "daily - trial: mail(:to => #{user.name} <#{user.email}>,..."
 #      mail(:to => "#{user.name} <#{user.email}>",
 #        :subject => "Está gostando do ContaCal?")
+      puts "enviou..."
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
       end
