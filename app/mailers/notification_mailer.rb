@@ -23,27 +23,21 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date
-################
-    if (user.email == "jtorres@jig.com.br")
-################         
     puts "[ContaCal] Resumo das calorias de [#{user.name} (#{user.email}) em #{I18n.l(@date)} - nutri = #{user.nutri_name} <#{user.nutri_email}>."
     if (user.status == 1 or user.status == 10)
-      mail(:to => "#{user.name} <#{user.email}>",
-        :subject => "Está gostando do ContaCal?")
+#      mail(:to => "#{user.name} <#{user.email}>",
+#        :subject => "Está gostando do ContaCal?")
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
       end
     else  
-      mail(:to => "#{user.name} <#{user.email}>",
-        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+#      mail(:to => "#{user.name} <#{user.email}>",
+#        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
       if (!user.nutri_email.blank?) 
-        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
-          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+#        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
+#          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
       end
     end
-################
-    end
-################
   end
 
   def end_of_day(user)
