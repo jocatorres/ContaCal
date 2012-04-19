@@ -49,7 +49,7 @@ class NotificationMailer < ::ActionMailer::Base
       if (!user.nutri_email.blank?) 
          puts "Tem nutri!"
          puts "daily - nao trial - nutri: mail(:to => #{user.nutri_name} <#{user.nutri_email}>,..."
-#        mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
+#         mail(:to => "#{user.nutri_name} <#{user.nutri_email}>",
          mail(:to => "Joaquim <joaquim.torres@locaweb.com.br>",
           :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
       end
