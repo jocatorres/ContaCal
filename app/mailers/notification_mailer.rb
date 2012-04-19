@@ -65,10 +65,10 @@ class NotificationMailer < ::ActionMailer::Base
     @user = user
     @food = food
     puts "new_food: mail(:to => #{user.name} <#{user.email}>,..."
-    mail(
- #     :from => "#{user.name} <#{user.email}>",
-      :to => "Info ContaCal <sugestao@contacal.com.br>",
-      :subject => "Sugestão de novo alimento")
+#    mail(
+#      :from => "#{user.name} <#{user.email}>",
+#      :to => "Info ContaCal <sugestao@contacal.com.br>",
+#      :subject => "Sugestão de novo alimento")
   end
 
 end
