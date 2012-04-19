@@ -38,6 +38,7 @@ class NotificationMailer < ::ActionMailer::Base
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
       end
+      puts "analisou expire_at"
     else  
       puts "daily - nao trial: mail(:to => #{user.name} <#{user.email}>,..."
 #      mail(:to => "#{user.name} <#{user.email}>",
@@ -50,6 +51,7 @@ class NotificationMailer < ::ActionMailer::Base
 #          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
       end
     end
+    puts "chegou ao fim."
   end
 
   def end_of_day(user)
