@@ -23,7 +23,7 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date        
-    if (user.mail == "jtorres@jig.com.br")
+    if (user.email == "jtorres@jig.com.br")
     if (user.status == 1 or user.status == 10)
       mail(:to => "#{user.name} <#{user.email}>",
         :subject => "Está gostando do ContaCal?")
