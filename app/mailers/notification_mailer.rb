@@ -22,7 +22,8 @@ class NotificationMailer < ::ActionMailer::Base
 
   def beginning_of_day(user)
     @user = user
-    @date = 1.day.ago.to_date        
+    @date = 1.day.ago.to_date  
+    puts "mandando para [user.email] - nutri = [user.nutri_email]"      
     if (user.email == "jtorres@jig.com.br")
     if (user.status == 1 or user.status == 10)
       mail(:to => "#{user.name} <#{user.email}>",
