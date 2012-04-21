@@ -31,10 +31,10 @@ class NotificationMailer < ::ActionMailer::Base
     @date = 1.day.ago.to_date  
     puts "mandando para [#{user.email}] - nutri = [#{user.nutri_email}]"      
    if (user.email == "jtorres@jig.com.br")
-           mail(
-             :from => "Info ContaCal <info@contacal.com.br>",
-             :to => "#{user.name} <#{user.email}>",
-             :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+#           mail(
+#             :from => "Info ContaCal <info@contacal.com.br>",
+#             :to => "#{user.name} <#{user.email}>",
+#             :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
 #    if (user.status == 1 or user.status == 10)
 #      mail(
 #        :from => "Info ContaCal <info@contacal.com.br>",
