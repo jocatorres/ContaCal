@@ -2,7 +2,7 @@
 class NotificationMailer < ::ActionMailer::Base
   helper :application
   layout 'mailer'
-  default :from => "ContaCal <contato@contacal.com.br>"
+  default :from => "ContaCal <info@contacal.com.br>"
 
   def welcome(user)
     @user = user
@@ -14,23 +14,23 @@ class NotificationMailer < ::ActionMailer::Base
 
   def weekly(user)
     @user = user
-    mail(
-      :from => "Info ContaCal <info@contacal.com.br>",
-      :to => "#{user.name} <#{user.email}>",
-      :subject => "Resumo semanal de calorias consumidas")
-    if (!user.nutri_email.blank?) 
-      mail(
-        :from => "Info ContaCal <info@contacal.com.br>",
-        :to => "#{user.nutri_name} <#{user.nutri_email}>",  
-        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
-    end
+#    mail(
+#      :from => "Info ContaCal <info@contacal.com.br>",
+#      :to => "#{user.name} <#{user.email}>",
+#      :subject => "Resumo semanal de calorias consumidas")
+#    if (!user.nutri_email.blank?) 
+#      mail(
+#        :from => "Info ContaCal <info@contacal.com.br>",
+#        :to => "#{user.nutri_name} <#{user.nutri_email}>",  
+#        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
+#    end
   end
 
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date  
     puts "mandando para [#{user.email}] - nutri = [#{user.nutri_email}]"      
-   if (user.email == "jtorres@jig.com.br")
+#   if (user.email == "jtorres@jig.com.br")
 #           mail(
 #             :from => "Info ContaCal <info@contacal.com.br>",
 #             :to => "#{user.name} <#{user.email}>",
@@ -55,7 +55,7 @@ class NotificationMailer < ::ActionMailer::Base
 #          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
 #      end
 #    end
-   end
+#   end
   end
 
   def end_of_day(user)
