@@ -1,4 +1,4 @@
-<p>Bom dia,  <%= @user.name %>!</p>
+<p>Bom dia!</p>
 <% if @user.status == 1 or @user.status == 10 %>
 <%- dias_falta = user.expire_at - Date.today -%>
 <%- if dias_falta >= 5 -%>
@@ -71,4 +71,4 @@
 <p>Se você está encontrando dificuldade em usar o sistema, veja nosso <a href=http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal>passo a passo</a>. Agora, se você já sabe como usar, mas na hora de anotar, esquece o que comeu, veja essa <a href=http://www.contacal.com.br/tire-fotos>super dica</a>!</p>
 <p>Sugestões, dúvidas, mande-nos um email para <a href="mailto:contato@contacal.com.br" style="color: #1E69B4;">contato@contacal.com.br</a>.</p>
 <p>Saudações,<br />Guilherme e Joca.</p>   
-<p>Esta mensagem foi enviada para o email "<%= @user.email %>"</p>
+<p>Esta mensagem foi enviada para <%= @user.name %> "<%= @user.email %>"</p>

@@ -53,7 +53,7 @@ class NotificationMailer < ::ActionMailer::Base
         mail(
           :to => "Joca <jtorres@jig.com.br>",
 #          :to => "#{user.nutri_name} <#{user.nutri_email}>",
-          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+          :subject => "[ContaCal] Cópia do resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
           puts "9"
       end
 puts "10"
