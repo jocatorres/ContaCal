@@ -27,38 +27,23 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date  
-    puts "mandando para [#{user.email}] - nutri = [#{user.nutri_email}]"      
-     puts "1"      
     if (user.status == 1 or user.status == 10)
-      puts "2"
       mail(
-        :to => "Joca <jtorres@jig.com.br>",
-#        :to => "#{user.name} <#{user.email}>",
+        :to => "#{user.name} <#{user.email}>",
         :subject => "Está gostando do ContaCal?")
-        puts "3"
       if (user.expire_at < Date.today-1)
-        puts "4"
         user.update_attribute(:subscribed_daily, "f")
       end
-      puts "5"
     else  
-      puts "6"
       mail(
-        :to => "Joca <jtorres@jig.com.br>",
-#        :to => "#{user.name} <#{user.email}>",
+        :to => "#{user.name} <#{user.email}>",
         :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
-        puts "7"
       if (!user.nutri_email.blank?) 
-        puts "8"
         mail(
           :to => "Joca <jtorres@jig.com.br>",
-#          :to => "#{user.nutri_name} <#{user.nutri_email}>",
           :subject => "[ContaCal] Cópia do resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
-          puts "9"
       end
-puts "10"
     end
-    puts "11"
   end
 
 #  def end_of_day(user)
