@@ -40,11 +40,11 @@ class NotificationMailer < ::ActionMailer::Base
       mail(
         :to => "#{user.name} <#{user.email}>",
         :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
-      if (!user.nutri_email.blank?) 
-        mail(
-          :to => "#{user.nutri_name} <#{user.nutri_email}>",
-          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
-      end
+#      if (!user.nutri_email.blank?) 
+#        mail(
+#          :to => "#{user.nutri_name} <#{user.nutri_email}>",
+#          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+#      end
     end
    end
   end
