@@ -27,6 +27,7 @@ class NotificationMailer < ::ActionMailer::Base
   def beginning_of_day(user)
     @user = user
     @date = 1.day.ago.to_date  
+   if (user.email == 'jtorres@jig.com.br')
     if (user.status == 1 or user.status == 10)
       mail(
         :to => "#{user.name} <#{user.email}>",
@@ -34,16 +35,26 @@ class NotificationMailer < ::ActionMailer::Base
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
       end
-    else  
-      mail(
-        :to => "#{user.name} <#{user.email}>",
-        :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
+    else
       if (!user.nutri_email.blank?) 
         mail(
-          :to => "Joca <jtorres@jig.com.br>",
-          :subject => "[ContaCal] Cópia do resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+          :to => "#{user.name} <#{user.email}>",
+          :cc => "#{user.nutri_name} <#{user.nutri_email}>",
+          :subject => "[ContaCal] Resumo das calorias de #{user.name} (#{user.email}) em #{I18n.l(@date)}")
+      else
+        mail(
+          :to => "#{user.name} <#{user.email}>",
+          :subject => "[ContaCal] Resumo de suas calorias em #{I18n.l(@date)}")
       end
     end
+   else
+     mail(
+       :to => "Joca <jtorres@jig.com.br>",
+       :subject => "Email seria enviado para #{user.name} <#{user.email}>")  do |format|
+         format.text { render :text => "Hello Mikel!" }
+         format.html { render :text => "<h1>Hello Mikel!</h1>" }
+     end
+   end
   end
 
 #  def end_of_day(user)
