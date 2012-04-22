@@ -2,7 +2,7 @@
 class NotificationMailer < ::ActionMailer::Base
   helper :application
   layout 'mailer'
-  default :from => "ContaCal <info@contacal.com.br>"
+  default :from => "Info ContaCal <info@contacal.com.br>"
 
   def welcome(user)
     @user = user
