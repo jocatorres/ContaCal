@@ -9,7 +9,7 @@ class NotificationMailer < ::ActionMailer::Base
     mail(
       :from => "Info ContaCal <info@contacal.com.br>",
       :to => "#{user.name} <#{user.email}>",
-      :subject => "Seja bem vindo ao ContaCal!")    
+      :subject => "[ContaCal] Seja bem vindo ao ContaCal!")    
   end
 
   def weekly(user)
@@ -18,11 +18,11 @@ class NotificationMailer < ::ActionMailer::Base
       mail(
         :to => "#{user.name} <#{user.email}>",
         :cc => "#{user.nutri_name} <#{user.nutri_email}>",  
-        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})") 
+        :subject => "[ContaCal] Resumo semanal de calorias consumidas de #{user.name} (#{user.email})") 
     else    
       mail(
         :to => "#{user.name} <#{user.email}>",
-        :subject => "Resumo semanal de calorias consumidas")
+        :subject => "[ContaCal] Resumo semanal de calorias consumidas")
     end
   end
 
