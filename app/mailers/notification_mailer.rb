@@ -14,13 +14,15 @@ class NotificationMailer < ::ActionMailer::Base
 
   def weekly(user)
     @user = user
-    mail(
-      :to => "#{user.name} <#{user.email}>",
-      :subject => "Resumo semanal de calorias consumidas")
     if (!user.nutri_email.blank?) 
       mail(
-        :to => "#{user.nutri_name} <#{user.nutri_email}>",  
-        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})")
+        :to => "#{user.name} <#{user.email}>",
+        :cc => "#{user.nutri_name} <#{user.nutri_email}>",  
+        :subject => "Resumo semanal de calorias consumidas de #{user.name} (#{user.email})") 
+    else    
+      mail(
+        :to => "#{user.name} <#{user.email}>",
+        :subject => "Resumo semanal de calorias consumidas")
     end
   end
 
