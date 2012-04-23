@@ -3,12 +3,12 @@
       <span style="float: right">
         <%= link_to 'Ver últimos 7 dias &raquo;'.html_safe, report_path %>
       </span>
-      Relatório de controle de calorias dos últimos 30 dias
+      Relatório de controle de calorias ingeridas nos últimos 30 dias
     <% else %>
       <span style="float: right">
         <%= link_to 'Ver últimos 30 dias &raquo;'.html_safe, report_path(:range => 'month') %>
       </span>
-      Relatório de controle de calorias dos últimos 7 dias
+      Relatório de controle de calorias ingeridas nos últimos 7 dias
     <% end -%>
 </h1>
 

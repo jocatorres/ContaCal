@@ -21,7 +21,7 @@ module ApplicationHelper
     @total_kcal ||= user.consumed_kcal(:date => current_date)
   end
 
-  # this methos was created to make this helper work with emails
+  # this method was created to make this helper work with emails
   def user
     current_user rescue @user
   end

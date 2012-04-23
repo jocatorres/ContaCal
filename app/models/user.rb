@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email
   has_many :user_foods
   validates :name, :presence => true
   after_create :send_welcome_email
@@ -123,6 +123,7 @@ class User < ActiveRecord::Base
   	update_attribute(:expire_at, date_expire.strftime("%Y-%m-%d"))
  	  update_attribute(:status, 10)
  	  update_attribute(:subscribed_daily, "t")
+ 	  update_attribute(:subscribed_weekly, "f")
 #  	update_attribute(:bank_billet_link, bb.attributes["external_link"])
 #  	update_attribute(:bank_billet_our_number, bb.attributes["our_number"])
   end
