@@ -5,7 +5,7 @@ set :application, "contacal.com.br"
 # GIT SETTINGS
 set :scm, :git
 set :repository,  "git@github.com:jocatorres/ContaCal.git"
-set :branch, "master"
+set :branch, "newcloud"
 #set :scm_username, "git"
 #set :scm_password, "git"
 
