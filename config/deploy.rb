@@ -1,7 +1,7 @@
-#require "bundler/capistrano"
+require "bundler/capistrano"
 
-#set :whenever_command, "bundle exec whenever"
-#require "whenever/capistrano" 
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano" 
 
 #APP SETTINGS
 set :application, "contacal.com.br"
@@ -15,8 +15,8 @@ set :branch, "newcloud"
 
 # SSH SETTINGS
 set :user , "deploy"
-
-set :use_sudo, false
+set :password, "d^7!Uy10"
+set :use_sudo, true
 set :group_writable, false
 default_run_options[:pty] = true
 
