@@ -1,0 +1,18 @@
+common: &common
+  adapter: postgresql
+  username: postgres
+  password:
+
+development:
+  <<: *common
+  host: localhost
+  database: contacal_development
+  password: postgres
+
+test:
+  <<: *common
+  database: contacal_test
+
+production:
+  <<: *common
+  database: contacal_production
