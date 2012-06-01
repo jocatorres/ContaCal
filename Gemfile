@@ -14,7 +14,7 @@ group :development, :test do
   gem 'ruby-debug19', '0.11.6'
   gem 'heroku', '2.4.2'
   gem 'foreman', '0.20.0'
-  gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
+#  gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
   gem 'rspec-rails', '2.6.1'
   gem 'shoulda-matchers', '1.0.0.beta2'
   gem 'factory_girl_rails', '1.1.0'

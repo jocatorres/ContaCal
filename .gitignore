@@ -3,6 +3,8 @@ db/*.sqlite3
 log/*.log
 tmp/
 heroku/
+config/database.yml
 .DS_Store
 .rspec
 coverage
+*.swp
