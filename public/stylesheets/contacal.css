@@ -405,11 +405,11 @@ section[role="main"] .meal-box .meals ul li.hover {
 }
 
 section[role="main"] .meal-box .meals ul li .ui-slider {
-  margin: 4px 4px 0;
+  margin: 8px 6px 0;
 }
 
 section[role="main"] .meal-box .meals ul li a.remove {
-  padding: 2px 14px 2px 0;
+  padding: 2px 15px 2px 0;
   display: none;
   color: #f00;
   font-size: .9em;
@@ -652,4 +652,49 @@ body#users-engine footer {
   -moz-border-radius-topright: 4px; -webkit-border-top-right-radius: 4px; -khtml-border-top-right-radius: 4px; border-top-right-radius: 4px;
   -moz-border-radius-bottomleft: 4px; -webkit-border-bottom-left-radius: 4px; -khtml-border-bottom-left-radius: 4px; border-bottom-left-radius: 4px;
   -moz-border-radius-bottomright: 4px; -webkit-border-bottom-right-radius: 4px; -khtml-border-bottom-right-radius: 4px; border-bottom-right-radius: 4px;
+}  
+
+
+section[role="main"] .meal-box .meals ul li {overflow:hidden; position:relative;}
+.removeMob {
+	position: absolute;
+	right: 0;
+	top: 10px; 
 }
+
+.slide {clear:both; padding:4px 0;overflow:hidden;}
+
+.slide .slider {
+    margin: 10px 42px !important;
+}    
+
+
+.sliderBt {
+	display:block;
+    border: 1px solid #CCC;
+    width: 30px;
+    height: 30px;
+	line-height:30px;
+    text-align: center;
+    line-height: 30px;  
+	font-size:23px;        
+	font-weight:bold;
+    background-color: #EEE !important;
+    color: #B0B0B0 !important;
+    margin:0;
+	border-radius:5px;
+}
+.slide .sliderBt a {
+    width: 30px;
+    height: 30px;
+	line-height:30px;
+	display:block; 
+	color: #B0B0B0 !important; 
+	text-align:center;
+	border-color:red;
+	border:none !important;
+	}
+
+
+.sliderBt.down-slider {float:left;}
+.sliderBt.up-slider {float: right;}

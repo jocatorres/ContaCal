@@ -2,8 +2,16 @@
 
 <li>                                     
   <%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em><span id='slider-meal-amount-#{user_food.id}'>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)}</span> x #{user_food.food.kcal} Kcal</em> = <strong><span id='slider-meal-total-#{user_food.id}'>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)}</span> Kcal</strong> #{image_tag("#{user_food.food.kind}.png")}".html_safe %>
-  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true, :class => "remove" %>
-  <%- if current_user.id == 22 && mobile_device? -%> <div id='down-<%= slider_id %>'><a href="javascript:void(0)"><font size=6><b>-</b></font></a></div> <%- end -%> <div id="<%= slider_id %>">&nbsp;</div> <%- if current_user.id == 22  && mobile_device? -%><div id='up-<%= slider_id %>'><a href="javascript:void(0)"><font size=5><b>+</b></font></a></div><%- end -%>
+  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true, :class => "remove removeMob" %>
+  <%- if mobile_device? -%> 
+    <div class="slide">
+      <div class="sliderBt down-slider" id='down-<%= slider_id %>'><a href="javascript:void(0)">-</a></div> 
+  	  <div class="sliderBt up-slider" id='up-<%= slider_id %>'><a href="javascript:void(0)">+</a></div>
+      <div class="slider" id="<%= slider_id %>">&nbsp;</div> 
+    </div>
+  <%- else -%>
+    <div class="slider-none" id="<%= slider_id %>">&nbsp;</div> 
+  <%- end -%>
 </li>
 <%= javascript_tag %{
 $(function() {
