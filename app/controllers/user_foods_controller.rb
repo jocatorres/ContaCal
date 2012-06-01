@@ -14,5 +14,5 @@ class UserFoodsController < ApplicationController
   def destroy
     @user_food = current_user.user_foods.find(params[:id])
     @user_food.destroy
-  end
+  end      
 end
