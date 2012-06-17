@@ -117,5 +117,15 @@
 </p>
 <br />
 
-<p id="cancel-account"><b>Quer desativar sua conta?</b><br /><br />Apesar de ficarmos muito tristes por você não querer mais usar o ContaCal, respeitamos sua decisão. Para desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.</p>
-
+<p id="cancel-account"><b>Quer desativar sua conta?</b>
+<br /><br />
+<%- if (user.status == 1 or user.status == 10) -%>
+<b>Atenção: </b>mesmo que você não deseje se tornar assinante do ContaCal, não é necessário cancelar sua conta. Basta não pagar o <%- if !user.bank_billet_link.nil? then -%><a target=_blank href=<%= user.bank_billet_link %>><%- end -%>boleto</a>.<br /><br />Se mesmo assim você quiser desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.<br /><br /> 
+<%- elsif (user.status == 2 or user.status == 20) -%>
+<b>Atenção: </b>mesmo que você não deseje renovar sua assinatura do ContaCal, não é necessário cancelar sua conta. Basta não pagar o <%- if !user.bank_billet_link.nil? then -%><a target=_blank href=<%= user.bank_billet_link %>><%- end -%>boleto</a>.<br /><br />Se mesmo assim você quiser desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.<br /><br /> 
+<%- elsif (user.status == 4 or user.status == 40) -%>
+<b>Atenção: </b>como você é assinante via cartão de crédito, você precisa acessar o <a href=http://paypal.com>PayPal</a> para cancelar os pagamentos.<br /><br /> 
+<%- else -%>
+Apesar de ficarmos muito tristes por você não querer mais usar o ContaCal, respeitamos sua decisão. Para desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.
+<%- end -%>
+</p>	
