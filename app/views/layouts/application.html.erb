@@ -60,7 +60,7 @@ var google_conversion_value = 0;
     </div>
     <%- if current_user.status == 1 or current_user.status == 10 -%>
       <%- if  user.bank_billet_link.nil? -%>
-        <%- date_expire = Date.today+90 -%>
+        <%- date_expire = Date.today+30 -%>
         <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
         <%- if current_user.status == 1 -%>
           <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
@@ -93,7 +93,7 @@ var google_conversion_value = 0;
     </div>
 	<%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
         <%- if  user.bank_billet_link.nil? or Date.today > user.expire_at -%>
-          <%- date_expire = Date.today+60 -%>
+          <%- date_expire = Date.today+30 -%>
           <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>    
           <%- if current_user.status == 2 or current_user.status == 4 -%>        
             <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
@@ -143,7 +143,7 @@ var google_conversion_value = 0;
   <hr />
   <%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>
    <%- if  user.bank_billet_link.nil? -%>
-     <%- date_expire = Date.today+90 -%>
+     <%- date_expire = Date.today+30 -%>
      <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
      <%- if current_user.status == 1 -%>
        <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
@@ -170,7 +170,7 @@ var google_conversion_value = 0;
 </div>
   <%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today > user.expire_at -%>
       <%- if  user.bank_billet_link.nil? -%>
-       <%- date_expire = Date.today+60 -%>
+       <%- date_expire = Date.today+30 -%>
        <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%>
        <%- if current_user.status == 2 or current_user.status == 4 -%>        
          <%- descrition = "R$ 35,00 = 30,00 (valor semestral) + 5,00 (taxa de emissão de boleto).\n\nATENÇÃO: A renovação de seu acesso ao ContaCal será liberado somente após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
