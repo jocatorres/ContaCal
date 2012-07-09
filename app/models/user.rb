@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email, :referred_by_email
   has_many :user_foods
   validates :name, :presence => true
   after_create :send_welcome_email

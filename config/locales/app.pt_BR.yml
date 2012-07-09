@@ -34,6 +34,7 @@ pt_BR:
         address_zipcode: Cep
         password: Senha
         password_confirmation: Confirmação de Senha
+        referred_by_email: "Se alguém indicou o ContaCal para você, coloque o email dessa pessoa abaixo"
         current_password: Senha atual
         remember_me: "Lembre-me neste computador"
         cpf: CPF
