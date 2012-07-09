@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20120709133753) do
     t.string   "address_state"
     t.string   "address_zipcode"
     t.integer  "kcal_limit"
-    t.boolean  "subscribed_daily",                         :default => false
+    t.boolean  "subscribed_daily",                         :default => true
     t.datetime "deleted_at"
     t.boolean  "subscribed_weekly",                        :default => true
     t.integer  "status"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20120709133753) do
     t.string   "nutri_name"
     t.string   "referred_by_email"
     t.string   "phone"
-    t.boolean  "subscribed_newsletter"
+    t.boolean  "subscribed_newsletter"                      :default => true
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
