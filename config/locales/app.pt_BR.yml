@@ -37,7 +37,8 @@ pt_BR:
         referred_by_email: "Se alguém indicou o ContaCal para você, coloque o email dessa pessoa abaixo. Ela pode ganhar prêmios!"
         current_password: Senha atual
         remember_me: "Lembre-me neste computador"
-        cpf: CPF
+        cpf: CPF                                                         
+        subscribed_newsletter: Receber nossas novidades por e-mail?
         subscribed_daily: Receber notificações por e-mail diariamente?
         subscribed_weekly: Receber notificações por e-mail semanalmente?
         kcal_limit: Limite diário de calorias

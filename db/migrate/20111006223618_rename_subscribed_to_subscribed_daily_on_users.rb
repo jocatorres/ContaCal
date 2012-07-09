@@ -1,6 +1,6 @@
 class RenameSubscribedToSubscribedDailyOnUsers < ActiveRecord::Migration
   def self.up
-    rename_column :users, :subscribed, :subscribed_daily
+    rename_column :users, :subscribed, :subscribed_daily, :default => true 
   end
 
   def self.down

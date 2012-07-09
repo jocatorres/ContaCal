@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120709004848) do
+ActiveRecord::Schema.define(:version => 20120709133753) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(:version => 20120709004848) do
     t.string   "nutri_name"
     t.string   "referred_by_email"
     t.string   "phone"
+    t.boolean  "subscribed_newsletter"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

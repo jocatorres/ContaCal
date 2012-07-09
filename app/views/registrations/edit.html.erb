@@ -48,9 +48,11 @@
   <p>&nbsp;</p>
   <h2>Recebimento de Emails</h2>
 
+  <p><%= f.check_box :subscribed_newsletter %>&nbsp;<%= f.label :subscribed_newsletter %></p>
+
   <%- if (user.status == 1 or user.status == 10) -%>
 
-  <p><b>Atenção: </b>função disponível apenas para assinantes.</p>
+  <p><b>Atenção: </b>as funções abaixo estão disponíveis apenas para assinantes.</p>
 
   <p><%= f.check_box :subscribed_daily, :disabled => true %>&nbsp;<%= f.label :subscribed_daily %></p>
 
@@ -67,7 +69,7 @@
   <%= f.email_field :nutri_email, :disabled => true %></p>
                                                     
   <%- else -%>
-
+                                                                                   
   <p><%= f.check_box :subscribed_daily %>&nbsp;<%= f.label :subscribed_daily %></p>
 
   <p><%= f.check_box :subscribed_weekly %>&nbsp;<%= f.label :subscribed_weekly %></p>
