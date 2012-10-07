@@ -83,13 +83,13 @@ var google_conversion_value = 0;
         <%- preco = "R$ 9,80" -%>
       <%- end -%>
 	<div id="subscriber">
-		  Período de teste gratuito
+		  <br>Período de teste gratuito
 		<%- if Date.today < user.expire_at -%>
-          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+          vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. Assine já com <a target=_blank href=<%=cartao_url%>><font color=#dd0000><b>cartão</b></font></a> ou <a target=_blank href=<%=user.bank_billet_link%>><font color=#dd0000><b>boleto</b></font></a>!<!--<br>Torne-se assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>-->
 		<%- elsif Date.today == user.expire_at -%>
-		  está vencendo <strong>hoje</strong>!<br>Torne-se um assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+		  está vencendo <strong>hoje</strong>! Assine já com <a target=_blank href=<%=cartao_url%>><font color=#dd0000><b>cartão</b></font></a> ou <a target=_blank href=<%=user.bank_billet_link%>><font color=#dd0000><b>boleto</b></font></a>!<!--<br>Torne-se um assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>-->
 		<%- else -%>
-	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong><br>Torne-se assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>
+	      venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. Assine com <a target=_blank href=<%=cartao_url%>><font color=#dd0000><b>cartão</b></font></a> ou <a target=_blank href=<%=user.bank_billet_link%>><font color=#dd0000><b>boleto</b></font></a>!<!--<br>Torne-se assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>-->
 		<%- end -%>
 
     </div>
@@ -171,7 +171,7 @@ var google_conversion_value = 0;
   <%- end -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>>cartão</a> ou <a target=_blank href=<%=user.bank_billet_link%>>boleto</a>.
+<b>Fim do período de teste gratuito... :-(</b><br /><br />Para voltar a ter acesso ao ContaCal basta se tornar assinante por apenas <%=preco%> por mês que podem ser pagos com <a target=_blank href=<%=cartao_url%>><font color=#dd0000><b>cartão</b></font></a> ou <a target=_blank href=<%=user.bank_billet_link%>><font color=#dd0000><b>boleto</b></font></a>.
 <br /><br />
 </div>
   <%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today > user.expire_at -%>
