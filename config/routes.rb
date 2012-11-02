@@ -2,6 +2,9 @@
 Contacal::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_scope :user do
+    match 'payment', :to => 'registrations#payment' 
+  end
   resources :foods, :only => [:new, :create]
   resources :user_foods, :only => [:create, :destroy, :update]
   match 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit, :via => :put
@@ -10,7 +13,8 @@ Contacal::Application.routes.draw do
   match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm
   match ':year/:month/:day' => "dashboard#index", :as => :dashboard, :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ }
   match 'authenticate', :to => 'dashboard#authenticate'
-  root :to => "dashboard#index"
+  root :to => "dashboard#index"       
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

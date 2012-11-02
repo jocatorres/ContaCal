@@ -52,6 +52,9 @@ class DashboardController < ApplicationController
     head :ok
   end
 
+  def payment
+  end
+
   def report
     data = []
     bar = ["",0,0,0]

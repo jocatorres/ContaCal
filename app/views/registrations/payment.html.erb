@@ -1,0 +1,69 @@
+<h1 id="report-title">Opções de pagamento</h1>
+
+<div id="graph">&nbsp;</div>
+
+Tipo de assinatura: <strong>
+
+  <%- if user.status.blank? or user.status == 0 -%>
+    Cortesia
+  <%- elsif (user.status == 1 or user.status == 10) -%>
+    Período de teste gratuito
+  <%- elsif (user.status == 2 or user.status == 20) -%>
+    Assinante boleto bancário
+  <%- elsif (user.status == 4 or user.status == 40) -%>
+    Assinante cartão de crédito
+  <%- end -%>                      
+</strong>
+  <%- if !user.expire_at.blank? -%>
+<br/><br/>
+Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>
+  <%- end -%>
+<br/><br/>
+Opções de pagamento  
+<br/><br/>
+<table border=1 cellspacing=0 cellpadding=5>
+	<tr>
+      <td valign=top><img src="/images/cartao.png"></td>
+      <td><small>O pagamento com cartão é feito via PayPal, que se encarrega 
+	de fazer o débito automaticamente em seu cartão 
+	quando sua assinatura vencer para você não ficar sem acessar 
+	por falta de pagamento.</td>
+    </tr>
+	<tr>
+      <td><img src="/images/boleto.png"></td>
+      <td>Como o banco nos cobra uma
+	taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos
+	clientes, então o boleto mensal total é de R$ 12,80. Outra desvantagem
+	do pagamento com boleto bancário é que pode levar 2 dias úteis para
+	sua assinatura ser liberada, que é o tempo que o banco leva para nos
+	informar quando um boleto é pago. A terceira desvantagem é que com
+	boleto é mais fácil esquecer de pagar, o que pode te deixar sem acesso
+	ao ContaCal por alguns dias, o que te deixará sem a possiblidade de
+	registrar suas refeições naquele dia.</td>
+    </tr>
+</table>
+
+
+  <%- if !user.status.blank? and (user.status == 1 or user.status == 10 or user.status == 2 or user.status == 20) and !user.expire_at.blank? -%>
+  <p><%= f.label :expire_at %>: <%= user.expire_at.strftime("%d/%m/%Y") %></p>
+
+     <p>
+	   <%- if (user.status == 1 or user.status == 10) -%>
+		Assinar com
+	  <%- elsif (user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) -%>
+	    Renovar com 
+	  <%- end -%>
+     <%- if !user.bank_billet_link.nil? then -%><a target=_blank href=<%= user.bank_billet_link %>> boleto</a> ou <%- end -%>
+     <%- if (user.status == 1 or user.status == 2 or user.status == 4) -%>
+	 <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a>.
+     <%- elsif (user.status == 10 or user.status == 20 or user.status == 40) -%>
+	 <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC>cartão</a>.
+	 <%- end -%>
+  </p>
+
+  <%- end -%>
+
+<br/><br/>   
+<p>
+  <%= link_to "&laquo; voltar para o programa".html_safe, root_path %>
+</p>
