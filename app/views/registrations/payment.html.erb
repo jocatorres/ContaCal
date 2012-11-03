@@ -18,7 +18,7 @@
 <%- end -%>
 <%- if  user.bank_billet_link_12.nil? -%>
   <%- descrition = "Assinatura anual.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- bb = Cobregratis::BankBillet.new(:amount => 82.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
+  <%- bb = Cobregratis::BankBillet.new(:amount => 93.60, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => descrition) -%>
   <%- bb.save -%>
   <%- user.update_attribute(:bank_billet_link_12, bb.attributes["external_link"]) -%>
   <%- user.update_attribute(:bank_billet_our_number_12, bb.attributes["our_number"]) -%>
@@ -53,14 +53,14 @@ Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %>
       <td width=100%><strong>
 	    &bull; <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC>Mensal (R$ 9,80)</a><br/>
 	    &bull; <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3QCYVHKR8DKZQ>Semestral (R$ 55,80)</a><br/>
-	    &bull; <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EWK9UZR35P6YN>Anual (R$ 82,00)</a>
+	    &bull; <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EWK9UZR35P6YN>Anual (R$ 93,60)</a>
 	  </td>
 	</tr>
 	<tr>
 	  <td colspan=3>
 		<table border=0 cellspacing=0 cellpadding=5>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento semestral com 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>!</td></tr>
-      		<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento anual com 30% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 6,83 por mês</font></strong>!</td></tr>
+      		<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento anual com 20% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 7,80 por mês</font></strong>!</td></tr>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>O pagamento com cartão é feito via PayPal que é a forma <strong>mais segura</strong> para pagar com cartão de crédito na internet.</td></tr>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Seu acesso é liberado <strong>algumas horas após o pagamento</strong>, mesmo em finais de semana e feriado!</td></tr>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>O PayPal se encarregará de <strong>renovar automaticamente sua assinatura</strong>, fazendo o débito em seu cartão quando do vencimento do primeiro período, para você não ficar sem acessar por falta de pagamento.</td></tr>
@@ -77,14 +77,14 @@ Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %>
       <td width=100%><strong>
 	    &bull; <a target=_blank href=<%=user.bank_billet_link%>>Mensal (R$ 12,80)</a><br/>
 	    &bull; <a target=_blank href=<%=user.bank_billet_link_6%>>Semestral (R$ 55,80)</a><br/>
-	    &bull; <a target=_blank href=<%=user.bank_billet_link_12%>>Anual (R$ 82,00)</a>
+	    &bull; <a target=_blank href=<%=user.bank_billet_link_12%>>Anual (R$ 93,60)</a>
 	  </td>
 	</tr>
 	<tr>
 	  <td colspan=3>
 		<table border=0 cellspacing=0 cellpadding=5>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento semestral com 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>!</td></tr>
-     		<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento anual com 30% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 6,83 por mês</font></strong>!</td></tr>
+     		<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento anual com 20% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 7,80 por mês</font></strong>!</td></tr>
 			<tr><td valign=top><img width=12 src="/images/warning.png"></td><td><small>Como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o <strong>boleto mensal total é de R$ 12,80</strong>.</td></tr>
 			<tr><td valign=top><img width=12 src="/images/warning.png"></td><td><small>Outra desvantagem do pagamento com boleto bancário é que <strong>pode levar 2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte...</td></tr>
 			<tr><td valign=top><img width=12 src="/images/warning.png"></td><td><small>A terceira desvantagem é que com boleto é mais fácil esquecer de pagar, o que <strong>pode te deixar sem acesso</strong> ao ContaCal por alguns dias, o que te deixará sem a possiblidade de registrar suas refeições naquele dia.</td></tr>
