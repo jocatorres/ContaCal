@@ -32,16 +32,10 @@
 
      <p>
 	   <%- if (user.status == 1 or user.status == 10) -%>
-		Assinar com
+		<a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
 	  <%- elsif (user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) -%>
-	    Renovar com 
+	    <a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a>! 
 	  <%- end -%>
-     <%- if !user.bank_billet_link.nil? then -%><a target=_blank href=<%= user.bank_billet_link %>> boleto</a> ou <%- end -%>
-     <%- if (user.status == 1 or user.status == 2 or user.status == 4) -%>
-	 <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=AJF5XZCYGJY5A>cartão</a>.
-     <%- elsif (user.status == 10 or user.status == 20 or user.status == 40) -%>
-	 <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC>cartão</a>.
-	 <%- end -%>
   </p>
 
   <%- end -%>
