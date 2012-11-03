@@ -19,5 +19,6 @@ describe RegistrationsController do
       delete :destroy
       response.should redirect_to("https://docs.google.com/a/jig.com.br/spreadsheet/viewform?formkey=dFBMUV9fd2x4aVZJOFJ2V3JVTmxlQmc6MQ")
     end
-  end
+  end  
+
 end
