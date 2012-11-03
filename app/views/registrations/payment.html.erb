@@ -27,27 +27,117 @@
 Tipo de assinatura: <strong>
 
   <%- if user.status.blank? or user.status == 0 -%>
-    Cortesia
+    Cortesia 
+    <%- verbo = "fazer" -%>
   <%- elsif (user.status == 1 or user.status == 10) -%>
     Período de teste gratuito
+    <%- verbo = "fazer" -%>
   <%- elsif (user.status == 2 or user.status == 20) -%>
     Assinante boleto bancário
+    <%- verbo = "renovar" -%>
   <%- elsif (user.status == 4 or user.status == 40) -%>
     Assinante cartão de crédito
+    <%- verbo = "renovar" -%>
   <%- end -%>                      
 </strong>
   <%- if !user.expire_at.blank? -%>
 <br/><br/>
 Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>
   <%- end -%>
-<br/><br/><br/>
-<center><strong>Opções de pagamento</strong></center>
-<br/>
-<table border=1 cellspacing=0 cellpadding=15>
+<br/><br/>
+Veja abaixo as opções de pagamento disponíveis e escolha uma para <%=verbo%> sua assinatura no ContaCal:
+<br/><br/>
+<table border=0 cellspacing=0 cellpadding=15>
+  <tr bgcolor=#cdcdcd>
+    <td>
+	</td>
+    <td><img width=15 src="/images/1x1.gif"></td>
+	<td bgcolor=#cdcdcd>
+		<table border=0 cellspacing=0 cellpadding=0>
+			<tr> 
+    <td align=center valign=top><img src="/images/paypal.png"><br/></td>
+    </tr><tr>
+    <td align=center nowrap width=100%><strong><small>
+	    <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC>Mensal (R$ 9,80)</a><br/>
+	    <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3QCYVHKR8DKZQ>Semestral (R$ 55,80)</a><br/>
+	    <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EWK9UZR35P6YN>Anual (R$ 93,60)</a>
+	  </td>
+      </tr>
+    </table>
+	</td>
+    <td><img width=1 src="/images/1x1.gif"></td>
+  	<td bgcolor=#cdcdcd>
+		<table border=0 cellspacing=0 cellpadding=0>
+			<tr> 
+      <td align=center valign=top><img src="/images/boleto.png"></td>
+      </tr>
+      <tr>
+      <td align=center nowrap width=100%><strong><small>
+	    <a target=_blank href=<%=user.bank_billet_link%>>Mensal (R$ 12,80)</a><br/>
+	    <a target=_blank href=<%=user.bank_billet_link_6%>>Semestral (R$ 55,80)</a><br/>
+	    <a target=_blank href=<%=user.bank_billet_link_12%>>Anual (R$ 93,60)</a>
+	  </td>
+	        </tr>
+	      </table>
+	</td>
+  </tr>
+  <tr bgcolor=#eeeeee>
+    <td><small>Opção de pagamento anual com 20% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 7,80 por mês</font></strong>!</td>
+  	<td></td>
+	<td bgcolor=#e0e0e0 align=center><img src="/images/success.png"></td>
+	<td></td>
+	<td bgcolor=#e0e0e0 align=center><img src="/images/success.png"></td>
+  </tr>
+  <tr bgcolor=#cdcdcd>
+    <td><small>Opção de pagamento semestral com 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>!</td>
+	  	<td></td>
+	<td bgcolor=#cdcdcd align=center><img src="/images/success.png"></td>
+	<td></td>
+	<td bgcolor=#cdcdcd align=center><img src="/images/success.png"></td>
+  </tr>
+  <tr bgcolor=#eeeeee>
+    <td><small>Pagamento via PayPal, a forma <strong>mais segura</strong> para pagar com cartão de crédito na internet.</td>
+	  	<td></td>
+	<td bgcolor=#e0e0e0 align=center><img src="/images/success.png"></td>
+	<td></td>
+	<td bgcolor=#e0e0e0 align=center><img src="/images/warning.png"></td>
+  </tr>
+  <tr bgcolor=#cdcdcd>
+    <td><small>Sem nenhuma taxa adicional de cobrança. <font size=1>(1)</td>
+	  	<td></td>
+	<td bgcolor=#cdcdcd align=center><img src="/images/success.png"></td>
+	<td></td>
+	<td bgcolor=#cdcdcd valign=top align=center><img src="/images/warning.png"></td>
+  </tr>
+  <tr bgcolor=#eeeeee>
+    <td><small>Liberação do acesso algumas horas após o pagamento. <font size=1>(2)</td>
+	  	<td></td>
+	<td bgcolor=#e0e0e0 align=center><img src="/images/success.png"></td>
+	<td></td>
+	<td bgcolor=#e0e0e0 align=center><img src="/images/warning.png"></td>
+  </tr>
+  <tr bgcolor=#cdcdcd>
+    <td><small>Renovação automática da assinatura para que você possa registrar suas refeições todos os dias, sem interrupções. <font size=1>(3)</td>
+	  	<td></td>
+	<td bgcolor=#cdcdcd align=center><img src="/images/success.png"></td>
+	<td></td>
+	<td bgcolor=#cdcdcd align=center><img src="/images/warning.png"></td>
+  </tr>
+</table>        
+<font size=1><strong>Notas:</strong><br/>
+(1) Como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.<br/>
+(2) Com pagamento via boleto bancário pode levar 2 dias úteis para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte.<br/>
+(3) Com pagamento via boleto é mais fácil esquecer de pagar, o que pode te deixar sem acesso ao ContaCal por alguns dias, o que te deixará sem a possiblidade de registrar suas refeições naquele dia.<br/>
+</font>
+
+<!--<table border=1 cellspacing=0 cellpadding=15>
     <tr>
 	  <td valign=top width=50%>
 <table border=0 cellspacing=0 cellpadding=0>
 	<tr>
+	  <td align=center> 
+		<table border=0 cellspacing=0 cellpadding=0>
+			<tr> 
       <td valign=top><img src="/images/paypal.png"></td>
       <td><img width=25 src="/images/1x1.gif"></td>
       <td width=100%><strong>
@@ -55,9 +145,12 @@ Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %>
 	    &bull; <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3QCYVHKR8DKZQ>Semestral (R$ 55,80)</a><br/>
 	    &bull; <a target=_blank href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EWK9UZR35P6YN>Anual (R$ 93,60)</a>
 	  </td>
+        </tr>
+      </table>
+  </td>
 	</tr>
 	<tr>
-	  <td colspan=3>
+	  <td colspan=3><br/>
 		<table border=0 cellspacing=0 cellpadding=5>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento semestral com 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>!</td></tr>
       		<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento anual com 20% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 7,80 por mês</font></strong>!</td></tr>
@@ -71,7 +164,10 @@ Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %>
       </td>
       <td valign=top width=50%>
 <table border=0 cellspacing=0 cellpadding=0>
-	<tr>
+	<tr> 
+	  <td align=center> 
+		<table border=0 cellspacing=0 cellpadding=0>
+			<tr> 
       <td><img src="/images/boleto.png"></td>
       <td><img width=25 src="/images/1x1.gif"></td>
       <td width=100%><strong>
@@ -79,9 +175,12 @@ Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %>
 	    &bull; <a target=_blank href=<%=user.bank_billet_link_6%>>Semestral (R$ 55,80)</a><br/>
 	    &bull; <a target=_blank href=<%=user.bank_billet_link_12%>>Anual (R$ 93,60)</a>
 	  </td>
+	        </tr>
+	      </table>
+	  </td>
 	</tr>
 	<tr>
-	  <td colspan=3>
+	  <td colspan=3><br/>
 		<table border=0 cellspacing=0 cellpadding=5>
 			<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento semestral com 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>!</td></tr>
      		<tr><td valign=top><img width=12 src="/images/success.png"></td><td><small>Opção de pagamento anual com 20% de desconto sobre o preço mensal. Equivale a <strong><font color=#dd0000>R$ 7,80 por mês</font></strong>!</td></tr>
@@ -94,7 +193,7 @@ Vencimento de sua assinatura: <strong><%= user.expire_at.strftime("%d/%m/%Y") %>
 </table>
          </td>
     </tr>
-</table>
+</table>-->
 
 
 <br/><br/>   
