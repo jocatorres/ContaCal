@@ -21,21 +21,29 @@
 </head>
 <body id="<%= controller.controller_name %>">
   <header>
-    <%- if user_signed_in? -%>
+    <%- if user_signed_in? -%> 
+    <%- if (current_user.status == 1 or current_user.status == 10) and user.expire_at.nil? -%>   
+       <%- user.update_attribute(:expire_at, Date.today+5) -%>
+    <%- end -%>
       <div id="masthead">
-        <p align=right>Olá, <strong><%= current_user.name %></strong>! 
-		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
-           Seu limite diário é de <%= current_user.kcal_limit %> Kcal
+        <p align=right>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<%- if current_user.kcal_limit.nil? or current_user.kcal_limit == 0 -%>
+           <%= link_to "Definir limite diário", edit_user_registration_url %> &bull;
+	    <%- end -%> 
+	    <%- if user.status.blank? or user.status == 0 or user.status == 1 or user.status == 10 -%> 
+	      <%= link_to "Assinar", payment_url %> 
+        <%- elsif (user.status == 2 or user.status == 20) or (!user.expire_at.nil? and (user.status == 4 or user.status == 40))-%>
+	      <%= link_to "Renovar assinatura", payment_url %>  
 	    <%- else -%>
-           Você ainda não definiu seu <%= link_to "limite diário", edit_user_registration_url %>
+	      <%= link_to "Opções de assinatura", payment_url %>  
 	    <%- end -%>
           &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Ajuda", '/ajuda.html', :class => "terms-of-use-fancybox" %> &bull; <%= link_to "Blog", 'http://contacal.com.br/blog'%> &bull; <%= link_to "Site", 'http://contacal.com.br'%> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
       </div>
     <%- end -%>
     <div id="logo"><a href="<%= root_url %>">ContaCal</a></div>
-    <%- if current_user.status == 1 or current_user.status == 10 -%>
+    <%- if (current_user.status == 1 or current_user.status == 10)  and !user.expire_at.nil? -%>
 	<div id="subscriber">
-		  <br>Período de teste gratuito
+		  <br>Seu período de teste gratuito
 		<%- if Date.today < user.expire_at -%>
           vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- elsif Date.today == user.expire_at -%>
@@ -59,7 +67,7 @@
 <!--    <%= yield(:header_info) %>-->
   </header>
   <hr />
-  <%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>
+  <%- if (current_user.status == 1 or current_user.status == 10)  and !user.expire_at.nil? and Date.today > user.expire_at -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
 <b>Fim do período de teste gratuito... :-(</b><br /><br /><a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!

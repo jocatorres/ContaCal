@@ -32,7 +32,14 @@ $(function() {
 } %>
 
 <div id="kcal-measure">
-  <div class="title">Total: <strong><span id="total-kcal"><%= display_daily_total(current_date) %></span> Kcal</strong></div>
+  <div class="title">Total: <strong><span id="total-kcal"><%= display_daily_total(current_date) %></span></strong> 
+		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
+          de <strong><a href="/users/edit"><%= current_user.kcal_limit %></a></strong> Kcal diários 
+	    <%- else -%>
+	      Kcal
+	    <%- end -%>
+	    
+	</div>
   <div id="progress">
     <%= render :partial => "progress" %>
   </div>

@@ -85,6 +85,7 @@ header #logo a {
 }
 
 header #masthead {
+  width: 600px;
   float: right;
   font-size: .8em;
   color: #363636;
@@ -129,6 +130,7 @@ header #kcal-limit #change-kcal-label {
 /* SUBSCRIBER */
 
 header #subscriber {
+    width: 600px;
 	font-size: .8em; 
     float: right;
 	text-align: right;
