@@ -7,5 +7,5 @@
   <p>Medida: <strong><%= @food.measure %></strong></p>
   <p>Quantidade de Calorias: <strong><%= @food.kcal %></strong></p>
   <p>Tipo de Caloria: <strong><%= {'a' => 'Tipo Verde', 'b' => 'Tipo Amarela', 'c' => 'Tipo Vermelha', 'd' => 'Exercício'}[@food.kind] %></strong></p>
-  <p>Google: <strong><a href="http://www.google.com.br/search?rls=pt&q=caloria+<%= @food.name %>">http://www.google.com.br/search?rls=pt&q=caloria+<%= @food.name %></a></strong></p>
+  <p><a href="http://www.google.com.br/search?rls=pt&q=informação+nutricional+<%= @food.name %>">Google</a></strong></p>
 </div>
