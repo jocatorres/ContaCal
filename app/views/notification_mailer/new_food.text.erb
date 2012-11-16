@@ -1,0 +1,9 @@
+Nome: <%= @user.name %>
+Email: <%= @user.email%>
+========================================================
+
+Alimento: <%= @food.name %>
+Peso: <%= @food.weight%>
+Medida: <%= @food.measure %>
+Quantidade de Calorias: <%= @food.kcal %>
+Google: http://www.google.com.br/search?rls=pt&q=%22informação+nutricional%22+%22<%= @food.name.gsub!(' ', '+') %>%22
