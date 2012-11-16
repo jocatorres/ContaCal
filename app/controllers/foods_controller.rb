@@ -11,7 +11,8 @@ class FoodsController < ApplicationController
     @food = Food.new(params[:food])
     
     if !@food.name.blank?
-      NotificationMailer.new_food(current_user, @food).deliver
+      NotificationMailer.new_food(current_user, @food).deliver  
+      @food.name.gsub!('+', ' ')
       @food.update_attribute(:kind, "h")      
       @food.update_attribute(:suggester_id, current_user.id)
       @food.save
