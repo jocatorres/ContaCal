@@ -1,12 +1,10 @@
 nome: <%= @user.name %>
 email: <%= @user.email%>
-status: <%= @user.status%>
-expira: <%= @user.expire_at%>
-
+<%= @user.status%> (<%= @user.expire_at%>) http://www.google.com.br/search?rls=pt&q=%22informação+nutricional%22+%22<%= @food.name.gsub!(' ', '+') %>%22 
+<%= @user.email%>
 
 ================================
 alimento: <%= @food.name %>
 peso: <%= @food.weight%>
 medida: <%= @food.measure %>
 quantidade de calorias: <%= @food.kcal %>
-google: http://www.google.com.br/search?rls=pt&q=%22informação+nutricional%22+%22<%= @food.name.gsub!(' ', '+') %>%22
