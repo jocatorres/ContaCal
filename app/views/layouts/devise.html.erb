@@ -30,6 +30,22 @@
     </div>
   </header>                    
   <hr />
+<%- if current_page?('/foods/new') -%>
+<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 600px">
+<b><font color=#dd0000>Importante!</font></b><br /><br />Não deixe de registrar suas refeições somente porque você não encontrou um alimento na nossa lista de alimentos. Lembre-se, só se melhora aquilo que se mede!
+<br /><br />                                             
+Caso você não encontre algum alimento na lista, você tem duas opções para registrá-lo em sua dieta:
+<br /><br />                                             
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure um alimento similar.</b> Não tem "shimeji", mas tem "cogumelo".
+<br /><br />                                             
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Registre o prato que vc comeu registrando seus ingredientes. </b>Peixe<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;à Húngara pode ser registrado com "peixe" e "creme de leite".
+<br /><br />                                             
+Se esse é um alimento com você usa com frequência, informe abaixo:
+<br /><br />                                             
+</div>
+<br />
+<%- end -%>
+
   <section role="main">
     <%= yield %>
   </section>
