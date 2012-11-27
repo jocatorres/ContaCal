@@ -30,25 +30,79 @@
     </div>
   </header>                    
   <hr />
-<%- if current_page?('/foods/new') -%>
+<%- if current_page?('/foods/new') or current_page?('/foods') -%>
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 600px">
-<b><font color=#dd0000>Importante!</font></b><br /><br />Não deixe de registrar suas refeições somente porque você não encontrou um alimento na nossa lista de alimentos. Lembre-se, só se melhora aquilo que se mede!
+<b><font color=#dd0000>Importante!</font></b>	
+
+<%= render_flash_messages %>
+
+	<%= form_for(@food, :html => { :method => :post }) do |f| %>
+	  <%- if @food.errors.any? -%>
+	    <div id="error_explanation">
+	      <h2>Verifique os erros abaixo:</h2>
+	      <ul>
+	      <% @food.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <%- end -%>
+Não deixe de registrar suas refeições somente porque você não encontrou um alimento na nossa lista de alimentos. Lembre-se, só se melhora aquilo que se mede!
 <br /><br />                                             
-Caso você não encontre algum alimento na lista, você tem duas opções para registrá-lo em sua dieta:
+Temos uma lista bem grande de alimentos, com mais de 4.000 itens. Caso você não encontre algum alimento na lista, você tem algumas opções:
+<br /><br />                                             
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure novamente usando outra palavra.</b> Não tem "cafezinho", mas <br />   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tem "café".
+<br /><br />                                             
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure novamente usando menos palavras.</b> Não tem "pao integral <br />   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;com aveia e nozes", mas tem "pao integral aveia nozes".
 <br /><br />                                             
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure um alimento similar.</b> Não tem "shimeji", mas tem "cogumelo".
 <br /><br />                                             
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Registre o prato que vc comeu registrando seus ingredientes. </b>Peixe<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;à Húngara pode ser registrado com "peixe" e "creme de leite".
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Registre o prato que vc comeu registrando seus ingredientes. </b>Macarrão<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;com molho branco pode ser registrado com "macarrao cozido" e<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"molho branco".
 <br /><br />                                             
-Se esse é um alimento com você usa com frequência, informe abaixo:
-<br /><br />                                             
+Se mesmo assim vc não encotrou o alimento e você o usa com frequência, informe os dados desse alimento abaixo. Quanto mais completa a informação, mais rápido conseguiremos disponibilizá-lo:  
+<br /><br />
+
+
+<table width=90% border=0 cellpadding=5 cellspacing=0>
+	<tr>
+		<td nowrap valign=top align=right><%= f.label :name %>: </td>
+		<td><%= f.text_field :name, :style => 'width: 250px'  %></td>
+	</tr>
+ 	<tr>
+		<td nowrap valign=top align=right><%= f.label :weight %>: </td>
+		<td><%= f.text_field :weight, :style => 'width: 250px'  %><br /><small><%= f.label :weight_explain %></small></td>
+	</tr>
+ 	<tr>
+		<td nowrap valign=top align=right><%= f.label :measure %>: </td>
+		<td><%= f.text_field :measure, :style => 'width: 250px' %><br />	<small><%= f.label :measure_explain %></small></td>
+	</tr>
+	<tr>
+		<td valign=top align=right><%= f.label :kcal %>: </td>
+		<td><%= f.text_field :kcal, :style => 'width: 50px' %></td>
+	</tr>
+	<tr>
+		<td valign=top align=right> </td>
+		<td><%= f.submit "Enviar Sugestão" %></td>
+	</tr>
+	<tr>
+		<td valign=top align=right> </td>
+		<td><%= link_to "&laquo; voltar".html_safe, root_path %> </td>
+	</tr>
+</table>
+
+
+<% end %>
+
 </div>
 <br />
 <%- end -%>
 
+<%- if !current_page?('/foods/new') and !current_page?('/foods') -%>
+
   <section role="main">
     <%= yield %>
   </section>
+<%- end -%>
   <hr />
   <footer>
     <p>Copyright &copy; 2011 ContaCal. Dúvidas? Sugestões? <%= link_to 'Fale conosco', 'http://www.contacal.com.br/contato/', :target => '_blank' %>!</p>
