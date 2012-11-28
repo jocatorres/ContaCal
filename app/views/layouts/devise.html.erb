@@ -6,7 +6,7 @@
   <meta name="description" content="Sistema simples e eficiente para controlar suas calorias diárias. Basta vc registrar suas refeições e o sistema calcula automaticamente a quantidade de calorias ingerida e ainda informa se as calorias ingeridas são do tipo verde, amarela ou vermelha. As cores servem para indicar quão recomendável é ingerir o alimento. Se é um alimento de calorias vermelhas, é melhor evitá-lo ao máximo. Calorias amarelas podem ser ingeridas com moderação. Já as calorias verdes podem ser ingeridas sem restrição. Como sugestão, procure seguir a seguinte regra, não mais que 10% de calorias vermelhas, não mais que 35% de calorias amarelas e pelo menos 55% de calorias verdes.">
   <meta name="keywords" content="contador de calorias, conta calorias, calorias, emagrecer, emagrecimento, controle de calorias, controle de peso, perder peso, diário de calorias, perda de peso, alimentação saudável, nutrição, informação nutricional">
   <link href='/favicon.png' rel='shortcut icon'>
-  <%= stylesheet_link_tag :all %>
+<%= stylesheet_link_tag :all %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
   <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
@@ -19,7 +19,7 @@
     <link href="/assets/iefix.css" media="all" rel="stylesheet" />
   <![endif]-->
 </head>
-	<%- if current_page?('/payment') -%>
+	<%- if current_page?('/payment') or current_page?('/foods/new') or current_page?('/foods') -%>
 <body id="dashboard">	                     
 	<%- else -%>
 <body id="users-engine" class="<%= controller.controller_name %>">
@@ -30,79 +30,9 @@
     </div>
   </header>                    
   <hr />
-<%- if current_page?('/foods/new') or current_page?('/foods') -%>
-<div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 600px">
-<b>Sugestão de novo alimento ou exercício</b>	
-
-<%= render_flash_messages %>
-
-	<%= form_for(@food, :html => { :method => :post }) do |f| %>
-	  <%- if @food.errors.any? -%>
-	    <div id="error_explanation">
-	      <h2>Verifique os erros abaixo:</h2>
-	      <ul>
-	      <% @food.errors.full_messages.each do |msg| %>
-	        <li><%= msg %></li>
-	      <% end %>
-	      </ul>
-	    </div>
-	  <%- end -%>
-Não deixe de registrar suas refeições somente porque você não encontrou um alimento na nossa lista de alimentos. Lembre-se, só se melhora aquilo que se mede!
-<br /><br />                                             
-Temos uma lista bem grande de alimentos, com mais de 4.000 itens. Caso você não encontre algum alimento na lista, você tem algumas opções:
-<br /><br />                                             
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure novamente usando outra palavra.</b> Não tem "cafezinho", mas <br />   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tem "café".
-<br /><br />                                             
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure novamente usando menos palavras.</b> Não tem "pao integral <br />   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;com aveia e nozes", mas tem "pao integral aveia nozes".
-<br /><br />                                             
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Procure um alimento similar.</b> Não tem "shimeji", mas tem "cogumelo".
-<br /><br />                                             
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; <b>Registre o prato que vc comeu registrando seus ingredientes. </b>Macarrão<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;com molho branco pode ser registrado com "macarrao cozido" e<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"molho branco".
-<br /><br />                                             
-Se mesmo assim vc não encotrou o alimento e você o usa com frequência, informe os dados desse alimento abaixo. Quanto mais completa a informação, mais rápido conseguiremos disponibilizá-lo:  
-<br /><br />
-
-
-<table width=90% border=0 cellpadding=5 cellspacing=0>
-	<tr>
-		<td nowrap valign=top align=right><%= f.label :name %>: </td>
-		<td><%= f.text_field :name, :style => 'width: 250px'  %></td>
-	</tr>
- 	<tr>
-		<td nowrap valign=top align=right><%= f.label :weight %>: </td>
-		<td><%= f.text_field :weight, :style => 'width: 250px'  %><br /><small><%= f.label :weight_explain %></small></td>
-	</tr>
- 	<tr>
-		<td nowrap valign=top align=right><%= f.label :measure %>: </td>
-		<td><%= f.text_field :measure, :style => 'width: 250px' %><br />	<small><%= f.label :measure_explain %></small></td>
-	</tr>
-	<tr>
-		<td valign=top align=right><%= f.label :kcal %>: </td>
-		<td><%= f.text_field :kcal, :style => 'width: 50px' %></td>
-	</tr>
-	<tr>
-		<td valign=top align=right> </td>
-		<td><%= f.submit "Enviar Sugestão" %></td>
-	</tr>
-	<tr>
-		<td valign=top align=right> </td>
-		<td><%= link_to "&laquo; voltar".html_safe, root_path %> </td>
-	</tr>
-</table>
-
-
-<% end %>
-
-</div>
-<br />
-<%- end -%>
-
-<%- if !current_page?('/foods/new') and !current_page?('/foods') -%>
-
   <section role="main">
     <%= yield %>
   </section>
-<%- end -%>
   <hr />
   <footer>
     <p>Copyright &copy; 2011 ContaCal. Dúvidas? Sugestões? <%= link_to 'Fale conosco', 'http://www.contacal.com.br/contato/', :target => '_blank' %>!</p>
