@@ -14,6 +14,16 @@
     </div><br />
   <%- end -%>
 
+<%- if !(user.status == 0 or user.status == 2 or user.status == 4 or user.status == 20 or user.status == 40) -%>
+    <div id="error_explanation">
+      <h2>Atenção!</h2>
+      <ul>
+        <li>Somente usuários <b>assinantes</b> podem sugerir alimentos ou atividades. Torne-se um <%= link_to "assinante", payment_url %> hoje mesmo!</li>
+      </ul>
+    </div><br />
+	<center><%= link_to "Assinar!".html_safe, payment_url  , :class => 'botao_especial' %></center>
+	<br />
+<%- end -%>
 Não deixe de registrar suas refeições somente porque você não encontrou um alimento ou exercício. Temos uma lista bem grande de alimentos e exercícios, com mais de 4.000 itens. Caso você não encontre algum item na lista, você tem algumas opções:
 <br /><br />                                             
 <table width=100% border=0 cellpadding=5 cellspacing=0>
@@ -25,6 +35,11 @@ Não deixe de registrar suas refeições somente porque você não encontrou um 
 <br /><br /> 
 <center><%= link_to "Voltar ao seu diário alimentar virtual para procurar novamente!".html_safe, root_path  , :class => 'botao_especial' %></center>
 <br /><br /> 
+<%- if !(user.status == 0 or user.status == 2 or user.status == 4 or user.status == 20 or user.status == 40) -%>
+Se mesmo assim vc não encontrou o alimento ou exercício e você o usa com frequência, basta se tornar um <%= link_to "assinante", payment_url %> para poder sugirir sua inclusão em nossa base de dados.  
+<br /><br />
+
+<%- else -%>
 Se mesmo assim vc não encontrou o alimento ou exercício e você o usa com frequência, informe os dados desse alimento abaixo. Quanto mais completa a informação, mais rápido conseguiremos disponibilizá-lo:  
 <br /><br />
 
@@ -54,6 +69,7 @@ Se mesmo assim vc não encontrou o alimento ou exercício e você o usa com freq
 		<td valign=top align=right> </td>
 		<td><%= link_to "&laquo; voltar".html_safe, root_path %> </td>
 	</tr>
-</table>
+</table>   
+<%- end -%>
 
 <% end %>
