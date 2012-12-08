@@ -31,6 +31,10 @@ $(function() {
 });
 } %>
 
+
+
+
+
 <div id="kcal-measure">
   <div class="title">Total: <strong><span id="total-kcal"><%= display_daily_total(current_date) %></span></strong> 
 		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>

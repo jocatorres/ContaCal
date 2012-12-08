@@ -96,6 +96,11 @@ class DashboardController < ApplicationController
     current_user.update_attributes({:kcal_limit => params[:kcal_limit]})
   end
   
+  def update_user_weight        
+#    current_user.update_attributes({:kcal_limit => params[:kcal_limit]})
+#    user_foods.find_by_user_id(current_user.id).find_or_create_by_date(params[:date].to_date).update_attributes(:amount => params[:kcal_limit].to_f, :date => params[:date].to_date, :meal => 'user_weight')
+  end
+  
   private
   def consumed_kcal(date, kind)
     current_user.consumed_kcal(:date => date, :kind => kind)

@@ -22,6 +22,11 @@ describe DashboardController do
       kcal_limit_path.should == '/kcal_limit'
     end
 
+    it "recognizes and generates user_weight" do
+      put("/user_weight").should route_to("dashboard#update_user_weight")
+      weight_path.should == '/user_weight'
+    end
+
     it "recognizes and generates confirm" do
       get("/autocomplete_food_name").should route_to("dashboard#autocomplete_food_name")
       autocomplete_food_name_path.should == "/autocomplete_food_name"

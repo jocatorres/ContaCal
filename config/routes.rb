@@ -5,6 +5,7 @@ Contacal::Application.routes.draw do
   resources :foods, :only => [:new, :create]
   resources :user_foods, :only => [:create, :destroy, :update]
   match 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit, :via => :put
+  match 'user_weight' => 'dashboard#update_user_weight', :as => :user_weight, :via => :put
   match 'report' => 'dashboard#report', :as => :report
   match 'autocomplete_food_name', :to => 'dashboard#autocomplete_food_name', :as => :autocomplete_food_name
   match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm

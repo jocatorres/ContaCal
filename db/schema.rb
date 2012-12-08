@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121124070000) do
+ActiveRecord::Schema.define(:version => 20121208195206) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -38,7 +38,16 @@ ActiveRecord::Schema.define(:version => 20121124070000) do
   add_index "user_foods", ["date", "meal"], :name => "index_user_foods_on_date_and_meal"
   add_index "user_foods", ["user_id", "date"], :name => "index_user_foods_on_user_id_and_date"
 
-  create_table "users", :force => true do |t|
+  create_table "user_weights", :force => true do |t|
+    t.integer  "user_id"
+    t.float    "weight"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", :id => false, :force => true do |t|
+    t.integer  "id",                                                          :null => false
     t.string   "email",                                    :default => "",    :null => false
     t.string   "encrypted_password",        :limit => 128, :default => "",    :null => false
     t.string   "reset_password_token"
@@ -80,9 +89,5 @@ ActiveRecord::Schema.define(:version => 20121124070000) do
     t.string   "bank_billet_link_12"
     t.date     "renew_at"
   end
-
-  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

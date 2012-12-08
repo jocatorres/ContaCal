@@ -103,7 +103,7 @@ header a:hover {
 }
 
 header #kcal-limit {
-  margin: 45px 0 0 60px;
+  margin: 5px 0 0 130px;
   color: #363636;
   text-shadow: 0px 1px 0 #fff;
   font-size: .8em;
@@ -111,7 +111,7 @@ header #kcal-limit {
 }
 
 header #kcal-limit span a {
-  font-size: 2em;
+  font-size: 1.6em;
   color: #363636;
   font-weight: bold;
 }
@@ -122,6 +122,31 @@ header #kcal-limit span a:hover {
 }
 
 header #kcal-limit #change-kcal-label {
+  display: none;
+  margin: 20px 0 0 10px;
+  color: #255686;
+}
+
+header #peso {
+  margin: 10px 0 0 260px;
+  color: #363636;
+  text-shadow: 0px 1px 0 #fff;
+  font-size: .8em;
+  float: right;
+}
+
+header #peso span a {
+  font-size: 2em;
+  color: #363636;
+  font-weight: bold;
+}
+
+header #peso span a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+header #peso #change-peso-label {
   display: none;
   margin: 0 0 0 10px;
   color: #255686;
