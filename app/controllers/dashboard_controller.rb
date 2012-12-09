@@ -130,7 +130,6 @@ class DashboardController < ApplicationController
       :legend => 'none',
       :colors => ['#f75443'],
     }
-#    chart_options[:series] = {0 => {:type => 'line', :color => 'black', :lineWidth => 2, :visibleInLegend => false}}
     @graph = GoogleVisualr::Interactive::LineChart.new(data_table, chart_options)
   end
 
