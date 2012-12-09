@@ -1,5 +1,4 @@
-$('#kcal-limit-value a').html('<%= current_user.user_weight.find_by_date(params[:date].to_date).weight.to_f.to_s %>');
-$('#kcal_limit').val('<%= current_user.user_weight.find_by_date(params[:date].to_date).weight.to_s%>');
-$('#kcal-limit-value a').append(" Kg");
+$('#kcal-limit-value a').html('<%= current_user.display_current_weight(:date => params[:date], :tipo => 'str') %>');
+$('#kcal_limit').val('<%= current_user.display_current_weight(:date => params[:date], :tipo => 'num') %>');
 $('#kcal-limit-form').hide();
 $('#kcal-limit-value').show();

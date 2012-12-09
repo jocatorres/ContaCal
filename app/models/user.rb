@@ -110,6 +110,22 @@ class User < ActiveRecord::Base
     }
   end
 
+  def display_current_weight(params)
+    if (user_weight.find_by_date(params[:date].to_date).nil?)
+      if (params[:tipo].to_s == 'str')
+        "não informado"                 
+      else
+        0
+      end
+    else
+      if (params[:tipo].to_s == 'str')
+        "#{user_weight.find_by_date(params[:date].to_date).weight.to_f.to_s} Kg"
+      else
+        "#{user_weight.find_by_date(params[:date].to_date).weight.to_f.to_s}"
+      end 
+    end
+  end
+
   private
   def send_welcome_email
     date_expire = Date.today+5
