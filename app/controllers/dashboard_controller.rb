@@ -58,6 +58,8 @@ class DashboardController < ApplicationController
     bar << current_user.kcal_limit  unless current_user.kcal_limit.nil?
     data << bar
     case params[:range]
+    when 'year'
+      @days = 365
     when 'month'
       @days = 30
     else
@@ -92,13 +94,53 @@ class DashboardController < ApplicationController
     @graph = GoogleVisualr::Interactive::ColumnChart.new(data_table, chart_options)
   end
 
+  def weight_report
+    data = []
+    case params[:range]
+    when 'year'
+      @days = 365
+    else
+      @days = 30
+    end
+    peso_antes = 0
+    (@days.days.ago.to_date..Date.today).each do |date|        
+      if !current_user.user_weight.find_by_date(date).nil? and current_user.user_weight.find_by_date(date).weight > peso_antes 
+        peso_antes = current_user.user_weight.find_by_date(date).weight
+      end
+    end
+    (@days.days.ago.to_date..Date.today).each do |date|        
+      peso = peso_antes
+      peso = current_user.user_weight.find_by_date(date).weight unless current_user.user_weight.find_by_date(date).nil?
+      bar = [l(date, :format => :chart),peso]
+      data << bar
+      peso_antes = peso
+    end
+
+    data_table = GoogleVisualr::DataTable.new
+    data_table.new_column('string', 'Data' )
+    data_table.new_column('number', 'Peso')
+    data_table.add_rows(data)
+    chart_options = {
+      :title => 'Controle de peso',
+      :vAxis => {:title => 'Peso'},
+      :isStacked => true,
+      :width => 900, 
+      :height => 400, 
+      :lineWidth => 3,
+      :legend => 'none',
+      :colors => ['#f75443'],
+    }
+#    chart_options[:series] = {0 => {:type => 'line', :color => 'black', :lineWidth => 2, :visibleInLegend => false}}
+    @graph = GoogleVisualr::Interactive::LineChart.new(data_table, chart_options)
+  end
+
   def update_kcal_limit
     current_user.update_attributes({:kcal_limit => params[:kcal_limit]})
   end
   
   def update_user_weight        
 #    current_user.update_attributes({:kcal_limit => params[:kcal_limit]})
-#    user_foods.find_by_user_id(current_user.id).find_or_create_by_date(params[:date].to_date).update_attributes(:amount => params[:kcal_limit].to_f, :date => params[:date].to_date, :meal => 'user_weight')
+    current_user.user_weight.find_or_create_by_date(params[:date].to_date).update_attributes(:weight => params[:kcal_limit].gsub(",",".").to_f, :date => params[:date].to_date)
   end
   
   private

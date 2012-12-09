@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email, :referred_by_email, :subscribed_newsletter
   has_many :user_foods
+  has_many :user_weight
   validates :name, :presence => true
   after_create :send_welcome_email
   scope :active, where(:deleted_at => nil)
@@ -112,11 +113,6 @@ class User < ActiveRecord::Base
   private
   def send_welcome_email
     date_expire = Date.today+5
-#    date_expire.strftime("%d/%m/%Y")
-#    document_number = Date.today.strftime("%Y%m%d") + "%08d" % self.id
-#    descrition = "R$ 30,00 => valor semestral que equivale a R$ 5,00 por mês\nR$ 5,00 => taxa de emissão de boleto\nTotal: R$ 35,00\nlogin: " + self.email
-#    bb = Cobregratis::BankBillet.new(:amount => 35.00, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => self.name, :acceptance => "S", :document_number => document_number, :description => descrition)
-#    bb.save
     NotificationMailer.welcome(self).deliver
   	update_attribute(:confirmed_at, Time.now)
 		update_attribute(:confirmation_sent_at, Time.now)
@@ -124,8 +120,6 @@ class User < ActiveRecord::Base
  	  update_attribute(:status, 10)
  	  update_attribute(:subscribed_daily, "t")
  	  update_attribute(:subscribed_weekly, "f")
-#  	update_attribute(:bank_billet_link, bb.attributes["external_link"])
-#  	update_attribute(:bank_billet_our_number, bb.attributes["our_number"])
   end
 
   def consumed_kcal_less_than_1000_kcal

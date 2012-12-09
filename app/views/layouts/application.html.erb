@@ -64,33 +64,7 @@
 		<%- end -%>
     </div>
 	<%- end -%>
-<!--    <%= yield(:header_info) %>  -->
-<!--<div id="kcal-limit">
-  <% peso = current_user.user_foods.find_by_date(l(@date).to_date) %>  
-  <%- if (Date.today == l(@date).to_date) -%>
-  Seu peso atual:  
-  <%- else -%>
-  Seu peso em <%= l(@date) %>:
-  <%- end -%>
-  <br/>
-  <% if current_user.user_foods.find_by_date(l(@date).to_date).nil? %>
-    <span id="kcal-limit-value"><%= link_to "não informado", '#', :id => 'kcal-limit-link' %></span>
-  <% else %>
-    <span id="kcal-limit-value"><%= link_to "#{peso.amount} Kg", '#', :id => 'kcal-limit-link' %></span>
-  <% end -%>
-  <span id="change-kcal-label">alterar</span>
-  <%= form_tag(user_weight_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
-  <%= hidden_field_tag :date, l(@date).to_date %>
-  <% if current_user.user_foods.find_by_date(l(@date).to_date).nil? %>
-    <%= hidden_field_tag :user_foods_id, 0 %>
-    <%= text_field_tag :kcal_limit, 0 %>
-  <% else %>
-    <%= hidden_field_tag :user_foods_id, peso.id %>
-    <%= text_field_tag :kcal_limit, peso.amount %>
-  <% end -%>
-    <%= submit_tag "Atualizar" %> 
-  <% end -%>
-</div>--> 
+    <%= yield(:header_info) %>  
 
  
 
