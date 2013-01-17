@@ -27,11 +27,11 @@
   <%- end -%>
 </p>
 
-  <%- if !user.status.blank? and (user.status == 1 or user.status == 10 or user.status == 2 or user.status == 20) and !user.expire_at.blank? -%>
+  <%- if !user.status.blank? and (user.status == 0 or user.status == 1 or user.status == 10 or user.status == 2 or user.status == 20) and !user.expire_at.blank? -%>
   <p><%= f.label :expire_at %>: <%= user.expire_at.strftime("%d/%m/%Y") %></p>
 
      <p>
-	   <%- if (user.status == 1 or user.status == 10) -%>
+	   <%- if (user.status == 0 or user.status == 1 or user.status == 10) -%>
 		<a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
 	  <%- elsif (user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) -%>
 	    <a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a>! 
