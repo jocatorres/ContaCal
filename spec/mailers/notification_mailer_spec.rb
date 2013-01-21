@@ -32,7 +32,7 @@ describe NotificationMailer do
       end
       it "should set correct header From" do
         # Ele coloca as aspas por que reconhece que existe um caracter UTF-8 (acento)
-        @mailer.header['From'].to_s.should == "ContaCal <contato@contacal.com.br>"
+        @mailer.header['From'].to_s.should == "Info ContaCal <info@contacal.com.br>"
       end
       it "should not have more than one from address" do
         @mailer.from.size.should == 1
@@ -104,7 +104,7 @@ describe NotificationMailer do
       end
       it "should set correct header From" do
         # Ele coloca as aspas por que reconhece que existe um caracter UTF-8 (acento)
-        @mailer.header['From'].to_s.should == "ContaCal <contato@contacal.com.br>"
+        @mailer.header['From'].to_s.should == "Info ContaCal <info@contacal.com.br>"
       end
       it "should not have more than one from address" do
         @mailer.from.size.should == 1
@@ -166,7 +166,7 @@ describe NotificationMailer do
       end
       it "should set correct header From" do
         # Ele coloca as aspas por que reconhece que existe um caracter UTF-8 (acento)
-        @mailer.header['From'].to_s.should == "ContaCal <contato@contacal.com.br>"
+        @mailer.header['From'].to_s.should == "Info ContaCal <info@contacal.com.br>"
       end
       it "should not have more than one from address" do
         @mailer.from.size.should == 1
@@ -241,7 +241,7 @@ describe NotificationMailer do
       end
       it "should set correct header From" do
         # Ele coloca as aspas por que reconhece que existe um caracter UTF-8 (acento)
-        @mailer.header['From'].to_s.should == "ContaCal <contato@contacal.com.br>"
+        @mailer.header['From'].to_s.should == "Info ContaCal <info@contacal.com.br>"
       end
       it "should not have more than one from address" do
         @mailer.from.size.should == 1

@@ -4,7 +4,7 @@
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "ContaCal <contato@contacal.com.br>"
+  config.mailer_sender = "Info ContaCal <info@contacal.com.br>"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
