@@ -1,7 +1,7 @@
 <p>Bom dia!</p>
 <% if @user.status == 1 or @user.status == 10 %>
-<%- dias_falta = user.expire_at - Date.today -%>
-<%- if dias_falta >= 5 -%>
+<% dias_falta = user.expire_at - Date.today %>
+<% if dias_falta >= 5 %>
 <p>Você tem 5 dias para experimentar o ContaCal, sistema para registro de refeições que conta calorias e ajuda você a ter uma alimentação mais saudável e balanceada. Veja abaixo alguns links úteis para você aproveitar ao máximo o sistema:</p>
 <ul>
   <li><a href="http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal/">Como registrar sua alimentação no ContaCal?</a></li>
@@ -9,28 +9,28 @@
   <li><a href="http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/">Qual o limite de calorias indicado?</a></li>
 </ul>
 <p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<%- elsif dias_falta == 4 -%>
+<% elsif dias_falta == 4 %>
 <p>Você ainda tem 4 dias para experimentar o ContaCal. E aí, você está gostando?</p>
 <p>Você sabia que pessoas que mantêm diários de sua alimentação perdem até o dobro do peso que as que não têm o registro? Confira essa e outras dicas em nosso <a href=http://www.contacal.com.br/20-dicas-para-vc-emagrecer>blog</a>.</p>
 <p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<%- elsif dias_falta == 3 -%>
+<% elsif dias_falta == 3 %>
 <p>Você ainda tem 3 dias para experimentar o ContaCal. E aí, você está gostando?</p>
 <p>Conheça <a href=http://www.contacal.com.br/testemunhos>histórias</a> de quem está usando o ContaCal e conseguiu ótimos resultados!</p>
 <p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<%- elsif dias_falta == 2 -%>
+<% elsif dias_falta == 2 %>
 <p>Você tem mais 2 dias para experimentar o ContaCal! Aproveite! :-)</p>
 <p>Você sabia que é possível <a href=http://www.contacal.com.br/programe-suas-proximas-refeicoes-no-contacal>programar suas próximas refeições</a> no ContaCal? Com isso você mesmo pode criar sua dieta caprichando nas calorias verdes e sem exagerar nas vermelhas!</p>
 <p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<%- elsif dias_falta == 1 -%>
+<% elsif dias_falta == 1 %>
 <p>Você tem mais 1 dia para experimentar o ContaCal! Aproveite! :-)</p>
 <p>No ContaCal é possível registrar não só suas refeições como também <a href=http://www.contacal.com.br/registre-tambem-suas-atividades>suas atividades físicas</a>.</p>
 <p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<%- elsif dias_falta < 1 -%>  
+<% elsif dias_falta < 1 %>  
 <p>Seu período de experiência do ContaCal acabou... :-(</p>
 <p>Mas se você gostou, junte-se a mais de 10.000 contadores de calorias e torne-se um assinante hoje mesmo!</p>
 <p>Para se tornar assinante, basta acessar o <a href=http://app.contacal.com.br/payment>ContaCal</a> e escolher a opção de pagamento que desejar, cartão ou boleto.</p>
-<% end -%>
-<%- end -%> 
+<% end %>
+<% end %> 
 
 <p>Veja como está sua evolução no ContaCal e não deixe de registrar suas refeições de hoje.</p>
 <p>Lembre-se, só se melhora aquilo que se mede!</p>
@@ -40,26 +40,26 @@
   <img src='<%= root_url %>images/a.png' alt='' /> <%= number_with_precision(percent_kcal_kind_a, :precision => 0) %>%
   <img src='<%= root_url %>images/b.png' alt='' /> <%= number_with_precision(percent_kcal_kind_b, :precision => 0) %>%
   <img src='<%= root_url %>images/c.png' alt='' /> <%= number_with_precision(percent_kcal_kind_c, :precision => 0) %>%
-<% end -%>
+<% end %>
 
-<%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
+<% [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| %>
   <% next if @user.consumed_kcal(:date => @date, :meal => meal).zero? %>
   <div class="meal-box">
     <h2 style="color: #696969; font-size: 16px"><%=t "dashboard.index.#{meal}" %> (<%= number_with_precision(@user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %> Kcal)</h2>
     <ul id="foods-<%= meal %>">
       <% @user.consumed_foods(:date => @date, :meal => meal).each do |user_food| %>
         <li><%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)} x #{user_food.food.kcal} Kcal</em> = <strong>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)} Kcal</strong> <img src='#{root_url}images/#{user_food.food.kind}.png' alt='' />".html_safe %></li>
-      <% end -%>
+      <% end %>
     </ul>
   </div>
-<%- end -%>
+<% end %>
 
 <% if @user.id == 22 %>
-<% if @user.spent_kcal(:date => @date) > 0 %>
+  <% if @user.spent_kcal(:date => @date) > 0 %>
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.spent_kcal(:date => @date), :precision => 0) %> Kcal gastas ontem.</h1>
-<% else %>
+  <% else %>
 <p>Você também pode registrar suas atividades físicas no ContaCal. veja como em <a href=http://contacal.com.br/registre-tambem-suas-atividades>nosso blog</a>.</p>
-<% end %>
+  <% end %>
 
 <p><%= link_to 'Acompanhe Online', root_url, :style => "color: #1E69B4;" %> | <%= link_to 'Veja o relatório dos últimos 7 dias', report_url, :style => "color: #1E69B4;" %></p>
 <p>Você sabia que pessoas que mantêm diários de sua alimentação perdem até o dobro do peso que as que não têm o registro?</p>
