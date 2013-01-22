@@ -244,7 +244,8 @@ section[role="main"] .title {
   margin: 8px 0 0 0;
   text-shadow: 0px 1px 0 #fff;
   font-size: .8em;
-  color: #5e5e5e;
+  color: #5e5e5e;  
+  margin-right: 17px;
 }
 
 section[role="main"] a#report {
@@ -353,7 +354,8 @@ section[role="main"] #progress {
   box-shadow: 0 2px 2px #aaa;
   font-size: .6em;
   text-shadow: 0px 1px 1px #fff;
-  color: #000;
+  color: #000; 
+  float: right;
 }
 
 section[role="main"] #progress .progressbar {
