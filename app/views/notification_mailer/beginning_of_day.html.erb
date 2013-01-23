@@ -57,6 +57,17 @@
 <% if @user.id == 22 %>
   <% if @user.spent_kcal(:date => @date) > 0 %>
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.spent_kcal(:date => @date), :precision => 0) %> Kcal gastas ontem.</h1>
+<% [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| %>
+  <% next if @user.spent_kcal(:date => @date, :meal => meal).zero? %>
+  <div class="meal-box">
+    <h2 style="color: #696969; font-size: 16px"><%=t "dashboard.index.#{meal}" %> (<%= number_with_precision(@user.spent_kcal(:date => @date, :meal => meal), :precision => 0) %> Kcal)</h2>
+    <ul id="foods-<%= meal %>">
+      <% @user.exercises(:date => @date, :meal => meal).each do |user_food| %>
+        <li><%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)} x #{user_food.food.kcal} Kcal</em> = <strong>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)} Kcal</strong> <img src='#{root_url}images/#{user_food.food.kind}.png' alt='' />".html_safe %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
   <% else %>
 <p>Você também pode registrar suas atividades físicas no ContaCal. veja como em <a href=http://contacal.com.br/registre-tambem-suas-atividades>nosso blog</a>.</p>
   <% end %>
