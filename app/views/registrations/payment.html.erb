@@ -30,7 +30,7 @@
   <%- end -%>
 <%- end -%>
 
-<table border=0 cellspacing=0 cellpadding=14>
+<table border=0 cellspacing=0 cellpadding=15>
   <tr bgcolor=#ffffff>
   	<td bgcolor=#ffffff></td>
 	<td bgcolor=#ffffff align=center valign=top>
@@ -53,13 +53,13 @@
   <td colspan=4>
 	<font size=1><strong>Temos também opção de pagamento com boleto:</strong><br/>
 <%- if !user.bank_billet_link.nil? -%>
-	   &bull; <a target=_blank href=<%=user.bank_billet_link%>>Mensal (R$ 12,80)</a> (Como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.)<br/> 
+	   &bull; <a target=_blank href=<%=user.bank_billet_link%>>Mensal</a> (R$ 12,80 - como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.)<br/> 
 <%- end -%>
 <%- if !user.bank_billet_link_6.nil? -%>
-	   &bull; <a target=_blank href=<%=user.bank_billet_link_6%>>Semestral (R$ 55,80)</a> (5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>)<br/>
+	   &bull; <a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a> (R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>)<br/>
 <%- end -%>
 <%- if !user.bank_billet_link_12.nil? -%>
-	   &bull; <a target=_blank href=<%=user.bank_billet_link_12%>>Anual (R$ 93,60)</a> (20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>)<br/>
+	   &bull; <a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a> (R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>)<br/>
 <%- end -%>
        <strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte.<br/>
 </font>
