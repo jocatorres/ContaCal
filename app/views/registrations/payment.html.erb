@@ -31,7 +31,8 @@
 <%- end -%>
 
 <table border=0 cellspacing=0 cellpadding=15>
-  <tr bgcolor=#cdcdcd>
+  <tr bgcolor=#ffffff>
+  	<td bgcolor=#ffffff></td>
 	<td bgcolor=#ffffff align=center valign=top>
 		<a onMouseOver="this.style.textDecoration='none'"
 		   onMouseOut="this.style.textDecoration='none'" href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC><img src="/images/paypal.png"></a><br>
@@ -49,7 +50,7 @@
   </tr>
 <%- if !user.bank_billet_link.nil? or !user.bank_billet_link_6.nil? or !user.bank_billet_link_12.nil?-%>
 <tr>
-  <td colspan=3>
+  <td colspan=4>
 	<font size=1><strong>Temos também opção de pagamento com boleto:</strong><br/>
 <%- if !user.bank_billet_link.nil? -%>
 	   &bull; <a target=_blank href=<%=user.bank_billet_link%>>Mensal (R$ 12,80)</a> (Como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.)<br/> 
@@ -67,7 +68,7 @@
 <%- end -%>
 </table>        
 
-<br/><br/>   
+<br/>
 <p>
   <%= link_to "&laquo; voltar para o programa".html_safe, root_path %>
 </p>
