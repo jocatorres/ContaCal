@@ -36,6 +36,13 @@
 <p>Lembre-se, só se melhora aquilo que se mede!</p>
 
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas ontem.</h1>
+<% if @user.id == 22 %>
+   <% if @user.consumed_kcal(:date => @date).zero? %>
+     Você não registrou nada ontem. Como escrevemos <%= link_to 'nesse artigo', "http://www.contacal.com.br/o-contacal-so-e-util-para-quem-usa-todo-dia/", :style => "color: #1E69B4;" %>, isso não é um problema, mas quando possível, procure registrar suas refeições para continuar mantendo o controle da qualidade das calorias ingeridas.
+   <% elsif @user.consumed_kcal(:date => @date) < 800 %> 
+     Você registrou todas as calorias de ontem? Seu número de calorias ingeridas parece baixo.
+   <% end %>
+<% end %>
 <% if !@user.consumed_kcal(:date => @date).zero? %>
   <img src='<%= root_url %>images/a.png' alt='' /> <%= number_with_precision(percent_kcal_kind_a, :precision => 0) %>%
   <img src='<%= root_url %>images/b.png' alt='' /> <%= number_with_precision(percent_kcal_kind_b, :precision => 0) %>%
@@ -54,7 +61,6 @@
   </div>
 <% end %>
 
-<% if @user.id == 22 %>
   <% if @user.spent_kcal(:date => @date) > 0 %>
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.spent_kcal(:date => @date), :precision => 0) %> Kcal em atividades físicas ontem:</h1>
 <% [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| %>
@@ -70,7 +76,6 @@
   <% else %>
 <p>Você também pode registrar suas atividades físicas no ContaCal. Veja como em <a href=http://contacal.com.br/registre-tambem-suas-atividades>nosso blog</a>.</p>
   <% end %>
-<% end %>
 
 <p><%= link_to 'Acompanhe Online', root_url, :style => "color: #1E69B4;" %> | <%= link_to 'Veja o relatório dos últimos 7 dias', report_url, :style => "color: #1E69B4;" %></p>
 <p>Você sabia que pessoas que mantêm diários de sua alimentação perdem até o dobro do peso que as que não têm o registro?</p>
