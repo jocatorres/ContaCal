@@ -38,9 +38,19 @@
 <h1 style="color: #6BA16C; font-size: 20px"><%= number_with_precision(@user.consumed_kcal(:date => @date), :precision => 0) %> Kcal consumidas ontem.</h1>
 <% if @user.id == 22 %>
    <% if @user.consumed_kcal(:date => @date).zero? %>
-     Você não registrou nada ontem. Como escrevemos <%= link_to 'nesse artigo', "http://www.contacal.com.br/o-contacal-so-e-util-para-quem-usa-todo-dia/", :style => "color: #1E69B4;" %>, isso não é um problema, mas quando possível, procure registrar suas refeições para continuar mantendo o controle da qualidade das calorias ingeridas.
+     <p>Você não registrou nada ontem. Como escrevemos <%= link_to 'nesse artigo', "http://www.contacal.com.br/o-contacal-so-e-util-para-quem-usa-todo-dia/", :style => "color: #1E69B4;" %>, isso não é um problema, mas quando possível, procure registrar suas refeições para continuar mantendo o controle da qualidade das calorias ingeridas.</p>
    <% elsif @user.consumed_kcal(:date => @date) < 800 %> 
-     Você registrou todas as calorias de ontem? Seu número de calorias ingeridas parece baixo.
+     <p>Você registrou todas as calorias de ontem? Seu número de calorias ingeridas parece baixo.</p>
+   <% elsif percent_kcal_kind_c > 15 && percent_kcal_kind_b > 40 %>
+     <p>Parece que vc exagerou na calorias vermelhas e amarelas... Procure manter as calorias vermelhas em 10% ou menos e as amarelas em 35% ou menos do total de calorias ingeridas.</p>
+   <% elsif percent_kcal_kind_c > 15 %>
+     <p>Parece que vc exagerou na calorias vermelhas... Procure manter as calorias vermelhas em 10% ou menos.</p>
+   <% elsif percent_kcal_kind_b > 40 %>
+     <p>Parece que vc exagerou na calorias amarelas... Procure manter as amarelas em 35% ou menos do total de calorias ingeridas.</p>
+   <% elsif percent_kcal_kind_c > 10 || percent_kcal_kind_b > 35 %>
+     <p>Vc foi bem ontem! Está quase nos padrões recomendados. Mais um pouquinho vc chega lá. Procure manter as calorias vermelhas em 10% ou menos e as amarelas em 35% ou menos do total de calorias ingeridas.</p>
+   <% else %>
+     <p>Excelente!!! Sua alimentação ontem foi dentro dos padrões recomendados. Continue assim! :-)</p>
    <% end %>
 <% end %>
 <% if !@user.consumed_kcal(:date => @date).zero? %>
