@@ -70,21 +70,26 @@
   </tr>-->
   <tr>
 	<td bgcolor=#ffffff></td>
-	<td bgcolor=#ffffff align=center valign=top><img width=85% src=/images/boleto.png>
+	<td bgcolor=#ffffff align=center valign=top><small><img width=85% src=/images/boleto.png><br/>
+		<a target=_blank href=<%=user.bank_billet_link%>>Mensal</a><br/>
+		<a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a><br/>
+		<a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>
+		
+		
 	</td>
 	<td bgcolor=#ffffff></td>
     <td colspan=7><font size=2> 
 	Temos também opção de assinatura com boleto:<br><br>
 <%- if !user.bank_billet_link.nil? -%>
-	   <li> <a target=_blank href=<%=user.bank_billet_link%>>Mensal</a> (R$ 12,80 - como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.)</li>
+	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Mensal</a>:</strong> R$ 12,80 - como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.</li>
 <%- end -%>
 <%- if !user.bank_billet_link_6.nil? -%>
-	   <li> <a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a> (R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>)</li>
+	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong></li>
 <%- end -%>
 <%- if !user.bank_billet_link_12.nil? -%>
-	   <li> <a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a> (R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>)</li>
+	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong></li>
 <%- end -%>
-    <br><strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte.
+    <br><strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
     </td>
   </tr>
 <!--  <tr bgcolor=#ffffff>
