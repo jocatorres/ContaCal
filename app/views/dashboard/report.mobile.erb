@@ -1,0 +1,29 @@
+<h1 id="report-title">
+    <% if @days == 30 %>
+      <span style="float: right">
+	      <%= link_to '7 dias'.html_safe, report_path %> | <%= link_to 'ano'.html_safe, report_path(:range => 'year') %>
+      </span>
+      Relatório de controle de calorias ingeridas nos últimos 30 dias
+    <% elsif @days == 365 %>
+    <span style="float: right">
+      <%= link_to '7 dias'.html_safe, report_path %> | <%= link_to '30 dias'.html_safe, report_path(:range => 'month') %>
+    </span>
+    Relatório de controle de calorias ingeridas no último ano
+    <% else %>
+      <span style="float: right">
+        <%= link_to '30 dias'.html_safe, report_path(:range => 'month') %> | <%= link_to 'ano'.html_safe, report_path(:range => 'year') %>
+      </span>
+      Relatório de controle de calorias ingeridas nos últimos 7 dias
+    <% end -%>
+</h1>
+
+<div id="graph">&nbsp;</div>
+<script src='https://www.google.com/jsapi'></script>
+<%= raw @graph.to_js("graph") %>
+
+<p>
+  <%= link_to "&laquo; voltar para o programa".html_safe, root_path %>
+<span style="float: right">
+  <%= link_to "ver relatório de peso  &raquo;".html_safe, weight_report_path %>
+</span>
+</p>

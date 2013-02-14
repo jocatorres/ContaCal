@@ -1,0 +1,24 @@
+<h1 id="report-title">
+    <% if @days == 365 %>
+      <span style="float: right">
+        <%= link_to 'Ver últimos 30 dias &raquo;'.html_safe, weight_report_path %>
+      </span>
+      Relatório de controle de peso no último ano
+    <% else %>
+      <span style="float: right">
+        <%= link_to 'Ver evolução no ano &raquo;'.html_safe, weight_report_path(:range => 'year') %>
+      </span>
+      Relatório de controle de peso nos últimos 30 dias
+    <% end -%>
+</h1>
+
+<div id="graph">&nbsp;</div>
+<script src='https://www.google.com/jsapi'></script>
+<%= raw @graph.to_js("graph") %>
+
+<p>
+  <%= link_to "&laquo; voltar para o programa".html_safe, root_path %>
+<span style="float: right">
+  <%= link_to "ver relatório de calorias ingeridas &raquo;".html_safe, report_path %>
+</span>
+</p>

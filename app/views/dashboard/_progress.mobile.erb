@@ -1,0 +1,13 @@
+<% if total_kcal.zero? %>
+  <div class="progressbar"><span>Não contabilizado</span></div>
+<% else %>
+  <% if !percent_kcal_kind_a.zero? %>
+    <div id="nice" class="progressbar" style="width: <%= number_with_precision(percent_kcal_kind_a, :precision => 3, :separator => ".") %>%"><span><%= number_with_precision(percent_kcal_kind_a, :precision => 0) %>%</span></div>
+  <% end %>
+  <% if !percent_kcal_kind_b.zero? %>
+    <div id="fair" class="progressbar" style="width: <%= number_with_precision(percent_kcal_kind_b, :precision => 3, :separator => ".") %>%"><span><%= number_with_precision(percent_kcal_kind_b, :precision => 0) %>%</span></div>
+  <% end %>
+  <% if !percent_kcal_kind_c.zero? %>
+    <div id="poor" class="progressbar" style="width: <%= number_with_precision(percent_kcal_kind_c, :precision => 3, :separator => ".") %>%"><span><%= number_with_precision(percent_kcal_kind_c, :precision => 0) %>%</span></div>
+  <% end %>
+<% end -%>

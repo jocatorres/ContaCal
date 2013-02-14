@@ -1,0 +1,163 @@
+<% content_for :header_info do %>
+<!--  <div id="kcal-limit">
+    <%= link_to "Limite diário de calorias", "http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/", :target => '_blank' %>:
+    <br />
+    <% if current_user.kcal_limit.nil? %>
+      <span id="kcal-limit-value"><%= link_to "0 Kcal", '#', :id => 'kcal-limit-link' %></span>
+      <span id="change-kcal-label">definir</span>
+    <% else %>
+      <span id="kcal-limit-value"><%= link_to "#{current_user.kcal_limit} Kcal", '#', :id => 'kcal-limit-link' %></span>
+      <span id="change-kcal-label">alterar</span>
+    <% end -%>
+    
+    <%= form_tag(kcal_limit_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
+      <%= text_field_tag :kcal_limit, current_user.kcal_limit %>
+      <%= submit_tag "Atualizar" %> 
+    <% end -%>
+  </div>-->
+<div id="kcal-limit">
+  <% peso = current_user.user_weight.find_by_date(l(@date).to_date) %>  
+  <%- if (Date.today == l(@date).to_date) -%>
+  Seu <%= link_to "peso", weight_report_url %> atual:  
+  <%- else -%>
+  Seu  <%= link_to "peso", weight_report_url %> em <%= l(@date) %>:
+  <%- end -%>
+  <br/>
+  <% if current_user.user_weight.find_by_date(l(@date).to_date).nil? %>
+    <span id="kcal-limit-value"><%= link_to "não informado", '#', :id => 'kcal-limit-link' %></span>
+  <% else %>
+    <span id="kcal-limit-value"><%= link_to "#{peso.weight} Kg", '#', :id => 'kcal-limit-link' %></span>
+  <% end -%>
+  <span id="change-kcal-label">alterar</span>
+  <%= form_tag(user_weight_path, :remote => true, :method => :put, :id => 'kcal-limit-form', :style => 'display: none') do |f| %>
+  <%= hidden_field_tag :date, l(@date).to_date %>
+  <% if current_user.user_weight.find_by_date(l(@date).to_date).nil? %>
+    <%= hidden_field_tag :user_foods_id, 0 %>
+    <%= text_field_tag :kcal_limit, 0 %>
+  <% else %>
+    <%= hidden_field_tag :user_foods_id, peso.id %>
+    <%= text_field_tag :kcal_limit, peso.weight %>
+  <% end -%>
+    <%= submit_tag "Atualizar" %> 
+  <% end -%>
+</div> 
+<% end %>
+
+
+
+
+
+
+
+<%= javascript_tag %{
+$(function() {
+  $('#kcal-limit-link').click(function() {
+    $('#kcal-limit-value').hide();
+    $('#change-kcal-label').hide();
+    $('#kcal-limit-form').show();
+    $('#kcal_limit').focus();
+    $('#kcal_limit').select();
+    return false;
+  });
+});
+} %>
+
+
+
+
+
+<div id="kcal-measure">
+  <div class="title">Total: <strong><span id="total-kcal"><%= display_daily_total(current_date) %></span></strong> 
+		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
+          de <strong><a href="/users/edit"><%= current_user.kcal_limit %></a></strong> Kcal diários 
+	    <%- else -%>
+	      Kcal
+	    <%- end -%>
+	    
+	</div>
+  <div id="progress">
+    <%= render :partial => "progress" %>
+  </div>
+</div>
+
+
+<%= link_to "Relatório", report_url, :id => "report" %>
+
+<!--div id="weight-info">
+  <div class="title">Seu peso:</div>
+  <div id="weight">89kg</div>
+</div-->
+
+<nav>
+  <div id="prev-date"><%= link_to 'anterior', dashboard_path(:year => @previous_day.year, :month => "%02d" % @previous_day.month, :day => "%02d" % @previous_day.day) %></div>
+  <% if l(@date) != l(Date.today) %>
+    <div id="current-date" class="not-today"><%= link_to "Voltar para hoje", root_url %> <a href="#" id="toggle-calendar"><%= l(@date) %></a></div>
+  <% else %>
+    <div id="current-date"><a href="#" id="toggle-calendar"><%= l(@date) %></a></div>
+  <% end %>
+  <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
+<!--  <% if l(@date) != l(Date.today) %>
+    <div id="next-date"><%= link_to 'próximo', dashboard_path(:year => @next_day.year, :month => "%02d" % @next_day.month, :day => "%02d" % @next_day.day) %></div>
+  <% end %>-->
+</nav>
+
+<div id="calendar"></div>
+
+<div id="program-result">
+  <%= render 'program_result' %>
+</div>
+
+<%= form_tag do -%>
+  <%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
+    <div class="meal-box">
+      <h2><span class="total-kcal"><span id="total-kcal-<%= meal %>"><%= number_with_precision(current_user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %></span> Kcal</span><%=t ".#{meal}" %></h2>
+      <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal, :placeholder => "Adicione um alimento" -%>
+      <div class="meals">
+        <ul id="foods-<%= meal %>">
+          <%= render current_user.foods_and_exercises(:date => @date, :meal => meal), :as => 'user_food' %>
+        </ul>
+      </div>
+    </div>
+  <%- end -%>
+  
+  <div style="clear: both; margin-bottom: 20px"></div>
+<%- end -%>
+
+<%= javascript_tag %{
+$(function() {
+  $('.food_name_autocomplete').bind('railsAutocomplete.select', function(event, data){
+    $.ajax({
+      type: 'POST',
+      url: "#{user_foods_url}",
+      dataType: "script",
+      data: {
+        user_food: {
+          date: '#{@date.to_s(:db)}',
+          food_id: data.item.id,
+          meal: $(this).attr('data-meal')
+        }
+      }
+    });
+    $(this).val('');
+  });
+
+  $('.food_name_autocomplete').bind('autocompleteopen', function(event, data){
+    $('.ui-autocomplete').append('<li class="ui-menu-item-link">#{link_to 'Sugerir cadastro de alimento ou exercício', new_food_path, :class => 'ui-corner-all'}</li>');
+  });
+  
+  $('#calendar').datepicker({
+    inline: true,
+    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+    dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+//    maxDate: #{l(Date.today)},
+    prevText: "Anterior",
+    nextText: "Próximo",
+    onSelect: function(dateText, inst) {
+      new_date = dateText.split("/")
+      location.href = "/" + new_date[2] + "/" + new_date[0] + "/" + new_date[1]
+    }
+  });
+});
+} %>
