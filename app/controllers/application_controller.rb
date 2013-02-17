@@ -30,6 +30,6 @@ class ApplicationController < ActionController::Base
   
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]
-    request.format = :mobile if mobile_device?
+    request.format = :mobile if mobile_device? && !request.xhr?
   end
 end
