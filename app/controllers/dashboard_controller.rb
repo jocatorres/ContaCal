@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
     where_clause = "kind <> 'h' and "
     where_clause << pieces.join(" and ")
     
-    @foods = Food.where(where_clause, *terms).limit(100).all
+    @foods = Food.where(where_clause, *terms).limit(300).all
     if @foods.empty?
       @foods << Food.new(:name => "#{params[:term]} não encontrado.")
     else
