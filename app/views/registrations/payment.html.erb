@@ -1,6 +1,6 @@
 <h1 id="report-title">Opções de pagamento</h1>
 
-<%- if  user.bank_billet_expire_at.nil? or (!user.bank_billet_expire_at.nil? and user.bank_billet_expire_at < Date.today) -%>
+<%- if  user.bank_billet_expire_at.nil? or (!user.bank_billet_expire_at.nil? and user.bank_billet_expire_at < Date.today - 1) -%>
     <%- user.update_attribute(:bank_billet_link, nil) -%>
     <%- user.update_attribute(:bank_billet_link_6, nil) -%>
     <%- user.update_attribute(:bank_billet_link_12, nil) -%>
