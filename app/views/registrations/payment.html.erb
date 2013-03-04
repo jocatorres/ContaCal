@@ -1,7 +1,14 @@
 <h1 id="report-title">Opções de pagamento</h1>
 
-<%- date_expire = Date.today+20 -%>
+<%- if  user.bank_billet_expire_at.nil? or (!user.bank_billet_expire_at.nil? and user.bank_billet_expire_at < Date.today) -%>
+    <%- user.update_attribute(:bank_billet_link, nil) -%>
+    <%- user.update_attribute(:bank_billet_link_6, nil) -%>
+    <%- user.update_attribute(:bank_billet_link_12, nil) -%>
+<%- end -%>
+
+<%- date_expire = Date.today+10 -%>
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
+
 <%- if  user.bank_billet_link.nil? -%>
   <%- description = "R$ 12,80 = 9,80 (valor mensal) + 3,00 (taxa de emissão de boleto)\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
   <%- bb = Cobregratis::BankBillet.new(:amount => 12.80, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
