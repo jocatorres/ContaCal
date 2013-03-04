@@ -1,5 +1,7 @@
 <h1 id="report-title">Opções de pagamento</h1>
 
+<!--<%= user.bank_billet_our_number %>-->
+
 <%- date_expire = Date.today+20 -%>
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
 <%- if  user.bank_billet_link.nil? -%>
@@ -29,7 +31,6 @@
     <%- sleep(1) -%>
   <%- end -%>
 <%- end -%>        
-
 <table border=0 cellspacing=0 cellpadding=15>
   <tr bgcolor=#ffffff>
   	<td colspan=7 bgcolor=#ffffff><font size=3>Temos opção de assinatura com cartão de crédito via PayPal ou PagSeguro. Escolha a que lhe convier:<br></td>
