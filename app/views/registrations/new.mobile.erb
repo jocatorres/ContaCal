@@ -15,12 +15,12 @@
   <p><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation, :autocomplete => "off" %></p>
   
-  <p><%= f.label :referred_by_email %>  Ela pode ganhar <%= link_to "prêmios", '/indique.html', :class => "terms-of-use-fancybox" %>!<br />
-  <%= f.email_field :referred_by_email %></p>
+<!--  <p><%= f.label :referred_by_email %>  Ela pode ganhar <%= link_to "prêmios", '/indique.html', :class => "terms-of-use-fancybox" %>!<br />
+  <%= f.email_field :referred_by_email %></p>-->
 
   <p><%= f.submit "Cadastre-se" %></p>
   
-  <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.html', :class => "terms-of-use-fancybox" %>.</p>
+  <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.mobile.html', :class => "terms-of-use-fancybox" %>.</p>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
@@ -28,7 +28,7 @@
   
   <script type="text/javascript">
     $(document).ready(function(){
-      $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '80%', height: '80%'});
+      $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '120%', height: '120%'});
     });
   </script>
 <% end %>

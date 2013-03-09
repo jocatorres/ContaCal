@@ -10,7 +10,8 @@ pt_BR:
 
   devise:
     failure:
-      unauthenticated: 'Para continuar, faça login ou registre-se.'
+        #      unauthenticated: 'Para continuar, faça login ou registre-se.'
+      unauthenticated: ''
       unconfirmed: 'Antes de continuar, confirme a sua conta.'
       locked: 'A sua conta está bloqueada.'
       invalid: 'Email ou senha inválidos.'
