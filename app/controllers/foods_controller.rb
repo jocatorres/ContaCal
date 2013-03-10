@@ -16,7 +16,7 @@ class FoodsController < ApplicationController
       @food.update_attribute(:kind, "h")      
       @food.update_attribute(:suggester_id, current_user.id)
       @food.save
-      redirect_to new_food_path, notice: '<center>Sua sugestão foi enviada com sucesso!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+      redirect_to new_food_path, notice: '<center>Sugestão enviada com sucesso!</center>'
     else
       @food.errors.add(:name, :empty)
       render action: "new"
