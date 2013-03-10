@@ -32,7 +32,7 @@ body#users-engine h1 {
 }
 
 section[role="main"] h1#report-title {
-  margin: 12px 0 30px;
+  margin: 12px 5px 30px;
 }
 
 h2 {
@@ -57,19 +57,19 @@ h4 {
 header {
   display: block;
   margin: auto;
-  width: 256px;
-  height: 100px;
+  width: 200px;
   padding: 10px;
 }
 
 header #logo {
-  float: left;
+  display: block;
   width: 200px;
-  height: 65px;
+  height: 80px;
+  text-indent: -9999px;
 }
 
 body#users-engine header {
-  height: auto;
+  height: 90px;
 }
 
 body#users-engine #logo {
@@ -156,11 +156,13 @@ header #peso #change-peso-label {
 /* SUBSCRIBER */
 
 header #subscriber {
-    width: 360px;
-	font-size: .8em; 
-    float: right;
-	text-align: right;
-	position: relative; left: 0px; top: -10px
+/*    width: 360px;*/
+/*	font-size: .8em; */
+/*    float: right;*/
+	text-align: center;
+	position: relative; 
+/*	left: 0px; */
+	top: -8px
 }
 
 
@@ -169,8 +171,8 @@ header #subscriber {
 section[role="main"] {
   display: block;
   margin: auto;
-  padding: 0 20px;
-  width: 920px;
+  padding: 0 5px;
+  width: 280px;
   border: 1px solid #ddd;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -216,8 +218,8 @@ body#users-engine section[role="main"] #registration {
   width: 222px;
   height: 72px;
   margin: 0 0 0 -38px;
-  padding: 7px 0 0 30px;
-  background: transparent url(/images/ribbon.png) no-repeat 0 0;
+  padding: 7px 0 0 50px;
+  background: transparent url(/images/ribbon.png) no-repeat 15px 0;
 }
 
 body#users-engine section[role="main"] #registration a {
@@ -267,20 +269,20 @@ section[role="main"] a#report:hover {
 
 
 section[role="main"] #kcal-measure {
-  float: right;
+/*  float: right;*/
 }
 
 section[role="main"] nav {
   display: block;
-  width: 340px;
-  height: 50px;
+  width: 160px;
+  height: 20px;
   margin: 0 auto 20px;
 }
 
 section[role="main"] nav #prev-date,
 section[role="main"] nav #next-date,
 section[role="main"] nav #current-date {
-  margin: 16px 0 0 0;
+  margin: 20px 0 3px 0;
   font-size: 1.4em;
   text-shadow: 0px 1px 0 #fff;
   color: #696969;
@@ -303,7 +305,7 @@ section[role="main"] nav #current-date a:hover {
 }
 
 section[role="main"] nav #current-date.not-today {
-  margin: 5px 0 0 0;
+  margin: 9px 0 0 0;
 }
 
 section[role="main"] nav #current-date.not-today #toggle-calendar {
@@ -311,11 +313,11 @@ section[role="main"] nav #current-date.not-today #toggle-calendar {
 }
 
 section[role="main"] nav #prev-date {
-  margin: 20px 10px 0 0;
+  margin: 24px 10px 0 0;
 }
 
 section[role="main"] nav #next-date {
-  margin: 20px 0 0 10px;
+  margin: 24px 0 0 10px;
 }
 
 section[role="main"] nav #prev-date a,
@@ -346,7 +348,7 @@ section[role="main"] nav #next-date a:hover {
 
 section[role="main"] #progress {
   margin-right: 17px;
-  width: 293px;
+  width: 277px;
   height: 20px;
   border: 1px solid #ddd;
   background-color: #fff;
@@ -356,7 +358,7 @@ section[role="main"] #progress {
   font-size: .6em;
   text-shadow: 0px 1px 1px #fff;
   color: #000; 
-  float: right;
+/*  float: right;*/
 }
 
 section[role="main"] #progress .progressbar {
@@ -381,7 +383,7 @@ section[role="main"] #progress #poor {
 }
 
 section[role="main"] .meal-box {
-  width: 280px;
+  width: 259px;
   height: 370px;
   margin: 10px 5px 5px 5px;
   padding: 5px;
@@ -455,14 +457,14 @@ section[role="main"] .meal-box .meals ul li a.remove:hover {
 
 section[role="main"] #program-result {
   clear: both;
-  margin: 20px 18px 0 6px;
+  margin: 20px 5px 0 6px;
 }
 
 /* CALENDAR */
 
 #calendar {
   position: absolute;
-  margin: -20px 0 0 270px;
+  margin: -20px 0 0 40px;
   display: none;
 }
 
@@ -533,7 +535,7 @@ form #kcal_limit {
 }
 
 section[role="main"] .meal-box input[type="text"] {
-  width: 260px;
+  width: 241px;
 }
 
 form input[type="submit"],
@@ -606,7 +608,7 @@ body#users-engine section[role="main"] form input[type="password"] {
   color: #333;
   padding: 3px 3px 1px 32px;
   line-height: 1.4em;
-  font-size: 1em;
+  font-size: 0.8em;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;

@@ -40,12 +40,11 @@
   <%- end -%>
 <%- end -%>        
 
-<table border=0 cellspacing=0 cellpadding=15>
+<table border=0 cellspacing=0 cellpadding=5>
   <tr bgcolor=#ffffff>
-  	<td colspan=7 bgcolor=#ffffff><font size=3>Temos opção de assinatura com cartão de crédito via PayPal ou PagSeguro. Escolha a que lhe convier:<br></td>
+  	<td bgcolor=#ffffff><font size=2>Temos opção de assinatura com cartão de crédito via PayPal ou PagSeguro. Escolha a que lhe convier:<br><br></td>
   </tr>
   <tr bgcolor=#ffffff>
-  	<td bgcolor=#ffffff></td>
 	<td bgcolor=#ffffff align=center valign=top>                                                                                                                                         
 		<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_s-xclick">
@@ -57,49 +56,41 @@
 <!--   	<a href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC><img src="/images/paypal.png"></a><br>-->
 <!--		<%= link_to "&nbsp;&nbsp;Assinar!&nbsp;&nbsp;".html_safe, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC"  , :class => 'botao_assinar' %>-->
 	</td>
-  	<td bgcolor=#ffffff></td>
-    <td width=100% bgcolor=#ffffff valign=top><font size=3>
-<li> Assinatura mensal de apenas <strong>R$ 9,80</strong>.</li>
+	</tr>
+	<tr>
+		<tr>
+		<td bgcolor=#ffffff align=center valign=top><br>
+			<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
+			<input type="hidden" name="code" value="62C8E43828289E0AA483CF9167A4D845" />
+			<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+			</form>	
+	  </tr>
+    <td width=100% bgcolor=#ffffff valign=top><font size=2>
+<br><br>Assinatura mensal de apenas <strong>R$ 9,80</strong>.<br><br>
 <!--<li> Pagamento via PayPal ou PagSeguro, as formas <strong>mais seguras</strong> para pagar com cartão de crédito na internet.</li>-->
-<li> Sem nenhuma taxa adicional de cobrança.</li>
-<li> Liberação do acesso automática, minutos após o pagamento.</li>
-<li> Renovação automática para você registrar suas refeições todos os dias, sem interrupções.</li>
+Sem nenhuma taxa adicional de cobrança.<br><br>
+Liberação do acesso automática, minutos após o pagamento.<br><br>
+Renovação automática para você registrar suas refeições todos os dias, sem interrupções.<br><br>
 	</ul>
 	</td>
-  	<td bgcolor=#ffffff></td>
-	<td bgcolor=#ffffff align=center valign=top>
-		<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
-		<input type="hidden" name="code" value="62C8E43828289E0AA483CF9167A4D845" />
-		<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
-		</form>	
-  	<td bgcolor=#ffffff></td>
-  </tr>
+	</tr>
 <%- if !user.bank_billet_link.nil? or !user.bank_billet_link_6.nil? or !user.bank_billet_link_12.nil?-%>
 <!--  <tr bgcolor=#ffffff>
   	<td colspan=7 bgcolor=#ffffff><font size=2>Temos também opção de assinatura com boleto:<br></td>
   </tr>-->
-  <tr>
-	<td bgcolor=#ffffff></td>
-	<td bgcolor=#ffffff align=center valign=top><small><img width=85% src=/images/boleto.png><br/>
-		<a target=_blank href=<%=user.bank_billet_link%>>Mensal</a><br/>
-		<a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a><br/>
-		<a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>
-		
-		
-	</td>
-	<td bgcolor=#ffffff></td>
+	<tr>
     <td colspan=7><font size=2> 
 	Temos também opção de assinatura com boleto:<br><br>
 <%- if !user.bank_billet_link.nil? -%>
-	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Mensal</a>:</strong> R$ 12,80 - como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.</li>
+	<strong><a target=_blank href=<%=user.bank_billet_link%>>Mensal</a>:</strong> R$ 12,80 - como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.<br><br>
 <%- end -%>
 <%- if !user.bank_billet_link_6.nil? -%>
-	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.</li>
+	<strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.<br><br>
 <%- end -%>
 <%- if !user.bank_billet_link_12.nil? -%>
-	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>.</li>
+	<strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>.<br><br>
 <%- end -%>
-    <br><strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
+    <strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
     </td>
   </tr>
 <!--  <tr bgcolor=#ffffff>
