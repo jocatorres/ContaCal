@@ -696,13 +696,13 @@ section[role="main"] .meal-box .meals ul li {overflow:hidden; position:relative;
 .slide {clear:both; padding:4px 0;overflow:hidden;}
 
 .slide .slider {
-    margin: 3px 31px !important;
+    margin: 3px 22px !important;
 }    
 
 
 .sliderBt {
 	display:block;
-    border: 1px solid #CCC;
+/*    border: 1px solid #CCC;*/
     width: 17px;
     height: 17px;
 	line-height:30px;
@@ -710,15 +710,15 @@ section[role="main"] .meal-box .meals ul li {overflow:hidden; position:relative;
     line-height: 30px;  
 	font-size:18px;        
 	font-weight:bold;
-    background-color: #EEE !important;
-    color: #B0B0B0 !important;
+/*    background-color: #EEE !important;
+    color: #B0B0B0 !important;*/
     margin:0;
 	border-radius:5px;
 }
 .slide .sliderBt a {
     width: 17px;
     height: 17px;
-	line-height:19px;
+	line-height:17px;
 	display:block; 
 	color: #B0B0B0 !important; 
 	text-align:center;
