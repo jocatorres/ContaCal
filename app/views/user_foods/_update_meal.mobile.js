@@ -5,10 +5,3 @@ $('#progress').html('<%= escape_javascript(render :partial => "dashboard/progres
 $('#program-result').html('<%= escape_javascript(render :partial => "dashboard/program_result") %>');
 
 
-$(".meals ul li").mouseover(function() {
-  $(this).addClass("hover");
-  $(this).children("a.remove").show();
-}).mouseout(function() {
-  $(this).removeClass("hover");
-  $(this).children("a.remove").hide();
-});
