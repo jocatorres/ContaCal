@@ -696,19 +696,19 @@ section[role="main"] .meal-box .meals ul li {overflow:hidden; position:relative;
 .slide {clear:both; padding:4px 0;overflow:hidden;}
 
 .slide .slider {
-    margin: 10px 42px !important;
+    margin: 3px 31px !important;
 }    
 
 
 .sliderBt {
 	display:block;
     border: 1px solid #CCC;
-    width: 30px;
-    height: 30px;
+    width: 17px;
+    height: 17px;
 	line-height:30px;
     text-align: center;
     line-height: 30px;  
-	font-size:23px;        
+	font-size:18px;        
 	font-weight:bold;
     background-color: #EEE !important;
     color: #B0B0B0 !important;
@@ -716,9 +716,9 @@ section[role="main"] .meal-box .meals ul li {overflow:hidden; position:relative;
 	border-radius:5px;
 }
 .slide .sliderBt a {
-    width: 30px;
-    height: 30px;
-	line-height:30px;
+    width: 17px;
+    height: 17px;
+	line-height:19px;
 	display:block; 
 	color: #B0B0B0 !important; 
 	text-align:center;

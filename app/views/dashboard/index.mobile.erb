@@ -108,7 +108,7 @@ $(function() {
 
 <%= form_tag do -%>
   <%- [:breakfast, :brunch, :lunch, :tea, :dinner, :supper].each do |meal| -%>
-    <div class="meal-box">
+    <div class="meal-box" id="<%= meal %>">
       <h2><span class="total-kcal"><span id="total-kcal-<%= meal %>"><%= number_with_precision(current_user.consumed_kcal(:date => @date, :meal => meal), :precision => 0) %></span> Kcal</span><%=t ".#{meal}" %></h2>
       <%= autocomplete_field :food_name, '', autocomplete_food_name_path, :class => "food_name_autocomplete", :"data-meal" => meal, :placeholder => "Adicione um alimento" -%>
       <div class="meals" id="meals-<%= meal %>">
