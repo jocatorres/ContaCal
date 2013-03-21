@@ -10,7 +10,7 @@
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
 
 <%- if  user.bank_billet_link.nil? -%>
-  <%- description = "Assinatura trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+  <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
   <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
