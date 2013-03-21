@@ -10,8 +10,8 @@
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
 
 <%- if  user.bank_billet_link.nil? -%>
-  <%- description = "R$ 12,80 = 9,80 (valor mensal) + 3,00 (taxa de emissão de boleto)\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- bb = Cobregratis::BankBillet.new(:amount => 12.80, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- description = "Assinatura trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+  <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
     <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
@@ -82,7 +82,7 @@ Renovação automática para você registrar suas refeições todos os dias, sem
     <td colspan=7><font size=2> 
 	Temos também opção de assinatura com boleto:<br><br>
 <%- if !user.bank_billet_link.nil? -%>
-	<strong><a target=_blank href=<%=user.bank_billet_link%>>Mensal</a>:</strong> R$ 12,80 - como o banco nos cobra uma taxa de R$ 3,00 somos obrigados a repassar esse custo para nossos clientes, então o boleto mensal total é de R$ 12,80.<br><br>
+    <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 29,40 - como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento.<br><br>
 <%- end -%>
 <%- if !user.bank_billet_link_6.nil? -%>
 	<strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.<br><br>
