@@ -7,11 +7,16 @@
 <%- end -%>
 
 <%- date_expire = Date.today+20 -%>
+<%- data_preco_1790 = "2013-03-23" -%>
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
 
 <%- if  user.bank_billet_link.nil? -%>
   <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- else -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 49.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- end -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
     <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
@@ -21,7 +26,11 @@
 <%- end -%>
 <%- if  user.bank_billet_link_6.nil? -%>
   <%- description = "Assinatura semestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- bb = Cobregratis::BankBillet.new(:amount => 55.80, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 55.80, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- else -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 89.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- end -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link_6, bb.attributes["external_link"]) -%>
     <%- user.update_attribute(:bank_billet_our_number_6, bb.attributes["our_number"]) -%>
@@ -31,7 +40,11 @@
 <%- end -%>
 <%- if  user.bank_billet_link_12.nil? -%>
   <%- description = "Assinatura anual.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- bb = Cobregratis::BankBillet.new(:amount => 93.60, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 93.60, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- else -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 152.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+  <%- end -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link_12, bb.attributes["external_link"]) -%>
     <%- user.update_attribute(:bank_billet_our_number_12, bb.attributes["our_number"]) -%>
@@ -46,12 +59,21 @@
   </tr>
   <tr bgcolor=#ffffff>
 	<td bgcolor=#ffffff align=center valign=top>                                                                                                                                         
+	  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
 		<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="PEJHG3LJ2U9HC">
 		<input type="image" src="/images/assinar-paypal.png" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
 		<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
 		</form>
+	  <%- else -%>
+		<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="QP4WL6TUCE9S6">
+		<input type="image" src="/images/assinar-paypal.png" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
+		<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+		</form>
+	  <%- end -%>
 		
 <!--   	<a href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC><img src="/images/paypal.png"></a><br>-->
 <!--		<%= link_to "&nbsp;&nbsp;Assinar!&nbsp;&nbsp;".html_safe, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC"  , :class => 'botao_assinar' %>-->
@@ -60,13 +82,24 @@
 	<tr>
 		<tr>
 		<td bgcolor=#ffffff align=center valign=top><br>
+		  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
 			<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
 			<input type="hidden" name="code" value="62C8E43828289E0AA483CF9167A4D845" />
-			<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+			<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Assine com PagSeguro - é rápido, grátis e seguro!" />
 			</form>	
+		  <%- else -%>
+			<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
+			<input type="hidden" name="code" value="F59F9C78505071C884818F8A74513A44" />
+			<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Assine com PagSeguro - é rápido, grátis e seguro!" />
+			</form>	
+		  <%- end -%>
 	  </tr>
     <td width=100% bgcolor=#ffffff valign=top><font size=2>
-<br><br>Assinatura mensal de apenas <strong>R$ 9,80</strong>.<br><br>
+<%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
+  <br><br>Assinatura mensal de apenas <strong>R$ 9,80</strong>.<br><br>
+<%- else -%>
+  <br><br>Assinatura mensal de apenas <strong>R$ 17,90</strong>.<br><br>
+<%- end -%>
 <!--<li> Pagamento via PayPal ou PagSeguro, as formas <strong>mais seguras</strong> para pagar com cartão de crédito na internet.</li>-->
 Sem nenhuma taxa adicional de cobrança.<br><br>
 Liberação do acesso automática, minutos após o pagamento.<br><br>
@@ -81,16 +114,29 @@ Renovação automática para você registrar suas refeições todos os dias, sem
 	<tr>
     <td colspan=7><font size=2> 
 	Temos também opção de assinatura com boleto:<br><br>
-<%- if !user.bank_billet_link.nil? -%>
-    <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 29,40 - como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento.<br><br>
-<%- end -%>
-<%- if !user.bank_billet_link_6.nil? -%>
-	<strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.<br><br>
-<%- end -%>
-<%- if !user.bank_billet_link_12.nil? -%>
-	<strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>.<br><br>
-<%- end -%>
-    <strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
+	<%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
+      <%- if !user.bank_billet_link.nil? -%>
+        <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 29,40 - como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento.<br><br>
+      <%- end -%>
+      <%- if !user.bank_billet_link_6.nil? -%>
+	    <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.<br><br>
+      <%- end -%>
+      <%- if !user.bank_billet_link_12.nil? -%>
+	    <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>.<br><br>
+	  <%- end -%>
+	<%- else -%>
+      <%- if !user.bank_billet_link.nil? -%>
+        Como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento. <br><br>
+        <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 49,40 - 8% de desconto sobre o preço mensal. Equivale a <strong>R$ 16,47 por mês</strong>.<br><br>
+      <%- end -%>
+      <%- if !user.bank_billet_link_6.nil? -%>
+	    <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 89,90 - 16% de desconto sobre o preço mensal. Equivale a <strong>R$ 14,99 por mês</strong>.<br><br>
+      <%- end -%>
+      <%- if !user.bank_billet_link_12.nil? -%>
+	    <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 152,90 - 28% de desconto sobre o preço mensal. Equivale a <strong>R$ 12,75 por mês</strong>.<br><br>
+	  <%- end -%>
+	<%- end -%>
+    <strong><font color=#de0000>Atenção:</font></strong> Para pagamentos feitos com boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
     </td>
   </tr>
 <!--  <tr bgcolor=#ffffff>
