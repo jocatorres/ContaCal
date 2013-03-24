@@ -42,7 +42,7 @@
   <%- description = "Assinatura anual.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
   <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
     <%- bb = Cobregratis::BankBillet.new(:amount => 93.60, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- if bb.save -%>
+  <%- else -%>
     <%- bb = Cobregratis::BankBillet.new(:amount => 152.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- end -%>
   <%- if bb.save -%>
