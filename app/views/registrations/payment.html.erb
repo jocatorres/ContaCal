@@ -45,6 +45,7 @@
   <%- if bb.save -%>
     <%- bb = Cobregratis::BankBillet.new(:amount => 152.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- end -%>
+  <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link_12, bb.attributes["external_link"]) -%>
     <%- user.update_attribute(:bank_billet_our_number_12, bb.attributes["our_number"]) -%>
     <%- user.update_attribute(:bank_billet_expire_at, date_expire.strftime("%Y-%m-%d")) -%>
