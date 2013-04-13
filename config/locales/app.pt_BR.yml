@@ -38,6 +38,7 @@ pt_BR:
         current_password: Senha atual
         remember_me: "Lembre-me neste computador"
         cpf: CPF                                                         
+        small_portions: Usar porções pequenas (de 0,1 em 0,1)?
         subscribed_newsletter: Receber nossas novidades por e-mail?
         subscribed_daily: Receber notificações por e-mail diariamente?
         subscribed_weekly: Receber notificações por e-mail semanalmente?
