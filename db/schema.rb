@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304005225) do
+ActiveRecord::Schema.define(:version => 20130413004107) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20130304005225) do
     t.string   "bank_billet_link_12"
     t.date     "renew_at"
     t.date     "bank_billet_expire_at"
+    t.boolean  "small_portions"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
