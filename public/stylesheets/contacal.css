@@ -689,7 +689,7 @@ body#users-engine footer {
 section[role="main"] .meal-box .meals ul li {overflow:hidden; position:relative;}
 .removeMob {
 	position: absolute;
-	right: 0;
+	right: 10px;
 	top: 41px; 
 }
 

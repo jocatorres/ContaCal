@@ -4,7 +4,7 @@
 <% step = 0.1 if user.small_portions %>
 <li>                                     
   <%= "#{user_food.food.name}<br />#{user_food.food.weight} (#{user_food.food.measure})<br /><em><span id='slider-meal-amount-#{user_food.id}'>#{number_with_precision(user_food.amount, :strip_insignificant_zeros => true)}</span> x #{user_food.food.kcal} Kcal</em> = <strong><span id='slider-meal-total-#{user_food.id}'>#{number_with_precision(user_food.kcal, :strip_insignificant_zeros => true)}</span> Kcal</strong> #{image_tag("#{user_food.food.kind}.png")}".html_safe %>
-  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true, :class => "remove removeMob" %>
+  <%= link_to "Remover", user_food_url(user_food.id, :format => :js), :method => :delete, :remote => true, :class => "removeMob" %>
    <div class="slide">
       <div class="sliderBt down-slider" id='down-<%= slider_id %>'><a href="javascript:void(0)">-</a></div> 
 	  <div class="sliderBt up-slider" id='up-<%= slider_id %>'><a href="javascript:void(0)">+</a></div>
