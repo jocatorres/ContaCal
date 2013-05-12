@@ -1,7 +1,7 @@
 <% if total_kcal == 0 %>
   <% if current_user.sign_in_count <= 1 %>  
   <%- current_user.update_attribute(:sign_in_count, 2) -%> 
-  <div class="notice">Seja bem vindo, <strong><%= current_user.name %></strong>! Se tiver dúvidas sobre como usar o sistema, confira a nossa <%= link_to "ajuda", '/ajuda.html', :class => "terms-of-use-fancybox", :id => "primeira_vez" %>.</div>
+  <div class="notice">Seja bem vindo, <strong><%= current_user.name %></strong>! Se tiver dúvidas sobre como usar o sistema, confira a nossa <%= link_to "ajuda", '/bemvindo.html', :class => "terms-of-use-fancybox", :id => "primeira_vez" %>.</div>
   <% else %>
     <div class="notice">Bem vindo de volta, <strong><%= current_user.name %></strong>! Confira nossas últimas novidades em <%= link_to "nosso blog", 'http://www.contacal.com.br/blog', :class => "terms-of-use-fancybox" %>.</div>
   <% end %>

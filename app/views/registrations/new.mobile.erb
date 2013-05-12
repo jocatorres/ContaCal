@@ -20,7 +20,7 @@
 
   <p><%= f.submit "Cadastre-se" %></p>
   
-  <p>Ao criar sua conta você está concordando com os <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.mobile.html', :class => "terms-of-use-fancybox" %>.</p>
+  <p>Ao criar sua conta você concorda com os nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.mobile.html', :class => "terms-of-use-fancybox" %> super simples.</p>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
