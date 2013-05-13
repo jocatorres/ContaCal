@@ -31,11 +31,11 @@
            <%= link_to "Definir limite diário", edit_user_registration_url %> &bull;
 	    <%- end -%> 
 	    <%- if user.status.blank? or user.status == 0 or user.status == 1 or user.status == 10 -%> 
-	      <%= link_to "Assinar", payment_url %> 
+	      <%= link_to "Assinar", payment_url(:protocol => "https") %> 
         <%- elsif (user.status == 2 or user.status == 20) or (!user.expire_at.nil? and (user.status == 4 or user.status == 40))-%>
-	      <%= link_to "Renovar assinatura", payment_url %>  
+	      <%= link_to "Renovar assinatura", payment_url(:protocol => "https") %>  
 	    <%- else -%>
-	      <%= link_to "Opções de assinatura", payment_url %>  
+	      <%= link_to "Opções de assinatura", payment_url(:protocol => "https") %>  
 	    <%- end -%>
           &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Ajuda", '/ajuda.html', :class => "terms-of-use-fancybox" %> &bull; <%= link_to "Blog", 'http://contacal.com.br/blog'%> &bull; <%= link_to "Site", 'http://contacal.com.br'%> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
       </div>
@@ -44,32 +44,32 @@
     <%- if (current_user.status == 1 or current_user.status == 10)  and !user.expire_at.nil? -%>
 	<div id="subscriber">
 		<%- if Date.today < user.expire_at -%>
-          <br>Seu período de teste vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+          <br>Seu período de teste vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- elsif Date.today == user.expire_at -%>
-		  <br>Seu período de teste está vencendo <strong>hoje</strong>!  <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+		  <br>Seu período de teste está vencendo <strong>hoje</strong>!  <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- else -%>
-	      <br>Seu período de teste venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+	      <br>Seu período de teste venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- end -%>
     </div>
 	<%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
 	<div id="subscriber">
 		  
 		<%- if Date.today < user.expire_at -%>
-          <br>Sua assinatura vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a>!
+          <br>Sua assinatura vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Renove já</b></font></a>!
 		<%- elsif Date.today == user.expire_at -%>
-		  <br>Sua assinatura está vencendo <strong>hoje</strong>! <a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a>!
+		  <br>Sua assinatura está vencendo <strong>hoje</strong>! <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Renove já</b></font></a>!
 		<%- else -%>
-	      <br>Sua assinatura venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a>!
+	      <br>Sua assinatura venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Renove já</b></font></a>!
 		<%- end -%>
     </div>
 	<%- elsif (current_user.status == 0) and !user.expire_at.nil? and Date.today+10 > user.expire_at -%>
 	<div id="subscriber">
 		<%- if Date.today < user.expire_at -%>
-          <br>Sua cortesia vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+          <br>Sua cortesia vence em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- elsif Date.today == user.expire_at -%>
-		  <br>Sua cortesia está vencendo <strong>hoje</strong>! <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+		  <br>Sua cortesia está vencendo <strong>hoje</strong>! <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- else -%>
-	      <br>Sua cortesia venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+	      <br>Sua cortesia venceu em <strong><%= user.expire_at.strftime("%d/%m/%Y") %></strong>. <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 		<%- end -%>
     </div>
 	<%- end -%>
@@ -83,19 +83,19 @@
   <%- if (current_user.status == 1 or current_user.status == 10)  and !user.expire_at.nil? and Date.today > user.expire_at -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Fim do período de teste gratuito... :-(</b><br /><br /><a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
+<b>Fim do período de teste gratuito... :-(</b><br /><br /><a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
 <br /><br />
 </div>
   <%- elsif (current_user.status == 2 or current_user.status == 4 or current_user.status == 20 or current_user.status == 40) and !user.expire_at.nil? and Date.today > user.expire_at -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Assinatura vencida... :-(</b><br /><br /><a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a> sua assinatura para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
+<b>Assinatura vencida... :-(</b><br /><br /><a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Renove já</b></font></a> sua assinatura para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
 <br /><br />
 </div>
   <%- elsif (current_user.status == 0) and !user.expire_at.nil? and Date.today > user.expire_at -%>
 <br /><br /><br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 350px">
-<b>Fim da cortesia... :-(</b><br /><br /><a href=<%=payment_url%>><font color=#dd0000><b>Assina já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
+<b>Fim da cortesia... :-(</b><br /><br /><a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assina já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
 <br /><br />
 </div>
   <%- else -%>

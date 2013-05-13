@@ -32,9 +32,9 @@
 
      <p>
 	   <%- if (user.status == 0 or user.status == 1 or user.status == 10) -%>
-		<a href=<%=payment_url%>><font color=#dd0000><b>Assine já</b></font></a>!
+		<a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
 	  <%- elsif (user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) -%>
-	    <a href=<%=payment_url%>><font color=#dd0000><b>Renove já</b></font></a>! 
+	    <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Renove já</b></font></a>! 
 	  <%- end -%>
   </p>
 
