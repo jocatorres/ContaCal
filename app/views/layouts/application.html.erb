@@ -40,7 +40,7 @@
           &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Ajuda", '/ajuda.html', :class => "terms-of-use-fancybox" %> &bull; <%= link_to "Blog", 'http://contacal.com.br/blog'%> &bull; <%= link_to "Site", 'http://contacal.com.br'%> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
       </div>
     <%- end -%>
-    <div id="logo"><a href="<%= root_url %>">ContaCal</a></div>
+    <div id="logo"><a href="<%= root_url(:protocol => "http") %>">ContaCal</a></div>
     <%- if (current_user.status == 1 or current_user.status == 10)  and !user.expire_at.nil? -%>
 	<div id="subscriber">
 		<%- if Date.today < user.expire_at -%>
