@@ -18,8 +18,51 @@
   <!--[if lte IE 7]>
     <link href="/assets/iefix.css" media="all" rel="stylesheet" />
   <![endif]-->
+<script src="http://stripe.github.io/jquery.payment/lib/jquery.payment.js"></script>
+<style type="text/css" media="screen">
+  input.invalid {
+    border: 2px solid red;
+  }
+
+  .validation.failed:after {
+    color: red;
+    content: 'Validation failed';
+  }
+
+  .validation.passed:after {
+    color: green;
+    content: 'Validation passed';
+  }
+</style>
+<script>
+  jQuery(function($){
+    $('[data-numeric]').payment('restrictNumeric');
+    $('.cc-number').payment('formatCardNumber');
+    $('.cc-exp').payment('formatCardExpiry');
+    $('.cc-cvc').payment('formatCardCVC');
+
+    $('form').submit(function(e){
+      e.preventDefault();
+      $('input').removeClass('invalid');
+      $('.validation').removeClass('passed failed');
+
+      var cardType = $.payment.cardType($('.cc-number').val());
+
+      $('.cc-number').toggleClass('invalid', !$.payment.validateCardNumber($('.cc-number').val()));
+      $('.cc-exp').toggleClass('invalid', !$.payment.validateCardExpiry($('.cc-exp').payment('cardExpiryVal')));
+      $('.cc-cvc').toggleClass('invalid', !$.payment.validateCardCVC($('.cc-cvc').val(), cardType));
+
+      if ( $('input.invalid').length ) {
+        $('.validation').addClass('failed');
+      } else {
+        $('.validation').addClass('passed');
+      }
+    });
+  });
+</script>
+
 </head>
-	<%- if current_page?('/payment') or current_page?('/foods/new') or current_page?('/foods') -%>
+	<%- if current_page?('/foods/new') or current_page?('/foods') -%>
 <body id="dashboard">	                     
 	<%- else -%>
 <body id="users-engine" class="<%= controller.controller_name %>">
