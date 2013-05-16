@@ -55,7 +55,7 @@
 
 <table border=0 cellspacing=0 cellpadding=5>
   <tr bgcolor=#ffffff>
-  	<td bgcolor=#ffffff><font size=2>Temos opção de assinatura com cartão de crédito via PayPal ou PagSeguro. Escolha a que lhe convier:<br><br></td>
+  	<td bgcolor=#ffffff><font size=2>Opção de pagamento com cartão de crédito via PayPal, a maneira mais simples e segura de pagar com cartão de crédito na internet:<br><br></td>
   </tr>
   <tr bgcolor=#ffffff>
 	<td bgcolor=#ffffff align=center valign=top>                                                                                                                                         
@@ -80,7 +80,7 @@
 	</td>
 	</tr>
 	<tr>
-		<tr>
+<!--		<tr>
 		<td bgcolor=#ffffff align=center valign=top><br>
 		  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
 			<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
@@ -93,7 +93,7 @@
 			<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Assine com PagSeguro - é rápido, grátis e seguro!" />
 			</form>	
 		  <%- end -%>
-	  </tr>
+	  </tr>-->
     <td width=100% bgcolor=#ffffff valign=top><font size=2>
 <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
   <br><br>Assinatura mensal de apenas <strong>R$ 9,80</strong>.<br><br>
@@ -104,7 +104,7 @@
 Sem nenhuma taxa adicional de cobrança.<br><br>
 Liberação do acesso automática, minutos após o pagamento.<br><br>
 Renovação automática para você registrar suas refeições todos os dias, sem interrupções.<br><br>
-Cancelamento sem complicações direto no site do PayPal ou do PagSeguro. Não acreditamos em prender os clientes dificultando sua saída, mas sim em ter nossos usuários conosco porque gostam de nosso serviço e o acham útil. Queremos que nossos usuários nos recomendem para seus amigos! :-)<br><br>
+Cancelamento sem complicações direto no site do PayPal. Não acreditamos em prender os clientes dificultando sua saída, mas sim em ter nossos usuários conosco porque gostam de nosso serviço e o acham útil. Queremos que nossos usuários nos recomendem para seus amigos! :-)<br><br>
 	</ul>
 	</td>
 	</tr>
