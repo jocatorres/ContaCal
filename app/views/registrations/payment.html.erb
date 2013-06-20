@@ -124,7 +124,7 @@
   	<td colspan=7 bgcolor=#ffffff><font size=2>Temos também opção de assinatura com boleto:<br></td>
   </tr>
   <tr>
-	<td bgcolor=#ffffff align=center valign=top><small><img width=85% src=/images/boleto.png><br/>
+	<td bgcolor=#ffffff align=center valign=top><small><img src=/images/boleto-small.png><br/>
 	  <%- if !user.bank_billet_link.nil? -%>
 		<a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a><br/>
 	  <%- end -%>
@@ -136,13 +136,13 @@
 	  <%- end -%>
 	</td>
 	<td bgcolor=#ffffff></td>
-   <td colspan=7><font size=2> 
+   <td colspan=5><font size=2> 
 	  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
 	    <%- if !user.bank_billet_link.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 29,40 - como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento.</li>
+	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 29,40 - como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento.<br>&nbsp;<br></li>
 	    <%- end -%>
 	    <%- if !user.bank_billet_link_6.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.</li>
+	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.<br>&nbsp;<br></li>
 	    <%- end -%>
 	    <%- if !user.bank_billet_link_12.nil? -%>
 	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>.</li>
@@ -150,10 +150,10 @@
 	  <%- else -%>
 	    <%- if !user.bank_billet_link.nil? -%>
 	           Como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento. <br><br>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 49,40 - 8% de desconto sobre o preço mensal. Equivale a <strong>R$ 16,47 por mês</strong>.</li>
+	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 49,40 - 8% de desconto sobre o preço mensal. Equivale a <strong>R$ 16,47 por mês</strong>.<br>&nbsp;<br></li>
 	    <%- end -%>
 	    <%- if !user.bank_billet_link_6.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 89,90 - 16% de desconto sobre o preço mensal. Equivale a <strong>R$ 14,99 por mês</strong>.</li>
+	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 89,90 - 16% de desconto sobre o preço mensal. Equivale a <strong>R$ 14,99 por mês</strong>.<br>&nbsp;<br></li>
 	    <%- end -%>
 	    <%- if !user.bank_billet_link_12.nil? -%>
 	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 152,90 - 28% de desconto sobre o preço mensal. Equivale a <strong>R$ 12,75 por mês</strong>.</li>
