@@ -13,11 +13,12 @@
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
 
 <%- if  user.bank_billet_link.nil? -%>
-  <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
   <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
+    <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
     <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- else -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 49.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+    <%- description = "Assinatura mensal.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 17.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- end -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -131,12 +132,16 @@
 
 <%- if !user.bank_billet_link.nil? or !user.bank_billet_link_6.nil? or !user.bank_billet_link_12.nil?-%>
   <tr bgcolor=#ffffff>
-  	<td colspan=7 bgcolor=#ffffff><font size=2>Temos também opção de assinatura com boleto:<br></td>
-  </tr>
+  	<td align=center colspan=7 bgcolor=#ffffff><font size=2>Temos também opção de assinatura com boleto:<br/><br/><!--</td>
+</tr>
   <tr>
-	<td bgcolor=#ffffff align=center valign=top><small><img src=/images/boleto-small.png><br/>
-	  <%- if !user.bank_billet_link.nil? -%>
+	<td bgcolor=#ffffff align=center valign=top>--><small><a onmouseover='this.style.text-decoration="none"; return true' target=_blank href=<%=user.bank_billet_link%>><img src=/images/boleto.png></a><br/>
+<!--	  <%- if !user.bank_billet_link.nil? -%>
+	    <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
 		<a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a><br/>
+  	    <%- else -%>
+		<a target=_blank href=<%=user.bank_billet_link%>>Mensal</a><br/>
+  	    <%- end -%>
 	  <%- end -%>
 	  <%- if !user.bank_billet_link_6.nil? -%>
 		<a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a><br/>
@@ -160,7 +165,7 @@
 	  <%- else -%>
 	    <%- if !user.bank_billet_link.nil? -%>
 	           Como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento. <br><br>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 49,40 - 8% de desconto sobre o preço mensal. Equivale a <strong>R$ 16,47 por mês</strong>.<br>&nbsp;<br></li>
+	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Mensal</a>:</strong> R$ 17,90 - 8% de desconto sobre o preço mensal. Equivale a <strong>R$ 16,47 por mês</strong>.<br>&nbsp;<br></li>
 	    <%- end -%>
 	    <%- if !user.bank_billet_link_6.nil? -%>
 	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 89,90 - 16% de desconto sobre o preço mensal. Equivale a <strong>R$ 14,99 por mês</strong>.<br>&nbsp;<br></li>
@@ -168,9 +173,9 @@
 	    <%- if !user.bank_billet_link_12.nil? -%>
 	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 152,90 - 28% de desconto sobre o preço mensal. Equivale a <strong>R$ 12,75 por mês</strong>.</li>
 	    <%- end -%>
-	  <%- end -%>
+	  <%- end -%>-->
 	  <tr bgcolor=#ffffff>
-	  	<td colspan=7  bgcolor=#ffffff><font size=2>
+	  	<td colspan=7  bgcolor=#ffffff><font size=2><div style="line-height: 130%;">
 		<strong><font color=#de0000>Atenção:</font></strong> Para pagamentos feitos com boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
     </td>
   </tr>
