@@ -2,6 +2,7 @@ common: &common
   adapter: postgresql
   username: webadmin
   password: SrgOxHrvbi
+  host: 10.70.2.11
 
 development:
   <<: *common
