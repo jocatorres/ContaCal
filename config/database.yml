@@ -1,7 +1,7 @@
 common: &common
   adapter: postgresql
-  username: postgres
-  password:
+  username: webadmin
+  password: SrgOxHrvbi
 
 development:
   <<: *common
