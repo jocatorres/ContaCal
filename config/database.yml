@@ -1,8 +1,7 @@
 common: &common
   adapter: postgresql
-  username: webadmin
-  password: SrgOxHrvbi
-  host: 10.70.2.11
+  username: postgres
+  password: 
 
 development:
   <<: *common
@@ -17,3 +16,6 @@ test:
 production:
   <<: *common
   database: contacal_production
+  username: webadmin
+  password: rthrm3n2ui  
+  host: 10.70.2.11
