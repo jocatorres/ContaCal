@@ -1,3 +1,2 @@
-db:schema:load
 db:seed
 
