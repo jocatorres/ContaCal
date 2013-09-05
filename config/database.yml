@@ -16,6 +16,6 @@ test:
 production:
   <<: *common
   database: contacal_production
-  username: webadmin
-  password: rthrm3n2ui  
-  host: 10.70.2.11
+#  username: webadmin
+#  password: rthrm3n2ui  
+#  host: 10.70.2.11

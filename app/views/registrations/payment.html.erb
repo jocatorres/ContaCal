@@ -13,12 +13,11 @@
 <%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
 
 <%- if  user.bank_billet_link.nil? -%>
+  <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
   <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-    <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
     <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- else -%>
-    <%- description = "Assinatura mensal.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 17.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
+    <%- bb = Cobregratis::BankBillet.new(:amount => 53.70, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
   <%- end -%>
   <%- if bb.save -%>
     <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
@@ -176,7 +175,7 @@
 	  <%- end -%>-->
 	  <tr bgcolor=#ffffff>
 	  	<td colspan=7  bgcolor=#ffffff><font size=2><div style="line-height: 130%;">
-		<strong><font color=#de0000>Atenção:</font></strong> Para pagamentos feitos com boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
+		<strong><font color=#de0000>Atenção:</font></strong> Pagamento mínimo trimestral. Para pagamentos feitos com boleto bancário pode levar até <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
     </td>
   </tr>
 <!--  <tr bgcolor=#ffffff>
