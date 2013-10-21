@@ -3,6 +3,8 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  Torne-se assinante do melhor diário alimentar virtual por apenas R$ 17,90 por mês: 
+
   <p><%= f.label :name %><br />
   <%= f.text_field :name %></p>
 
@@ -18,7 +20,8 @@
 <!--  <p><%= f.label :referred_by_email %>  Ela pode ganhar <%= link_to "prêmios", '/indique.html', :class => "terms-of-use-fancybox" %>!<br />
   <%= f.email_field :referred_by_email %></p>-->
 
-  <p><%= f.submit "Cadastre-se" %></p>
+  <p aling=center><%= f.submit "Selecionar pagamento" %></p>
+  <p aling=center>Aceitamos cartão de crédito e boleto bancário!</p>
   
   <p>Ao criar sua conta você concorda com os nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.mobile.html', :class => "terms-of-use-fancybox" %> super simples.</p>
 

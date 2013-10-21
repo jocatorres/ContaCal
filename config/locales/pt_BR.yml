@@ -224,7 +224,7 @@ pt_BR:
         body: "Por favor, verifique o(s) seguinte(s) campo(s):"
 
       messages:
-        taken: "já está em uso"
+        taken: "já está em uso."
         record_invalid: "A validação falhou: %{errors}"
         <<: *errors_messages
 

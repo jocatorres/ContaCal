@@ -62,6 +62,7 @@
 
 
 
+
 <table border=0 cellspacing=0 cellpadding=15>
 <%- if user.id == -1 -%>
   <tr bgcolor=#ffffff>
@@ -76,7 +77,13 @@
   </tr>
 <%- else -%>
   <tr bgcolor=#ffffff>
-  	<td colspan=7 bgcolor=#ffffff><font size=3>Opção de pagamento com cartão de crédito via PayPal, a maneira mais simples e segura de pagar com cartão de crédito na internet:<!-- ou PagSeguro. Escolha a que lhe convier:--></td>
+  	<td colspan=7 bgcolor=#ffffff><font size=3>
+		<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>   
+		Faça como <a href="#openModal2">essas várias pessoas</a> que já emagreceram com o ContaCal!<br><br>
+		<%- end -%>
+	
+	Opção de pagamento com cartão de crédito via PayPal, a maneira mais simples e segura de pagar com cartão de crédito na internet:<!-- ou PagSeguro. Escolha a que lhe convier:-->
+	</td>
   </tr>
   <tr bgcolor=#ffffff>
 	<td colspan=7 bgcolor=#ffffff align=center valign=top>                                                                                                                                         
@@ -185,6 +192,25 @@
 </table>        
 
 <br/>
+<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>   
+<%- else -%>
 <p>
   <%= link_to "&laquo; voltar para o programa".html_safe, root_url(:protocol => "http") %>
 </p>
+<%- end -%>
+
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<center><h2>Veja como é simples!</h2>
+<iframe src="http://player.vimeo.com/video/33258576" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
+	</div>
+</div>
+
+<div id="openModal2" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<center><h2>Veja o que estão falando do ContaCal!</h2><br>
+<iframe src="/testemunhos.html" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	</div>
+</div>

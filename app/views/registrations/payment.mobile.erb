@@ -154,6 +154,9 @@ Cancelamento sem complicações direto no site do PayPal. Não acreditamos em pr
 </table>        
 
 <br/>
+<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>   
+<%- else -%>
 <p>
   <%= link_to "&laquo; voltar para o programa".html_safe, root_url(:protocol => "http") %>
 </p>
+<%- end -%>

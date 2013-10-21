@@ -23,7 +23,12 @@
   <header>
     <%- if user_signed_in? -%> 
     <%- if (current_user.status == 1 or current_user.status == 10) and user.expire_at.nil? -%>   
-       <%- user.update_attribute(:expire_at, Date.today+5) -%>
+       <%- user.update_attribute(:expire_at, Date.today-1) -%>
+    <%- end -%>
+    <%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>   
+      <script language="JavaScript">
+        self.location="/payment";
+      </script>
     <%- end -%>
       <div id="masthead">
         <p align=right>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -128,13 +128,13 @@ class User < ActiveRecord::Base
 
   private
   def send_welcome_email
-    date_expire = Date.today+5
+    date_expire = Date.today-1
     NotificationMailer.welcome(self).deliver
   	update_attribute(:confirmed_at, Time.now)
 		update_attribute(:confirmation_sent_at, Time.now)
   	update_attribute(:expire_at, date_expire.strftime("%Y-%m-%d"))
  	  update_attribute(:status, 10)
- 	  update_attribute(:subscribed_daily, "t")
+ 	  update_attribute(:subscribed_daily, "f")
  	  update_attribute(:subscribed_weekly, "f")
  	  update_attribute(:small_portions, "f")
   end

@@ -1,8 +1,11 @@
-<h1>Cadastre-se</h1>
+<h1>Assinar ContaCal</h1>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  Faça como <a href="#openModal2">essas pessoas</a> que já emagreceram com o ContaCal. Veja <a href="#openModal">como é simples</a>!<br><br>
+  Torne-se assinante do melhor diário alimentar virtual por apenas R$ 17,90 por mês: 
+  
   <p><%= f.label :name %><br />
   <%= f.text_field :name %></p>
 
@@ -18,17 +21,41 @@
 <!--  <p><%= f.label :referred_by_email %>  Ela pode ganhar <%= link_to "prêmios", '/indique.html', :class => "terms-of-use-fancybox" %>!<br />
   <%= f.email_field :referred_by_email %></p>-->
 
-  <p><%= f.submit "Cadastre-se" %></p>
-  
+  <p align=center><%= f.submit "Selecionar forma de pagamento" %></p>
+  <p align=center>Aceitamos cartão de crédito e boleto bancário!</p>
   <p>Criando sua conta você concorda com os nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.html', :class => "terms-of-use-fancybox" %> super simples.</p>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
   <% end -%>
   
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $("a.terms-of-use-fancybox").fancybox({type: 'iframe', width: '80%', height: '80%'});
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("a.assina").fancybox({type: 'iframe', width: '70%', height: '100%'});
+  });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('#close-button').click(function(){
+          $.fancybox.close();
+       })
     });
-  </script>
+</script>
 <% end %>
+
+<div id="openModal" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<center><h2>Veja como é simples!</h2>
+<iframe src="http://player.vimeo.com/video/33258576" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
+	</div>
+</div>
+
+<div id="openModal2" class="modalDialog">
+	<div>
+		<a href="#close" title="Close" class="close">X</a>
+		<center><h2>Veja o que estão falando do ContaCal!</h2><br>
+<iframe src="/testemunhos.html" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+	</div>
+</div>
