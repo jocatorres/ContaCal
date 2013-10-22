@@ -192,7 +192,10 @@
 </table>        
 
 <br/>
-<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>   
+<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%> 
+<p align=right>
+  <%= link_to "sair &raquo;".html_safe, destroy_user_session_url, {:method => :delete, :style=>'color:#bcbcbc;'} %>
+</p>
 <%- else -%>
 <p>
   <%= link_to "&laquo; voltar para o programa".html_safe, root_url(:protocol => "http") %>
