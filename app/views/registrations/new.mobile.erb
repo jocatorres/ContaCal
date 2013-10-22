@@ -3,6 +3,10 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  <% if resource.errors.any? %>
+    <br>Se esse e-mail é seu, você pode <%= link_to "criar uma nova senha", new_password_path(resource_name) %>.<br><br>
+  <% end %>
+
   Torne-se assinante do melhor diário alimentar virtual por apenas R$ 17,90 por mês: 
 
   <p><%= f.label :name %><br />

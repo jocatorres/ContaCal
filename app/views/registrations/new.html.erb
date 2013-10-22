@@ -3,6 +3,10 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  <% if resource.errors.any? %>
+    <br>Se esse e-mail é seu, você pode <%= link_to "criar uma nova senha", new_password_path(resource_name) %>.<br><br>
+  <% end %>
+
   Faça como <a href="#openModal2">essas pessoas</a> que já emagreceram com o ContaCal. Veja <a href="#openModal">como é simples</a>!<br><br>
   Torne-se assinante do melhor diário alimentar virtual por apenas R$ 17,90 por mês: 
   
