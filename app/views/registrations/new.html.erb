@@ -1,14 +1,13 @@
-<h1>Assinar ContaCal</h1>
+<h1>Criar conta grátis</h1>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
   <% if resource.errors.any? %>
-    <br>Se esse e-mail é seu, você pode <%= link_to "criar uma nova senha", new_password_path(resource_name) %>.<br><br>
+    <center><br>Se esse e-mail é seu, você pode <%= link_to "criar uma nova senha", new_password_path(resource_name) %>.<br><br></center>
   <% end %>
 
-  Faça como <a href="#openModal2">essas pessoas</a> que já emagreceram com o ContaCal. Veja <a href="#openModal">como é simples</a>!<br><br>
-  Torne-se assinante do melhor diário alimentar virtual por apenas R$ 17,90 por mês: 
+  <center>Preencha seus dados abaixo para criar sua conta e experimentar o ContaCal gratuitamente!</center><br>
   
   <p><%= f.label :name %><br />
   <%= f.text_field :name %></p>
@@ -25,9 +24,9 @@
 <!--  <p><%= f.label :referred_by_email %>  Ela pode ganhar <%= link_to "prêmios", '/indique.html', :class => "terms-of-use-fancybox" %>!<br />
   <%= f.email_field :referred_by_email %></p>-->
 
-  <p align=center><%= f.submit "Selecionar forma de pagamento" %></p>
-  <p align=center>Aceitamos cartão de crédito e boleto bancário!</p>
-  <p>Criando sua conta você concorda com os nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.html', :class => "terms-of-use-fancybox" %> super simples.</p>
+  <p align=center><%= f.submit "Criar conta!" %></p>
+<!--  <p align=center>Aceitamos cartão de crédito e boleto bancário!</p>-->
+  <p align=center><small>Criando sua conta você concorda com<br>nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.html', :class => "terms-of-use-fancybox" %> super simples.</p>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
