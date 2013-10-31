@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130413004107) do
+ActiveRecord::Schema.define(:version => 20131031010325) do
 
   create_table "foods", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,15 @@ ActiveRecord::Schema.define(:version => 20130413004107) do
 
   add_index "user_foods", ["date", "meal"], :name => "index_user_foods_on_date_and_meal"
   add_index "user_foods", ["user_id", "date"], :name => "index_user_foods_on_user_id_and_date"
+
+  create_table "user_friends", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "friend_name"
+    t.string   "friend_email"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_weights", :force => true do |t|
     t.integer  "user_id"
