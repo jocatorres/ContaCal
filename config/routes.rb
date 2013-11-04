@@ -3,6 +3,7 @@ Contacal::Application.routes.draw do
 
   devise_for :users, :controllers => { :registrations => "registrations" }
   resources :foods, :only => [:new, :create]
+  resources :user_friends, :only => [:new, :create]
   resources :user_foods, :only => [:create, :destroy, :update]
   match 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit, :via => :put
   match 'user_weight' => 'dashboard#update_user_weight', :as => :user_weight, :via => :put

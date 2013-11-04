@@ -18,6 +18,29 @@
   <!--[if lte IE 7]>
     <link href="/stylesheets/iefix.css" media="all" rel="stylesheet" />
   <![endif]-->
+<!-- Totango Tracking Code -->
+<script>
+var totango_options = {
+  service_id: "SP-6766-01",                  // Your unique Totango service id is SP-6766-01. Don't change this. 
+  username: "<%= user.email %>",             // replace with the tracked user's email or unique id. 
+  account:                                  // An account can have multiple users (usually in B2B).
+  {
+  id: "<%= user.id %>",                         // replace with the tracked account's unique id.
+  name: "<%= user.name %>",                      // replace with the tracked account's account display name.
+  status: "<%= user.status %>",                           // or "paying".
+  "Create Date": "<%= user.confirmation_sent_at %>"   // Optional - The date that the tracked account was created.
+  }
+  // For more options and examples see http://help.totango.com/developers/
+};
+
+window.totango = {go: function(){return -1}, track: function(){}, identify: function(){}, setAccountAttributes: function(){}};
+(function() {
+var e = document.createElement('script'); e.type = 'text/javascript'; e.async = true;
+e.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 's3.amazonaws.com/totango-cdn/totango2.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
+})();
+</script>
+<!-- End Totango Tracking Code -->
 </head>
 <body id="<%= controller.controller_name %>">
   <header>
@@ -179,6 +202,8 @@ __lc.license = 2961662;
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
 })();
 </script>
+
+
 
 </body>
 </html>

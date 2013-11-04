@@ -1,0 +1,45 @@
+<h1 id="report-title">Avisar amigos!</h1>
+
+<%= render_flash_messages %>
+
+<%= form_for(@user_friends, :html => { :method => :post }) do |f| %>
+<%- if @user_friends.errors.any? -%>
+  <div id="error_explanation">
+    <h2>Verifique os erros abaixo:</h2>
+    <ul>
+    <% @user_friends.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div><br />
+<%- end -%>
+
+
+<table width=90% border=0 cellpadding=5 cellspacing=0>
+	<tr>
+		<td nowrap valign=top align=right><%= f.label :name %>: </td>
+		<td><%= f.text_field :name  %></td>
+	</tr>
+ 	<tr>
+		<td nowrap valign=top align=right><%= f.label :weight %>: </td>
+		<td><%= f.text_field :weight  %><br /><small><%= f.label :weight_explain %></small></td>
+	</tr>
+ 	<tr>
+		<td nowrap valign=top align=right><%= f.label :measure %>: </td>
+		<td><%= f.text_field :measure %><br />	<small><%= f.label :measure_explain %></small></td>
+	</tr>
+	<tr>
+		<td valign=top align=right><%= f.label :kcal %>: </td>
+		<td><%= f.text_field :kcal, :style => 'width: 50px' %></td>
+	</tr>
+	<tr>
+		<td valign=top align=right> </td>
+		<td><%= f.submit "Enviar Sugestão" %></td>
+	</tr>
+	<tr>
+		<td valign=top align=right> </td>
+		<td><%= link_to "&laquo; voltar".html_safe, root_path %> </td>
+	</tr>
+</table>   
+
+<% end %>

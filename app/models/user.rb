@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email, :referred_by_email, :subscribed_newsletter, :small_portions
   has_many :user_foods
   has_many :user_weight
+  has_many :user_friends
   validates :name, :presence => true
   after_create :send_welcome_email
   scope :active, where(:deleted_at => nil)

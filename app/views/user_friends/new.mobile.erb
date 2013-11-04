@@ -1,0 +1,66 @@
+<br><center><div style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 280px"><h3 id="report-title">Sugerir Novo Alimento ou Exercício</h3></div></center>
+<br>
+<%= render_flash_messages %>
+
+<%= form_for(@food, :html => { :method => :post }) do |f| %>
+  <%- if @food.errors.any? -%>
+    <div id="error_explanation">
+      <h2>Verifique os erros abaixo:</h2>
+      <ul>
+      <% @food.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div><br />
+  <%- end -%>
+
+<%- if !(user.status == 0 or user.status == 2 or user.status == 4 or user.status == 20 or user.status == 40) -%>
+    <div id="error_explanation">
+      <h2>Atenção!</h2>
+      <ul>
+        <li>Somente usuários <b>assinantes</b> podem sugerir alimentos ou atividades. Torne-se um <%= link_to "assinante", payment_url(:protocol => "https") %> hoje mesmo!</li>
+      </ul>
+    </div><!--<br />
+	<center><%= link_to "Assinar!".html_safe, payment_url(:protocol => "https"), :class => 'botao_especial' %></center>-->
+	
+<%- end -%>
+<font size=2><br>Não deixe de registrar suas refeições somente porque você não encontrou um alimento ou exercício. Temos uma lista bem grande de alimentos e exercícios, com mais de 4.000 itens. Caso você não encontre algum item na lista, você tem algumas opções:
+<br /><br />                                             
+<table width=100% border=0 cellpadding=5 cellspacing=0>
+	<tr><td valign=top><strong>&bull;</td><td><b>Procure novamente usando outra palavra:</b> não tem "cafezinho", mas tem "café".</li></td></tr>
+	<tr><td valign=top><strong>&bull;</td><td><b>Procure novamente usando menos palavras:</b> não tem "pao integral com aveia e nozes", mas tem "pao integral aveia nozes". Ou digite somente "pao integral" para ver todas as opções disponíveis. Ou só "aveia nozes". Ou só "pao aveia". Enfim, acho que vc pegou a ideia, né? :-)</li></td></tr>
+	<tr><td valign=top><strong>&bull;</td><td><b>Procure um alimento similar:</b> Não tem "shimeji", mas tem "cogumelo". Ah, isso foi só um exemplo, já tem "shimeji"! :-P.</li></td></tr>
+	<tr><td valign=top><strong>&bull;</td><td><b>Registre o prato que vc comeu registrando seus ingredientes:</b> macarrão com molho branco pode ser registrado com "macarrao cozido" e "molho branco".</li></td></tr>
+</table>
+<br /><br /> 
+<center><%= link_to "Voltar ao seu diário alimentar virtual para procurar novamente!".html_safe, root_path  , :class => 'botao_especial' %></center>
+<br /><br /> 
+<%- if !(user.status == 0 or user.status == 2 or user.status == 4 or user.status == 20 or user.status == 40) -%>
+Se mesmo assim vc não encontrou o alimento ou exercício e você o usa com frequência, basta se tornar um <%= link_to "assinante", payment_url(:protocol => "https") %> para poder sugirir sua inclusão em nossa base de dados.  
+<br /><br />
+
+<%- else -%>
+Se mesmo assim vc não encontrou o alimento ou exercício e você o usa com frequência, informe os dados desse alimento abaixo. Quanto mais completa a informação, mais rápido conseguiremos disponibilizá-lo:  
+<br /><br />
+
+
+<table width=95% border=0 cellpadding=5 cellspacing=0>
+	<tr><td nowrap valign=top><%= f.label :name %>: </td></tr>
+	<tr><td><%= f.text_field :name , :style => 'width: 250px'  %></td></tr>
+	<tr><td></td></tr>
+ 	<tr><td nowrap valign=top><%= f.label :weight %>: </td></tr>
+	<tr><td><%= f.text_field :weight, :style => 'width: 250px'   %><br /><small><%= f.label :weight_explain %></small></td></tr>
+	<tr><td></td></tr>
+ 	<tr><td nowrap valign=top><%= f.label :measure %>: </td></tr>
+	<tr><td><%= f.text_field :measure, :style => 'width: 250px'  %><br />	<small><%= f.label :measure_explain %></small></td></tr></tr>
+	<tr><td></td></tr>
+	<tr><td valign=top><%= f.label :kcal%>: </td></tr>
+	<tr><td><%= f.text_field :kcal, :style => 'width: 50px' %></td></tr>
+	<tr><td></td></tr>
+	<tr><td align=center><%= f.submit " Enviar Sugestão " %></td></tr>
+	<tr><td></td></tr>
+	<tr><td align=center><font size=3><%= link_to "&laquo; voltar".html_safe, root_path %> </td></tr>
+</table>   
+<%- end -%>
+
+<% end %>
