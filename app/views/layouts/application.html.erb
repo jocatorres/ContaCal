@@ -27,7 +27,13 @@ var totango_options = {
   {
   id: "<%= user.id %>",                         // replace with the tracked account's unique id.
   name: "<%= user.name %>",                      // replace with the tracked account's account display name.
-  status: "<%= user.status %>",                           // or "paying".
+<%- if (current_user.status == 1 or current_user.status == 10 or current_user.status == 0 or current_user.status.nil?) -%>
+  status: "Free",                           // or "paying".
+<%- elsif (Date.today > user.expire_at and (user.status == 2 or user.status == 20)) or (user.expire_at.nil? and (user.status == 4 or user.status == 40))-%>
+  status: "Paying",                           // or "paying".
+<%- else -%>
+status: "Cancelled",                           // or "paying".
+<%- end -%>
   "Create Date": "<%= user.confirmation_sent_at %>"   // Optional - The date that the tracked account was created.
   }
   // For more options and examples see http://help.totango.com/developers/
