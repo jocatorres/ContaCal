@@ -2,12 +2,12 @@
 
 <%= render_flash_messages %>
 
-<%= form_for(@user_friends, :html => { :method => :post }) do |f| %>
-<%- if @user_friends.errors.any? -%>
+<%= form_for(@user_friend, :html => { :method => :post }) do |f| %>
+<%- if @user_friend.errors.any? -%>
   <div id="error_explanation">
     <h2>Verifique os erros abaixo:</h2>
     <ul>
-    <% @user_friends.errors.full_messages.each do |msg| %>
+    <% @user_friend.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>
