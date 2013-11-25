@@ -71,7 +71,7 @@ $(function() {
 		<%- if current_user.kcal_limit != nil and current_user.kcal_limit > 0 -%>
           de <strong><a href="/users/edit"><%= current_user.kcal_limit %></a></strong> Kcal diários 
 	    <%- else -%>
-	      Kcal
+	      Kcal (<%= link_to "Definir limite diário de calorias", edit_user_registration_url %>)
 	    <%- end -%>
 	    
 	</div>
