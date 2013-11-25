@@ -106,6 +106,9 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e,
 		<%- end -%>
     </div>
 	<%- end -%>
+	<div id="referrer">
+        <a href="http://admin.contacal.com.br/user_friends/user_friend.cgi?from=<%=current_user.email%>"><font color=#dd0000><b>Indique</b></font></a> ContaCal para seus amigos!
+    </div>
     <%= yield(:header_info) %>  
 
  

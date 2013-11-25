@@ -109,6 +109,8 @@ header #kcal-limit {
   text-shadow: 0px 1px 0 #fff;
   font-size: .8em;
   float: left;
+  position: relative; left: 0px; top: -10px;
+  width: 180px;
 }
 
 header #kcal-limit span a {
@@ -162,6 +164,17 @@ header #subscriber {
 	text-align: right;
 	position: relative; left: 0px; top: -10px
 }
+
+/* REFERRER */
+
+header #referrer {
+    width: 260px;
+	font-size: .8em; 
+    float: right;
+	text-align: right;
+	position: relative; left: 360px; top: 36px
+}
+
 
 
 /* SECTION */
