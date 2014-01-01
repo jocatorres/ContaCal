@@ -273,7 +273,7 @@ section[role="main"] #kcal-measure {
 
 section[role="main"] nav {
   display: block;
-  width: 160px;
+  width: 148px;
   height: 20px;
   margin: 0 auto 20px;
 }
@@ -281,8 +281,8 @@ section[role="main"] nav {
 section[role="main"] nav #prev-date,
 section[role="main"] nav #next-date,
 section[role="main"] nav #current-date {
-  margin: 20px 0 3px 0;
-  font-size: 1.4em;
+  margin: 20px 0 5px 0;
+  font-size: 1.2em;
   text-shadow: 0px 1px 0 #fff;
   color: #696969;
   font-weight: bold;
@@ -312,11 +312,11 @@ section[role="main"] nav #current-date.not-today #toggle-calendar {
 }
 
 section[role="main"] nav #prev-date {
-  margin: 24px 10px 0 0;
+  margin: 22px 14px 0 0;
 }
 
 section[role="main"] nav #next-date {
-  margin: 24px 0 0 10px;
+  margin: 22px 0 0 14px;
 }
 
 section[role="main"] nav #prev-date a,
