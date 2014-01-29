@@ -27,10 +27,12 @@ Contacal::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost', :port => '3000' }
 
   config.action_mailer.smtp_settings = {
-    :address        => "smtp.sendgrid.net",
+#    :address        => "smtp.sendgrid.net",
+    :address        => "smtplw.com.br",
     :port           => "587",
     :authentication => :plain,
-    :user_name      => "ContaCal",
+#    :user_name      => "ContaCal",
+    :user_name      => "joca123",
     :password       => "q1w2e3w2q1",
     :domain         => "contacal.com.br"
   }
