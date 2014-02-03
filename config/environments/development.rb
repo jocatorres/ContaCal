@@ -31,7 +31,7 @@ Contacal::Application.configure do
     :address        => "smtplw.com.br",
     :port           => "587",
     :authentication => :plain,
-#    :user_name      => "ContaCal",
+#    :user_name      => "contacal",
     :user_name      => "joca123",
     :password       => "q1w2e3w2q1",
     :domain         => "contacal.com.br"
