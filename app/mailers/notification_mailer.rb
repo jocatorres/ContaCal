@@ -32,7 +32,7 @@ class NotificationMailer < ::ActionMailer::Base
     if (user.status == 1 or user.status == 10)
       mail(
         :to => "#{user.name} <#{user.email}>",
-        :subject => "Está gostando do ContaCal?")
+        :subject => "[ContaCal] Está gostando do ContaCal?")
       if (user.expire_at < Date.today-1)
         user.update_attribute(:subscribed_daily, "f")
       end

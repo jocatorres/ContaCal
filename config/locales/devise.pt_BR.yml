@@ -40,8 +40,8 @@ pt_BR:
       failure: 'Não foi possível autorizar de uma conta de %{kind} porque "%{reason}".'
     mailer:
       confirmation_instructions:
-        subject: 'Instruções de confirmação'
+        subject: '[ContaCal] Instruções de confirmação'
       reset_password_instructions:
-        subject: 'Instruções de reinicialização de senha'
+        subject: '[ContaCal] Instruções de reinicialização de senha'
       unlock_instructions:
-        subject: 'Instruções de desbloqueio'
+        subject: '[ContaCal] Instruções de desbloqueio'

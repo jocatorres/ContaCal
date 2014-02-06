@@ -17,7 +17,7 @@ describe Devise::Mailer do
         @mailer = Devise::Mailer.reset_password_instructions(@user)
       end
       it "should set correct subject" do
-        @mailer.subject.should == "Instruções de reinicialização de senha"
+        @mailer.subject.should == "[ContaCal] Instruções de reinicialização de senha"
       end
       it "should set correct header To" do
         # Ele não coloca as aspas por que não receonhece nenhum caracter UTF-8 (acento)
