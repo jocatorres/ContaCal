@@ -141,7 +141,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e,
   <%- elsif (current_user.status == 0) and !user.expire_at.nil? and Date.today > user.expire_at -%>
 <br />
 <div class="alert" style="position: relative; margin-left: auto; margin-right: auto; margin-top: auto; width: 250px">
-<b>Fim da cortesia... :-(</b><br /><br /><a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assina já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
+<b>Fim da cortesia... :-(</b><br /><br /><a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a> para voltar a ter acesso ao ContaCal e continuar a registrar suas refeições!
 <br /><br />
 </div>
   <%- else -%>
