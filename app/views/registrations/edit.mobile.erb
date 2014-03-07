@@ -12,33 +12,7 @@
   <p><%= f.label :kcal_limit %> <em><%= link_to 'Que limite usar?', 'http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/', :target => '_blank' %></em>
   <%= f.text_field :kcal_limit %></p>
  
-  <p>&nbsp;</p>
-  <h2>Dados de cobrança</h2>
-
-  <p><%= f.label :status %>: 
-  <%- if user.status.blank? or user.status == 0 -%>
-    Cortesia
-  <%- elsif (user.status == 1 or user.status == 10) -%>
-    Período de teste gratuito
-  <%- elsif (user.status == 2 or user.status == 20) -%>
-    Assinante boleto bancário
-  <%- elsif (user.status == 4 or user.status == 40) -%>
-    Assinante cartão de crédito
-  <%- end -%>
-</p>
-
-  <%- if !user.status.blank? and (user.status == 0 or user.status == 1 or user.status == 10 or user.status == 2 or user.status == 20) and !user.expire_at.blank? -%>
-  <p><%= f.label :expire_at %>: <%= user.expire_at.strftime("%d/%m/%Y") %></p>
-
-     <p>
-	   <%- if (user.status == 0 or user.status == 1 or user.status == 10) -%>
-		<a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Assine já</b></font></a>!
-	  <%- elsif (user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) -%>
-	    <a href=<%=payment_url(:protocol => "https")%>><font color=#dd0000><b>Renove já</b></font></a>! 
-	  <%- end -%>
-  </p>
-
-  <%- end -%>
+ 
   <p>&nbsp;</p>
   <h2>Configurações</h2>
 
@@ -49,26 +23,6 @@
 
   <p><%= f.check_box :subscribed_newsletter %>&nbsp;<%= f.label :subscribed_newsletter %></p>
 
-  <%- if (user.status == 1 or user.status == 10) -%>
-
-  <p><b>Atenção: </b>as funções abaixo estão disponíveis apenas para assinantes.</p>
-
-  <p><%= f.check_box :subscribed_daily, :disabled => true %>&nbsp;<%= f.label :subscribed_daily %></p>
-
-  <p><%= f.check_box :subscribed_weekly, :disabled => true %>&nbsp;<%= f.label :subscribed_weekly %></p>
-
-  <p>Esses emails serão enviados para:</p><p><b><%= user.email %></b></p>
-
-  <p>Caso queira mandar cópia desses emails para outra pessoa (por exemplo, seu nutricionista) para que ela acompanhe seu progresso, preencha os dados abaixo:</p>
-
-  <p><%= f.label :nutri_name %><br />
-  <%= f.text_field :nutri_name, :disabled => true %></p>
-
-  <p><%= f.label :nutri_email %><br />
-  <%= f.email_field :nutri_email, :disabled => true %></p>
-                                                    
-  <%- else -%>
-                                                                                   
   <p><%= f.check_box :subscribed_daily %>&nbsp;<%= f.label :subscribed_daily %></p>
 
   <p><%= f.check_box :subscribed_weekly %>&nbsp;<%= f.label :subscribed_weekly %></p>
@@ -82,7 +36,6 @@
 
   <p><%= f.label :nutri_email %><br />
   <%= f.email_field :nutri_email %></p>
-  <%- end -%>
 
   <p>&nbsp;</p>
   <h2>Trocar Senha</h2>
@@ -120,11 +73,7 @@
 
 <p id="cancel-account"><b>Quer desativar sua conta?</b>
 <br /><br />
-<%- if (user.status == 1 or user.status == 10) -%>
-<b>Atenção: </b>mesmo que você não deseje se tornar assinante do ContaCal, não é necessário cancelar sua conta. Basta não pagar o <%- if !user.bank_billet_link.nil? then -%><a target=_blank href=<%= user.bank_billet_link %>><%- end -%>boleto</a>.<br /><br />Se mesmo assim você quiser desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.<br /><br /> 
-<%- elsif (user.status == 2 or user.status == 20) -%>
-<b>Atenção: </b>mesmo que você não deseje renovar sua assinatura do ContaCal, não é necessário cancelar sua conta. Basta não pagar o <%- if !user.bank_billet_link.nil? then -%><a target=_blank href=<%= user.bank_billet_link %>><%- end -%>boleto</a>.<br /><br />Se mesmo assim você quiser desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.<br /><br /> 
-<%- elsif (user.status == 4 or user.status == 40) -%> 
+<%- if (user.status == 4 or user.status == 40) && user.expire_at.nil? -%> 
   <%- if user.paypal_email.nil? -%>
     <b>Atenção: </b>como você é assinante via cartão de crédito, você precisa acessar o <a target=new href=http://paypal.com>PayPal</a> para cancelar os pagamentos.<br /><br /> 
   <%- elsif user.paypal_email == "pagseguro" -%>

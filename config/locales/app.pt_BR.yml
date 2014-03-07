@@ -40,8 +40,8 @@ pt_BR:
         cpf: CPF                                                         
         small_portions: Usar porções pequenas (de 0,1 em 0,1)?
         subscribed_newsletter: Receber nossas novidades por e-mail?
-        subscribed_daily: Receber notificações por e-mail diariamente?
-        subscribed_weekly: Receber notificações por e-mail semanalmente?
+        subscribed_daily: Receber relatórios por e-mail diariamente?
+        subscribed_weekly: Receber relatórios por e-mail semanalmente?
         kcal_limit: Limite diário de calorias
         status: Tipo de assinatura
         expire_at: Data de vencimento

@@ -1,37 +1,4 @@
 <p>Bom dia!</p>
-<% if @user.status == 1 or @user.status == 10 %>
-<% dias_falta = user.expire_at - Date.today %>
-<% if dias_falta >= 5 %>
-<p>Você tem 5 dias para experimentar o ContaCal, sistema para registro de refeições que conta calorias e ajuda você a ter uma alimentação mais saudável e balanceada. Veja abaixo alguns links úteis para você aproveitar ao máximo o sistema:</p>
-<ul>
-  <li><a href="http://www.contacal.com.br/como-registrar-sua-alimentacao-no-contacal/">Como registrar sua alimentação no ContaCal?</a></li>
-  <li><a href="http://www.contacal.com.br/o-que-sao-as-calorias-vermelhas-amarelas-e-verdes/">O que são as calorias vermelhas, amarelas e verdes?</a></li>
-  <li><a href="http://www.contacal.com.br/qual-o-limite-de-calorias-indicado/">Qual o limite de calorias indicado?</a></li>
-</ul>
-<p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<% elsif dias_falta == 4 %>
-<p>Você ainda tem 4 dias para experimentar o ContaCal. E aí, você está gostando?</p>
-<p>Você sabia que pessoas que mantêm diários de sua alimentação perdem até o dobro do peso que as que não têm o registro? Confira essa e outras dicas em nosso <a href=http://www.contacal.com.br/20-dicas-para-vc-emagrecer>blog</a>.</p>
-<p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<% elsif dias_falta == 3 %>
-<p>Você ainda tem 3 dias para experimentar o ContaCal. E aí, você está gostando?</p>
-<p>Conheça <a href=http://www.contacal.com.br/testemunhos>histórias</a> de quem está usando o ContaCal e conseguiu ótimos resultados!</p>
-<p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<% elsif dias_falta == 2 %>
-<p>Você tem mais 2 dias para experimentar o ContaCal! Aproveite! :-)</p>
-<p>Você sabia que é possível <a href=http://www.contacal.com.br/programe-suas-proximas-refeicoes-no-contacal>programar suas próximas refeições</a> no ContaCal? Com isso você mesmo pode criar sua dieta caprichando nas calorias verdes e sem exagerar nas vermelhas!</p>
-<p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<% elsif dias_falta == 1 %>
-<p>Você tem mais 1 dia para experimentar o ContaCal! Aproveite! :-)</p>
-<p>No ContaCal é possível registrar não só suas refeições como também <a href=http://www.contacal.com.br/registre-tambem-suas-atividades>suas atividades físicas</a>.</p>
-<p>Aproveite que o dia está começando e se organize para <a href=http://app.contacal.com.br>registrar suas refeições</a> de hoje no ContaCal.</p>
-<% elsif dias_falta < 1 %>  
-<p>Seu período de experiência do ContaCal acabou... :-(</p>
-<p>Mas se você gostou, junte-se a mais de 10.000 contadores de calorias e torne-se um assinante hoje mesmo!</p>
-<p>Para se tornar assinante, basta acessar o <a href=http://app.contacal.com.br/payment>ContaCal</a> e escolher a opção de pagamento que desejar, cartão ou boleto.</p>
-<% end %>
-<% end %> 
-
 <p>Veja como está sua evolução no ContaCal e não deixe de registrar suas refeições de hoje.</p>
 <p>Lembre-se, só se melhora aquilo que se mede!</p>
 

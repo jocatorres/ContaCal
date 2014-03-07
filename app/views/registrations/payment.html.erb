@@ -1,219 +1,27 @@
-<h1 id="report-title">Opções de pagamento</h1>
-
-<%- data_preco_1790 = "2013-03-23" -%>
-
-
-<%- if  user.bank_billet_expire_at.nil? or (!user.bank_billet_expire_at.nil? and user.bank_billet_expire_at < Date.today + 1) -%>
-    <%- user.update_attribute(:bank_billet_link, nil) -%>
-    <%- user.update_attribute(:bank_billet_link_6, nil) -%>
-    <%- user.update_attribute(:bank_billet_link_12, nil) -%>
-<%- end -%>
-
-<%- date_expire = Date.today+10 -%>
-<%- document_number = Date.today.strftime("%Y%m%d") + "%08d" % user.id -%> 
-
-<%- if  user.bank_billet_link.nil? -%>
-  <%- description = "Pagamento mínimo por boleto: trimestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 29.40, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- else -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 53.70, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- end -%>
-  <%- if bb.save -%>
-    <%- user.update_attribute(:bank_billet_link, bb.attributes["external_link"]) -%>
-    <%- user.update_attribute(:bank_billet_our_number, bb.attributes["our_number"]) -%>
-    <%- user.update_attribute(:bank_billet_expire_at, date_expire.strftime("%Y-%m-%d")) -%>
-    <%- sleep(1) -%>
-  <%- end -%>
-<%- end -%>
-
-<%- if user.status == 120 -%>
-
-<%- if  user.bank_billet_link_6.nil? -%>
-  <%- description = "Assinatura semestral.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 55.80, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- else -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 89.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- end -%>
-  <%- if bb.save -%>
-    <%- user.update_attribute(:bank_billet_link_6, bb.attributes["external_link"]) -%>
-    <%- user.update_attribute(:bank_billet_our_number_6, bb.attributes["our_number"]) -%>
-    <%- user.update_attribute(:bank_billet_expire_at, date_expire.strftime("%Y-%m-%d")) -%>
-    <%- sleep(1) -%>
-  <%- end -%>
-<%- end -%>
-<%- if  user.bank_billet_link_12.nil? -%>
-  <%- description = "Assinatura anual.\n\nATENÇÃO: O acesso ao ContaCal somente será liberado após o pagamento deste boleto.\n\nSeu login ContaCal é \"" + user.email + "\"."-%>
-  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 93.60, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- else -%>
-    <%- bb = Cobregratis::BankBillet.new(:amount => 152.90, :expire_at_date_string => date_expire.strftime("%d/%m/%Y"), :name => user.name, :acceptance => "S", :document_number => document_number, :description => description) -%>
-  <%- end -%>
-  <%- if bb.save -%>
-    <%- user.update_attribute(:bank_billet_link_12, bb.attributes["external_link"]) -%>
-    <%- user.update_attribute(:bank_billet_our_number_12, bb.attributes["our_number"]) -%>
-    <%- user.update_attribute(:bank_billet_expire_at, date_expire.strftime("%Y-%m-%d")) -%>
-    <%- sleep(1) -%>
-  <%- end -%>
-<%- end -%>        
-
-<%- end -%>        
-
-
-
+<h1 id="report-title">Opções de doação</h1>
 
 <table border=0 cellspacing=0 cellpadding=15>
-<%- if user.id == -1 -%>
   <tr bgcolor=#ffffff>
   	<td colspan=7 bgcolor=#ffffff><font size=3>
-	  <form novalidate autocomplete="on">
-	    Número do cartão: <input type="text" class="cc-number" pattern="\d*" x-autocompletetype="cc-number" placeholder="Número do cartão" required><br>
-		Data de experição: <input type="text" class="cc-exp" pattern="\d*" x-autocompletetype="cc-exp" placeholder="MM/AA" required maxlength="9"><br>
-		CVC: <input type="text" class="cc-cvc" pattern="\d*" x-autocompletetype="cc-csc" placeholder="Código do lado do número" required maxlength="4" autocomplete="off"><br>
-	    <button type="submit">Assinar</button>
-	  </form>	
-	</td>
-  </tr>
-<%- else -%>
-  <tr bgcolor=#ffffff>
-  	<td colspan=7 bgcolor=#ffffff><font size=3>
-		<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%>   
-		Faça como <a href="#openModal2">essas várias pessoas</a> que já emagreceram com o ContaCal!<br><br>
-		<%- end -%>
-	
-	Opção de pagamento com cartão de crédito via PayPal, a maneira mais simples e segura de pagar com cartão de crédito na internet:<!-- ou PagSeguro. Escolha a que lhe convier:-->
-	</td>
-  </tr>
-  <tr bgcolor=#ffffff>
-	<td colspan=7 bgcolor=#ffffff align=center valign=top>                                                                                                                                         
-	  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-		<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-		<input type="hidden" name="cmd" value="_s-xclick">
-		<input type="hidden" name="hosted_button_id" value="PEJHG3LJ2U9HC">
-		<input type="image" src="/images/assinar-paypal.png" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
-		<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+		Somos uma entidade sem fins lucrativos que tem por missão:<br><br>
+		<font color=#E89105><center><strong><em>Ajudar o maior número de pessoas<br>a ter uma alimentação<br>mais saudável e balanceada!</em></strong></center></font><br>
+		Por este motivo nosso diário alimentar virtual é gratuito!<br><br>
+		Só que precisamos de algum dinheiro para mantê-lo operando. Para nos ajudar a mantê-lo operando aceitamos doações tanto de pessoas quanto de empresas.<br>
+		<center>
+		<!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+		<form target="pagseguro" action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post">
+		<!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+		<input type="hidden" name="receiverEmail" value="info@contacal.com.br" />
+		<input type="hidden" name="currency" value="BRL" />
+		<input type="image" src="https://p.simg.uol.com.br/out/pagseguro/i/botoes/doacoes/120x53-doar.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
 		</form>
-	  <%- else -%>
-		<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-		<input type="hidden" name="cmd" value="_s-xclick">
-		<input type="hidden" name="hosted_button_id" value="QP4WL6TUCE9S6">
-		<input type="image" src="/images/assinar-paypal.png" border="0" name="submit" alt="PayPal - A maneira mais fácil e segura de efetuar pagamentos online!">
-		<img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-		</form>
-	  <%- end -%>
-    </tr><tr>		
-		
-<!--   	<a href=https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC><img src="/images/paypal.png"></a><br>-->
-<!--		<%= link_to "&nbsp;&nbsp;Assinar!&nbsp;&nbsp;".html_safe, "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PEJHG3LJ2U9HC"  , :class => 'botao_assinar' %>-->
-	</td>
-    <td colspan=7 width=100% bgcolor=#ffffff valign=top><font size=2>
-	  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-<li> Assinatura mensal de apenas <strong>R$ 9,80</strong>.<br>&nbsp;<br></li>
-<%- else -%>
-<li> Assinatura mensal de apenas <strong>R$ 17,90</strong>.<br>&nbsp;<br></li>
-<%- end -%>
-<!--<li> Pagamento via PayPal ou PagSeguro, as formas <strong>mais seguras</strong> para pagar com cartão de crédito na internet.</li>-->
-<li> Sem nenhuma taxa adicional de cobrança.<br>&nbsp;<br></li>
-<li> Liberação do acesso automática, minutos após o pagamento.<br>&nbsp;<br></li>
-<li> Renovação automática para você registrar suas refeições todos os dias, sem interrupções.<br>&nbsp;<br></li>
-<li> Cancelamento sem complicações direto no site do PayPal. Não acreditamos em prender os clientes dificultando sua saída, mas sim em ter nossos usuários conosco porque gostam de nosso serviço e o acham útil. Queremos que nossos usuários nos recomendem para seus amigos! :-)<br>&nbsp;<br><br>&nbsp;<br></li>
-	</ul>
-	</td>
-<!--	<td bgcolor=#ffffff align=center valign=top>
-	  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-		<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
-		<input type="hidden" name="code" value="62C8E43828289E0AA483CF9167A4D845" />
-		<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Assine com PagSeguro - é rápido, grátis e seguro!" />
-		</form>	
-	  <%- else -%>
-		<form target="pagseguro" action="https://pagseguro.uol.com.br/v2/pre-approvals/request.html" method="post">
-		<input type="hidden" name="code" value="F59F9C78505071C884818F8A74513A44" />
-		<input type="image" src="/images/assinar-pagseguro.png" name="submit" alt="Assine com PagSeguro - é rápido, grátis e seguro!" />
-		</form>	
-	  <%- end -%>
-  	<td bgcolor=#ffffff></td>-->
+		<!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+		</center>
+		</td>
   </tr>
-<%- end -%>
-
-<%- if !user.bank_billet_link.nil? or !user.bank_billet_link_6.nil? or !user.bank_billet_link_12.nil?-%>
-  <tr bgcolor=#ffffff>
-  	<td align=center colspan=7 bgcolor=#ffffff><font size=2>Temos também opção de assinatura com boleto:<br/><br/><!--</td>
-</tr>
-  <tr>
-	<td bgcolor=#ffffff align=center valign=top>--><small><a onmouseover='this.style.text-decoration="none"; return true' target=_blank href=<%=user.bank_billet_link%>><img src=/images/boleto.png></a><br/>
-<!--	  <%- if !user.bank_billet_link.nil? -%>
-	    <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-		<a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a><br/>
-  	    <%- else -%>
-		<a target=_blank href=<%=user.bank_billet_link%>>Mensal</a><br/>
-  	    <%- end -%>
-	  <%- end -%>
-	  <%- if !user.bank_billet_link_6.nil? -%>
-		<a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a><br/>
-	  <%- end -%>
-	  <%- if !user.bank_billet_link_12.nil? -%>
-		<a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>
-	  <%- end -%>
-	</td>
-	<td bgcolor=#ffffff></td>
-   <td colspan=5><font size=2> 
-	  <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") <= data_preco_1790 -%>
-	    <%- if !user.bank_billet_link.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Trimestral</a>:</strong> R$ 29,40 - como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento.<br>&nbsp;<br></li>
-	    <%- end -%>
-	    <%- if !user.bank_billet_link_6.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 55,80 - 5% de desconto sobre o preço mensal. Equivale a <strong>R$ 9,30 por mês</strong>.<br>&nbsp;<br></li>
-	    <%- end -%>
-	    <%- if !user.bank_billet_link_12.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 93,60 - 20% de desconto sobre o preço mensal. Equivale a <strong>R$ 7,80 por mês</strong>.</li>
-	    <%- end -%>
-	  <%- else -%>
-	    <%- if !user.bank_billet_link.nil? -%>
-	           Como o banco nos cobra uma taxa de quase R$ 4,00 para pagamento por boleto, não temos como oferecer opção mensal para esse meio de pagamento. <br><br>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link%>>Mensal</a>:</strong> R$ 17,90 - 8% de desconto sobre o preço mensal. Equivale a <strong>R$ 16,47 por mês</strong>.<br>&nbsp;<br></li>
-	    <%- end -%>
-	    <%- if !user.bank_billet_link_6.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_6%>>Semestral</a>:</strong> R$ 89,90 - 16% de desconto sobre o preço mensal. Equivale a <strong>R$ 14,99 por mês</strong>.<br>&nbsp;<br></li>
-	    <%- end -%>
-	    <%- if !user.bank_billet_link_12.nil? -%>
-	    	   <li> <strong><a target=_blank href=<%=user.bank_billet_link_12%>>Anual</a>:</strong> R$ 152,90 - 28% de desconto sobre o preço mensal. Equivale a <strong>R$ 12,75 por mês</strong>.</li>
-	    <%- end -%>
-	  <%- end -%>-->
-	  <tr bgcolor=#ffffff>
-	  	<td colspan=7  bgcolor=#ffffff><font size=2><div style="line-height: 130%;">
-		<strong><font color=#de0000>Atenção:</font></strong> Pagamento mínimo trimestral. Para pagamentos feitos com boleto bancário pode levar até <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte. Nos feriados pode demorar ainda mais... :-/
-    </td>
-  </tr>
-<!--  <tr bgcolor=#ffffff>
-	<td colspan=7 bgcolor=#ffffff><font size=2><strong><font color=#de0000>Atenção:</font></strong> Com pagamento via boleto bancário pode levar <strong>2 dias úteis</strong> para sua assinatura ser liberada, que é o tempo que o banco leva para nos informar quando um boleto é pago. Se você pagar na sexta à noite, seu acesso só será liberado na terça da semana seguinte.</td>
-  </tr>-->
-<%- end -%>
 </table>        
 
 <br/>
-<%- if (current_user.status == 1 or current_user.status == 10) and Date.today > user.expire_at -%> 
-<p align=right>
-  <%= link_to "sair &raquo;".html_safe, destroy_user_session_url, {:method => :delete, :style=>'color:#bcbcbc;'} %>
-</p>
-<%- else -%>
 <p>
   <%= link_to "&laquo; voltar para o programa".html_safe, root_url(:protocol => "http") %>
 </p>
-<%- end -%>
-
-<div id="openModal" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-		<center><h2>Veja como é simples!</h2>
-<iframe src="http://player.vimeo.com/video/33258576" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
-	</div>
-</div>
-
-<div id="openModal2" class="modalDialog">
-	<div>
-		<a href="#close" title="Close" class="close">X</a>
-		<center><h2>Veja o que estão falando do ContaCal!</h2><br>
-<iframe src="/testemunhos.html" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-	</div>
-</div>
