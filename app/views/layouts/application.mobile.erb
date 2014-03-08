@@ -30,7 +30,9 @@ if(navigator.userAgent.match(/Android/i)){
 <body id="<%= controller.controller_name %>">
   <header>
     <div id="logo"><a href="<%= root_url(:protocol => "http") %>">ContaCal</a></div>
-<!--    <div style="position: relative; left: -29px; top: 12px; width: 423px; height: 35px"><small>ContaCal é uma entidade <%= link_to "sem fins lucrativos", payment_url %>.</small></div>-->
+    <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") >= "2014-03-08" -%>
+    	<div style="position: relative; left: -112px; top: 12px; width: 423px; height: 45px"><small><center>ContaCal é uma entidade sem fins lucrativos.<br /><%= link_to "Colabore", payment_url %>!</center></small></div>
+	<%- end -%>
     <%= yield(:header_info) %>
   </header>
   <hr />

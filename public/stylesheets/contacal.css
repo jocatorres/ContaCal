@@ -168,11 +168,11 @@ header #subscriber {
 /* REFERRER */
 
 header #referrer {
-    width: 280px;
+    width: 360px;
 	font-size: .8em; 
     float: right;
 	text-align: right;
-	position: relative; left: 360px; top: 36px
+	position: relative; left: 0px; top: 10px
 }
 
 

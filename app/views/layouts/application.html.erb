@@ -33,7 +33,9 @@
 		<br /><a href="http://admin.contacal.com.br/user_friends/user_friend.cgi?from=<%=current_user.email%>" class="terms-of-use-fancybox"><font color=#dd0000><b>Indique</b></font></a> ContaCal para seus amigos!<br />
     </div>
 	<div id="referrer">
-<!--		ContaCal é uma entidade <%= link_to "sem fins lucrativos", payment_url %>.-->
+    <%- if user.confirmation_sent_at.strftime("%Y-%m-%d") >= "2014-03-08" -%>
+		ContaCal é uma entidade sem fins lucrativos. <%= link_to "Colabore", payment_url %>!
+	<%- end -%>
     </div>
     <%= yield(:header_info) %>  
   </header>
