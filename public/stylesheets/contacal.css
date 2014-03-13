@@ -104,12 +104,11 @@ header a:hover {
 }
 
 header #kcal-limit {
-  margin: 5px 0 0 60px;
+  margin: 118px 0 0 320px;
   color: #363636;
   text-shadow: 0px 1px 0 #fff;
   font-size: .8em;
-  float: left;
-  position: relative; left: 0px; top: -18px;
+  position: relative; left: 0px; top: -68px;
   width: 220px;
 }
 
@@ -183,7 +182,7 @@ section[role="main"] {
   display: block;
   margin: auto;
   padding: 0 20px;
-  width: 920px;
+  width: 907px;
   border: 1px solid #ddd;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -287,13 +286,13 @@ section[role="main"] nav {
   display: block;
   width: 340px;
   height: 50px;
-  margin: 0 auto 20px;
+  margin: 0 auto 15px;
 }
 
 section[role="main"] nav #prev-date,
 section[role="main"] nav #next-date,
 section[role="main"] nav #current-date {
-  margin: 16px 0 0 0;
+  margin: 18px 0 0 0;
   font-size: 1.4em;
   text-shadow: 0px 1px 0 #fff;
   color: #696969;
@@ -316,7 +315,7 @@ section[role="main"] nav #current-date a:hover {
 }
 
 section[role="main"] nav #current-date.not-today {
-  margin: 5px 0 0 0;
+  margin: 7px 0 0 0;
 }
 
 section[role="main"] nav #current-date.not-today #toggle-calendar {
@@ -324,11 +323,11 @@ section[role="main"] nav #current-date.not-today #toggle-calendar {
 }
 
 section[role="main"] nav #prev-date {
-  margin: 20px 10px 0 0;
+  margin: 24px 10px 0 20px;
 }
 
 section[role="main"] nav #next-date {
-  margin: 20px 0 0 10px;
+  margin: 24px 0 0 10px;
 }
 
 section[role="main"] nav #prev-date a,
@@ -358,7 +357,7 @@ section[role="main"] nav #next-date a:hover {
 }
 
 section[role="main"] #progress {
-  margin-right: 17px;
+  margin-right: 6px;
   width: 293px;
   height: 20px;
   border: 1px solid #ddd;
@@ -468,7 +467,7 @@ section[role="main"] .meal-box .meals ul li a.remove:hover {
 
 section[role="main"] #program-result {
   clear: both;
-  margin: 20px 18px 0 6px;
+  margin: 15px 6px 0 6px;
 }
 
 /* CALENDAR */
