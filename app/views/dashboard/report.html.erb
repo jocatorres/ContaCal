@@ -1,20 +1,20 @@
 <h1 id="report-title">
-    <% if @days == 30 %>
-      <span style="float: right">
+<% if @days == 30 %>
+       <span style="float: right">
 	      <%= link_to '7 dias'.html_safe, report_path %> | <%= link_to 'ano'.html_safe, report_path(:range => 'year') %>
-      </span>
-      Relatório de controle de calorias ingeridas nos últimos 30 dias
-    <% elsif @days == 365 %>
+       </span>
+       Relatório de controle de calorias ingeridas nos últimos 30 dias
+<% elsif @days == 365 %>
     <span style="float: right">
       <%= link_to '7 dias'.html_safe, report_path %> | <%= link_to '30 dias'.html_safe, report_path(:range => 'month') %>
     </span>
     Relatório de controle de calorias ingeridas no último ano
-    <% else %>
+<% else %>
       <span style="float: right">
         <%= link_to '30 dias'.html_safe, report_path(:range => 'month') %> | <%= link_to 'ano'.html_safe, report_path(:range => 'year') %>
       </span>
       Relatório de controle de calorias ingeridas nos últimos 7 dias
-    <% end -%>
+<% end -%>
 </h1>
 
 <div id="graph">&nbsp;</div>
