@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://www.w3.org/2005/10/profile">
+<link rel="icon" href="http://easycalculation.com/images/easy_favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="http://easycalculation.com/images/easy_favicon.ico" />
+<link rel="shortcut icon" href="http://easycalculation.com/images/easy_favicon.ico" type="image/ico" /> 
+
+	<title> Resting Metabolic Rate (RMR) Calculator to Find Calories Burned </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="rmr calculator, resting metabolic rate calculator, calculating resting metabolic rate, calculate resting metabolic rate, calculate rmr, calculate rmr rate, calculator to find calories burned, calculator to find resting metabolic rate, resting metabolic rate, rmr, calories burned rate, find resting metabolic rate, find calories burned, find metabolic rate, find calories rate," /> 
+	<meta name="description" content="RMR Calculator to find resting metabolic calories burned rate" />
+	<script language=javascript>
+	function check(typ){
+
+	}
+
+	function getid(elid){
+	 var f=document.getElementById(elid);
+	 return f;	
+	}
+
+	function gf(formname,fieldname){
+	 var f= eval("document."+formname+"."+fieldname);
+	 return f.value;	
+	}
+
+
+	function showresult(id, val){
+	  var rs = getid('r'+id);
+	  rs.value=val;
+	}
+
+	$(document).ready(function() 
+	{
+		$("textarea.auto_selectemb").mouseover(function()
+		{
+			 $(this).select();
+		});
+
+		$("#embedisp").hide();
+
+		 if ($(".easycurrency").length > 0) //it exists
+		  {
+		    currencySelector();
+		    if ($(".easycurrencyresult").length > 0) //it exists
+		    {
+		      $(".easycurrencyresult").html("&#2352;");
+		    }
+		  }
+	});
+
+	function embedshowhide(obj)
+	{
+		if(obj == 'expand')
+		{
+			$("#embedisp").show();
+		}
+		else if(obj == 'minimize')
+		{
+			$("#embedisp").hide();
+		}
+	}
+
+	function changeCurrencySymbol(currObj)
+	{
+	  var currencySelVal = $(currObj).val();
+	  if ($(".easycurrencyresult").length > 0) //it exists
+	  {
+	    $(".easycurrencyresult").html(currencySelVal);
+	  }
+	}
+
+	function currencySelector()
+	{
+	    var easycurrency = new Array("&#2352;", "&#36;", "&#162;", "&#163;", "&#165;", "&#8355;", "&#8356;", "&#8359;", "&#128;");
+	    var easycurcountry = new Array("Rupee", "Dollar", "Cent", "Pound", "Yen", "Franc", "Lira", "Peseta", "Euro");
+	    var currencySel = "<select onchange=changeCurrencySymbol(this)>";
+	    for(i=0;i<easycurrency.length;i++)
+	    {
+	        currencySel+=  "<option value='"+easycurrency[i]+"'>"+easycurcountry[i]+" ("+easycurrency[i]+") </option>";
+	    }
+	    currencySel+= "</select>";
+
+	    $(".easycurrency").html(currencySel);
+	}
+	</script>
+	<script type="text/javascript" src="http://easycalculation.com/jquery.js"> </script>
+<script type="text/javascript">
+function checnum(as)
+{
+	  var a = as.value;
+	
+	  for(var x=0; x<a.length; x++)
+	  {
+	     var ff = a[x];
+	     if(isNaN(a) || ff==" ")
+	     {
+		  a = a.substring(0,(a.length-1));
+		  as.value = a;
+	     }	
+  	   }	
+}
+ 
+
+ function tqe_perc()
+{
+var gender=$("input:radio[name=gender]:checked").val();
+
+
+var w=$("#w").val();
+var h=$("#h").val();
+var age=$("#age").val();
+
+
+
+var wu=$("#wopt option:selected").val();
+if(w=="" && h=="" && age=="")
+{
+    alert("Entre as informações pedidas");return false;
+}
+else
+{
+    w=check1("w","Informe seu peso");
+    h=check1("h","Informe sua altura");
+    age=check1("age","Informe sua idade");
+    
+    //alert(w+"--"+h+"---"+age);
+            w=w/0.45359237;
+      var rmr=rmrCalc(gender,w,h,age)
+      $("#v").val(rmr);
+  
+  }
+}
+
+function rmrCalc(gender,weight,height,age)
+{	
+	//var inches=parseInt(inches);
+	var rmr=0;
+
+	if (gender=="1")
+	{
+		weight=weight*6.22;
+		height=height*0.393701*12.7;
+		age=age*6.8;
+		rmr=66+weight+height-age;
+		rmr=Math.round(rmr);
+		
+	}
+	else
+	   {
+		weight=weight*4.36;
+		height=height*0.393701;		
+		height=height*4.32;
+		age=age*4.7;
+		rmr=655+weight+height-age;
+		rmr=Math.round(rmr);
+      }     
+  return rmr;
+  
+  }
+
+
+
+// check the values valid or not
+function check1(id,msg)
+{
+var id1="#"+id;
+var val=$(id1).val();
+if(val=="")
+{
+	alert(msg);
+	exit(0);
+}	
+else
+{
+val=parseFloat(val);
+return val;	
+}
+
+
+}
+
+</script> 
+<form name=first>
+<table align=center border=0 cellpadding=1 cellspacing=1 id=tqe_calc>
+			<tr><td><font face=helvetica,arial size=2>Você é? </td><td><font face=helvetica,arial size=2>
+				<input type=radio name=gender value=2 >Mulher&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type=radio name=gender value=1 >Homem</td></tr>
+	  		<tr><td><font face=helvetica,arial size=2>Seu peso: </td><td>
+			<input type=text id=w size=5 onkeyup=checnum(this)> Kg</td></tr>
+	  		<tr><td><font face=helvetica,arial size=2>Altura: </td><td><input type=text size=5 id=h onkeyup=checnum(this)> cm</td></tr>
+			<tr><td><font face=helvetica,arial size=2>Idade: </td><td><input type=text id=age size=5 onkeyup=checnum(this)> anos</td></tr>
+<tr><td colspan=2> &nbsp; </td></tr>
+<tr><td align=center colspan=2> <input type=button value='Calcular' onclick=tqe_perc()><!--<input type=reset value='Reset' onclick=empty()>--> </td></tr>
+<tr><td colspan=2> &nbsp; </td></tr>
+<tr><td align=left><font face=helvetica,arial size=2>Seu IMB é </td><td><input size=5 type=text id=v readonly> calorias por dia</td></tr> 
+</table>
+</form></td> </tr> </table> </td> </tr> 
+

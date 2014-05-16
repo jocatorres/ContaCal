@@ -14,6 +14,37 @@
  
  
   <p>&nbsp;</p>
+<h2>Seu status</h2>
+
+   <p>
+   <%- if user.status.blank? or user.status == 0 -%>
+     Cortesia
+   <%- elsif (user.status == 1 or user.status == 10) -%>
+     Período de teste gratuito
+   <%- elsif (user.status == 2 or user.status == 20) -%>
+     Contribuidor eventual via boleto bancário
+   <%- elsif (user.status == 4 or user.status == 40) -%>
+     Contribuidor recorrente via cartão de crédito
+   <%- end -%>
+ </p>
+
+   <%- if !user.status.blank? and (user.status == 0 or user.status == 1 or user.status == 10 or user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) and !user.expire_at.blank? -%>
+   <p><%= f.label :expire_at %>: <%= user.expire_at.strftime("%d/%m/%Y") %></p>
+
+      <p>
+ 	   <%- if (user.status == 0 or user.status == 1 or user.status == 10) -%>
+ 		<a href=<%=payment_url%>><font color=#dd0000><b>Seja um contribuidor</b></font></a>!
+ 	  <%- elsif (user.status == 2 or user.status == 20 or user.status == 4 or user.status == 40) -%>
+ 	    <a href=<%=payment_url%>><font color=#dd0000><b>Volte a ser um contribuidor</b></font></a>! 
+ 	  <%- end -%>
+   </p>
+   <%- elsif (user.status.blank? or user.status == 0 or user.status == 1 or user.status == 10 or user.status == 2 or user.status == 20) and user.expire_at.blank? -%> 
+      <p>
+ 		<a href=<%=payment_url%>><font color=#dd0000><b>Seja um contribuidor</b></font></a>!
+      </p>
+
+   <%- end -%>
+   <p>&nbsp;</p>
   <h2>Configurações</h2>
 
   <p><%= f.check_box :small_portions %>&nbsp;<%= f.label :small_portions %></p>

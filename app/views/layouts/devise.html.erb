@@ -62,7 +62,7 @@
 </script>
 
 </head>
-	<%- if current_page?('/foods/new') or current_page?('/foods') -%>
+	<%- if current_page?('/foods/new') or current_page?('/foods') or current_page?('/payments') -%>
 <body id="dashboard">	                     
 	<%- else -%>
 <body id="users-engine" class="<%= controller.controller_name %>">
@@ -73,7 +73,11 @@
     </div>
   </header>                    
   <hr />
+  <%- if current_page?('/payment') -%>
+  <section role="main" style="width:678px">
+  <%- else -%>
   <section role="main">
+  <%- end -%>
     <%= yield %>
   </section>
   <hr />
