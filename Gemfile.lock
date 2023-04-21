@@ -86,7 +86,7 @@ GEM
       activerecord (= 3.0.10)
       activeresource (= 3.0.10)
       activesupport (= 3.0.10)
-      bundler (= 2.3.70)
+	  bundler (~> 1.0)
       railties (= 3.0.10)
     rails3-jquery-autocomplete (0.9.1)
       rails (~> 3.0)
