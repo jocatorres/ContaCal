@@ -35,8 +35,6 @@ GEM
     builder (2.1.2)
     cobregratis (0.3.0)
       activeresource (>= 2.1)
-      activeresource (>= 2.1)
-      activesupport (>= 2.1)
       activesupport (>= 2.1)
     columnize (0.3.4)
     daemons (1.1.4)
@@ -168,3 +166,6 @@ DEPENDENCIES
   simplecov (= 0.5.3)
   thin (= 1.2.11)
   timecop (= 0.3.5)
+
+BUNDLED WITH
+   1.17.3
