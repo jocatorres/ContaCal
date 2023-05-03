@@ -7,6 +7,4 @@ class Food < ActiveRecord::Base
   Expendables = %w( d )
 
   validates :kind, :inclusion => Consumables + Expendables
-
-  attr_accessible :name, :weight, :measure, :kcal, :kind
 end

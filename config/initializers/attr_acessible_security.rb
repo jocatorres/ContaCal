@@ -7,4 +7,4 @@
 # initializer, run your tests, and expose each attribute (via attr_accessible) as dictated
 # by your failing tests.
 
-ActiveRecord::Base.send(:attr_accessible, nil)
+# ActiveRecord::Base.send(:attr_accessible, nil)

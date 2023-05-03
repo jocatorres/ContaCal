@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
   end
   
   def create
-    @food = Food.new(params[:food])
+    @food = Food.new(food_params)
     
     if !@food.name.blank?
       NotificationMailer.new_food(current_user, @food).deliver  
@@ -21,5 +21,11 @@ class FoodsController < ApplicationController
       @food.errors.add(:name, :empty)
       render action: "new"
     end    
+  end
+  
+  private 
+  
+  def food_params 
+    params.require(:food).permit(:name, :weight, :measure, :kcal, :kind)
   end
 end

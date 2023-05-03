@@ -8,7 +8,7 @@ class UserFriendsController < ApplicationController
   end
   
   def create
-    @user_frined = UserFriends.new(params[:user_friend])
+    @user_frined = UserFriends.new(user_friend_params)
     
     if (!@user_friend.name.blank? && !@user_friend.email.blank?)
       NotificationMailer.new_user_friend(current_user, @user_friend).deliver  
@@ -21,5 +21,11 @@ class UserFriendsController < ApplicationController
       @user_friend.errors.add(:name, :empty)
       render action: "new"
     end    
+  end
+  
+  private 
+  
+  def user_friend_params 
+    params.require(:user_friend).permit(:friend_name, :friend_email, :date)
   end
 end
