@@ -1,24 +1,18 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe Food do
-  it { should have_many(:user_foods) }
-  it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:weight) }
-  it { should validate_presence_of(:measure) }
-  it { should validate_presence_of(:kcal) }
-
-  it { should allow_mass_assignment_of(:name) }
-  it { should allow_mass_assignment_of(:weight) }
-  it { should allow_mass_assignment_of(:measure) }
-  it { should allow_mass_assignment_of(:kcal) }
-  it { should allow_mass_assignment_of(:kind) }
+describe Food, type: :model do
+  it { is_expected.to have_many(:user_foods) }
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:weight) }
+  it { is_expected.to validate_presence_of(:measure) }
+  it { is_expected.to validate_presence_of(:kcal) }
   
   it "should validate inclusion of :type" do
-    Factory.build(:food, :kind => 'a').valid?.should be_true
-    Factory.build(:food, :kind => 'b').valid?.should be_true
-    Factory.build(:food, :kind => 'c').valid?.should be_true
-    Factory.build(:food, :kind => 'd').valid?.should be_true
-    Factory.build(:food, :kind => 'e').valid?.should_not be_true
+    expect(FactoryGirl.build(:food, :kind => 'a').valid?).to be_truthy
+    expect(FactoryGirl.build(:food, :kind => 'b').valid?).to be_truthy
+    expect(FactoryGirl.build(:food, :kind => 'c').valid?).to be_truthy
+    expect(FactoryGirl.build(:food, :kind => 'd').valid?).to be_truthy
+    expect(FactoryGirl.build(:food, :kind => 'e').valid?).to be_falsey
   end
 end

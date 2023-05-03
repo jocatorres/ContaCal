@@ -8,12 +8,4 @@ class RegistrationsController < Devise::RegistrationsController
   def after_sign_out_path_for(resource_or_scope)
     "https://docs.google.com/a/jig.com.br/spreadsheet/viewform?formkey=dFBMUV9fd2x4aVZJOFJ2V3JVTmxlQmc6MQ"
   end  
-
-  def sign_up_params 
-    params.permit(*User::ATTRIBUTES_ACCESSIBLE)
-  end 
-  
-  def account_update_params 
-    params.permit(*User::ATTRIBUTES_ACCESSIBLE)
-  end
 end

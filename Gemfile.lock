@@ -55,9 +55,10 @@ GEM
     diff-lcs (1.5.0)
     erubi (1.12.0)
     eventmachine (1.2.7)
-    factory_girl (2.0.5)
-    factory_girl_rails (1.1.0)
-      factory_girl (~> 2.0.0)
+    factory_girl (3.0.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (2.0.0)
+      factory_girl (~> 3.0.0)
       railties (>= 3.0.0)
     foreman (0.20.0)
       term-ansicolor (~> 1.0.5)
@@ -145,7 +146,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.12.0)
-    shoulda-matchers (1.0.0.beta2)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 4.2.0)
     silent-postgres (0.1.1)
     simplecov (0.5.3)
       multi_json (~> 1.0.3)
@@ -181,7 +183,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   devise
-  factory_girl_rails
+  factory_girl_rails (~> 2.0.0)
   foreman (= 0.20.0)
   google_visualr
   magic_encoding (= 0.0.2)
