@@ -9,6 +9,13 @@ FactoryGirl.define do
     password '123456'
     password_confirmation '123456'
     kcal_limit 1000
+    
+    # trait :subscribed_daily do 
+    #   after_create do |u|
+    #     u.subscribed_daily = true 
+    #     u.save
+    #   end
+    # end
   end
   factory :food do
     name 'Abacate batido com limão e açúcar'

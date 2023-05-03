@@ -18,9 +18,10 @@ group :development, :test do
 #  gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
   gem 'minitest'
   gem 'rspec-rails'
-  gem 'shoulda-matchers', '1.0.0.beta2'
-  gem 'factory_girl_rails', '1.1.0'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
   gem 'magic_encoding', '0.0.2'
   gem 'timecop', '0.3.5'
   gem 'simplecov', '0.5.3', :require => false
+  gem 'byebug'
 end

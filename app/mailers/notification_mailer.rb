@@ -41,12 +41,12 @@ class NotificationMailer < ::ActionMailer::Base
     end
   end
 
-#  def end_of_day(user)
-#    @user = user
-#    @date = Date.today
-#    mail(:to => "#{user.name} <#{user.email}>",
-#      :subject => "Resumo de suas calorias de hoje (#{I18n.l(@date)})")
-#  end
+ def end_of_day(user)
+   @user = user
+   @date = Date.today
+   mail(:to => "#{user.name} <#{user.email}>",
+     :subject => "Resumo de suas calorias de hoje (#{I18n.l(@date)})")
+ end
 
   def new_food(user, food)
     @user = user
