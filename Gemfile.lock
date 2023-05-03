@@ -183,6 +183,7 @@ DEPENDENCIES
   foreman (= 0.20.0)
   google_visualr
   magic_encoding (= 0.0.2)
+  minitest
   newrelic_rpm
   pg
   rails (= 5.1.7)

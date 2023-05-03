@@ -1,4 +1,4 @@
-class AddNutriMailAndNameToUsers < ActiveRecord::Migration
+class AddNutriMailAndNameToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :nutri_email, :string
     add_column :users, :nutri_name, :string

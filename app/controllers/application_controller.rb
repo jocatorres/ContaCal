@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     end     
   end
          
-  before_filter :prepare_for_mobile
+  before_action :prepare_for_mobile
 
   def mobile_device?
     if session[:mobile_param]

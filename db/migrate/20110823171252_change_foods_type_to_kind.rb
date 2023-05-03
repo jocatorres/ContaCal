@@ -1,4 +1,4 @@
-class ChangeFoodsTypeToKind < ActiveRecord::Migration
+class ChangeFoodsTypeToKind < ActiveRecord::Migration[4.2]
   def self.up
     rename_column :foods, :type, :kind
   end

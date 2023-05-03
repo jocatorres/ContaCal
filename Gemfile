@@ -16,6 +16,7 @@ group :development, :test do
   # gem 'heroku'
   gem 'foreman', '0.20.0'
 #  gem 'integration', :git => 'git://github.com/mergulhao/integration.git'
+  gem 'minitest'
   gem 'rspec-rails'
   gem 'shoulda-matchers', '1.0.0.beta2'
   gem 'factory_girl_rails', '1.1.0'

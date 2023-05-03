@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class CreateFoods < ActiveRecord::Migration
+class CreateFoods < ActiveRecord::Migration[4.2]
   def self.up
     create_table :foods do |t|
       t.string :name

@@ -1,4 +1,4 @@
-class PopulateFoods < ActiveRecord::Migration
+class PopulateFoods < ActiveRecord::Migration[4.2]
   def self.up
     lines = File.open(Rails.root.join('db','foods.txt')).readlines
     lines.each do |line|

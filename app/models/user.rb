@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   has_many :user_friends
   validates :name, :presence => true
   after_create :send_welcome_email
-  scope :active, where(:deleted_at => nil)
-  scope :subscribed_daily, active.where(:subscribed_daily => true)
-  scope :subscribed_weekly, active.where(:subscribed_weekly => true)
+  scope :active, -> { where(:deleted_at => nil) }
+  scope :subscribed_daily, -> { active.where(:subscribed_daily => true) }
+  scope :subscribed_weekly, -> { active.where(:subscribed_weekly => true) }
 
   class << self
     def send_weekly_notification!

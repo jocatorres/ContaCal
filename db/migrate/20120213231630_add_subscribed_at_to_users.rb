@@ -1,4 +1,4 @@
-class AddSubscribedAtToUsers < ActiveRecord::Migration
+class AddSubscribedAtToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :subscribed_at, :date
   end

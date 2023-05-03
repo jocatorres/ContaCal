@@ -1,4 +1,4 @@
-class CreateUserWeights < ActiveRecord::Migration
+class CreateUserWeights < ActiveRecord::Migration[4.2]
   def self.up
     create_table :user_weights do |t|
       t.integer :user_id

@@ -1,4 +1,4 @@
-class AddMsgToUserFriends < ActiveRecord::Migration
+class AddMsgToUserFriends < ActiveRecord::Migration[4.2]
   def self.up
     add_column :user_friends, :msg, :string
   end

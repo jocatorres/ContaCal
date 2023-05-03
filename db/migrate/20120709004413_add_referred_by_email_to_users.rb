@@ -1,4 +1,4 @@
-class AddReferredByEmailToUsers < ActiveRecord::Migration
+class AddReferredByEmailToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :referred_by_email, :string
   end

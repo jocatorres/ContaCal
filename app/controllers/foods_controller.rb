@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class FoodsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   layout 'devise'
   
   def new
