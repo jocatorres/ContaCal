@@ -8,7 +8,13 @@ gem 'thin', '~> 1.8.2'
 gem 'silent-postgres', '~> 0.1.1'
 gem 'rails-jquery-autocomplete', '~> 1.0.5'
 gem 'google_visualr', '~> 2.5.1'
-gem 'newrelic_rpm', '~> 9.2.2'     
+gem 'newrelic_rpm', '~> 9.2.2'  
+
+gem 'sass-rails', '~> 6.0'
+gem 'coffee-rails', '~> 4.2'
+gem 'uglifier', '~> 4.2'
+gem 'jquery-rails', '~> 4.5'
+   
 
 group :development, :test do
   # gem 'ruby-debug19', '0.11.6'
