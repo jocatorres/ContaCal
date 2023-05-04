@@ -230,5 +230,8 @@ DEPENDENCIES
   timecop (= 0.3.5)
   uglifier (~> 4.2)
 
+RUBY VERSION
+   ruby 2.7.2p137
+
 BUNDLED WITH
    2.2.15
