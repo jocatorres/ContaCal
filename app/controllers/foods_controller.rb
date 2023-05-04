@@ -26,6 +26,6 @@ class FoodsController < ApplicationController
   private 
   
   def food_params 
-    params.require(:food).permit(:name, :weight, :measure, :kcal, :kind)
+    params.require(:food).permit(:name, :weight, :measure, :kcal, :kind) if params[:food]
   end
 end
