@@ -44,6 +44,6 @@ module Contacal
     
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.prefix = '/asset-files'
+    # config.assets.prefix = '/asset-files'
   end
 end
