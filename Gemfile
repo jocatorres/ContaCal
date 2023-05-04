@@ -15,6 +15,7 @@ gem 'sass-rails', '~> 6.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'uglifier', '~> 4.2'
 gem 'jquery-rails', '~> 4.5'
+gem 'jquery-ui-rails'
    
 
 group :development, :test do
