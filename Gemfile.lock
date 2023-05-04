@@ -182,22 +182,22 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  devise
+  devise (~> 4.9.2)
   factory_girl_rails (~> 2.0.0)
   foreman (= 0.20.0)
-  google_visualr
+  google_visualr (~> 2.5.1)
   magic_encoding (= 0.0.2)
-  minitest
-  newrelic_rpm
-  pg
+  minitest (~> 5.1)
+  newrelic_rpm (~> 9.2.2)
+  pg (~> 1.5)
   rails (= 5.1.7)
-  rails-jquery-autocomplete
-  rake
-  rspec-rails
-  shoulda-matchers
-  silent-postgres
+  rails-jquery-autocomplete (~> 1.0.5)
+  rake (~> 13.0.6)
+  rspec-rails (~> 4.1)
+  shoulda-matchers (~> 4.5)
+  silent-postgres (~> 0.1.1)
   simplecov (= 0.5.3)
-  thin
+  thin (~> 1.8.2)
   timecop (= 0.3.5)
 
 BUNDLED WITH

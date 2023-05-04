@@ -104,6 +104,6 @@
     <b>Atenção: </b>como você é assinante via cartão de crédito, você precisa acessar o <a target=new href=https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=<%=user.paypal_email%>>PayPal</a> para cancelar os pagamentos.<br /><br /> 
   <%- end -%>
 <%- else -%>
-Apesar de ficarmos muito tristes por você não querer mais usar o ContaCal, respeitamos sua decisão. Para desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :confirm => "Tem certeza de que deseja desativar sua conta?", :method => :delete %>.
+Apesar de ficarmos muito tristes por você não querer mais usar o ContaCal, respeitamos sua decisão. Para desativar sua conta, basta você <%= link_to "clicar aqui", registration_path(resource_name), :method => :delete, :data => { :confirm => "Tem certeza de que deseja desativar sua conta?" } %>.
 <%- end -%>
 </p>	
