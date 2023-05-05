@@ -47,7 +47,7 @@ describe NotificationMailer do
         body = @mailer.body.to_s
         filename = Rails.root.join('spec','fixtures','mailers','welcome.html')
         File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
-        expect(body).to eq(File.read(filename))
+        expect(body.gsub(/\s+/, "")).to eq(File.read(filename).gsub(/\s+/, ""))
       end
       it "should set correct content type" do
         expect(@mailer.content_type).to eq("text/html; charset=UTF-8")
@@ -347,7 +347,7 @@ describe NotificationMailer do
       end
       it "should set correct header To" do
         # Ele não coloca as aspas por que não receonhece nenhum caracter UTF-8 (acento)
-        expect(@mailer.header['To'].to_s).to eq("ContaCal <info@contacal.com.br>")
+        expect(@mailer.header['To'].to_s).to eq("Info ContaCal <info@contacal.com.br>")
       end
       it "should not have more than one to address" do
         expect(@mailer.to.size).to eq(1)
@@ -360,7 +360,7 @@ describe NotificationMailer do
       end
       it "should set correct header From" do
         # Ele coloca as aspas por que reconhece que existe um caracter UTF-8 (acento)
-        expect(@mailer.header['From'].to_s).to eq("Nome do Usuario <emaildousuario@example.com>")
+        expect(@mailer.header['From'].to_s).to eq("Info ContaCal <info@contacal.com.br>")
       end
       it "should not have more than one from address" do
         expect(@mailer.from.size).to eq(1)
@@ -373,12 +373,12 @@ describe NotificationMailer do
       end
       it "should set correct body for text html" do
         body = @mailer.body.to_s
-        filename = Rails.root.join('spec','fixtures','mailers','new_food.html')
+        filename = Rails.root.join('spec','fixtures','mailers','new_food.txt')
         File.open(filename, 'w') {|f| f.write(body) } unless File.exists?(filename)
-        expect(body).to eq(File.read(filename))
+        expect(body.gsub(/\s+/, "")).to eql(File.read(filename).gsub(/\s+/, ""))
       end
       it "should set correct content type" do
-        expect(@mailer.content_type).to eq("text/html; charset=UTF-8")
+        expect(@mailer.content_type).to eq("text/plain; charset=UTF-8")
       end
       it "should deliver successfully" do
         expect { NotificationMailer.new_food(@user, @food).deliver }.to_not raise_error

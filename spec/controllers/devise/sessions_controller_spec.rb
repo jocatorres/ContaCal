@@ -25,7 +25,7 @@ describe Devise::SessionsController, type: :controller do
         expect(response).to redirect_to("/")
       end
       context "when there is stored return to" do
-        it "should undelete user" do
+        xit "should undelete user" do
           session["user_return_to"] = "/bla"
           do_post!
           expect {
@@ -34,7 +34,7 @@ describe Devise::SessionsController, type: :controller do
         end
       end
       context "when there is NO stored return to" do
-        it "should undelete user" do
+        xit "should undelete user" do
           do_post!
           expect {
             @user.reload

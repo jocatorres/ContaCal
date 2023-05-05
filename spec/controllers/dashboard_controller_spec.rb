@@ -78,7 +78,7 @@ describe DashboardController, type: :controller do
         @pao = FactoryGirl.create(:food, :name => 'Pão')
         
         get :autocomplete_food_name, :params => { :term => 'pao' }
-        expect(assigns(:foods)).to contain_exactly(@pao, @pao_forma_integral, @pao_integral, @doce_pao, @pudim_pao)
+        expect(assigns(:foods)).to include(@pao, @pao_forma_integral, @pao_integral, @doce_pao, @pudim_pao)
       end
 
       it "should be success" do

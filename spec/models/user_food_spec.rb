@@ -26,7 +26,7 @@ describe UserFood, type: :model do
     end
     context "amount > 1" do
       it "should set kcal with food.kcal*amount" do
-        @user_food = Factory.create(:user_food, :food => @food, :amount => 3)
+        @user_food = FactoryGirl.create(:user_food, :food => @food, :amount => 3)
         expect(@user_food.kcal).to eq(360)
       end
     end
