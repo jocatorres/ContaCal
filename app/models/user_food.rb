@@ -1,4 +1,4 @@
-class UserFood < ActiveRecord::Base
+class UserFood < ApplicationRecord
   belongs_to :user
   belongs_to :food
   validates :user, :food, :date, :presence => true

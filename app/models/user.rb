@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   ATTRIBUTES_ACCESSIBLE = [:name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email, :referred_by_email, :subscribed_newsletter, :small_portions]
   

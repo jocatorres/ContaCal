@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Food < ActiveRecord::Base
+class Food < ApplicationRecord
   has_many :user_foods
   validates :name, :weight, :measure, :kcal, :presence => true
 

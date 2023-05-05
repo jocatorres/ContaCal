@@ -475,7 +475,7 @@ section[role="main"] #program-result {
 #calendar {
   position: absolute;
   margin: -20px 0 0 270px;
-  display: none;
+  visibility: hidden;
 }
 
 /* FORMS AND BUTTONS */
