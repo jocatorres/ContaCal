@@ -7,7 +7,7 @@ Devise.setup do |config|
   config.mailer_sender = "Info ContaCal <info@contacal.com.br>"
 
   # Configure the class responsible to send e-mails.
-  config.mailer = "DeviseMailer"
+  # config.mailer = "Devise::Mailer"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
