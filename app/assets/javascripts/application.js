@@ -3,5 +3,3 @@
 //= require jquery-ui
 //= require contacal
 //= require jquery.fancybox
-//= require rails
-//= require autocomplete-rails
