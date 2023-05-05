@@ -123,25 +123,24 @@ $(function() {
 <%- end -%>
 
 <%= javascript_tag %{
-$(function() {
-  $('.food_name_autocomplete').bind('railsAutocomplete.select', function(event, data){
-    $.ajax({
-      type: 'POST',
-      url: "#{user_foods_url}",
-      dataType: "script",
-      data: {
-        user_food: {
-          date: '#{@date.to_s(:db)}',
-          food_id: data.item.id,
-          meal: $(this).attr('data-meal')
+$(function() {  
+  $('.food_name_autocomplete').autocomplete({
+    source: '/autocomplete_food_name',
+    minLength: 2,
+    select: function( event, ui ) {
+      $.ajax({
+        type: 'POST',
+        url: "#{user_foods_url}",
+        dataType: "script",
+        data: {
+          user_food: {
+            date: '#{@date.to_s(:db)}',
+            food_id: ui.item.id,
+            meal: $(this).attr('data-meal')
+          }
         }
-      }
-    });
-    $(this).val('');
-  });
-
-  $('.food_name_autocomplete').bind('autocompleteopen', function(event, data){
-    $('.ui-autocomplete').append('<li class="ui-menu-item-link">#{link_to 'Sugerir cadastro de alimento ou exercício', new_food_path, :class => 'ui-corner-all'}</li>');
+      });
+    }
   });
   
   $('#calendar').datepicker({

@@ -1,4 +1,4 @@
-class AddPaypalEmailToUsers < ActiveRecord::Migration
+class AddPaypalEmailToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :paypal_email, :string
   end

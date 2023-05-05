@@ -5,18 +5,18 @@ Contacal::Application.routes.draw do
   resources :foods, :only => [:new, :create]
   resources :user_friends, :only => [:new, :create]
   resources :user_foods, :only => [:create, :destroy, :update]
-  match 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit, :via => :put
-  match 'user_weight' => 'dashboard#update_user_weight', :as => :user_weight, :via => :put
-  match 'report' => 'dashboard#report', :as => :report
-  match 'weight_report' => 'dashboard#weight_report', :as => :weight_report
-  match 'autocomplete_food_name', :to => 'dashboard#autocomplete_food_name', :as => :autocomplete_food_name
-  match 'users/confirm', :to => 'confirmation#index', :as => :user_confirm
-  match ':year/:month/:day' => "dashboard#index", :as => :dashboard, :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ }
-  match 'authenticate', :to => 'dashboard#authenticate'
+  put 'kcal_limit' => 'dashboard#update_kcal_limit', :as => :kcal_limit
+  put 'user_weight' => 'dashboard#update_user_weight', :as => :user_weight
+  get 'report' => 'dashboard#report', :as => :report
+  get 'weight_report' => 'dashboard#weight_report', :as => :weight_report
+  get 'autocomplete_food_name', :to => 'dashboard#autocomplete_food_name', :as => :autocomplete_food_name
+  get 'users/confirm', :to => 'confirmation#index', :as => :user_confirm
+  get ':year/:month/:day' => "dashboard#index", :as => :dashboard, :constraints => { :year => /\d{4}/, :month => /\d{2}/, :day => /\d{2}/ }
+  get 'authenticate', :to => 'dashboard#authenticate'
   root :to => "dashboard#index"       
   authenticate :user do
     devise_scope :user do
-      match 'payment' => 'registrations#payment', :as => :payment   
+      get 'payment' => 'registrations#payment', :as => :payment   
     end
   end 
   

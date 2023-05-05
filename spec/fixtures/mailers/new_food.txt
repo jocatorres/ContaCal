@@ -1,0 +1,10 @@
+nome: Nome do Usuario
+email: emaildousuario@example.com
+ () http://www.google.com.br/search?rls=pt&q=%22informação+nutricional%22+%22Abacate+batido+com+limão+e+açúcar%22 
+emaildousuario@example.com
+
+================================
+alimento: Abacate+batido+com+limão+e+açúcar
+peso: 90 Gramas - g
+medida: 2 Colher de sopa
+quantidade de calorias: 164

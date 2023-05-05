@@ -1,6 +1,6 @@
 module DeviseLoginTestHelper
   def login!
-    @user = Factory.create(:user)
+    @user = FactoryGirl.create(:user)
     sign_in @user
   end
 end

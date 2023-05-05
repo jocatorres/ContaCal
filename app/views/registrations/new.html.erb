@@ -1,7 +1,7 @@
 <h1>Cadastre-se grátis!</h1>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
   <% if resource.errors.any? %>
     <center><br>Se esse e-mail é seu, você pode <%= link_to "criar uma nova senha", new_password_path(resource_name) %>.<br><br></center>
@@ -26,7 +26,10 @@
 
   <p align=center><%= f.submit "Criar conta!" %></p>
 <!--  <p align=center>Aceitamos cartão de crédito e boleto bancário!</p>-->
-  <p align=center><small>Criando sua conta você concorda com<br>nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.html', :class => "terms-of-use-fancybox" %> super simples.</p>
+  <p align=center>
+    <small>Criando sua conta você concorda com<br>nossos 
+    <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.html', :class => "terms-of-use-fancybox", :data => {:fancybox => true, :type => 'iframe'} %> super simples.
+  </p>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
@@ -51,7 +54,7 @@
 	<div>
 		<a href="#close" title="Close" class="close">X</a>
 		<center><h2>Veja como é simples!</h2>
-<iframe src="http://player.vimeo.com/video/33258576" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
+<iframe src="https://player.vimeo.com/video/33258576" width="500" height="319" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> 
 	</div>
 </div>
 

@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-class Food < ActiveRecord::Base
+class Food < ApplicationRecord
   has_many :user_foods
   validates :name, :weight, :measure, :kcal, :presence => true
 
@@ -7,6 +7,4 @@ class Food < ActiveRecord::Base
   Expendables = %w( d )
 
   validates :kind, :inclusion => Consumables + Expendables
-
-  attr_accessible :name, :weight, :measure, :kcal, :kind
 end

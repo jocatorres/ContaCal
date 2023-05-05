@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class FoodsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   layout 'devise'
   
   def new
@@ -8,7 +8,7 @@ class FoodsController < ApplicationController
   end
   
   def create
-    @food = Food.new(params[:food])
+    @food = Food.new(food_params)
     
     if !@food.name.blank?
       NotificationMailer.new_food(current_user, @food).deliver  
@@ -21,5 +21,11 @@ class FoodsController < ApplicationController
       @food.errors.add(:name, :empty)
       render action: "new"
     end    
+  end
+  
+  private 
+  
+  def food_params 
+    params.require(:food).permit(:name, :weight, :measure, :kcal, :kind) if params[:food]
   end
 end

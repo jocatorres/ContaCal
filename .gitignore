@@ -8,3 +8,4 @@ config/database.yml
 .rspec
 coverage
 *.swp
+.byebug_history

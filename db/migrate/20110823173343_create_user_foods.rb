@@ -1,4 +1,4 @@
-class CreateUserFoods < ActiveRecord::Migration
+class CreateUserFoods < ActiveRecord::Migration[4.2]
   def self.up
     create_table :user_foods do |t|
       t.integer :user_id

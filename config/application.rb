@@ -41,5 +41,12 @@ module Contacal
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    config.assets.enabled = true
+    config.assets.version = '1.0'
+    # config.assets.prefix = '/asset-files'
+    
+    config.action_controller.per_form_csrf_tokens = true
+    config.action_controller.forgery_protection_origin_check = true
   end
 end

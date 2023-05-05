@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 require 'spec_helper'
 
-describe FoodsController do
+describe FoodsController, type: :controller do
   describe "GET new" do
     context "when user is not logged in" do
       it "should redirect to sign in" do
         get :new
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
     context "when user is logged in" do
@@ -15,11 +15,11 @@ describe FoodsController do
       end
       it "should render template" do
         get :new
-        response.should render_template('foods/new')
+        expect(response).to render_template('foods/new')
       end
       it "should assign @food" do
         get :new
-        assigns(:food).should be_a_new(Food)
+        expect(assigns(:food)).to be_a_new(Food)
       end
     end
   end
@@ -27,7 +27,7 @@ describe FoodsController do
     context "when user is not logged in" do
       it "should redirect to sign in" do
         post :create
-        response.should redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
     context "when user is logged in" do
@@ -40,28 +40,28 @@ describe FoodsController do
         end
         it "sends email" do
           expect {
-            post :create, :food => valid_attributes
-          }.should change(ActionMailer::Base.deliveries,:size).by(1)
+            post :create, :params => { :food => valid_attributes }
+          }.to change(ActionMailer::Base.deliveries,:size).by(1)
         end
         it "redirects to new food path" do
-          post :create, :food => valid_attributes
-          response.should redirect_to(new_food_path)
+          post :create, :params => { :food => valid_attributes }
+          expect(response).to redirect_to(new_food_path)
         end
         it "set flash message" do
-          post :create, :food => valid_attributes
-          flash[:notice].should == "Sua sugestão foi enviada com sucesso."
+          post :create, :params => { :food => valid_attributes }
+          expect(flash[:notice]).to include("Sugestão enviada com sucesso!")
         end
       end
       describe "with invalid params" do
         it "assigns a newly created but unsaved food as @food" do
           Food.any_instance.stub(:valid?).and_return(false)
-          post :create, :food => {}
-          assigns(:food).should be_a_new(Food)
+          post :create, :params => { :food => {} }
+          expect(assigns(:food)).to be_a_new(Food)
         end
         it "re-renders the 'new' template" do
           Food.any_instance.stub(:valid?).and_return(false)
-          post :create, :food => {}
-          response.should render_template("new")
+          post :create, :params => { :food => {} }
+          expect(response).to render_template("new")
         end
       end
     end

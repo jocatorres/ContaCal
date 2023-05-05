@@ -1,4 +1,4 @@
-class AddSubscribedNewsletterToUsers < ActiveRecord::Migration
+class AddSubscribedNewsletterToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :subscribed_newsletter, :boolean, :default => true  
     User.update_all(:subscribed_newsletter => true)

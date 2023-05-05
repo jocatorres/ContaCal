@@ -1,4 +1,4 @@
-class AddSuggesterToFoods < ActiveRecord::Migration
+class AddSuggesterToFoods < ActiveRecord::Migration[4.2]
   def self.up
     add_column :foods, :suggester_id, :integer
   end

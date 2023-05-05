@@ -1,4 +1,4 @@
-class AddDataToUsers < ActiveRecord::Migration
+class AddDataToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :cpf, :string
     add_column :users, :address_street_and_number, :string

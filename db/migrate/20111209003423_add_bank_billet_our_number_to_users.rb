@@ -1,4 +1,4 @@
-class AddBankBilletOurNumberToUsers < ActiveRecord::Migration
+class AddBankBilletOurNumberToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :bank_billet_our_number, :string
   end

@@ -1,4 +1,4 @@
-class AddSubscriptionFieldsToUsers < ActiveRecord::Migration
+class AddSubscriptionFieldsToUsers < ActiveRecord::Migration[4.2]
   def self.up
     add_column :users, :status, :integer
     add_column :users, :bank_billet_link, :string

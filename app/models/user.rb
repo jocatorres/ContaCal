@@ -1,15 +1,16 @@
 # -*- encoding : utf-8 -*-
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email, :referred_by_email, :subscribed_newsletter, :small_portions
+  ATTRIBUTES_ACCESSIBLE = [:name, :email, :password, :password_confirmation, :remember_me, :cpf, :address_street_and_number, :address_city, :address_state, :address_zipcode, :kcal_limit, :subscribed_daily, :subscribed_weekly, :nutri_name, :nutri_email, :referred_by_email, :subscribed_newsletter, :small_portions]
+  
   has_many :user_foods
   has_many :user_weight
   has_many :user_friends
   validates :name, :presence => true
   after_create :send_welcome_email
-  scope :active, where(:deleted_at => nil)
-  scope :subscribed_daily, active.where(:subscribed_daily => true)
-  scope :subscribed_weekly, active.where(:subscribed_weekly => true)
+  scope :active, -> { where(:deleted_at => nil) }
+  scope :subscribed_daily, -> { active.where(:subscribed_daily => true) }
+  scope :subscribed_weekly, -> { active.where(:subscribed_weekly => true) }
 
   class << self
     def send_weekly_notification!
@@ -20,9 +21,9 @@ class User < ActiveRecord::Base
       run_on_each_subscribed_daily { |user| NotificationMailer.beginning_of_day(user).deliver }
     end
 
-    def send_end_of_day_notification!
-      run_on_each_subscribed_daily { |user| NotificationMailer.end_of_day(user).deliver if user.deliver_end_of_day_email? }
-    end
+    # def send_end_of_day_notification!
+    #   run_on_each_subscribed_daily { |user| NotificationMailer.end_of_day(user).deliver if user.deliver_end_of_day_email? }
+    # end
 
     def run_on_each_subscribed_weekly
       subscribed_weekly.each { |user| yield(user) }

@@ -13,9 +13,8 @@
   <link href="/images/ContaCal-Icone-180x180.png" rel="apple-touch-icon" sizes="180x180" />
   <link href="/images/ContaCal-Icone-192x192.png" rel="icon" sizes="192x192" />
   <link href="/images/ContaCal-Icone-128x128.png" rel="icon" sizes="128x128" />
-  <%= stylesheet_link_tag "contacal", "jquery-ui", "jquery.fancybox-1.3.4", "reset" %>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"> </script> 
-  <%= javascript_include_tag :all %>
+  <%= stylesheet_link_tag "contacal", "jquery-ui", "jquery.fancybox", "reset" %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tag %>
 
   <!--[if lt IE 9]>
@@ -38,7 +37,7 @@
 		<%- if current_user.kcal_limit.nil? or current_user.kcal_limit == 0 -%>
            <%= link_to "Definir limite diário", edit_user_registration_url %> &bull;
 	    <%- end -%> 
-	    <%= link_to "Renovar acesso", payment_url %> &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Ajuda", '/ajuda.html', :class => "terms-of-use-fancybox" %> &bull; <%= link_to "Blog", 'http://contacal.com.br/blog'%> &bull; <%= link_to "Site", 'http://contacal.com.br'%> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
+	    <%= link_to "Renovar acesso", payment_url %> &bull; <%= link_to "Alterar Dados", edit_user_registration_url %> &bull; <%= link_to "Ajuda", '/ajuda.html', :class => "terms-of-use-fancybox", :data => {:fancybox => true, :type => 'iframe'} %> &bull; <%= link_to "Blog", 'http://contacal.com.br/blog'%> &bull; <%= link_to "Site", 'http://contacal.com.br'%> &bull; <%= link_to "Sair", destroy_user_session_url, :method => :delete %>
       </div>
     <%- end -%>
     <div id="logo"><a href="<%= root_url(:protocol => "http") %>">ContaCal</a></div>
@@ -58,9 +57,6 @@
 		<br>
     </div>
 	<%- end -%>
-	<div id="referrer">
-        <a href="http://admin.contacal.com.br/user_friends/user_friend.cgi?from=<%=current_user.email%>" class="terms-of-use-fancybox"><font color=#dd0000><b>Indique</b></font></a> ContaCal para seus amigos!
-    </div>
     <%= yield(:header_info) %>  
 
  

@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  
   protect_from_forgery
   layout :layout_by_resource
 
@@ -17,7 +19,7 @@ class ApplicationController < ActionController::Base
     end     
   end
          
-  before_filter :prepare_for_mobile
+  before_action :prepare_for_mobile
 
   def mobile_device?
     if session[:mobile_param]
@@ -31,5 +33,10 @@ class ApplicationController < ActionController::Base
   def prepare_for_mobile
     session[:mobile_param] = params[:mobile] if params[:mobile]
     request.format = :mobile if mobile_device? && !request.xhr?
+  end
+  
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: User::ATTRIBUTES_ACCESSIBLE)
+    devise_parameter_sanitizer.permit(:account_update, keys: User::ATTRIBUTES_ACCESSIBLE)
   end
 end

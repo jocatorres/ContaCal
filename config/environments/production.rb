@@ -11,7 +11,8 @@ Contacal::Application.configure do
   config.action_controller.perform_caching = true
 
   # Specifies the header that your server uses for sending files
-  config.action_dispatch.x_sendfile_header = "X-Sendfile"
+  # config.action_dispatch.x_sendfile_header = "X-Sendfile"
+  config.action_dispatch.x_sendfile_header = nil
 
   # For nginx:
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
@@ -30,7 +31,7 @@ Contacal::Application.configure do
 
   # Disable Rails's static asset server
   # In production, Apache or nginx will already do this
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -40,34 +41,43 @@ Contacal::Application.configure do
 
   # Enable threaded mode
   # config.threadsafe!
+  
+  # Compress JavaScripts and CSS
+  config.assets.compress = true
+  
+  # Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = false
+  
+  # Generate digests for assets URLs
+  config.assets.digest = true
+  
+  # Defaults to Rails.root.join("public/assets")
+  # config.assets.manifest = YOUR_PATH
+  
+  # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+  # config.assets.precompile += %w( admin.js admin.css )
+  
+  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
+  # config.force_ssl = true
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
+  
+  config.eager_load = true
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
   
   config.action_mailer.default_url_options = { :host => 'app.contacal.com.br' }
-  
-  config.action_mailer.smtp_settings = {
-#    :address        => "smtp.sendgrid.net",
-    :address        => "smtplw.com.br",
-    :port           => "587",
-    :authentication => :plain,
-#    :user_name      => "ContaCal",
-    :user_name      => "joca123",
-    :password       => "q1w2e3w2q1",
-    :domain         => "contacal.com.br"
-  }
 
-#  config.action_mailer.smtp_settings = {
-#    :address        => "smtp.sendgrid.net",
-#    :port           => "25",
-#    :authentication => :plain,
-#    :user_name      => ENV['SENDGRID_USERNAME'],
-#    :password       => ENV['SENDGRID_PASSWORD'],
-#    :domain         => ENV['SENDGRID_DOMAIN']
-#  }  
+ config.action_mailer.smtp_settings = {
+   :address        => "smtp.sendgrid.net",
+   :port           => "25",
+   :authentication => :plain,
+   :user_name      => "apikey",
+   :password       => ENV['SENDGRID_API_KEY'],
+   :domain         => "'app.contacal.com.br'"
+ }  
 
 end

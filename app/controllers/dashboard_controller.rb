@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class DashboardController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def autocomplete_food_name
     extra_data = [:id, :name]
@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
     where_clause = "kind <> 'h' and "
     where_clause << pieces.join(" and ")
     
-    @foods = Food.where(where_clause, *terms).limit(300).all
+    @foods = Food.where(where_clause, *terms).limit(300).all.to_a
     if @foods.empty?
       @foods << Food.new(:name => "#{params[:term]} não encontrado.")
     else
@@ -139,9 +139,9 @@ class DashboardController < ApplicationController
   
   def update_user_weight        
     if (params[:kcal_limit].to_f == 0)
-      current_user.user_weight.find_or_create_by_date(params[:date].to_date).destroy
+      current_user.user_weight.find_or_create_by(date: params[:date].to_date).destroy
     else
-      current_user.user_weight.find_or_create_by_date(params[:date].to_date).update_attributes(:weight => params[:kcal_limit].gsub(",",".").to_f, :date => params[:date].to_date)
+      current_user.user_weight.find_or_create_by(date: params[:date].to_date).update_attributes(:weight => params[:kcal_limit].gsub(",",".").to_f, :date => params[:date].to_date)
     end  
   end
   

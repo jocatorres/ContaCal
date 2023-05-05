@@ -1,4 +1,4 @@
-class CreateUserFriends < ActiveRecord::Migration
+class CreateUserFriends < ActiveRecord::Migration[4.2]
   def self.up
     create_table :user_friends do |t|
       t.integer :user_id
