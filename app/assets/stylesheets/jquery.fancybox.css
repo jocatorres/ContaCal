@@ -482,7 +482,7 @@ body.compensate-for-scrollbar {
 
 @supports (padding: max(0px)) {
 	.fancybox-caption {
-		padding: 75px max(44px, 0px) max(25px, 0px)) max(44px, 0px);
+		padding: 75px 44px 25px 44px;
 	}
 }
 
