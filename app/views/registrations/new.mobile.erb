@@ -25,7 +25,7 @@
 
   <p aling=center><%= f.submit "Criar conta!" %></p>
   
-  <p align=center><small>Ao criar sua conta você concorda com<br>nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.mobile.html', :class => "terms-of-use-fancybox" %> super simples.</small></p>
+  <p align=center><small>Ao criar sua conta você concorda com<br>nossos <%= link_to "termos de uso", 'http://www.contacal.com.br/termodeuso.mobile.html', :class => "terms-of-use-fancybox", :data => {:fancybox => true, :type => 'iframe'} %> super simples.</small></p>
 
   <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
     <p><%= link_to "Não recebeu as instruções para validar a conta?", new_confirmation_path(resource_name) %></p>
