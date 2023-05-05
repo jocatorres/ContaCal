@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :user_weight
   has_many :user_friends
   validates :name, :presence => true
-  # after_create :send_welcome_email
+  after_create :send_welcome_email
   scope :active, -> { where(:deleted_at => nil) }
   scope :subscribed_daily, -> { active.where(:subscribed_daily => true) }
   scope :subscribed_weekly, -> { active.where(:subscribed_weekly => true) }
